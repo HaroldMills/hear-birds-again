@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct HearBirdsAgainApp: App {
+    
+    @StateObject var audioProcessor = AudioProcessor()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(audioProcessor: audioProcessor)
         }
     }
+    
 }

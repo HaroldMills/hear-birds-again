@@ -11,6 +11,11 @@
 		F2609D0727EE0B88005DACFA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D0627EE0B88005DACFA /* ContentView.swift */; };
 		F2609D0927EE0B89005DACFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2609D0827EE0B89005DACFA /* Assets.xcassets */; };
 		F2609D0C27EE0B89005DACFA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2609D0B27EE0B89005DACFA /* Preview Assets.xcassets */; };
+		F2609D1327EE0C2E005DACFA /* AudioProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D1227EE0C2E005DACFA /* AudioProcessor.swift */; };
+		F2609D1627EE0CAB005DACFA /* SongFinderAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D1527EE0CAB005DACFA /* SongFinderAudioUnit.swift */; };
+		F2609D1827EE0CE6005DACFA /* SongFinderParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D1727EE0CE6005DACFA /* SongFinderParameters.swift */; };
+		F2609D1B27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = F2609D1A27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm */; };
+		F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = F2609D2127EE0FAB005DACFA /* DSPKernel.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,16 @@
 		F2609D0627EE0B88005DACFA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2609D0827EE0B89005DACFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2609D0B27EE0B89005DACFA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F2609D1227EE0C2E005DACFA /* AudioProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioProcessor.swift; sourceTree = "<group>"; };
+		F2609D1527EE0CAB005DACFA /* SongFinderAudioUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongFinderAudioUnit.swift; sourceTree = "<group>"; };
+		F2609D1727EE0CE6005DACFA /* SongFinderParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongFinderParameters.swift; sourceTree = "<group>"; };
+		F2609D1927EE0D47005DACFA /* SongFinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SongFinder-Bridging-Header.h"; sourceTree = "<group>"; };
+		F2609D1A27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SongFinderDSPKernelAdapter.mm; sourceTree = "<group>"; };
+		F2609D1C27EE0E9F005DACFA /* SongFinderDSPKernelAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SongFinderDSPKernelAdapter.h; sourceTree = "<group>"; };
+		F2609D1E27EE0EDF005DACFA /* SongFinderDSPKernel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SongFinderDSPKernel.hpp; sourceTree = "<group>"; };
+		F2609D2127EE0FAB005DACFA /* DSPKernel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DSPKernel.mm; sourceTree = "<group>"; };
+		F2609D2227EE0FAB005DACFA /* DSPKernel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DSPKernel.hpp; sourceTree = "<group>"; };
+		F2609D2427EE0FF1005DACFA /* BufferedAudioBus.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferedAudioBus.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +51,8 @@
 			isa = PBXGroup;
 			children = (
 				F2609D0327EE0B88005DACFA /* HearBirdsAgain */,
+				F2609D1427EE0C6B005DACFA /* SongFinder Audio Unit */,
+				F2609D2027EE0F7D005DACFA /* Generic Audio Unit */,
 				F2609D0227EE0B88005DACFA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				F2609D0427EE0B88005DACFA /* HearBirdsAgainApp.swift */,
+				F2609D1227EE0C2E005DACFA /* AudioProcessor.swift */,
 				F2609D0627EE0B88005DACFA /* ContentView.swift */,
 				F2609D0827EE0B89005DACFA /* Assets.xcassets */,
 				F2609D0A27EE0B89005DACFA /* Preview Content */,
@@ -65,6 +83,29 @@
 				F2609D0B27EE0B89005DACFA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F2609D1427EE0C6B005DACFA /* SongFinder Audio Unit */ = {
+			isa = PBXGroup;
+			children = (
+				F2609D1527EE0CAB005DACFA /* SongFinderAudioUnit.swift */,
+				F2609D1727EE0CE6005DACFA /* SongFinderParameters.swift */,
+				F2609D1927EE0D47005DACFA /* SongFinder-Bridging-Header.h */,
+				F2609D1A27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm */,
+				F2609D1C27EE0E9F005DACFA /* SongFinderDSPKernelAdapter.h */,
+				F2609D1E27EE0EDF005DACFA /* SongFinderDSPKernel.hpp */,
+			);
+			path = "SongFinder Audio Unit";
+			sourceTree = "<group>";
+		};
+		F2609D2027EE0F7D005DACFA /* Generic Audio Unit */ = {
+			isa = PBXGroup;
+			children = (
+				F2609D2127EE0FAB005DACFA /* DSPKernel.mm */,
+				F2609D2227EE0FAB005DACFA /* DSPKernel.hpp */,
+				F2609D2427EE0FF1005DACFA /* BufferedAudioBus.hpp */,
+			);
+			path = "Generic Audio Unit";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,6 +140,7 @@
 				TargetAttributes = {
 					F2609D0027EE0B88005DACFA = {
 						CreatedOnToolsVersion = 13.3;
+						LastSwiftMigration = 1330;
 					};
 				};
 			};
@@ -137,8 +179,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */,
 				F2609D0727EE0B88005DACFA /* ContentView.swift in Sources */,
+				F2609D1627EE0CAB005DACFA /* SongFinderAudioUnit.swift in Sources */,
+				F2609D1827EE0CE6005DACFA /* SongFinderParameters.swift in Sources */,
 				F2609D0527EE0B88005DACFA /* HearBirdsAgainApp.swift in Sources */,
+				F2609D1327EE0C2E005DACFA /* AudioProcessor.swift in Sources */,
+				F2609D1B27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,17 +311,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HearBirdsAgain/Preview Content\"";
 				DEVELOPMENT_TEAM = U89S284FLD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -283,6 +333,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.haroldmills.HearBirdsAgain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SongFinder Audio Unit/SongFinder-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -293,17 +345,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HearBirdsAgain/Preview Content\"";
 				DEVELOPMENT_TEAM = U89S284FLD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -312,6 +367,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.haroldmills.HearBirdsAgain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SongFinder Audio Unit/SongFinder-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
