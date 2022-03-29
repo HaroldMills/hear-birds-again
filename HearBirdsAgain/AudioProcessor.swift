@@ -12,6 +12,8 @@ import AVFoundation
 
 // TODO: Notify development team of errors, perhaps using something like Firebase Crashlytics.
 
+// TODO: Check that input sample rate is 48 kHz. Is it safe to assume that?
+
 
 private enum _Error: Error {
     case error(message: String)
