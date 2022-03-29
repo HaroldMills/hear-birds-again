@@ -60,7 +60,7 @@
 }
 
 - (void)setShouldBypassEffect:(BOOL)bypass {
-    _kernel.setBypass(bypass);
+    _kernel.setBypassed(bypass);
 }
 
 - (void)allocateRenderResources {

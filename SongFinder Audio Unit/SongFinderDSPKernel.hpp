@@ -4,93 +4,104 @@
 //
 //  Created by Harold Mills on 3/25/22.
 //
+// The class defined in this file is a C++ class rather than
+// an Objective-C or Swift class to make it safe to use on
+// the audio render thread.
+//
+
 
 #ifndef SongFinderDSPKernel_hpp
 #define SongFinderDSPKernel_hpp
+
 
 // #include <iostream>
 
 #import "DSPKernel.hpp"
 
+
 enum {
     Attenuation = 0,
 };
 
-/*
- SongFinderDSPKernel
- Performs simple copying of the input signal to the output.
- As a non-ObjC class, this is safe to use from render thread.
- */
+
 class SongFinderDSPKernel : public DSPKernel {
+    
+    
 public:
+    
     
     // MARK: Member Functions
 
+    
     SongFinderDSPKernel() {}
 
-    void init(int channelCount, double inSampleRate) {
-        chanCount = channelCount;
-        sampleRate = float(inSampleRate);
+    
+    void init(int channelCount, double sampleRate) {
+        _channelCount = channelCount;
+        _sampleRate = float(sampleRate);
     }
 
-    void reset() {
-    }
+    
+    void reset() { }
 
+    
     bool isBypassed() {
-        return bypassed;
+        return _bypassed;
     }
 
-    void setBypass(bool shouldBypass) {
-        bypassed = shouldBypass;
+    
+    void setBypassed(bool bypassed) {
+        bypassed = bypassed;
     }
 
+    
     void setParameter(AUParameterAddress address, AUValue value) {
         switch (address) {
             case Attenuation:
-                attenuation = value;
+                _attenuation = value;
                 break;
         }
     }
 
+    
     AUValue getParameter(AUParameterAddress address) {
         switch (address) {
             case Attenuation:
                 // Return the goal. It is not thread safe to return the ramping value.
-                return attenuation;
+                return _attenuation;
 
             default: return 0.f;
         }
     }
 
-    void setBuffers(AudioBufferList* inBufferList, AudioBufferList* outBufferList) {
-        inBufferListPtr = inBufferList;
-        outBufferListPtr = outBufferList;
+    
+    void setBuffers(AudioBufferList* inputBuffers, AudioBufferList* outputBuffers) {
+        _inputBuffers = inputBuffers;
+        _outputBuffers = outputBuffers;
     }
 
+    
     void process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset) override {
         
-        if (bypassed) {
+        if (_bypassed) {
             // this audio unit bypassed
             
             // Pass samples through.
-            for (int channel = 0; channel < chanCount; ++channel) {
+            for (int i = 0; i != _channelCount; ++i) {
                 
-                const float *inData = (float *) inBufferListPtr->mBuffers[channel].mData;
-                float *outData = (float *) outBufferListPtr->mBuffers[channel].mData;
+                const float *inputs = (float *) _inputBuffers->mBuffers[i].mData + bufferOffset;
+                float *outputs = (float *) _outputBuffers->mBuffers[i].mData + bufferOffset;
                 
-                if (outData == inData) {
+                if (outputs == inputs) {
                     // input and output buffers are the same
                     
                     continue;
                     
                 } else {
                     // input and output buffers are not the same
-                
-                    const float *in = inData + bufferOffset;
-                    float *out = outData + bufferOffset;
                     
-                    for (int frameIndex = 0; frameIndex < frameCount; ++frameIndex)
-                        out[frameIndex] = in[frameIndex];
+                    for (int j = 0; j != frameCount; ++j)
+                        outputs[j] = inputs[j];
                     
                 }
                 
@@ -99,19 +110,18 @@ public:
         } else {
             // this audio unit not bypassed
             
-            const float scaleFactor = pow(10, -attenuation / 20.);
+            const float scaleFactor = pow(10, -_attenuation / 20.);
             
-            // std::cout << "process " << attenuation << " " << scaleFactor << std::endl;
+            // std::cout << "process " << _attenuation << " " << scaleFactor << std::endl;
             // std::cout << "frameCount " << frameCount << std::endl;
             
-            // Perform per sample dsp on the incoming float *in before assigning it to *out.
-            for (int channel = 0; channel < chanCount; ++channel) {
+            for (int i = 0; i != _channelCount; ++i) {
             
-                const float *in = ((float *) inBufferListPtr->mBuffers[channel].mData) + bufferOffset;
-                float *out = ((float *) outBufferListPtr->mBuffers[channel].mData) + bufferOffset;
+                const float *inputs = (float *) _inputBuffers->mBuffers[i].mData + bufferOffset;
+                float *outputs = (float *) _outputBuffers->mBuffers[i].mData + bufferOffset;
                 
-                for (int frameIndex = 0; frameIndex < frameCount; ++frameIndex)
-                    out[frameIndex] = scaleFactor * in[frameIndex];
+                for (int j = 0; j != frameCount; ++j)
+                    outputs[j] = scaleFactor * inputs[j];
                 
             }
             
@@ -119,15 +129,20 @@ public:
 
     }
 
+    
+private:
+    
     // MARK: Member Variables
 
-private:
-    int chanCount = 2;
-    float sampleRate = 48000.0;
-    bool bypassed = false;
-    AudioBufferList* inBufferListPtr = nullptr;
-    AudioBufferList* outBufferListPtr = nullptr;
-    AUValue attenuation;
+    int _channelCount = 2;
+    float _sampleRate = 48000.0;
+    bool _bypassed = false;
+    AudioBufferList* _inputBuffers = nullptr;
+    AudioBufferList* _outputBuffers = nullptr;
+    AUValue _attenuation;
+    
+    
 };
 
-#endif /* SongFinderDSPKernel_hpp */
+
+#endif
