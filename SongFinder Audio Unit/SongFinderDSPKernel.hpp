@@ -70,7 +70,7 @@ public:
                 // Return the goal. It is not thread safe to return the ramping value.
                 return _attenuation;
 
-            default: return 0.f;
+            default: return 0;
         }
     }
 
@@ -110,7 +110,7 @@ public:
         } else {
             // this audio unit not bypassed
             
-            const float scaleFactor = pow(10, -_attenuation / 20.);
+            const float scaleFactor = pow(10, -_attenuation / 20);
             
             // std::cout << "process " << _attenuation << " " << scaleFactor << std::endl;
             // std::cout << "frameCount " << frameCount << std::endl;
@@ -135,7 +135,7 @@ private:
     // MARK: Member Variables
 
     int _channelCount = 2;
-    float _sampleRate = 48000.0;
+    float _sampleRate = 48000;
     bool _bypassed = false;
     AudioBufferList* _inputBuffers = nullptr;
     AudioBufferList* _outputBuffers = nullptr;
