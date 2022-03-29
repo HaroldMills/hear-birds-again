@@ -21,7 +21,7 @@
 - (instancetype)init {
 
     if (self = [super init]) {
-        AVAudioFormat *format = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100 channels:2];
+        AVAudioFormat *format = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:48000 channels:2];
         
         // Create a DSP kernel to handle the signal processing.
         _kernel.init(format.channelCount, format.sampleRate);

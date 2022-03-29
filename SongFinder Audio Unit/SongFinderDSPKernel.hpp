@@ -122,8 +122,8 @@ public:
     // MARK: Member Variables
 
 private:
-    int chanCount = 0;
-    float sampleRate = 44100.0;
+    int chanCount = 2;
+    float sampleRate = 48000.0;
     bool bypassed = false;
     AudioBufferList* inBufferListPtr = nullptr;
     AudioBufferList* outBufferListPtr = nullptr;
