@@ -102,6 +102,7 @@ public:
             const float scaleFactor = pow(10, -attenuation / 20.);
             
             // std::cout << "process " << attenuation << " " << scaleFactor << std::endl;
+            // std::cout << "frameCount " << frameCount << std::endl;
             
             // Perform per sample dsp on the incoming float *in before assigning it to *out.
             for (int channel = 0; channel < chanCount; ++channel) {
