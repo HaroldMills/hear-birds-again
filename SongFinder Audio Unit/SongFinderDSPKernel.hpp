@@ -74,6 +74,7 @@ public:
         
     }
     
+    
     void deallocateRenderResources() {
         for (int i = 0; i != _channelCount; ++i)
             delete _processors[i];
