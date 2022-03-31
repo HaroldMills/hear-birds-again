@@ -16,7 +16,12 @@
 
 // #include <iostream>
 
+#import <string>
 #import "DSPKernel.hpp"
+#import "SongFinderProcessor.hpp"
+
+
+using std::string;
 
 
 enum {
@@ -44,6 +49,30 @@ public:
     
     void reset() { }
 
+    
+    void allocateRenderResources() {
+        
+        _processors = new SongFinderProcessor*[_channelCount];
+        
+        for (int i = 0; i != _channelCount; ++i) {
+            
+            _processors[i] = new SongFinderProcessor(
+                _maxInputSize, _pitchShiftFactor, _windowType, _windowSize);
+            
+            _processors[i]->prime_input(960);
+            
+        }
+        
+    }
+    
+    
+    void deallocateRenderResources() {
+        for (int i = 0; i != _channelCount; ++i)
+            delete _processors[i];
+        delete[] _processors;
+        _processors = nullptr;
+    }
+    
     
     bool isBypassed() {
         return _bypassed;
@@ -110,7 +139,7 @@ public:
         } else {
             // this audio unit not bypassed
             
-            const float scaleFactor = pow(10, -_attenuation / 20);
+            // const float scaleFactor = pow(10, -_attenuation / 20);
             
             // std::cout << "process " << _attenuation << " " << scaleFactor << std::endl;
             // std::cout << "frameCount " << frameCount << std::endl;
@@ -120,8 +149,10 @@ public:
                 const float *inputs = (float *) _inputBuffers->mBuffers[i].mData + bufferOffset;
                 float *outputs = (float *) _outputBuffers->mBuffers[i].mData + bufferOffset;
                 
-                for (int j = 0; j != frameCount; ++j)
-                    outputs[j] = scaleFactor * inputs[j];
+                _processors[i]->process(inputs, frameCount, outputs);
+                
+//                for (int j = 0; j != frameCount; ++j)
+//                    outputs[j] = scaleFactor * inputs[j];
                 
             }
             
@@ -136,6 +167,13 @@ private:
 
     int _channelCount = 2;
     float _sampleRate = 48000;
+    
+    unsigned _maxInputSize = 128;
+    unsigned _pitchShiftFactor = 2;
+    string _windowType = "Hann";
+    double _windowSize = .020;
+    SongFinderProcessor **_processors = nullptr;
+    
     bool _bypassed = false;
     AudioBufferList* _inputBuffers = nullptr;
     AudioBufferList* _outputBuffers = nullptr;

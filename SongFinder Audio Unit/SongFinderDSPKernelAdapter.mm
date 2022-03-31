@@ -66,11 +66,13 @@
 - (void)allocateRenderResources {
     _inputBus.allocateRenderResources(self.maximumFramesToRender);
     _kernel.init(self.outputBus.format.channelCount, self.outputBus.format.sampleRate);
+    _kernel.allocateRenderResources();
     _kernel.reset();
 }
 
 - (void)deallocateRenderResources {
     _inputBus.deallocateRenderResources();
+    _kernel.deallocateRenderResources();
 }
 
 // MARK: -  AUAudioUnit (AUAudioUnitImplementation)
