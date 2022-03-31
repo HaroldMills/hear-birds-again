@@ -54,17 +54,25 @@ public:
         
         _processors = new SongFinderProcessor*[_channelCount];
         
-        for (int i = 0; i != _channelCount; ++i) {
+        for (int i = 0; i != _channelCount; ++i)
+            _processors[i] = _createProcessor();
             
-            _processors[i] = new SongFinderProcessor(
-                _maxInputSize, _pitchShiftFactor, _windowType, _windowSize);
-            
-            _processors[i]->prime_input(960);
-            
-        }
-        
     }
     
+    
+    SongFinderProcessor *_createProcessor() {
+        
+        SongFinderProcessor *p = new SongFinderProcessor(
+            _maxInputSize, _pitchShiftFactor, _windowType, _windowSize);
+        
+        const size_t zero_count =
+            static_cast<size_t>(round(_windowSize * p->sample_rate));
+
+        p->prime_input(zero_count);
+        
+        return p;
+        
+    }
     
     void deallocateRenderResources() {
         for (int i = 0; i != _channelCount; ++i)
