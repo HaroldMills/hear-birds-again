@@ -36,6 +36,7 @@ class AudioProcessor: ObservableObject {
     @Published var pitchShift = 2 {
         didSet {
             getPitchShiftParam().value = Float(pitchShift)
+            restartIfRunning();
         }
     }
     
@@ -121,9 +122,9 @@ class AudioProcessor: ObservableObject {
     }
     
     
-    func run() {
+    func start() {
         
-        print("AudioProcessor.run")
+        print("AudioProcessor.start")
         
         do {
             try engine.start()
@@ -143,6 +144,14 @@ class AudioProcessor: ObservableObject {
         // handleFatalError(message: "Could not stop audio engine.")
         engine.stop()
         running = false
+    }
+    
+    
+    func restartIfRunning() {
+        if (running) {
+            stop()
+            start()
+        }
     }
     
     

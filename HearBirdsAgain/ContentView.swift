@@ -41,7 +41,7 @@ struct ContentView: View {
                 if (audioProcessor.running) {
                     audioProcessor.stop()
                 } else {
-                    audioProcessor.run()
+                    audioProcessor.start()
                 }
 
             }
@@ -59,7 +59,6 @@ struct ContentView: View {
                 .fixedSize()
                 .onChange(of: audioProcessor.pitchShift) { value in
                     audioProcessor.pitchShift = value
-                    _restartAudioProcessorIfNeeded()
                     print("pitch shift changed to \(value)")
                 }
                 
@@ -94,13 +93,6 @@ struct ContentView: View {
         }
 
 
-    }
-    
-    func _restartAudioProcessorIfNeeded() {
-        if (audioProcessor.running) {
-            audioProcessor.stop()
-            audioProcessor.run()
-        }
     }
 
 }
