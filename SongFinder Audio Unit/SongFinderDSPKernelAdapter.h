@@ -7,8 +7,6 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 
-// @class AttenuatorViewController;
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SongFinderDSPKernelAdapter : NSObject

@@ -33,9 +33,9 @@ class AudioProcessor: ObservableObject {
     
     @Published var running = false
     
-    @Published var attenuation: Float = 0.0 {
+    @Published var pitchShift = 2 {
         didSet {
-            getAttenuationParam().value = Float(attenuation)
+            getPitchShiftParam().value = Float(pitchShift)
         }
     }
     
@@ -97,19 +97,19 @@ class AudioProcessor: ObservableObject {
     
     
     private func initializeState() {
-        self.attenuation = getAttenuationParam().value
+        self.pitchShift = Int(getPitchShiftParam().value)
     }
     
     
-    private func getAttenuationParam() -> AUParameter {
+    private func getPitchShiftParam() -> AUParameter {
         
         // We force unwrap the parameter tree and the parameter in this
         // method since we know by design that a SongFinder audio unit
-        // has a parameter tree, and that the parameter tree includes an
-        // attenuation parameter.
+        // has a parameter tree, and that the parameter tree includes a
+        // pitch shift parameter.
         
         let parameterTree = songFinder.auAudioUnit.parameterTree!
-        return parameterTree.value(forKey: "attenuation") as! AUParameter
+        return parameterTree.value(forKey: "pitchShift") as! AUParameter
         
     }
     

@@ -27,7 +27,7 @@ public class SongFinderAudioUnit: AUAudioUnit {
     )
 
 
-    private let parameters: AttenuatorParameters
+    private let parameters: SongFinderParameters
     private let kernelAdapter: SongFinderDSPKernelAdapter
 
     
@@ -45,9 +45,6 @@ public class SongFinderAudioUnit: AUAudioUnit {
             busType: .output,
             busses: [kernelAdapter.outputBus])
     }()
-
-    
-    // weak var viewController: AttenuatorViewController?
 
     
     public override var inputBusses: AUAudioUnitBusArray {
@@ -75,6 +72,7 @@ public class SongFinderAudioUnit: AUAudioUnit {
     */
 
     
+    /*
     private let factoryPresetValues: [AUValue] = [
         0,    // "Unattenuated"
         10    // "Attenuated"
@@ -124,10 +122,11 @@ public class SongFinderAudioUnit: AUAudioUnit {
         }
         
     }
+    */
     
     
     public override var supportsUserPresets: Bool {
-        return true
+        return false
     }
 
     
@@ -141,8 +140,8 @@ public class SongFinderAudioUnit: AUAudioUnit {
         // Create adapter for communicating with C++ DSP code.
         kernelAdapter = SongFinderDSPKernelAdapter()
         
-        // Create parameters object to control attenuation
-        parameters = AttenuatorParameters(kernelAdapter: kernelAdapter)
+        // Create parameters object to control audio unit parameters.
+        parameters = SongFinderParameters(kernelAdapter: kernelAdapter)
 
         // Initialize superclass.
         try super.init(componentDescription: componentDescription, options: options)
@@ -152,9 +151,9 @@ public class SongFinderAudioUnit: AUAudioUnit {
         
         // Set default preset.
         /*
-        print("Attenuator initializer setting preset")
+        print("SongFinderAudioUnit initializer setting preset")
         currentPreset = factoryPresets[1]
-        print("Attenuator initializer done setting preset")
+        print("SongFinderAudioUnit initializer done setting preset")
         */
 
     }

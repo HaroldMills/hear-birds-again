@@ -11,6 +11,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State private var pitchShift: Int = 2
+
     @ObservedObject var audioProcessor: AudioProcessor
     
     private var buttonTitle: String {
@@ -35,32 +37,51 @@ struct ContentView: View {
         VStack {
             
             Button(buttonTitle) {
-                
+
                 if (audioProcessor.running) {
                     audioProcessor.stop()
                 } else {
                     audioProcessor.run()
                 }
-                
+
             }
             
             HStack {
                 
-                Text("Attenuation:")
-                
-                Text("0")
-                
-                Slider(value: $audioProcessor.attenuation, in: 0...30)
-                
-                Text("30")
+                Text("Pitch Shift:")
+            
+                Picker("Pitch Shift", selection: $audioProcessor.pitchShift) {
+                    Text("Two").tag(2)
+                    Text("Three").tag(3)
+                    Text("Four").tag(4)
+                }
+                .pickerStyle(.segmented)
+                .fixedSize()
+                .onChange(of: audioProcessor.pitchShift) { value in
+                    audioProcessor.pitchShift = value
+                    _restartAudioProcessorIfNeeded()
+                    print("pitch shift changed to \(value)")
+                }
                 
             }
-            .padding()
             
-            Text("Selected attenuation is \(audioProcessor.attenuation, specifier: "%.2f") dB")
+//            HStack {
+//
+//                Text("Attenuation:")
+//
+//                Text("0")
+//
+//                Slider(value: $audioProcessor.attenuation, in: 0...30)
+//
+//                Text("30")
+//
+//            }
+//            .padding()
+//
+//            Text("Selected attenuation is \(audioProcessor.attenuation, specifier: "%.2f") dB")
 
         }
-        .padding()
+//        .padding()
         .alert(nonfatalErrorMessage, isPresented: $audioProcessor.nonfatalErrorOccurred) {
             Button("OK", role: .cancel) {
                 audioProcessor.nonfatalErrorOccurred = false
@@ -73,6 +94,13 @@ struct ContentView: View {
         }
 
 
+    }
+    
+    func _restartAudioProcessorIfNeeded() {
+        if (audioProcessor.running) {
+            audioProcessor.stop()
+            audioProcessor.run()
+        }
     }
 
 }

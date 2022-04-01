@@ -9,21 +9,24 @@
 import Foundation
 
 
-class AttenuatorParameters {
+class SongFinderParameters {
 
-    private enum AttenuatorParam: AUParameterAddress {
-        case attenuation
+    private enum SongFinderParam: AUParameterAddress {
+        case pitchShift
     }
+    
+    static let minPitchShift: AUValue = 2
+    static let maxPitchShift: AUValue = 4
 
-    var attenuationParam: AUParameter = {
+    var pitchShiftParam: AUParameter = {
         
         let parameter = AUParameterTree.createParameter(
-            withIdentifier: "attenuation",
-            name: "Attenuation",
-            address: AttenuatorParam.attenuation.rawValue,
-            min: 0.0,
-            max: 100.0,
-            unit: .decibels,
+            withIdentifier: "pitchShift",
+            name: "Pitch Shift",
+            address: SongFinderParam.pitchShift.rawValue,
+            min: minPitchShift,
+            max: maxPitchShift,
+            unit: .customUnit,
             unitName: nil,
             flags: [.flag_IsReadable,
                     .flag_IsWritable,
@@ -31,7 +34,7 @@ class AttenuatorParameters {
             valueStrings: nil,
             dependentParameters: nil)
         
-        parameter.value = 0.0
+        parameter.value = minPitchShift
 
         return parameter
         
@@ -42,7 +45,7 @@ class AttenuatorParameters {
     init(kernelAdapter: SongFinderDSPKernelAdapter) {
 
         // Create the audio unit's tree of parameters
-        parameterTree = AUParameterTree.createTree(withChildren: [attenuationParam])
+        parameterTree = AUParameterTree.createTree(withChildren: [pitchShiftParam])
 
         // Closure observing all externally-generated parameter value changes.
         parameterTree.implementorValueObserver = { param, value in
@@ -57,7 +60,7 @@ class AttenuatorParameters {
         // Closure returning string representation of requested parameter value.
         parameterTree.implementorStringFromValueCallback = { param, value in
             switch param.address {
-                case AttenuatorParam.attenuation.rawValue:
+                case SongFinderParam.pitchShift.rawValue:
                     return String(format: "%.f", value ?? param.value)
                 default:
                     return "?"
@@ -65,8 +68,8 @@ class AttenuatorParameters {
         }
     }
     
-    func setParameterValues(attenuation: AUValue) {
-        attenuationParam.value = attenuation
+    func setParameterValues(pitchShift: AUValue) {
+        pitchShiftParam.value = pitchShift
     }
     
 }
