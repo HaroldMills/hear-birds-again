@@ -60,6 +60,19 @@ struct ContentView: View {
                 
             }
             
+            HStack {
+                
+                Text("Window Type:")
+                
+                Picker("Window Type", selection: $audioProcessor.windowType) {
+                    Text("Hann").tag(WindowType.Hann)
+                    Text("SongFinder").tag(WindowType.SongFinder)
+                }
+                .pickerStyle(.segmented)
+                .fixedSize()
+                
+            }
+            
 //            HStack {
 //
 //                Text("Attenuation:")

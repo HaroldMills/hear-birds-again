@@ -15,6 +15,22 @@ import AVFoundation
 // TODO: Check that input sample rate is 48 kHz. Is it safe to assume that?
 
 
+enum WindowType: AUValue, CustomStringConvertible {
+    
+    case Hann = 0.0
+    case SongFinder = 1.0
+    
+    
+    var description: String {
+        switch self {
+            case .Hann: return "Hann"
+            case .SongFinder: return "SongFinder"
+        }
+    }
+    
+}
+
+
 private enum _Error: Error {
     case error(message: String)
 }
@@ -35,7 +51,15 @@ class AudioProcessor: ObservableObject {
     
     @Published var pitchShift = 2 {
         didSet {
-            getPitchShiftParam().value = Float(pitchShift)
+            getAudioUnitParam(key: "pitchShift").value = Float(pitchShift)
+            restartIfRunning();
+        }
+    }
+    
+    @Published var windowType = WindowType.Hann {
+        didSet {
+            print("AudioProcessor: window type set to \(windowType).")
+            getAudioUnitParam(key: "windowType").value = AUValue(windowType.rawValue)
             restartIfRunning();
         }
     }
@@ -98,19 +122,24 @@ class AudioProcessor: ObservableObject {
     
     
     private func initializeState() {
-        self.pitchShift = Int(getPitchShiftParam().value)
+        
+        self.pitchShift = Int(getAudioUnitParam(key: "pitchShift").value)
+        
+        let windowTypeParam = getAudioUnitParam(key: "windowType")
+        self.windowType = WindowType(rawValue: windowTypeParam.value) ?? WindowType.Hann
+        
     }
     
     
-    private func getPitchShiftParam() -> AUParameter {
+    private func getAudioUnitParam(key: String) -> AUParameter {
         
         // We force unwrap the parameter tree and the parameter in this
         // method since we know by design that a SongFinder audio unit
-        // has a parameter tree, and that the parameter tree includes a
-        // pitch shift parameter.
+        // has a parameter tree, and we assume that the parameter tree
+        // includes a parameter for the specified key.
         
         let parameterTree = songFinder.auAudioUnit.parameterTree!
-        return parameterTree.value(forKey: "pitchShift") as! AUParameter
+        return parameterTree.value(forKey: key) as! AUParameter
         
     }
     

@@ -25,7 +25,7 @@ using std::string;
 
 
 enum {
-    PitchShift = 0,
+    PitchShift = 0, WindowType
 };
 
 
@@ -62,8 +62,10 @@ public:
     
     SongFinderProcessor *_createProcessor() {
         
+        const string windowType = _windowType == 0 ? "Hann" : "SongFinder";
+        
         SongFinderProcessor *p = new SongFinderProcessor(
-            _maxInputSize, _pitchShift, _windowType, _windowSize);
+            _maxInputSize, _pitchShift, windowType, _windowSize);
         
         const size_t zero_count =
             static_cast<size_t>(round(_windowSize * p->sample_rate));
@@ -94,22 +96,38 @@ public:
 
     
     void setParameter(AUParameterAddress address, AUValue value) {
+        
         switch (address) {
+                
             case PitchShift:
+                std::cout << "DSP Kernel: set pitch shift to " << value << std::endl;
                 _pitchShift = value;
                 break;
+                
+            case WindowType:
+                std::cout << "DSP Kernel: set window type to " << value << std::endl;
+                _windowType = value;
+                break;
+                
         }
+        
     }
 
     
     AUValue getParameter(AUParameterAddress address) {
+        
         switch (address) {
+                
             case PitchShift:
-                // Return the goal. It is not thread safe to return the ramping value.
                 return _pitchShift;
+                
+            case WindowType:
+                return _windowType;
 
             default: return 0;
+                
         }
+        
     }
 
     
@@ -179,7 +197,7 @@ private:
     
     unsigned _maxInputSize = 128;
     AUValue _pitchShift = 2;
-    string _windowType = "Hann";
+    AUValue _windowType = 0;
     double _windowSize = .020;
     SongFinderProcessor **_processors = nullptr;
     
