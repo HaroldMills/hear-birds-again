@@ -124,7 +124,6 @@ class SongFinderParameters {
         }
     }
     
-    // TODO: Do we need this?
     func setParameterValues(pitchShift: AUValue, windowType: AUValue, windowSize: AUValue) {
         pitchShiftParam.value = pitchShift
         windowTypeParam.value = windowType

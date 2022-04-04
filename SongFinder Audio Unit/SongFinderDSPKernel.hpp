@@ -24,9 +24,8 @@
 using std::string;
 
 
-// TODO: Do we need " = 0" here?
 enum {
-    PitchShift = 0, WindowType, WindowSize
+    PitchShift, WindowType, WindowSize
 };
 
 
