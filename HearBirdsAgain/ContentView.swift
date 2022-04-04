@@ -57,10 +57,6 @@ struct ContentView: View {
                 }
                 .pickerStyle(.segmented)
                 .fixedSize()
-                .onChange(of: audioProcessor.pitchShift) { value in
-                    audioProcessor.pitchShift = value
-                    print("pitch shift changed to \(value)")
-                }
                 
             }
             
