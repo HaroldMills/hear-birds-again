@@ -27,8 +27,6 @@ class SongFinderParameters {
     static let minWindowSize: AUValue = 5
     static let maxWindowSize: AUValue = 50
 
-    // TODO: For which parameters should we specify .flag_CanRamp, if any?
-    
     var pitchShiftParam: AUParameter = {
         
         let parameter = AUParameterTree.createParameter(
@@ -40,8 +38,7 @@ class SongFinderParameters {
             unit: .customUnit,
             unitName: nil,
             flags: [.flag_IsReadable,
-                    .flag_IsWritable,
-                    .flag_CanRamp],
+                    .flag_IsWritable],
             valueStrings: nil,
             dependentParameters: nil)
         
@@ -62,8 +59,7 @@ class SongFinderParameters {
             unit: .indexed,
             unitName: nil,
             flags: [.flag_IsReadable,
-                    .flag_IsWritable,
-                    .flag_CanRamp],
+                    .flag_IsWritable],
             valueStrings: nil,
             dependentParameters: nil)
         
