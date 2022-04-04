@@ -26,6 +26,7 @@ struct ContentView: View {
             return "A nonfatal error occurred. The error message was: \(audioProcessor.nonfatalErrorMessage)"
         }
     }
+    
     private var fatalErrorMessage: String {
         get {
             return "A fatal error occurred, so the app will now exit. The error message was: \(audioProcessor.fatalErrorMessage)"
@@ -36,15 +37,9 @@ struct ContentView: View {
         
         VStack {
             
-            Button(buttonTitle) {
-
-                if (audioProcessor.running) {
-                    audioProcessor.stop()
-                } else {
-                    audioProcessor.start()
-                }
-
-            }
+            Text("Hear Birds Again")
+                .font(.system(size: 35, weight: .bold, design: .default))
+                .padding()
             
             HStack {
                 
@@ -59,6 +54,7 @@ struct ContentView: View {
                 .fixedSize()
                 
             }
+            .padding()
             
             HStack {
                 
@@ -72,24 +68,40 @@ struct ContentView: View {
                 .fixedSize()
                 
             }
+            .padding()
             
-//            HStack {
-//
-//                Text("Attenuation:")
-//
-//                Text("0")
-//
-//                Slider(value: $audioProcessor.attenuation, in: 0...30)
-//
-//                Text("30")
-//
-//            }
-//            .padding()
-//
-//            Text("Selected attenuation is \(audioProcessor.attenuation, specifier: "%.2f") dB")
+            VStack {
 
+                Text("Window Size:")
+                
+                HStack {
+
+                    // Text("5")
+
+                    Slider(value: $audioProcessor.windowSize, in: 5...50)
+
+                    // Text("50")
+                    
+                    Text("\(audioProcessor.windowSize, specifier: "%.1f") ms")
+                    
+                }
+
+            }
+            .padding()
+
+            Button(buttonTitle) {
+
+                if (audioProcessor.running) {
+                    audioProcessor.stop()
+                } else {
+                    audioProcessor.start()
+                }
+
+            }
+            .padding()
+            
         }
-//        .padding()
+        .padding()
         .alert(nonfatalErrorMessage, isPresented: $audioProcessor.nonfatalErrorOccurred) {
             Button("OK", role: .cancel) {
                 audioProcessor.nonfatalErrorOccurred = false
@@ -100,7 +112,6 @@ struct ContentView: View {
                 fatalError(fatalErrorMessage)
             }
         }
-
 
     }
 

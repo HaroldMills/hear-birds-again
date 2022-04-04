@@ -20,7 +20,6 @@ enum WindowType: AUValue, CustomStringConvertible {
     case Hann = 0.0
     case SongFinder = 1.0
     
-    
     var description: String {
         switch self {
             case .Hann: return "Hann"
@@ -51,16 +50,19 @@ class AudioProcessor: ObservableObject {
     
     @Published var pitchShift = 2 {
         didSet {
-            getAudioUnitParam(key: "pitchShift").value = Float(pitchShift)
-            restartIfRunning();
+            setAudioUnitParam(key: "pitchShift", value: AUValue(pitchShift))
         }
     }
     
     @Published var windowType = WindowType.Hann {
         didSet {
-            print("AudioProcessor: window type set to \(windowType).")
-            getAudioUnitParam(key: "windowType").value = AUValue(windowType.rawValue)
-            restartIfRunning();
+            setAudioUnitParam(key: "windowType", value: AUValue(windowType.rawValue))
+        }
+    }
+    
+    @Published var windowSize: AUValue = 20 {
+        didSet {
+            setAudioUnitParam(key: "windowSize", value: windowSize)
         }
     }
     
@@ -128,6 +130,8 @@ class AudioProcessor: ObservableObject {
         let windowTypeParam = getAudioUnitParam(key: "windowType")
         self.windowType = WindowType(rawValue: windowTypeParam.value) ?? WindowType.Hann
         
+        self.windowSize = getAudioUnitParam(key: "windowSize").value
+        
     }
     
     
@@ -141,6 +145,12 @@ class AudioProcessor: ObservableObject {
         let parameterTree = songFinder.auAudioUnit.parameterTree!
         return parameterTree.value(forKey: key) as! AUParameter
         
+    }
+    
+    
+    private func setAudioUnitParam(key: String, value: AUValue) {
+        getAudioUnitParam(key: key).value = value
+        restartIfRunning()
     }
     
     

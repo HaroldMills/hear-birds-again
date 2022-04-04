@@ -24,8 +24,9 @@
 using std::string;
 
 
+// TODO: Do we need " = 0" here?
 enum {
-    PitchShift = 0, WindowType
+    PitchShift = 0, WindowType, WindowSize
 };
 
 
@@ -63,12 +64,13 @@ public:
     SongFinderProcessor *_createProcessor() {
         
         const string windowType = _windowType == 0 ? "Hann" : "SongFinder";
+        const double windowSize = _windowSize / 1000;
         
         SongFinderProcessor *p = new SongFinderProcessor(
-            _maxInputSize, _pitchShift, windowType, _windowSize);
+            _maxInputSize, _pitchShift, windowType, windowSize);
         
         const size_t zero_count =
-            static_cast<size_t>(round(_windowSize * p->sample_rate));
+            static_cast<size_t>(round(windowSize * p->sample_rate));
 
         p->prime_input(zero_count);
         
@@ -109,6 +111,11 @@ public:
                 _windowType = value;
                 break;
                 
+            case WindowSize:
+                std::cout << "DSP Kernel: set window size to " << value << std::endl;
+                _windowSize = value;
+                break;
+
         }
         
     }
@@ -123,6 +130,9 @@ public:
                 
             case WindowType:
                 return _windowType;
+                
+            case WindowSize:
+                return _windowSize;
 
             default: return 0;
                 
@@ -198,7 +208,7 @@ private:
     unsigned _maxInputSize = 128;
     AUValue _pitchShift = 2;
     AUValue _windowType = 0;
-    double _windowSize = .020;
+    AUValue _windowSize = 20;
     SongFinderProcessor **_processors = nullptr;
     
     bool _bypassed = false;
