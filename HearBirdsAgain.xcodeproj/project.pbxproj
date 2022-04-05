@@ -19,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F245FCFD27FCD5A000C54A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F2609D0127EE0B88005DACFA /* HearBirdsAgain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HearBirdsAgain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2609D0427EE0B88005DACFA /* HearBirdsAgainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearBirdsAgainApp.swift; sourceTree = "<group>"; };
 		F2609D0627EE0B88005DACFA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 				F2609D0427EE0B88005DACFA /* HearBirdsAgainApp.swift */,
 				F2609D1227EE0C2E005DACFA /* AudioProcessor.swift */,
 				F2609D0627EE0B88005DACFA /* ContentView.swift */,
+				F245FCFD27FCD5A000C54A50 /* Info.plist */,
 				F2609D0827EE0B89005DACFA /* Assets.xcassets */,
 				F2609D0A27EE0B89005DACFA /* Preview Content */,
 			);
@@ -326,6 +328,7 @@
 				DEVELOPMENT_TEAM = U89S284FLD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HearBirdsAgain/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = HearBirdsAgain;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -361,6 +364,7 @@
 				DEVELOPMENT_TEAM = U89S284FLD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HearBirdsAgain/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = HearBirdsAgain;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
