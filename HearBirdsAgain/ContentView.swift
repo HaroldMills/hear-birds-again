@@ -58,9 +58,9 @@ struct ContentView: View {
             
             HStack {
                 
-                Text("Window Type:")
+                Text("Window:")
                 
-                Picker("Window Type", selection: $audioProcessor.windowType) {
+                Picker("Window", selection: $audioProcessor.windowType) {
                     Text("Hann").tag(WindowType.Hann)
                     Text("SongFinder").tag(WindowType.SongFinder)
                 }
@@ -72,19 +72,27 @@ struct ContentView: View {
             
             VStack {
 
-                Text("Window Size:")
+                Text("Window Size (ms):")
                 
-                HStack {
-
-                    // Text("5")
-
-                    Slider(value: $audioProcessor.windowSize, in: 5...50)
-
-                    // Text("50")
-                    
-                    Text("\(audioProcessor.windowSize, specifier: "%.1f") ms")
-                    
+                Picker("Window Size", selection: $audioProcessor.windowSize) {
+                    Text("5").tag(5)
+                    Text("10").tag(10)
+                    Text("15").tag(15)
+                    Text("20").tag(20)
+                    Text("25").tag(25)
+                    Text("30").tag(30)
+                    Text("35").tag(35)
+                    Text("40").tag(40)
+                    Text("45").tag(45)
+                    Text("50").tag(50)
                 }
+                .pickerStyle(.segmented)
+                .fixedSize()
+
+//                HStack {
+//                    Slider(value: $audioProcessor.windowSize, in: 5...50, step: 5)
+//                    Text("\(audioProcessor.windowSize) ms")
+//                }
 
             }
             .padding()

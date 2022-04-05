@@ -60,9 +60,9 @@ class AudioProcessor: ObservableObject {
         }
     }
     
-    @Published var windowSize: AUValue = 20 {
+    @Published var windowSize = 20 {
         didSet {
-            setAudioUnitParam(key: "windowSize", value: windowSize)
+            setAudioUnitParam(key: "windowSize", value: AUValue(windowSize))
         }
     }
     
@@ -130,7 +130,7 @@ class AudioProcessor: ObservableObject {
         let windowTypeParam = getAudioUnitParam(key: "windowType")
         self.windowType = WindowType(rawValue: windowTypeParam.value) ?? WindowType.Hann
         
-        self.windowSize = getAudioUnitParam(key: "windowSize").value
+        self.windowSize = Int(getAudioUnitParam(key: "windowSize").value)
         
     }
     
