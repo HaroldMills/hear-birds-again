@@ -114,6 +114,11 @@ struct ContentView: View {
                 
                 Spacer()
                 
+//                Text(
+//                    "If you find this app useful, please [donate](https://hearbirdsagain.org/donate/) to support its continued development and maintenance.")
+//                
+//                Spacer()
+                
             }
             .alert(nonfatalErrorMessage, isPresented: $audioProcessor.nonfatalErrorOccurred) {
                 Button("OK", role: .cancel) {
