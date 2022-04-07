@@ -109,7 +109,6 @@ struct ContentView: View {
             .padding()
             
         }
-        .padding()
         .alert(nonfatalErrorMessage, isPresented: $audioProcessor.nonfatalErrorOccurred) {
             Button("OK", role: .cancel) {
                 audioProcessor.nonfatalErrorOccurred = false
@@ -120,6 +119,15 @@ struct ContentView: View {
                 fatalError(fatalErrorMessage)
             }
         }
+        .background(
+            GeometryReader { geo in
+                Image("BlackAndWhiteWarbler")
+                    .resizable()
+                    // .scaledToFit()
+                    // .frame(width: 2 * geo.size.width, height: 2 * geo.size.height, alignment: .center)
+                    .opacity(0.15)
+            },
+            alignment: .center)
 
     }
 
