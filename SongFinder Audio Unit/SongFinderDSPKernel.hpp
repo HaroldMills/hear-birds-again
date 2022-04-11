@@ -16,6 +16,7 @@
 
 // #include <iostream>
 
+#import <cmath>
 #import <string>
 #import "DSPKernel.hpp"
 #import "SongFinderProcessor.hpp"
@@ -25,7 +26,7 @@ using std::string;
 
 
 enum {
-    PitchShift, WindowType, WindowSize
+    PitchShift, WindowType, WindowSize, Gain
 };
 
 
@@ -101,20 +102,26 @@ public:
         switch (address) {
                 
             case PitchShift:
-                std::cout << "DSP Kernel: set pitch shift to " << value << std::endl;
                 _pitchShift = value;
+                std::cout << "DSP Kernel: set pitch shift to " << _pitchShift << std::endl;
                 break;
                 
             case WindowType:
-                std::cout << "DSP Kernel: set window type to " << value << std::endl;
                 _windowType = value;
+                std::cout << "DSP Kernel: set window type to " << _windowType << std::endl;
                 break;
                 
             case WindowSize:
-                std::cout << "DSP Kernel: set window size to " << value << std::endl;
                 _windowSize = value;
+                std::cout << "DSP Kernel: set window size to " << _windowSize << std::endl;
                 break;
-
+                
+            case Gain:
+                _gain = value;
+                _gainFactor = std::pow(10, (_gain / 20));
+                std::cout << "DSP Kernel: set gain to " << _gain << " " << _gainFactor << std::endl;
+                break;
+                
         }
         
     }
@@ -132,6 +139,9 @@ public:
                 
             case WindowSize:
                 return _windowSize;
+                
+            case Gain:
+                return _gain;
 
             default: return 0;
                 
@@ -175,9 +185,6 @@ public:
         } else {
             // this audio unit not bypassed
             
-            // const float scaleFactor = pow(10, -_attenuation / 20);
-            
-            // std::cout << "process " << _attenuation << " " << scaleFactor << std::endl;
             // std::cout << "frameCount " << frameCount << std::endl;
             
             for (int i = 0; i != _channelCount; ++i) {
@@ -187,8 +194,8 @@ public:
                 
                 _processors[i]->process(inputs, frameCount, outputs);
                 
-//                for (int j = 0; j != frameCount; ++j)
-//                    outputs[j] = scaleFactor * inputs[j];
+                for (int j = 0; j != frameCount; ++j)
+                    outputs[j] *= _gainFactor;
                 
             }
             
@@ -207,7 +214,9 @@ private:
     unsigned _maxInputSize = 128;
     AUValue _pitchShift = 2;
     AUValue _windowType = 0;
-    AUValue _windowSize = 20;
+    AUValue _windowSize = 20;       // ms
+    AUValue _gain = 0;              // dB
+    AUValue _gainFactor = 1;
     SongFinderProcessor **_processors = nullptr;
     
     bool _bypassed = false;

@@ -66,6 +66,13 @@ class AudioProcessor: ObservableObject {
         }
     }
     
+    @Published var gain: AUValue = 0 {
+        didSet {
+            getAudioUnitParam(key: "gain").value = gain;
+            // setAudioUnitParam(key: "gain", value: AUValue(gain))
+        }
+    }
+    
     private let engine = AVAudioEngine()
     private let songFinder: AVAudioUnitEffect
 
@@ -131,6 +138,8 @@ class AudioProcessor: ObservableObject {
         self.windowType = WindowType(rawValue: windowTypeParam.value) ?? WindowType.Hann
         
         self.windowSize = Int(getAudioUnitParam(key: "windowSize").value)
+        
+        self.gain = getAudioUnitParam(key: "gain").value
         
     }
     

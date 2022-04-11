@@ -15,7 +15,7 @@ import Foundation
 class SongFinderParameters {
 
     private enum SongFinderParam: AUParameterAddress {
-        case pitchShift, windowType, windowSize
+        case pitchShift, windowType, windowSize, gain
     }
     
     static let minPitchShift: AUValue = 2
@@ -26,6 +26,9 @@ class SongFinderParameters {
     
     static let minWindowSize: AUValue = 5
     static let maxWindowSize: AUValue = 50
+    
+    static let minGain: AUValue = -24
+    static let maxGain: AUValue = 24
 
     var pitchShiftParam: AUParameter = {
         
@@ -91,13 +94,35 @@ class SongFinderParameters {
         
     }()
 
+    var gainParam: AUParameter = {
+        
+        let parameter = AUParameterTree.createParameter(
+            withIdentifier: "gain",
+            name: "Gain",
+            address: SongFinderParam.gain.rawValue,
+            min: minGain,
+            max: maxGain,
+            unit: .decibels,
+            unitName: "dB",
+            flags: [.flag_IsReadable,
+                    .flag_IsWritable,
+                    .flag_CanRamp],
+            valueStrings: nil,
+            dependentParameters: nil)
+        
+        parameter.value = 0
+
+        return parameter
+        
+    }()
+
     let parameterTree: AUParameterTree
 
     init(kernelAdapter: SongFinderDSPKernelAdapter) {
 
         // Create the audio unit's tree of parameters
         parameterTree = AUParameterTree.createTree(
-            withChildren: [pitchShiftParam, windowTypeParam, windowSizeParam])
+            withChildren: [pitchShiftParam, windowTypeParam, windowSizeParam, gainParam])
 
         // Closure observing all externally-generated parameter value changes.
         parameterTree.implementorValueObserver = { param, value in
@@ -112,22 +137,22 @@ class SongFinderParameters {
         // Closure returning string representation of requested parameter value.
         parameterTree.implementorStringFromValueCallback = { param, value in
             switch param.address {
-                case SongFinderParam.pitchShift.rawValue:
-                    return String(format: "%.f", value ?? param.value)
-                case SongFinderParam.windowType.rawValue:
-                    return String(format: "%.f", value ?? param.value)
-                case SongFinderParam.windowSize.rawValue:
-                    return String(format: "%.f", value ?? param.value)
-                default:
-                    return "?"
+            case SongFinderParam.pitchShift.rawValue,
+                SongFinderParam.windowType.rawValue,
+                SongFinderParam.windowSize.rawValue,
+                SongFinderParam.gain.rawValue:
+                return String(format: "%.f", value ?? param.value)
+            default:
+                return "?"
             }
         }
     }
     
-    func setParameterValues(pitchShift: AUValue, windowType: AUValue, windowSize: AUValue) {
+    func setParameterValues(pitchShift: AUValue, windowType: AUValue, windowSize: AUValue, gain: AUValue) {
         pitchShiftParam.value = pitchShift
         windowTypeParam.value = windowType
         windowSizeParam.value = windowSize
+        gainParam.value = gain
     }
     
 }

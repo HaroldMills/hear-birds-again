@@ -101,6 +101,15 @@ struct ContentView: View {
                 }
                 .padding()
 
+                VStack {
+                    HStack {
+                        Text("Gain:")
+                        Slider(value: $audioProcessor.gain, in: 0...24)
+                    }
+                    Text(String(format: "%.1f dB", audioProcessor.gain))
+                }
+                .padding()
+                    
                 Button(buttonTitle) {
 
                     if (audioProcessor.running) {
