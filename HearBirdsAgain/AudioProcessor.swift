@@ -48,6 +48,12 @@ class AudioProcessor: ObservableObject {
     
     @Published var running = false
     
+    @Published var cutoff = 0 {
+        didSet {
+            setAudioUnitParam(key: "cutoff", value: AUValue(cutoff))
+        }
+    }
+    
     @Published var pitchShift = 2 {
         didSet {
             setAudioUnitParam(key: "pitchShift", value: AUValue(pitchShift))
@@ -131,6 +137,8 @@ class AudioProcessor: ObservableObject {
     
     
     private func initializeState() {
+        
+        self.cutoff = Int(getAudioUnitParam(key: "cutoff").value)
         
         self.pitchShift = Int(getAudioUnitParam(key: "pitchShift").value)
         

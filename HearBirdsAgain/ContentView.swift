@@ -47,6 +47,23 @@ struct ContentView: View {
                 
                 HStack {
                     
+                    Text("Cutoff (kHz):")
+                
+                    Picker("Cutoff", selection: $audioProcessor.cutoff) {
+                        Text("0").tag(0)
+                        Text("2").tag(2000)
+                        Text("2.5").tag(2500)
+                        Text("3").tag(3000)
+                        Text("4").tag(4000)
+                    }
+                    .pickerStyle(.segmented)
+                    .fixedSize()
+                    
+                }
+                .padding()
+                
+                HStack {
+                    
                     Text("Pitch Shift:")
                 
                     Picker("Pitch Shift", selection: $audioProcessor.pitchShift) {

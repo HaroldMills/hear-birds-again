@@ -26,7 +26,7 @@ using std::string;
 
 
 enum {
-    PitchShift, WindowType, WindowSize, Gain
+    Cutoff, PitchShift, WindowType, WindowSize, Gain
 };
 
 
@@ -67,7 +67,7 @@ public:
         const double windowSize = _windowSize / 1000;
         
         SongFinderProcessor *p = new SongFinderProcessor(
-            _maxInputSize, 2000, _pitchShift, windowType, windowSize);
+            _maxInputSize, _cutoff, _pitchShift, windowType, windowSize);
         
         const size_t zero_count =
             static_cast<size_t>(round(windowSize * p->sample_rate));
@@ -101,6 +101,11 @@ public:
         
         switch (address) {
                 
+            case Cutoff:
+                _cutoff = value;
+                std::cout << "DSP Kernel: set cutoff to " << _cutoff << std::endl;
+                break;
+                
             case PitchShift:
                 _pitchShift = value;
                 std::cout << "DSP Kernel: set pitch shift to " << _pitchShift << std::endl;
@@ -130,6 +135,9 @@ public:
     AUValue getParameter(AUParameterAddress address) {
         
         switch (address) {
+                
+            case Cutoff:
+                return _cutoff;
                 
             case PitchShift:
                 return _pitchShift;
@@ -212,6 +220,7 @@ private:
     float _sampleRate = 48000;
     
     unsigned _maxInputSize = 128;
+    AUValue _cutoff = 0;            // Hz
     AUValue _pitchShift = 2;
     AUValue _windowType = 0;
     AUValue _windowSize = 20;       // ms
