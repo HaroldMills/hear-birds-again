@@ -1,11 +1,3 @@
-//
-//  AdvancingBuffer.hpp
-//  HearBirdsAgain
-//
-//  Created by Harold Mills on 3/25/22.
-//
-
-
 #ifndef ADVANCING_BUFFER
 #define ADVANCING_BUFFER
 
@@ -96,9 +88,9 @@ public:
     void append(const T *values, size_t value_count) {
 
         // Extend buffer.
-        void *dest = extend(value_count);
+    	void *dest = extend(value_count);
 
-        // Copy values to extension.
+    	// Copy values to extension.
         size_t size = value_count * sizeof(T);
         std::memcpy(dest, values, size);
 
@@ -108,11 +100,11 @@ public:
     void append_zeros(size_t zero_count) {
 
         // Extend buffer.
-        T *dest = extend(zero_count);
+    	T *dest = extend(zero_count);
 
-        // Set elements to zero.
-        for (size_t i = 0; i != zero_count; ++i)
-            dest[i] = 0;
+    	// Set elements to zero.
+    	for (size_t i = 0; i != zero_count; ++i)
+    		dest[i] = 0;
 
     }
 

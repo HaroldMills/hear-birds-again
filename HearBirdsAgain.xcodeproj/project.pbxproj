@@ -38,6 +38,8 @@
 		F29647A927EE1BA000AB33A6 /* AdvancingBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AdvancingBuffer.hpp; sourceTree = "<group>"; };
 		F29647AA27EE1BD100AB33A6 /* Interpolator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Interpolator.hpp; sourceTree = "<group>"; };
 		F29647AB27EE1C0200AB33A6 /* OverlapAdder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OverlapAdder.hpp; sourceTree = "<group>"; };
+		F2E7AA50282C1290003E27FF /* FirFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FirFilter.hpp; sourceTree = "<group>"; };
+		F2E7AA51282C1290003E27FF /* HbaFilters.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HbaFilters.hpp; sourceTree = "<group>"; };
 		F2FD2F8B27F6362900BBD070 /* SongFinderProcessor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SongFinderProcessor.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +103,8 @@
 				F2609D1C27EE0E9F005DACFA /* SongFinderDSPKernelAdapter.h */,
 				F2609D1E27EE0EDF005DACFA /* SongFinderDSPKernel.hpp */,
 				F29647A927EE1BA000AB33A6 /* AdvancingBuffer.hpp */,
+				F2E7AA50282C1290003E27FF /* FirFilter.hpp */,
+				F2E7AA51282C1290003E27FF /* HbaFilters.hpp */,
 				F29647AA27EE1BD100AB33A6 /* Interpolator.hpp */,
 				F29647AB27EE1C0200AB33A6 /* OverlapAdder.hpp */,
 				F2FD2F8B27F6362900BBD070 /* SongFinderProcessor.hpp */,

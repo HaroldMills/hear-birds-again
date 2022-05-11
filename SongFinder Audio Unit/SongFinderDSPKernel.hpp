@@ -67,7 +67,7 @@ public:
         const double windowSize = _windowSize / 1000;
         
         SongFinderProcessor *p = new SongFinderProcessor(
-            _maxInputSize, _pitchShift, windowType, windowSize);
+            _maxInputSize, 2000, _pitchShift, windowType, windowSize);
         
         const size_t zero_count =
             static_cast<size_t>(round(windowSize * p->sample_rate));
