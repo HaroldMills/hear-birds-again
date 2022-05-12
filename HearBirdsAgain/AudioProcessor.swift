@@ -38,6 +38,8 @@ private enum _Error: Error {
 class AudioProcessor: ObservableObject {
     
     
+    @Published var consoleText = ""
+    
     @Published var nonfatalErrorOccurred = false
     
     @Published var nonfatalErrorMessage = ""
@@ -100,7 +102,7 @@ class AudioProcessor: ObservableObject {
         do {
             
             try setAudioSessionCategory()
-        
+            
             // try showAvailableAudioInputs()
 
             try configureAudioSession()
@@ -115,8 +117,8 @@ class AudioProcessor: ObservableObject {
         
         initializeState()
 
-        // showAudioRoute()
-        
+        showAudioRoute()
+
         // showInputSampleRate()
         
     }
@@ -178,6 +180,11 @@ class AudioProcessor: ObservableObject {
     }
     
     
+    private func log(_ text: String = "") {
+        consoleText += text + "\n"
+    }
+    
+    
     func start() {
         
         print("AudioProcessor.start")
@@ -222,7 +229,45 @@ class AudioProcessor: ObservableObject {
         fatalErrorOccurred = true
     }
     
+    func showAudioRoute() {
+        
+        let session = AVAudioSession.sharedInstance()
+        let route = session.currentRoute
+        
+        log("Audio session inputs:")
+        for input in route.inputs {
+            let channelCount = getChannelCountText(channelCount: input.channels!.count)
+            log("    \(input.portName) (\(channelCount))")
+        }
+        log()
+        
+        log("Audio session outputs:")
+        for output in route.outputs {
+            let channelCount = getChannelCountText(channelCount: output.channels!.count)
+            log("    \(output.portName) (\(channelCount))")
+        }
+        log()
+
+    }
     
+}
+
+
+private func getChannelCountText(channelCount: Int) -> String {
+    
+    switch channelCount {
+        
+    case 1:
+        return "mono"
+        
+    case 2:
+        return "stereo"
+        
+    default:
+        return "\(channelCount) channels"
+        
+    }
+        
 }
 
 
@@ -320,14 +365,4 @@ private func configureAudioSession() throws {
         throw _Error.error(message: "Could not configure audio session. \(String(describing: error))")
     }
     
-}
-
-
-private func showAudioRoute() {
-    let session = AVAudioSession.sharedInstance()
-    let route = session.currentRoute
-    print("Audio session inputs:")
-    print("\(route.inputs)")
-    print("Audio session outputs:")
-    print("\(route.outputs)")
 }
