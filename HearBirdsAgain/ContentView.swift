@@ -33,139 +33,131 @@ struct ContentView: View {
     
     var body: some View {
         
-        HStack {
+        VStack {
             
             Spacer()
             
+            Text("Hear Birds Again")
+                .font(.system(size: 35, weight: .bold, design: .default))
+                .padding()
+            
+            HStack {
+                
+                Text("Cutoff (kHz):")
+            
+                Picker("Cutoff", selection: $audioProcessor.cutoff) {
+                    Text("0").tag(0)
+                    Text("2").tag(2000)
+                    Text("2.5").tag(2500)
+                    Text("3").tag(3000)
+                    Text("4").tag(4000)
+                }
+                .pickerStyle(.segmented)
+                .fixedSize()
+                
+            }
+            .padding()
+            
+            HStack {
+                
+                Text("Pitch Shift:")
+            
+                Picker("Pitch Shift", selection: $audioProcessor.pitchShift) {
+                    Text("Two").tag(2)
+                    Text("Three").tag(3)
+                    Text("Four").tag(4)
+                }
+                .pickerStyle(.segmented)
+                .fixedSize()
+                
+            }
+            .padding()
+            
+            HStack {
+                
+                Text("Window:")
+                
+                Picker("Window", selection: $audioProcessor.windowType) {
+                    Text("Hann").tag(WindowType.Hann)
+                    Text("SongFinder").tag(WindowType.SongFinder)
+                }
+                .pickerStyle(.segmented)
+                .fixedSize()
+                
+            }
+            .padding()
+            
             VStack {
+
+                Text("Window Size (ms):")
                 
-                Spacer()
-                
-                Text("Hear Birds Again")
-                    .font(.system(size: 35, weight: .bold, design: .default))
-                    .padding()
-                
+                Picker("Window Size", selection: $audioProcessor.windowSize) {
+                    Text("5").tag(5)
+                    Text("10").tag(10)
+                    Text("15").tag(15)
+                    Text("20").tag(20)
+                    Text("25").tag(25)
+                    Text("30").tag(30)
+                    Text("35").tag(35)
+                    Text("40").tag(40)
+                    Text("45").tag(45)
+                    Text("50").tag(50)
+                }
+                .pickerStyle(.segmented)
+                .fixedSize()
+
+//                HStack {
+//                    Slider(value: $audioProcessor.windowSize, in: 5...50, step: 5)
+//                    Text("\(audioProcessor.windowSize) ms")
+//                }
+
+            }
+            .padding()
+
+            VStack {
                 HStack {
-                    
-                    Text("Cutoff (kHz):")
-                
-                    Picker("Cutoff", selection: $audioProcessor.cutoff) {
-                        Text("0").tag(0)
-                        Text("2").tag(2000)
-                        Text("2.5").tag(2500)
-                        Text("3").tag(3000)
-                        Text("4").tag(4000)
-                    }
-                    .pickerStyle(.segmented)
-                    .fixedSize()
-                    
+                    Text("Gain:")
+                    Slider(value: $audioProcessor.gain, in: 0...24)
                 }
-                .padding()
+                Text(String(format: "%.1f dB", audioProcessor.gain))
+            }
+            .padding()
                 
-                HStack {
-                    
-                    Text("Pitch Shift:")
-                
-                    Picker("Pitch Shift", selection: $audioProcessor.pitchShift) {
-                        Text("Two").tag(2)
-                        Text("Three").tag(3)
-                        Text("Four").tag(4)
-                    }
-                    .pickerStyle(.segmented)
-                    .fixedSize()
-                    
+            Button(buttonTitle) {
+
+                if (audioProcessor.running) {
+                    audioProcessor.stop()
+                } else {
+                    audioProcessor.start()
                 }
-                .padding()
-                
-                HStack {
-                    
-                    Text("Window:")
-                    
-                    Picker("Window", selection: $audioProcessor.windowType) {
-                        Text("Hann").tag(WindowType.Hann)
-                        Text("SongFinder").tag(WindowType.SongFinder)
-                    }
-                    .pickerStyle(.segmented)
-                    .fixedSize()
-                    
-                }
-                .padding()
-                
-                VStack {
 
-                    Text("Window Size (ms):")
-                    
-                    Picker("Window Size", selection: $audioProcessor.windowSize) {
-                        Text("5").tag(5)
-                        Text("10").tag(10)
-                        Text("15").tag(15)
-                        Text("20").tag(20)
-                        Text("25").tag(25)
-                        Text("30").tag(30)
-                        Text("35").tag(35)
-                        Text("40").tag(40)
-                        Text("45").tag(45)
-                        Text("50").tag(50)
-                    }
-                    .pickerStyle(.segmented)
-                    .fixedSize()
-
-    //                HStack {
-    //                    Slider(value: $audioProcessor.windowSize, in: 5...50, step: 5)
-    //                    Text("\(audioProcessor.windowSize) ms")
-    //                }
-
-                }
-                .padding()
-
-                VStack {
-                    HStack {
-                        Text("Gain:")
-                        Slider(value: $audioProcessor.gain, in: 0...24)
-                    }
-                    Text(String(format: "%.1f dB", audioProcessor.gain))
-                }
-                .padding()
-                    
-                Button(buttonTitle) {
-
-                    if (audioProcessor.running) {
-                        audioProcessor.stop()
-                    } else {
-                        audioProcessor.start()
-                    }
-
-                }
-                .padding()
-                
-                Spacer()
-                
+            }
+            .padding()
+            
+            Spacer()
+            
 //                Text(
 //                    "If you find this app useful, please [donate](https://hearbirdsagain.org/donate/) to support its continued development and maintenance.")
 //                
 //                Spacer()
-                
-            }
-            .alert(nonfatalErrorMessage, isPresented: $audioProcessor.nonfatalErrorOccurred) {
-                Button("OK", role: .cancel) {
-                    audioProcessor.nonfatalErrorOccurred = false
-                }
-            }
-            .alert(fatalErrorMessage, isPresented: $audioProcessor.fatalErrorOccurred) {
-                Button("OK", role: .cancel) {
-                    fatalError(fatalErrorMessage)
-                }
-            }
-            .background(
-                Image("BlackAndWhiteWarbler")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .opacity(0.15))
-
-           Spacer()
             
         }
-        
+        .alert(nonfatalErrorMessage, isPresented: $audioProcessor.nonfatalErrorOccurred) {
+            Button("OK", role: .cancel) {
+                audioProcessor.nonfatalErrorOccurred = false
+            }
+        }
+        .alert(fatalErrorMessage, isPresented: $audioProcessor.fatalErrorOccurred) {
+            Button("OK", role: .cancel) {
+                fatalError(fatalErrorMessage)
+            }
+        }
+        .background(
+            Image("BlackAndWhiteWarbler")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .opacity(0.15))
+
     }
 
 }
