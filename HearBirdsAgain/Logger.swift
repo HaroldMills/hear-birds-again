@@ -19,4 +19,5 @@ class Logger: ObservableObject {
 }
 
 
+// The one and only Logger of this app.
 let logger = Logger()

@@ -21,4 +21,5 @@ class Errors: ObservableObject {
 }
 
 
+// The one and only Errors object of this app.
 var errors = Errors()

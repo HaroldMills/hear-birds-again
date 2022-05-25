@@ -474,3 +474,7 @@ private func getChannelCountText(channelCount: Int) -> String {
     }
         
 }
+
+
+// The one and only AudioProcessor of this app.
+let audioProcessor = AudioProcessor()

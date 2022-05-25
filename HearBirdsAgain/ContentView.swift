@@ -239,6 +239,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(audioProcessor: AudioProcessor(), logger: logger, errors: errors)
+        ContentView(audioProcessor: audioProcessor, logger: logger, errors: errors)
     }
 }
