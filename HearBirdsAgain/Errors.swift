@@ -8,7 +8,11 @@
 import Foundation
 
 
+// TODO: Notify development team of errors, perhaps using something like Firebase Crashlytics.
+
+
 class Errors: ObservableObject {
+    
     
     @Published var nonfatalErrorOccurred = false
     
@@ -17,6 +21,19 @@ class Errors: ObservableObject {
     @Published var fatalErrorOccurred = false
     
     @Published var fatalErrorMessage = ""
+    
+    
+    func handleNonfatalError(message: String) {
+        nonfatalErrorMessage = message
+        nonfatalErrorOccurred = true
+    }
+    
+    
+    func handleFatalError(message: String) {
+        fatalErrorMessage = message
+        fatalErrorOccurred = true
+    }
+    
     
 }
 
