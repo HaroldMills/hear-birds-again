@@ -108,10 +108,6 @@ class AudioProcessor: ObservableObject {
     
     init() {
         
-        registerSongFinderAudioUnit()
-        
-        assert(isSongFinderAudioUnitPresent())
-        
         // We must create the SongFinder before calling any
         // instance methods, since Swift requires that all of
         // an object's stored properties be initialized before
@@ -312,22 +308,6 @@ class AudioProcessor: ObservableObject {
         fatalErrorOccurred = true
     }
     
-}
-
-
-private func registerSongFinderAudioUnit() {
-    AUAudioUnit.registerSubclass(
-        SongFinderAudioUnit.self,
-        as: SongFinderAudioUnit.componentDescription,
-        name: "HBAx: SongFinder",
-        version: 0)
-}
-
-
-private func isSongFinderAudioUnitPresent() -> Bool {
-    let components = AVAudioUnitComponentManager.shared().components(
-        matching: SongFinderAudioUnit.componentDescription)
-    return (components.count == 1 && components[0].name == "SongFinder")
 }
 
 

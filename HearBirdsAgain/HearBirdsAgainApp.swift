@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AVFoundation
+
 
 @main
 struct HearBirdsAgainApp: App {
@@ -18,4 +20,25 @@ struct HearBirdsAgainApp: App {
         }
     }
     
+    init() {
+        registerSongFinderAudioUnit()
+        assert(songFinderAudioUnitPresent())
+    }
+    
+}
+
+
+private func registerSongFinderAudioUnit() {
+    AUAudioUnit.registerSubclass(
+        SongFinderAudioUnit.self,
+        as: SongFinderAudioUnit.componentDescription,
+        name: "HBAx: SongFinder",
+        version: 0)
+}
+
+
+private func songFinderAudioUnitPresent() -> Bool {
+    let components = AVAudioUnitComponentManager.shared().components(
+        matching: SongFinderAudioUnit.componentDescription)
+    return (components.count == 1 && components[0].name == "SongFinder")
 }
