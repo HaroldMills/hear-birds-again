@@ -12,6 +12,7 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var audioProcessor: AudioProcessor
+    @ObservedObject var logger: Logger
     
     private var buttonTitle: String {
         get {
@@ -174,7 +175,7 @@ struct ContentView: View {
                     
                     HStack {
                         
-                        Text(audioProcessor.consoleText)
+                        Text(logger.logText)
                             .font(Font.system(size: 16).monospaced())
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: true)
@@ -235,6 +236,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(audioProcessor: AudioProcessor())
+        ContentView(audioProcessor: AudioProcessor(), logger: Logger())
     }
 }

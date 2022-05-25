@@ -61,8 +61,6 @@ private enum _Error: Error {
 class AudioProcessor: ObservableObject {
     
     
-    @Published var consoleText = ""
-    
     @Published var nonfatalErrorOccurred = false
     
     @Published var nonfatalErrorMessage = ""
@@ -120,13 +118,13 @@ class AudioProcessor: ObservableObject {
         // any of its methods are called.
         songFinder = createSongFinder()
 
-        // showAudioSessionAvailableCategories(self.log)
+        showAudioSessionAvailableCategories()
         
         do {
             
             try setAudioSessionCategory()
             
-            showAudioSessionAvailableInputPorts(self.log)
+            showAudioSessionAvailableInputPorts()
 
             try configureAudioSession()
             
@@ -142,7 +140,7 @@ class AudioProcessor: ObservableObject {
         
         initializeState()
 
-        showAudioSessionCurrentRoute(self.log)
+        showAudioSessionCurrentRoute()
 
         // showInputSampleRate()
         
@@ -170,10 +168,10 @@ class AudioProcessor: ObservableObject {
                   return
         }
     
-        log()
+        logger.log()
         let reasonString = getAudioSessionRouteChangeReasonString(reason: reason)
-        log("AudioProcessor.handleRouteChange: \(reasonString)")
-        showAudioSessionCurrentRoute(self.log)
+        logger.log("AudioProcessor.handleRouteChange: \(reasonString)")
+        showAudioSessionCurrentRoute()
     
         switch reason {
             
@@ -181,7 +179,7 @@ class AudioProcessor: ObservableObject {
             // audio session category changed
             
             if (AVAudioSession.sharedInstance().secondaryAudioShouldBeSilencedHint) {
-                log("AVAudioProcessor.handleRouteChange: Secondary audio should be silenced.")
+                logger.log("AVAudioProcessor.handleRouteChange: Secondary audio should be silenced.")
                 stop()
             }
             
@@ -267,11 +265,6 @@ class AudioProcessor: ObservableObject {
         let input = engine.inputNode
         let format = input.inputFormat(forBus: 0)
         print("Input sample rate: \(format.sampleRate)")
-    }
-    
-    
-    private func log(_ text: String = "") {
-        consoleText += text + "\n"
     }
     
     
@@ -400,28 +393,28 @@ private func configureAudioSession() throws {
 }
 
 
-private func showAudioSessionAvailableCategories(_ logger: (String) -> Void) {
+private func showAudioSessionAvailableCategories() {
     
     let session = AVAudioSession.sharedInstance()
     let categories = session.availableCategories
 
-    logger("")
-    logger("Audio session categories:")
+    logger.log("")
+    logger.log("Audio session categories:")
     for category in categories {
-        logger("\(category)")
+        logger.log("\(category)")
     }
     
 }
 
 
-private func showAudioSessionAvailableInputPorts(_ logger: (String) -> Void) {
+private func showAudioSessionAvailableInputPorts() {
     
     let session = AVAudioSession.sharedInstance()
     
     if let ports = session.availableInputs {
-        showAudioSessionPorts(ports: ports, title: "Available input ports", logger: logger)
+        showAudioSessionPorts(ports: ports, title: "Available input ports")
     } else {
-        logger("Could not get available input ports.")
+        logger.log("Could not get available input ports.")
     }
     
 }
@@ -463,18 +456,18 @@ private func getAudioSessionRouteChangeReasonString(reason: AVAudioSession.Route
 }
 
 
-private func showAudioSessionCurrentRoute(_ logger: (String) -> Void) {
+private func showAudioSessionCurrentRoute() {
     let session = AVAudioSession.sharedInstance()
     let route = session.currentRoute
-    showAudioSessionPorts(ports: route.inputs, title: "Current audio input ports", logger: logger)
-    showAudioSessionPorts(ports: route.outputs, title: "Current audio output ports", logger: logger)
+    showAudioSessionPorts(ports: route.inputs, title: "Current audio input ports")
+    showAudioSessionPorts(ports: route.outputs, title: "Current audio output ports")
 }
 
 
-private func showAudioSessionPorts(ports: [AVAudioSessionPortDescription], title: String, logger: (String) -> Void) {
+private func showAudioSessionPorts(ports: [AVAudioSessionPortDescription], title: String) {
     
-    logger("")
-    logger("\(title):")
+    logger.log("")
+    logger.log("\(title):")
     
     for port in ports {
         
@@ -482,11 +475,11 @@ private func showAudioSessionPorts(ports: [AVAudioSessionPortDescription], title
         if let channels = port.channels {
             channelCountText = getChannelCountText(channelCount: channels.count)
         }
-        logger("    \(port.portName) (\(channelCountText))")
+        logger.log("    \(port.portName) (\(channelCountText))")
         
         if let sources = port.dataSources {
             for source in sources {
-                logger("        \(source.dataSourceName)")
+                logger.log("        \(source.dataSourceName)")
             }
         }
         

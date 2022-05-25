@@ -11,10 +11,10 @@ import SwiftUI
 struct HearBirdsAgainApp: App {
     
     @StateObject var audioProcessor = AudioProcessor()
-    
+
     var body: some Scene {
         WindowGroup {
-            ContentView(audioProcessor: audioProcessor)
+            ContentView(audioProcessor: audioProcessor, logger: logger)
         }
     }
     
