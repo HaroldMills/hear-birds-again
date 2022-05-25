@@ -10,8 +10,6 @@ import Foundation
 import AVFoundation
 
 
-// TODO: Consider moving SongFinder audio unit registration to app class.
-
 // TODO: Consider moving audio session management to app class.
 
 // TODO: Do we need to activate audio session?
@@ -60,14 +58,6 @@ private enum _Error: Error {
 
 class AudioProcessor: ObservableObject {
     
-    
-    @Published var nonfatalErrorOccurred = false
-    
-    @Published var nonfatalErrorMessage = ""
-    
-    @Published var fatalErrorOccurred = false
-    
-    @Published var fatalErrorMessage = ""
     
     @Published var running = false
     
@@ -298,14 +288,14 @@ class AudioProcessor: ObservableObject {
     
     
     func handleNonfatalError(message: String) {
-        nonfatalErrorMessage = message
-        nonfatalErrorOccurred = true
+        errors.nonfatalErrorMessage = message
+        errors.nonfatalErrorOccurred = true
     }
     
     
     func handleFatalError(message: String) {
-        fatalErrorMessage = message
-        fatalErrorOccurred = true
+        errors.fatalErrorMessage = message
+        errors.fatalErrorOccurred = true
     }
     
 }

@@ -11,8 +11,11 @@ import SwiftUI
 
 struct ContentView: View {
     
+    
     @ObservedObject var audioProcessor: AudioProcessor
     @ObservedObject var logger: Logger
+    @ObservedObject var errors: Errors
+    
     
     private var buttonTitle: String {
         get {
@@ -22,13 +25,13 @@ struct ContentView: View {
     
     private var nonfatalErrorMessage: String {
         get {
-            return "A nonfatal error occurred. The error message was: \(audioProcessor.nonfatalErrorMessage)"
+            return "A nonfatal error occurred. The error message was: \(errors.nonfatalErrorMessage)"
         }
     }
     
     private var fatalErrorMessage: String {
         get {
-            return "A fatal error occurred, so the app will now exit. The error message was: \(audioProcessor.fatalErrorMessage)"
+            return "A fatal error occurred, so the app will now exit. The error message was: \(errors.fatalErrorMessage)"
         }
     }
     
@@ -218,12 +221,12 @@ struct ContentView: View {
                     .opacity(0.15))
 
         }
-        .alert(nonfatalErrorMessage, isPresented: $audioProcessor.nonfatalErrorOccurred) {
+        .alert(nonfatalErrorMessage, isPresented: $errors.nonfatalErrorOccurred) {
             Button("OK", role: .cancel) {
-                audioProcessor.nonfatalErrorOccurred = false
+                errors.nonfatalErrorOccurred = false
             }
         }
-        .alert(fatalErrorMessage, isPresented: $audioProcessor.fatalErrorOccurred) {
+        .alert(fatalErrorMessage, isPresented: $errors.fatalErrorOccurred) {
             Button("OK", role: .cancel) {
                 fatalError(fatalErrorMessage)
             }
@@ -236,6 +239,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(audioProcessor: AudioProcessor(), logger: Logger())
+        ContentView(audioProcessor: AudioProcessor(), logger: logger, errors: errors)
     }
 }
