@@ -26,6 +26,8 @@ struct ContentView: View {
     
     @SceneStorage("ContentView.selectedTab") private var selectedTab = Tab.home
     
+    private let includeTestTab = false
+    
     // The AudioProcessor is currently the authority for the values of
     // its properties, rather than the UI, which seems best to me.
     // Is there some way we can arrange for AudioProcessor state to be
@@ -150,62 +152,66 @@ struct ContentView: View {
                     .aspectRatio(contentMode: .fill)
                     .opacity(0.15))
 
-            VStack {
-                
-                Spacer()
-                
-                Text("Hear Birds Again")
-                    .font(.system(size: 35, weight: .bold, design: .default))
-                    .padding()
-                
-                HStack {
-                    
-                    Text("Window:")
-                    
-                    Picker("Window", selection: $audioProcessor.windowType) {
-                        Text("Hann").tag(WindowType.Hann)
-                        Text("SongFinder").tag(WindowType.SongFinder)
-                    }
-                    .pickerStyle(.segmented)
-                    .fixedSize()
-                    
-                }
-                .padding()
+            if (includeTestTab) {
                 
                 VStack {
-
-                    Text("Window Size (ms):")
                     
-                    Picker("Window Size", selection: $audioProcessor.windowSize) {
-                        Text("5").tag(5)
-                        Text("10").tag(10)
-                        Text("15").tag(15)
-                        Text("20").tag(20)
-                        Text("25").tag(25)
-                        Text("30").tag(30)
-                        Text("35").tag(35)
-                        Text("40").tag(40)
-                        Text("45").tag(45)
-                        Text("50").tag(50)
+                    Spacer()
+                    
+                    Text("Hear Birds Again")
+                        .font(.system(size: 35, weight: .bold, design: .default))
+                        .padding()
+                    
+                    HStack {
+                        
+                        Text("Window:")
+                        
+                        Picker("Window", selection: $audioProcessor.windowType) {
+                            Text("Hann").tag(WindowType.Hann)
+                            Text("SongFinder").tag(WindowType.SongFinder)
+                        }
+                        .pickerStyle(.segmented)
+                        .fixedSize()
+                        
                     }
-                    .pickerStyle(.segmented)
-                    .fixedSize()
+                    .padding()
+                    
+                    VStack {
 
+                        Text("Window Size (ms):")
+                        
+                        Picker("Window Size", selection: $audioProcessor.windowSize) {
+                            Text("5").tag(5)
+                            Text("10").tag(10)
+                            Text("15").tag(15)
+                            Text("20").tag(20)
+                            Text("25").tag(25)
+                            Text("30").tag(30)
+                            Text("35").tag(35)
+                            Text("40").tag(40)
+                            Text("45").tag(45)
+                            Text("50").tag(50)
+                        }
+                        .pickerStyle(.segmented)
+                        .fixedSize()
+
+                    }
+                    .padding()
+
+                    Spacer()
+                    
                 }
-                .padding()
-
-                Spacer()
+                .tabItem {
+                    Label("Test", systemImage: "slider.horizontal.3")
+                }
+                .tag(Tab.test)
+                .background(
+                    Image("BlackAndWhiteWarbler")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .opacity(0.15))
                 
             }
-            .tabItem {
-                Label("Test", systemImage: "slider.horizontal.3")
-            }
-            .tag(Tab.test)
-            .background(
-                Image("BlackAndWhiteWarbler")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .opacity(0.15))
             
             ScrollView {
                 
