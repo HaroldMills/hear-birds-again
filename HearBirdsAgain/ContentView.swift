@@ -17,6 +17,36 @@ struct ContentView: View {
     @ObservedObject var errors: Errors
     
     
+    enum Tab: String {
+        case home
+        case test
+        case console
+        case help
+    }
+    
+    @SceneStorage("ContentView.selectedTab") private var selectedTab = Tab.home
+    
+    // The AudioProcessor is currently the authority for the values of
+    // its properties, rather than the UI, which seems best to me.
+    // Is there some way we can arrange for AudioProcessor state to be
+    // saved and restored at the same time that UI state like the
+    // selected tab is saved and restored via @SceneStorage?
+    
+    // When the following is uncommented and the pitch shift picker's
+    // selection is $pitchShift, the pitchShift.didSet method is not
+    // called when the picker value changes. On the other hand, when
+    // the pitch shift picker's selection is $audioProcessor.pitchShift,
+    // the audioProcessor.pitchShift.didSet method *is* called when the
+    // picker value changes. Why the difference?
+//    @SceneStorage("ContentView.pitchShift")
+//    private var pitchShift: Int = 2 {
+//        didSet {
+//            print("ContentView.pitchShift set to \(pitchShift)")
+//            audioProcessor.pitchShift = pitchShift
+//        }
+//    }
+
+
     private var buttonTitle: String {
         get {
             return audioProcessor.running ? "Stop" : "Run"
@@ -37,7 +67,7 @@ struct ContentView: View {
     
     var body: some View {
         
-        TabView {
+        TabView(selection: $selectedTab) {
             
             VStack {
                 
@@ -52,6 +82,7 @@ struct ContentView: View {
                     Text("Pitch Shift:")
                 
                     Picker("Pitch Shift", selection: $audioProcessor.pitchShift) {
+                    // Picker("Pitch Shift", selection: $pitchShift) {
                         Text("1/2").tag(2)
                         Text("1/3").tag(3)
                         Text("1/4").tag(4)
@@ -93,6 +124,8 @@ struct ContentView: View {
                     if (audioProcessor.running) {
                         audioProcessor.stop()
                     } else {
+                        // print("ContentView: setting pitch shift to \(pitchShift)")
+                        // audioProcessor.pitchShift = pitchShift
                         audioProcessor.start()
                     }
 
@@ -110,6 +143,7 @@ struct ContentView: View {
             .tabItem {
                 Label("Home", systemImage: "house")
             }
+            .tag(Tab.home)
             .background(
                 Image("BlackAndWhiteWarbler")
                     .resizable()
@@ -166,6 +200,7 @@ struct ContentView: View {
             .tabItem {
                 Label("Test", systemImage: "slider.horizontal.3")
             }
+            .tag(Tab.test)
             .background(
                 Image("BlackAndWhiteWarbler")
                     .resizable()
@@ -196,6 +231,7 @@ struct ContentView: View {
             .tabItem {
                 Label("Console", systemImage: "terminal")
             }
+            .tag(Tab.console)
 
             VStack {
                 
@@ -214,6 +250,7 @@ struct ContentView: View {
             .tabItem {
                 Label("Help", systemImage: "questionmark.circle")
             }
+            .tag(Tab.help)
             .background(
                 Image("BlackAndWhiteWarbler")
                     .resizable()
