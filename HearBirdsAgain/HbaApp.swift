@@ -35,7 +35,7 @@ private enum _Error: Error {
 
 
 @main
-class HearBirdsAgainApp: App {
+class HbaApp: App {
     
     
     var body: some Scene {
