@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F24AD4552860C4D500554D3D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4542860C4D500554D3D /* HomeView.swift */; };
+		F24AD4572860CA8300554D3D /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4562860CA8300554D3D /* TestView.swift */; };
+		F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4582860CB7E00554D3D /* ConsoleView.swift */; };
+		F24AD45B2860CC1C00554D3D /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD45A2860CC1C00554D3D /* HelpView.swift */; };
 		F2609D0527EE0B88005DACFA /* HbaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D0427EE0B88005DACFA /* HbaApp.swift */; };
 		F2609D0727EE0B88005DACFA /* HbaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D0627EE0B88005DACFA /* HbaView.swift */; };
 		F2609D0927EE0B89005DACFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2609D0827EE0B89005DACFA /* Assets.xcassets */; };
@@ -22,6 +26,10 @@
 
 /* Begin PBXFileReference section */
 		F245FCFD27FCD5A000C54A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F24AD4542860C4D500554D3D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F24AD4562860CA8300554D3D /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		F24AD4582860CB7E00554D3D /* ConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleView.swift; sourceTree = "<group>"; };
+		F24AD45A2860CC1C00554D3D /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		F2609D0127EE0B88005DACFA /* HearBirdsAgain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HearBirdsAgain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2609D0427EE0B88005DACFA /* HbaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HbaApp.swift; sourceTree = "<group>"; };
 		F2609D0627EE0B88005DACFA /* HbaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HbaView.swift; sourceTree = "<group>"; };
@@ -84,6 +92,10 @@
 				F2945ABA283E6A8B0056D1F3 /* Logger.swift */,
 				F2945ABC283E75BB0056D1F3 /* Errors.swift */,
 				F2609D0627EE0B88005DACFA /* HbaView.swift */,
+				F24AD4542860C4D500554D3D /* HomeView.swift */,
+				F24AD4562860CA8300554D3D /* TestView.swift */,
+				F24AD4582860CB7E00554D3D /* ConsoleView.swift */,
+				F24AD45A2860CC1C00554D3D /* HelpView.swift */,
 				F245FCFD27FCD5A000C54A50 /* Info.plist */,
 				F2609D0827EE0B89005DACFA /* Assets.xcassets */,
 				F2609D0A27EE0B89005DACFA /* Preview Content */,
@@ -200,13 +212,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */,
+				F24AD45B2860CC1C00554D3D /* HelpView.swift in Sources */,
 				F2609D0727EE0B88005DACFA /* HbaView.swift in Sources */,
+				F24AD4572860CA8300554D3D /* TestView.swift in Sources */,
 				F2609D1627EE0CAB005DACFA /* SongFinderAudioUnit.swift in Sources */,
+				F24AD4552860C4D500554D3D /* HomeView.swift in Sources */,
 				F2609D1827EE0CE6005DACFA /* SongFinderParameters.swift in Sources */,
 				F2609D0527EE0B88005DACFA /* HbaApp.swift in Sources */,
 				F2945ABD283E75BB0056D1F3 /* Errors.swift in Sources */,
 				F2609D1327EE0C2E005DACFA /* AudioProcessor.swift in Sources */,
 				F2609D1B27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm in Sources */,
+				F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */,
 				F2945ABB283E6A8B0056D1F3 /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
