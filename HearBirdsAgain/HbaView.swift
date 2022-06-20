@@ -85,7 +85,6 @@ struct HbaView: View {
             }
             .tag(Tab.console)
 
-        
             HelpView()
             .tabItem {
                 Label("Help", systemImage: "questionmark.circle")

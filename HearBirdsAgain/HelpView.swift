@@ -25,11 +25,7 @@ struct HelpView: View {
             Spacer()
             
         }
-        .background(
-            Image("BlackAndWhiteWarbler")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .opacity(0.15))
+        .hbaBackground()
         
     }
     
