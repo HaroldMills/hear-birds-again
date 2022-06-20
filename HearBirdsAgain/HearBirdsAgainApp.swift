@@ -40,7 +40,7 @@ class HearBirdsAgainApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(audioProcessor: audioProcessor, logger: logger, errors: errors)
+            HbaView(audioProcessor: audioProcessor, logger: logger, errors: errors)
         }
     }
     

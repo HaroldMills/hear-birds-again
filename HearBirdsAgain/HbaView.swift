@@ -9,7 +9,7 @@
 import SwiftUI
 
 
-struct ContentView: View {
+struct HbaView: View {
     
     
     @ObservedObject var audioProcessor: AudioProcessor
@@ -282,6 +282,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(audioProcessor: audioProcessor, logger: logger, errors: errors)
+        HbaView(audioProcessor: audioProcessor, logger: logger, errors: errors)
     }
 }
