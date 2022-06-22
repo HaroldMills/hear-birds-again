@@ -65,23 +65,14 @@ class AudioProcessor: ObservableObject {
     }
     
     private let engine = AVAudioEngine()
-    private let songFinder: AVAudioUnitEffect
+    
+    private let songFinder = AVAudioUnitEffect(audioComponentDescription: SongFinderAudioUnit.componentDescription)
 
     
     init() {
-        
-        // We must create the SongFinder before calling any
-        // instance methods, since Swift requires that all of
-        // an object's stored properties be initialized before
-        // any of its methods are called.
-        songFinder = createSongFinder()
-
         configureAudioEngine()
-        
         initializeState()
-
         showInputSampleRate()
-        
     }
 
     
@@ -174,11 +165,6 @@ class AudioProcessor: ObservableObject {
     }
     
     
-}
-
-
-private func createSongFinder() -> AVAudioUnitEffect {
-    return AVAudioUnitEffect(audioComponentDescription: SongFinderAudioUnit.componentDescription)
 }
 
 
