@@ -39,9 +39,36 @@ class HbaApp: App {
     
     
     var body: some Scene {
+        
         WindowGroup {
-            HbaView(audioProcessor: audioProcessor, logger: logger, errors: errors)
+            
+            // Processor state save and load is modeled after code from the iOS
+            // Scrumdinger app tutorial.
+            HbaView(audioProcessor: audioProcessor, logger: logger, errors: errors) {
+                audioProcessor.state.save() { result in
+                    if case .failure(let error) = result {
+                        errors.handleNonfatalError(message: "Audio processor state save failed. \(error.localizedDescription)")
+                        fatalError(error.localizedDescription)
+                    }
+                }
+            }
+            .onAppear {
+                AudioProcessorState.load { result in
+                    switch result {
+                    case .failure(let error):
+                        errors.handleNonfatalError(message: "Audio processor state load failed. \(error.localizedDescription)")
+                    case .success(let state):
+                        audioProcessor.pitchShift = state.pitchShift
+                        audioProcessor.cutoff = state.cutoff
+                        audioProcessor.windowType = state.windowType
+                        audioProcessor.windowSize = state.windowSize
+                        audioProcessor.gain = state.gain
+                    }
+                }
+            }
+            
         }
+        
     }
     
     
@@ -64,7 +91,7 @@ class HbaApp: App {
         } catch _Error.error(let message) {
             errors.handleFatalError(message: "Audio processor initialization failed. \(message)")
         } catch {
-            errors.handleFatalError(message: "Audio processor initialization failed. \(String(describing: error))")
+            errors.handleFatalError(message: "Audio processor initialization failed. \(error.localizedDescription)")
         }
 
         setUpNotifications()

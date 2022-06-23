@@ -15,8 +15,8 @@ struct HbaView: View {
     @ObservedObject var audioProcessor: AudioProcessor
     @ObservedObject var logger: Logger
     @ObservedObject var errors: Errors
-    
-    
+    let saveAction: () -> Void
+
     enum Tab: String {
         case home
         case test
@@ -24,30 +24,9 @@ struct HbaView: View {
         case help
     }
     
-    @SceneStorage("ContentView.selectedTab") private var selectedTab = Tab.home
+    @SceneStorage("HbaView.selectedTab") private var selectedTab = Tab.home
     
     private let testTabVisible = false
-    
-    // The AudioProcessor is currently the authority for the values of
-    // its properties, rather than the UI, which seems best to me.
-    // Is there some way we can arrange for AudioProcessor state to be
-    // saved and restored at the same time that UI state like the
-    // selected tab is saved and restored via @SceneStorage?
-    
-    // When the following is uncommented and the pitch shift picker's
-    // selection is $pitchShift, the pitchShift.didSet method is not
-    // called when the picker value changes. On the other hand, when
-    // the pitch shift picker's selection is $audioProcessor.pitchShift,
-    // the audioProcessor.pitchShift.didSet method *is* called when the
-    // picker value changes. Why the difference?
-//    @SceneStorage("ContentView.pitchShift")
-//    private var pitchShift: Int = 2 {
-//        didSet {
-//            print("ContentView.pitchShift set to \(pitchShift)")
-//            audioProcessor.pitchShift = pitchShift
-//        }
-//    }
-
 
     private var nonfatalErrorMessage: String {
         get {
@@ -60,6 +39,10 @@ struct HbaView: View {
             return "A fatal error occurred, so the app will now exit. The error message was: \(errors.fatalErrorMessage)"
         }
     }
+    
+    // So we can monitor scene phase changes for saving processor state
+    // (see `.onChange` view modifier below).
+    @Environment(\.scenePhase) private var scenePhase
     
     var body: some View {
         
@@ -102,6 +85,9 @@ struct HbaView: View {
                 fatalError(fatalErrorMessage)
             }
         }
+        .onChange(of: scenePhase) { phase in
+            if phase == .inactive { saveAction() }
+        }
 
     }
 
@@ -110,6 +96,6 @@ struct HbaView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HbaView(audioProcessor: audioProcessor, logger: logger, errors: errors)
+        HbaView(audioProcessor: audioProcessor, logger: logger, errors: errors, saveAction: {})
     }
 }
