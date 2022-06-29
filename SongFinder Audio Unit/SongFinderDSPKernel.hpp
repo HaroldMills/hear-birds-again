@@ -26,7 +26,7 @@ using std::string;
 
 
 enum {
-    Cutoff, PitchShift, WindowType, WindowSize, Gain
+    Cutoff, PitchShift, WindowType, WindowSize, Gain, Balance
 };
 
 
@@ -43,10 +43,39 @@ public:
 
     
     void init(int channelCount, double sampleRate) {
+        
         _channelCount = channelCount;
         _sampleRate = float(sampleRate);
+        
+        _gainFactors = new float[_channelCount];
+        _updateGainFactors();
+        
     }
 
+    
+    void _updateGainFactors() {
+        
+        // Set the gain factors of all channels according to `_gain`.
+        float gainFactor = _dbToFactor(_gain);
+        for (int i = 0; i != _channelCount; ++i)
+            _gainFactors[i] = gainFactor;
+        
+        // If stereo, adjust gain factor of left or right channel if indicated by `_balance`.
+        if (_channelCount == 2) {
+            if (_balance > 0) {
+                _gainFactors[0] *= _dbToFactor(-_balance);
+            } else if (_balance < 0) {
+                _gainFactors[1] *= _dbToFactor(_balance);
+            }
+        }
+        
+    }
+    
+    
+    float _dbToFactor(float x) {
+        return std::pow(10, x / 20);
+    }
+    
     
     void reset() { }
 
@@ -123,14 +152,21 @@ public:
                 
             case Gain:
                 _gain = value;
-                _gainFactor = std::pow(10, (_gain / 20));
-                std::cout << "DSP Kernel: set gain to " << _gain << " " << _gainFactor << std::endl;
+                std::cout << "DSP Kernel: set gain to " << _gain << std::endl;
+                _updateGainFactors();
                 break;
                 
+            case Balance:
+                _balance = value;
+                std::cout << "DSP Kernel: set balance to " << _balance << std::endl;
+                _updateGainFactors();
+                break;
+
         }
         
     }
 
+    
     
     AUValue getParameter(AUParameterAddress address) {
         
@@ -150,6 +186,9 @@ public:
                 
             case Gain:
                 return _gain;
+                
+            case Balance:
+                return _balance;
 
             default: return 0;
                 
@@ -202,8 +241,9 @@ public:
                 
                 _processors[i]->process(inputs, frameCount, outputs);
                 
+                float gainFactor = _gainFactors[i];
                 for (int j = 0; j != frameCount; ++j)
-                    outputs[j] *= _gainFactor;
+                    outputs[j] *= gainFactor;
                 
             }
             
@@ -225,7 +265,8 @@ private:
     AUValue _windowType = 0;
     AUValue _windowSize = 20;       // ms
     AUValue _gain = 0;              // dB
-    AUValue _gainFactor = 1;
+    AUValue _balance = 0;           // dB
+    AUValue *_gainFactors = nullptr;
     SongFinderProcessor **_processors = nullptr;
     
     bool _bypassed = false;

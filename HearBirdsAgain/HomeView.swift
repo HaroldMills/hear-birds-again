@@ -60,12 +60,32 @@ struct HomeView: View {
             }
             .padding()
             
-            VStack {
-                HStack {
-                    Text("Gain:")
-                    Slider(value: $audioProcessor.gain, in: 0...24)
+//            VStack {
+//                HStack {
+//                    Text("Gain:")
+//                    Slider(value: $audioProcessor.gain, in: 0...24)
+//                }
+//                Text(String(format: "%.1f dB", audioProcessor.gain))
+//            }
+//            .padding()
+
+            HStack {
+                Spacer()
+                VStack {
+                    Stepper("Gain: \(audioProcessor.gain.formatted()) dB", value: $audioProcessor.gain, in: 0...20, step: 1)
                 }
-                Text(String(format: "%.1f dB", audioProcessor.gain))
+                .fixedSize()
+                Spacer()
+            }
+            .padding()
+
+            HStack {
+                Spacer()
+                VStack {
+                    Stepper("Balance: \(audioProcessor.balance.formatted()) dB", value: $audioProcessor.balance, in: -10...10, step: 1)
+                }
+                .fixedSize()
+                Spacer()
             }
             .padding()
                 

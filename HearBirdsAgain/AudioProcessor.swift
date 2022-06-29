@@ -36,6 +36,7 @@ struct AudioProcessorState: Codable {
     var windowType = WindowType.Hann
     var windowSize = 20
     var gain: AUValue = 0
+    var balance: AUValue = 0
     
     
     // Modeled after code from the iOS Scrumdinger app tutorial.
@@ -131,11 +132,21 @@ class AudioProcessor: ObservableObject {
     
     @Published var gain: AUValue = defaultProcessorState.gain {
         didSet {
-            // Note that unlike for all of the other SongFinder parameters
+            // Note that unlike for some other SongFinder parameters
             // we do not need to restart here here since the SongFinder
             // audio unit can respond to changes in the value of this
             // parameter while running.
             setAudioUnitParam(key: "gain", value: AUValue(gain))
+        }
+    }
+    
+    @Published var balance: AUValue = defaultProcessorState.balance {
+        didSet {
+            // Note that unlike for some other SongFinder parameters
+            // we do not need to restart here here since the SongFinder
+            // audio unit can respond to changes in the value of this
+            // parameter while running.
+            setAudioUnitParam(key: "balance", value: AUValue(balance))
         }
     }
     
@@ -144,7 +155,7 @@ class AudioProcessor: ObservableObject {
         get {
             return AudioProcessorState(
                 cutoff: cutoff, pitchShift: pitchShift, windowType: windowType,
-                windowSize: windowSize, gain: gain)
+                windowSize: windowSize, gain: gain, balance: balance)
         }
         
         set {
@@ -153,6 +164,7 @@ class AudioProcessor: ObservableObject {
             windowType = newValue.windowType
             windowSize = newValue.windowSize
             gain = newValue.gain
+            balance = newValue.balance
         }
         
     }
@@ -188,6 +200,7 @@ class AudioProcessor: ObservableObject {
         setAudioUnitParam(key: "windowType", value: AUValue(windowType.rawValue))
         setAudioUnitParam(key: "windowSize", value: AUValue(windowSize))
         setAudioUnitParam(key: "gain", value: AUValue(gain))
+        setAudioUnitParam(key: "balance", value: AUValue(balance))
         restartIfRunning()
     }
     

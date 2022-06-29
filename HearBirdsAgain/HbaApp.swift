@@ -63,6 +63,7 @@ class HbaApp: App {
                         audioProcessor.windowType = state.windowType
                         audioProcessor.windowSize = state.windowSize
                         audioProcessor.gain = state.gain
+                        audioProcessor.balance = state.balance
                     }
                 }
             }

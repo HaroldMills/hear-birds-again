@@ -15,7 +15,7 @@ import Foundation
 class SongFinderParameters {
 
     private enum SongFinderParam: AUParameterAddress {
-        case cutoff, pitchShift, windowType, windowSize, gain
+        case cutoff, pitchShift, windowType, windowSize, gain, balance
     }
     
     static let minCutoff: AUValue = 0
@@ -30,8 +30,11 @@ class SongFinderParameters {
     static let minWindowSize: AUValue = 5
     static let maxWindowSize: AUValue = 50
     
-    static let minGain: AUValue = -24
-    static let maxGain: AUValue = 24
+    static let minGain: AUValue = -20
+    static let maxGain: AUValue = 20
+    
+    static let minBalance: AUValue = -10
+    static let maxBalance: AUValue = 10
 
     var cutoffParam: AUParameter = {
         
@@ -140,13 +143,35 @@ class SongFinderParameters {
         
     }()
 
+    var balanceParam: AUParameter = {
+        
+        let parameter = AUParameterTree.createParameter(
+            withIdentifier: "balance",
+            name: "Balance",
+            address: SongFinderParam.balance.rawValue,
+            min: minBalance,
+            max: maxBalance,
+            unit: .decibels,
+            unitName: "dB",
+            flags: [.flag_IsReadable,
+                    .flag_IsWritable,
+                    .flag_CanRamp],
+            valueStrings: nil,
+            dependentParameters: nil)
+        
+        parameter.value = 0
+
+        return parameter
+        
+    }()
+    
     let parameterTree: AUParameterTree
 
     init(kernelAdapter: SongFinderDSPKernelAdapter) {
 
         // Create the audio unit's tree of parameters
         parameterTree = AUParameterTree.createTree(
-            withChildren: [cutoffParam, pitchShiftParam, windowTypeParam, windowSizeParam, gainParam])
+            withChildren: [cutoffParam, pitchShiftParam, windowTypeParam, windowSizeParam, gainParam, balanceParam])
 
         // Closure observing all externally-generated parameter value changes.
         parameterTree.implementorValueObserver = { param, value in
@@ -165,7 +190,8 @@ class SongFinderParameters {
                 SongFinderParam.pitchShift.rawValue,
                 SongFinderParam.windowType.rawValue,
                 SongFinderParam.windowSize.rawValue,
-                SongFinderParam.gain.rawValue:
+                SongFinderParam.gain.rawValue,
+                SongFinderParam.balance.rawValue:
                 return String(format: "%.f", value ?? param.value)
             default:
                 return "?"
@@ -173,13 +199,14 @@ class SongFinderParameters {
         }
     }
     
-    func setParameterValues(cutoff: AUValue, pitchShift: AUValue, windowType: AUValue, windowSize: AUValue, gain: AUValue) {
+    func setParameterValues(cutoff: AUValue, pitchShift: AUValue, windowType: AUValue, windowSize: AUValue, gain: AUValue, balance: AUValue) {
         
         cutoffParam.value = cutoff
         pitchShiftParam.value = pitchShift
         windowTypeParam.value = windowType
         windowSizeParam.value = windowSize
         gainParam.value = gain
+        balanceParam.value = balance
                 
     }
     
