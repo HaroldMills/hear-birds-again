@@ -13,20 +13,30 @@ struct HelpView: View {
         
         VStack {
             
+            VStack {
+                
+                Text("Hear Birds Again")
+                    .font(.system(size: 35, weight: .bold, design: .default))
+                
+                Text("v\(getAppVersion())")
+                    .font(.subheadline)
+                
+            }
+            .padding(50)
+            
             Spacer()
             
-            Text("Hear Birds Again")
-                .font(.system(size: 35, weight: .bold, design: .default))
-                .padding()
-            
             Text("Help is on the way!")
-                .padding()
-            
+
             Spacer()
             
         }
         .hbaBackground()
         
+    }
+    
+    private func getAppVersion() -> String {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     }
     
 }
