@@ -59,8 +59,9 @@ public class SongFinderAudioUnit: AUAudioUnit {
     
     public override var parameterTree: AUParameterTree? {
         get { return parameters.parameterTree }
-        set { /* This makes this property read-only. */ }
+        set { /* This makes this property read-only in this class, though it is mutable in the parent class. */ }
     }
+    
 
     /*
     public override var factoryPresets: [AUAudioUnitPreset] {
