@@ -88,6 +88,9 @@ struct HomeView: View {
                 Spacer()
             }
             .padding()
+            
+            LevelMeter(level: $audioProcessor.outputLevel, minLevel: -80, maxLevel: 0, segmentSize: 5)
+                .padding()
                 
             Button(buttonTitle) {
 

@@ -95,6 +95,7 @@ private func getSavedProcessorStateUrl() throws -> URL {
 
 
 private let defaultProcessorState = AudioProcessorState()
+private let stoppedOutputLevel: AUValue = -200
 
 
 class AudioProcessor: ObservableObject {
@@ -149,6 +150,10 @@ class AudioProcessor: ObservableObject {
             setAudioUnitParam(key: "balance", value: AUValue(balance))
         }
     }
+    
+    @Published var outputLevel: AUValue = stoppedOutputLevel
+    
+    var levelUpdateTimer: Timer?
     
     var state: AudioProcessorState {
         
@@ -206,15 +211,19 @@ class AudioProcessor: ObservableObject {
     
     
     private func setAudioUnitParam(key: String, value: AUValue) {
+        let parameter = getAudioUnitParam(key: key)
+        parameter.value = value
+    }
+    
+    
+    private func getAudioUnitParam(key: String) -> AUParameter {
         
         // We force unwrap the parameter tree and the parameter in this
         // method since we know by design that a SongFinder audio unit
         // has a parameter tree, and we assume that the parameter tree
         // includes a parameter for the specified key.
         let parameterTree = songFinder.auAudioUnit.parameterTree!
-        let parameter = parameterTree.value(forKey: key) as! AUParameter
-        
-        parameter.value = value
+        return parameterTree.value(forKey: key) as! AUParameter
         
     }
     
@@ -238,7 +247,23 @@ class AudioProcessor: ObservableObject {
             return
         }
         
+        levelUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+            self.updateOutputLevel()
+        }
+        
         running = true
+        
+    }
+    
+    
+    func updateOutputLevel() {
+        
+        // outputLevel = AUValue.random(in: -20 ... -5)
+
+        let parameter = getAudioUnitParam(key: "outputLevel")
+        outputLevel = parameter.value
+        
+        // print(outputLevel)
         
     }
     
@@ -246,8 +271,12 @@ class AudioProcessor: ObservableObject {
     func stop() {
         print("AudioProcessor.stop")
         // handleFatalError(message: "Could not stop audio engine.")
-        engine.stop()
-        running = false
+        if (running) {
+            engine.stop()
+            levelUpdateTimer?.invalidate()
+            outputLevel = stoppedOutputLevel
+            running = false
+        }
     }
     
     

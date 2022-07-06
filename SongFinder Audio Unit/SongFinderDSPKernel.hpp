@@ -26,8 +26,11 @@ using std::string;
 
 
 enum {
-    Cutoff, PitchShift, WindowType, WindowSize, Gain, Balance
+    Cutoff, PitchShift, WindowType, WindowSize, Gain, Balance, OutputLevel
 };
+
+
+const AUValue _MIN_POWER = 1e-20;
 
 
 class SongFinderDSPKernel : public DSPKernel {
@@ -189,6 +192,9 @@ public:
                 
             case Balance:
                 return _balance;
+                
+            case OutputLevel:
+                return _outputLevel;
 
             default: return 0;
                 
@@ -248,7 +254,31 @@ public:
             }
             
         }
-
+        
+        
+        // compute max channel RMS output power in dBFS, where full scale is 1.
+        
+        float maxPower = _MIN_POWER;
+        
+        for (int i = 0; i != _channelCount; ++i) {
+            
+            float power = 0;
+            float *outputs = (float *) _outputBuffers->mBuffers[0].mData + bufferOffset;
+            
+            for (int j = 0; j != frameCount; ++j) {
+                const float sample = outputs[j];
+                power += sample * sample;
+            }
+            
+            power /= frameCount;
+            
+            if (power > maxPower)
+                maxPower = power;
+                
+        }
+        
+        _outputLevel = 10 * std::log10(maxPower);
+        
     }
 
     
@@ -266,6 +296,7 @@ private:
     AUValue _windowSize = 20;       // ms
     AUValue _gain = 0;              // dB
     AUValue _balance = 0;           // dB
+    AUValue _outputLevel = -200;    // dB
     AUValue *_gainFactors = nullptr;
     SongFinderProcessor **_processors = nullptr;
     

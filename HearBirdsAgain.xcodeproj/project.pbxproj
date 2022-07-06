@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2104BA0286C9AA100F65AEF /* LevelMeter.swift */; };
 		F24AD4552860C4D500554D3D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4542860C4D500554D3D /* HomeView.swift */; };
 		F24AD4572860CA8300554D3D /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4562860CA8300554D3D /* TestView.swift */; };
 		F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4582860CB7E00554D3D /* ConsoleView.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F2104BA0286C9AA100F65AEF /* LevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
 		F245FCFD27FCD5A000C54A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F24AD4542860C4D500554D3D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F24AD4562860CA8300554D3D /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				F2945ABC283E75BB0056D1F3 /* Errors.swift */,
 				F2609D0627EE0B88005DACFA /* HbaView.swift */,
 				F24AD4542860C4D500554D3D /* HomeView.swift */,
+				F2104BA0286C9AA100F65AEF /* LevelMeter.swift */,
 				F24AD4562860CA8300554D3D /* TestView.swift */,
 				F24AD4582860CB7E00554D3D /* ConsoleView.swift */,
 				F24AD45A2860CC1C00554D3D /* HelpView.swift */,
@@ -220,6 +223,7 @@
 				F24AD4572860CA8300554D3D /* TestView.swift in Sources */,
 				F2609D1627EE0CAB005DACFA /* SongFinderAudioUnit.swift in Sources */,
 				F24AD4552860C4D500554D3D /* HomeView.swift in Sources */,
+				F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */,
 				F2609D1827EE0CE6005DACFA /* SongFinderParameters.swift in Sources */,
 				F2609D0527EE0B88005DACFA /* HbaApp.swift in Sources */,
 				F24AD45D2860CE9900554D3D /* ViewExtensions.swift in Sources */,

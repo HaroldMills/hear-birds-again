@@ -15,7 +15,7 @@ import Foundation
 class SongFinderParameters {
 
     private enum SongFinderParam: AUParameterAddress {
-        case cutoff, pitchShift, windowType, windowSize, gain, balance
+        case cutoff, pitchShift, windowType, windowSize, gain, balance, outputLevel
     }
     
     static let minCutoff: AUValue = 0
@@ -35,6 +35,9 @@ class SongFinderParameters {
     
     static let minBalance: AUValue = -10
     static let maxBalance: AUValue = 10
+    
+    static let minOutputLevel: AUValue = -100
+    static let maxOutputLevel: AUValue = 0
 
     var cutoffParam: AUParameter = {
         
@@ -165,13 +168,33 @@ class SongFinderParameters {
         
     }()
     
+    var outputLevelParam: AUParameter = {
+        
+        let parameter = AUParameterTree.createParameter(
+            withIdentifier: "outputLevel",
+            name: "Output Level",
+            address: SongFinderParam.outputLevel.rawValue,
+            min: minOutputLevel,
+            max: maxOutputLevel,
+            unit: .decibels,
+            unitName: "dB",
+            flags: [.flag_MeterReadOnly],
+            valueStrings: nil,
+            dependentParameters: nil)
+        
+        parameter.value = minOutputLevel
+
+        return parameter
+        
+    }()
+    
     let parameterTree: AUParameterTree
 
     init(kernelAdapter: SongFinderDSPKernelAdapter) {
 
         // Create the audio unit's tree of parameters
         parameterTree = AUParameterTree.createTree(
-            withChildren: [cutoffParam, pitchShiftParam, windowTypeParam, windowSizeParam, gainParam, balanceParam])
+            withChildren: [cutoffParam, pitchShiftParam, windowTypeParam, windowSizeParam, gainParam, balanceParam, outputLevelParam])
 
         // Closure observing all externally-generated parameter value changes.
         parameterTree.implementorValueObserver = { param, value in
@@ -191,7 +214,8 @@ class SongFinderParameters {
                 SongFinderParam.windowType.rawValue,
                 SongFinderParam.windowSize.rawValue,
                 SongFinderParam.gain.rawValue,
-                SongFinderParam.balance.rawValue:
+                SongFinderParam.balance.rawValue,
+                SongFinderParam.outputLevel.rawValue:
                 return String(format: "%.f", value ?? param.value)
             default:
                 return "?"
