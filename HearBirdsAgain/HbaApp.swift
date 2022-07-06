@@ -58,12 +58,7 @@ class HbaApp: App {
                     case .failure(let error):
                         errors.handleNonfatalError(message: "Audio processor state load failed. \(error.localizedDescription)")
                     case .success(let state):
-                        audioProcessor.pitchShift = state.pitchShift
-                        audioProcessor.cutoff = state.cutoff
-                        audioProcessor.windowType = state.windowType
-                        audioProcessor.windowSize = state.windowSize
-                        audioProcessor.gain = state.gain
-                        audioProcessor.balance = state.balance
+                        audioProcessor.state = state
                     }
                 }
             }
