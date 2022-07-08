@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct SongFinderParameters {
+public struct SongFinderParameters {
 
     
     private enum ParameterAddress: AUParameterAddress {
@@ -39,7 +39,7 @@ struct SongFinderParameters {
     private static let maxOutputLevel: AUValue = 0
 
     
-    let cutoff: AUParameter = {
+    public let cutoff: AUParameter = {
         
         let parameter = AUParameterTree.createParameter(
             withIdentifier: "cutoff",
@@ -60,7 +60,7 @@ struct SongFinderParameters {
     }()
     
     
-    let pitchShift: AUParameter = {
+    public let pitchShift: AUParameter = {
         
         let parameter = AUParameterTree.createParameter(
             withIdentifier: "pitchShift",
@@ -81,7 +81,7 @@ struct SongFinderParameters {
     }()
 
     
-    let windowType: AUParameter = {
+    public let windowType: AUParameter = {
         
         let parameter = AUParameterTree.createParameter(
             withIdentifier: "windowType",
@@ -102,7 +102,7 @@ struct SongFinderParameters {
     }()
     
     
-    let windowSize: AUParameter = {
+    public let windowSize: AUParameter = {
         
         let parameter = AUParameterTree.createParameter(
             withIdentifier: "windowSize",
@@ -123,7 +123,7 @@ struct SongFinderParameters {
     }()
 
     
-    let gain: AUParameter = {
+    public let gain: AUParameter = {
         
         let parameter = AUParameterTree.createParameter(
             withIdentifier: "gain",
@@ -144,7 +144,7 @@ struct SongFinderParameters {
     }()
 
     
-    let balance: AUParameter = {
+    public let balance: AUParameter = {
         
         let parameter = AUParameterTree.createParameter(
             withIdentifier: "balance",
@@ -165,7 +165,7 @@ struct SongFinderParameters {
     }()
     
     
-    let outputLevel: AUParameter = {
+    public let outputLevel: AUParameter = {
         
         let parameter = AUParameterTree.createParameter(
             withIdentifier: "outputLevel",
@@ -186,10 +186,10 @@ struct SongFinderParameters {
     }()
     
     
-    let parameterTree: AUParameterTree
+    public let parameterTree: AUParameterTree
 
     
-    init(kernelAdapter: SongFinderDSPKernelAdapter) {
+    public init(kernelAdapter: SongFinderDSPKernelAdapter) {
 
         // Create the audio unit's tree of parameters
         parameterTree = AUParameterTree.createTree(
@@ -223,7 +223,7 @@ struct SongFinderParameters {
     }
     
     
-    func setValues(cutoff: AUValue, pitchShift: AUValue, windowType: AUValue, windowSize: AUValue, gain: AUValue, balance: AUValue) {
+    public func setValues(cutoff: AUValue, pitchShift: AUValue, windowType: AUValue, windowSize: AUValue, gain: AUValue, balance: AUValue) {
         
         self.cutoff.value = cutoff
         self.pitchShift.value = pitchShift
