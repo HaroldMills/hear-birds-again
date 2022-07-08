@@ -27,7 +27,7 @@ public class SongFinderAudioUnit: AUAudioUnit {
     )
 
 
-    private let parameters: SongFinderParameters
+    public let parameters: SongFinderParameters
     private let kernelAdapter: SongFinderDSPKernelAdapter
 
     

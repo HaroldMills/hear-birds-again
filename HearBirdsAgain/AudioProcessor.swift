@@ -105,28 +105,28 @@ class AudioProcessor: ObservableObject {
     
     @Published var cutoff = defaultProcessorState.cutoff {
         didSet {
-            setAudioUnitParam(key: "cutoff", value: AUValue(cutoff))
+            songFinderAudioUnit.parameters.cutoff.value = AUValue(cutoff)
             restartIfRunning()
         }
     }
     
     @Published var pitchShift = defaultProcessorState.pitchShift {
         didSet {
-            setAudioUnitParam(key: "pitchShift", value: AUValue(pitchShift))
+            songFinderAudioUnit.parameters.pitchShift.value = AUValue(pitchShift)
             restartIfRunning()
         }
     }
     
     @Published var windowType = defaultProcessorState.windowType {
         didSet {
-            setAudioUnitParam(key: "windowType", value: AUValue(windowType.rawValue))
+            songFinderAudioUnit.parameters.windowType.value = AUValue(windowType.rawValue)
             restartIfRunning()
         }
     }
     
     @Published var windowSize = defaultProcessorState.windowSize {
         didSet {
-            setAudioUnitParam(key: "windowSize", value: AUValue(windowSize))
+            songFinderAudioUnit.parameters.windowSize.value = AUValue(windowSize)
             restartIfRunning()
         }
     }
@@ -137,7 +137,7 @@ class AudioProcessor: ObservableObject {
             // we do not need to restart here here since the SongFinder
             // audio unit can respond to changes in the value of this
             // parameter while running.
-            setAudioUnitParam(key: "gain", value: AUValue(gain))
+            songFinderAudioUnit.parameters.gain.value = AUValue(gain)
         }
     }
     
@@ -147,7 +147,7 @@ class AudioProcessor: ObservableObject {
             // we do not need to restart here here since the SongFinder
             // audio unit can respond to changes in the value of this
             // parameter while running.
-            setAudioUnitParam(key: "balance", value: AUValue(balance))
+            songFinderAudioUnit.parameters.balance.value = AUValue(balance)
         }
     }
     
@@ -176,7 +176,12 @@ class AudioProcessor: ObservableObject {
     
     private let engine = AVAudioEngine()
     
-    private let songFinder = AVAudioUnitEffect(audioComponentDescription: SongFinderAudioUnit.componentDescription)
+    private let songFinderEffect = AVAudioUnitEffect(audioComponentDescription: SongFinderAudioUnit.componentDescription)
+    
+    private var songFinderAudioUnit: SongFinderAudioUnit {
+        return songFinderEffect.auAudioUnit as! SongFinderAudioUnit
+    }
+    
     
     init() {
         configureAudioEngine()
@@ -191,39 +196,25 @@ class AudioProcessor: ObservableObject {
         let output = engine.outputNode
         let format = input.inputFormat(forBus: 0)
         
-        engine.attach(songFinder)
+        engine.attach(songFinderEffect)
         
-        engine.connect(input, to: songFinder, format: format)
-        engine.connect(songFinder, to: output, format: format)
+        engine.connect(input, to: songFinderEffect, format: format)
+        engine.connect(songFinderEffect, to: output, format: format)
 
     }
     
     
     private func setSongFinderState() {
-        setAudioUnitParam(key: "cutoff", value: AUValue(cutoff))
-        setAudioUnitParam(key: "pitchShift", value: AUValue(pitchShift))
-        setAudioUnitParam(key: "windowType", value: AUValue(windowType.rawValue))
-        setAudioUnitParam(key: "windowSize", value: AUValue(windowSize))
-        setAudioUnitParam(key: "gain", value: AUValue(gain))
-        setAudioUnitParam(key: "balance", value: AUValue(balance))
-        restartIfRunning()
-    }
-    
-    
-    private func setAudioUnitParam(key: String, value: AUValue) {
-        let parameter = getAudioUnitParam(key: key)
-        parameter.value = value
-    }
-    
-    
-    private func getAudioUnitParam(key: String) -> AUParameter {
         
-        // We force unwrap the parameter tree and the parameter in this
-        // method since we know by design that a SongFinder audio unit
-        // has a parameter tree, and we assume that the parameter tree
-        // includes a parameter for the specified key.
-        let parameterTree = songFinder.auAudioUnit.parameterTree!
-        return parameterTree.value(forKey: key) as! AUParameter
+        songFinderAudioUnit.parameters.setValues(
+            cutoff: AUValue(cutoff),
+            pitchShift: AUValue(pitchShift),
+            windowType: AUValue(windowType.rawValue),
+            windowSize: AUValue(windowSize),
+            gain: AUValue(gain),
+            balance: AUValue(balance))
+        
+        restartIfRunning()
         
     }
     
@@ -248,22 +239,10 @@ class AudioProcessor: ObservableObject {
         }
         
         levelUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
-            self.updateOutputLevel()
+            self.outputLevel = self.songFinderAudioUnit.parameters.outputLevel.value
         }
         
         running = true
-        
-    }
-    
-    
-    func updateOutputLevel() {
-        
-        // outputLevel = AUValue.random(in: -20 ... -5)
-
-        let parameter = getAudioUnitParam(key: "outputLevel")
-        outputLevel = parameter.value
-        
-        // print(outputLevel)
         
     }
     
