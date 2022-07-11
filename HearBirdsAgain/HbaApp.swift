@@ -292,6 +292,9 @@ private func showAudioSessionAvailableInputPorts() {
 }
 
 
+// This seems to be necessary since `reason.rawValue` is an integer instead of
+// the string we return here, and `RouteChangeReason` doesn't seem to provide
+// something like this function.
 private func getAudioSessionRouteChangeReasonString(reason: AVAudioSession.RouteChangeReason) -> String {
     
     switch reason {
