@@ -262,8 +262,8 @@ class AudioProcessor: ObservableObject {
     private func showInputSampleRate() {
         let input = engine.inputNode
         let format = input.inputFormat(forBus: 0)
-        logger.log()
-        logger.log("AudioProcessor.showInputSampleRate \(format.sampleRate)")
+        console.log()
+        console.log("AudioProcessor.showInputSampleRate \(format.sampleRate)")
     }
 
     

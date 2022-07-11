@@ -22,7 +22,7 @@
 		F2609D1827EE0CE6005DACFA /* SongFinderParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D1727EE0CE6005DACFA /* SongFinderParameters.swift */; };
 		F2609D1B27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = F2609D1A27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm */; };
 		F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = F2609D2127EE0FAB005DACFA /* DSPKernel.mm */; };
-		F2945ABB283E6A8B0056D1F3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABA283E6A8B0056D1F3 /* Logger.swift */; };
+		F2945ABB283E6A8B0056D1F3 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABA283E6A8B0056D1F3 /* Console.swift */; };
 		F2945ABD283E75BB0056D1F3 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABC283E75BB0056D1F3 /* Errors.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +49,7 @@
 		F2609D2127EE0FAB005DACFA /* DSPKernel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DSPKernel.mm; sourceTree = "<group>"; };
 		F2609D2227EE0FAB005DACFA /* DSPKernel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DSPKernel.hpp; sourceTree = "<group>"; };
 		F2609D2427EE0FF1005DACFA /* BufferedAudioBus.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferedAudioBus.hpp; sourceTree = "<group>"; };
-		F2945ABA283E6A8B0056D1F3 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		F2945ABA283E6A8B0056D1F3 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		F2945ABC283E75BB0056D1F3 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		F29647A927EE1BA000AB33A6 /* AdvancingBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AdvancingBuffer.hpp; sourceTree = "<group>"; };
 		F29647AA27EE1BD100AB33A6 /* Interpolator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Interpolator.hpp; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 			children = (
 				F2609D0427EE0B88005DACFA /* HbaApp.swift */,
 				F2609D1227EE0C2E005DACFA /* AudioProcessor.swift */,
-				F2945ABA283E6A8B0056D1F3 /* Logger.swift */,
+				F2945ABA283E6A8B0056D1F3 /* Console.swift */,
 				F2945ABC283E75BB0056D1F3 /* Errors.swift */,
 				F2609D0627EE0B88005DACFA /* HbaView.swift */,
 				F24AD4542860C4D500554D3D /* HomeView.swift */,
@@ -231,7 +231,7 @@
 				F2609D1327EE0C2E005DACFA /* AudioProcessor.swift in Sources */,
 				F2609D1B27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm in Sources */,
 				F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */,
-				F2945ABB283E6A8B0056D1F3 /* Logger.swift in Sources */,
+				F2945ABB283E6A8B0056D1F3 /* Console.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

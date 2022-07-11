@@ -44,7 +44,7 @@ class HbaApp: App {
             
             // Processor state save and load is modeled after code from the iOS
             // Scrumdinger app tutorial.
-            HbaView(audioProcessor: audioProcessor, logger: logger, errors: errors) {
+            HbaView(audioProcessor: audioProcessor, console: console, errors: errors) {
                 audioProcessor.state.save() { result in
                     if case .failure(let error) = result {
                         errors.handleNonfatalError(message: "Audio processor state save failed. \(error.localizedDescription)")
@@ -93,10 +93,37 @@ class HbaApp: App {
         setUpNotifications()
         
         showAudioSessionCurrentRoute()
+        
+        showInputPolarPatterns()
 
     }
     
 
+    private func showInputPolarPatterns() {
+        
+        console.log()
+        
+        let session = AVAudioSession.sharedInstance()
+        
+        if let source = session.inputDataSource {
+            
+            console.log("Input data source polar patterns:")
+            
+            if let patterns = source.supportedPolarPatterns {
+                for pattern in patterns {
+                    console.log("    \(pattern.rawValue)")
+                }
+            } else {
+                console.log("    none found")
+            }
+            
+        } else {
+            console.log("No input data source found.")
+        }
+        
+    }
+    
+    
     private func setUpNotifications() {
         
         let notificationCenter = NotificationCenter.default
@@ -118,9 +145,9 @@ class HbaApp: App {
                   return
         }
 
-        logger.log()
+        console.log()
         let reasonString = getAudioSessionRouteChangeReasonString(reason: reason)
-        logger.log("HeadBirdsAgainApp.handleRouteChange: \(reasonString)")
+        console.log("HeadBirdsAgainApp.handleRouteChange: \(reasonString)")
         showAudioSessionCurrentRoute()
 
         switch reason {
@@ -129,7 +156,7 @@ class HbaApp: App {
             // audio session category changed
             
             if (AVAudioSession.sharedInstance().secondaryAudioShouldBeSilencedHint) {
-                logger.log("HearBirdsAgainApp.handleRouteChange: Secondary audio should be silenced.")
+                console.log("HearBirdsAgainApp.handleRouteChange: Secondary audio should be silenced.")
                 audioProcessor.stop()
             }
             
@@ -243,10 +270,10 @@ private func showAudioSessionAvailableCategories() {
     let session = AVAudioSession.sharedInstance()
     let categories = session.availableCategories
 
-    logger.log("")
-    logger.log("Audio session categories:")
+    console.log("")
+    console.log("Audio session categories:")
     for category in categories {
-        logger.log("\(category)")
+        console.log("\(category)")
     }
     
 }
@@ -259,7 +286,7 @@ private func showAudioSessionAvailableInputPorts() {
     if let ports = session.availableInputs {
         showAudioSessionPorts(ports: ports, title: "Available input ports")
     } else {
-        logger.log("Could not get available input ports.")
+        console.log("Could not get available input ports.")
     }
     
 }
@@ -311,8 +338,8 @@ private func showAudioSessionCurrentRoute() {
 
 private func showAudioSessionPorts(ports: [AVAudioSessionPortDescription], title: String) {
     
-    logger.log("")
-    logger.log("\(title):")
+    console.log("")
+    console.log("\(title):")
     
     for port in ports {
         
@@ -320,11 +347,11 @@ private func showAudioSessionPorts(ports: [AVAudioSessionPortDescription], title
         if let channels = port.channels {
             channelCountText = getChannelCountText(channelCount: channels.count)
         }
-        logger.log("    \(port.portName) (\(channelCountText))")
+        console.log("    \(port.portName) (\(channelCountText))")
         
         if let sources = port.dataSources {
             for source in sources {
-                logger.log("        \(source.dataSourceName)")
+                console.log("        \(source.dataSourceName)")
             }
         }
         

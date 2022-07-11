@@ -13,7 +13,7 @@ struct HbaView: View {
     
     
     @ObservedObject var audioProcessor: AudioProcessor
-    @ObservedObject var logger: Logger
+    @ObservedObject var console: Console
     @ObservedObject var errors: Errors
     let saveAction: () -> Void
 
@@ -62,7 +62,7 @@ struct HbaView: View {
                 .tag(Tab.test)
             }
             
-            ConsoleView(logger: logger)
+            ConsoleView(console: console)
             .tabItem {
                 Label("Console", systemImage: "terminal")
             }
@@ -96,6 +96,6 @@ struct HbaView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HbaView(audioProcessor: audioProcessor, logger: logger, errors: errors, saveAction: {})
+        HbaView(audioProcessor: audioProcessor, console: console, errors: errors, saveAction: {})
     }
 }

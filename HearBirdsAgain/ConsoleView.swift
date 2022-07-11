@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ConsoleView: View {
     
-    @ObservedObject var logger: Logger
+    @ObservedObject var console: Console
     
     var body: some View {
         
@@ -19,7 +19,7 @@ struct ConsoleView: View {
                 
                 HStack {
                     
-                    Text(logger.logText)
+                    Text(console.text)
                         .font(Font.system(size: 16).monospaced())
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
@@ -41,6 +41,6 @@ struct ConsoleView: View {
 
 struct ConsoleView_Previews: PreviewProvider {
     static var previews: some View {
-        ConsoleView(logger: logger)
+        ConsoleView(console: console)
     }
 }
