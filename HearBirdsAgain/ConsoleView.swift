@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ConsoleView: View {
     
+    @ObservedObject var logger: Logger
+    
     var body: some View {
         
         ScrollView {
@@ -39,6 +41,6 @@ struct ConsoleView: View {
 
 struct ConsoleView_Previews: PreviewProvider {
     static var previews: some View {
-        ConsoleView()
+        ConsoleView(logger: logger)
     }
 }

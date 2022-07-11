@@ -62,7 +62,7 @@ struct HbaView: View {
                 .tag(Tab.test)
             }
             
-            ConsoleView()
+            ConsoleView(logger: logger)
             .tabItem {
                 Label("Console", systemImage: "terminal")
             }
