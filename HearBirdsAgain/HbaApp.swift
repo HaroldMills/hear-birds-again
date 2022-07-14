@@ -80,8 +80,6 @@ class HbaApp: App {
             
             try setAudioSessionCategory()
             
-            showAudioSessionAvailableInputPorts()
-
             try configureAudioSession()
             
         } catch _Error.error(let message) {
@@ -94,36 +92,9 @@ class HbaApp: App {
         
         showAudioSessionCurrentRoute()
         
-        showInputPolarPatterns()
-
     }
     
 
-    private func showInputPolarPatterns() {
-        
-        console.log()
-        
-        let session = AVAudioSession.sharedInstance()
-        
-        if let source = session.inputDataSource {
-            
-            console.log("Input data source polar patterns:")
-            
-            if let patterns = source.supportedPolarPatterns {
-                for pattern in patterns {
-                    console.log("    \(pattern.rawValue)")
-                }
-            } else {
-                console.log("    none found")
-            }
-            
-        } else {
-            console.log("No input data source found.")
-        }
-        
-    }
-    
-    
     private func setUpNotifications() {
         
         let notificationCenter = NotificationCenter.default
@@ -164,8 +135,7 @@ class HbaApp: App {
             // route changed to use a new device, e.g. because headphones
             // were connected
             
-            // I'm not sure quite why, but this seems to be necessary to ensure
-            // that processing uses new input and/or output device.
+            // Restart audio processor to use new device.
             audioProcessor.restartIfRunning()
             
         case .oldDeviceUnavailable:
@@ -214,9 +184,10 @@ private func setAudioSessionCategory() throws {
 
     do {
         
-        try session.setCategory(
-            AVAudioSession.Category.playAndRecord,
-            mode: AVAudioSession.Mode.measurement)
+        // Do *not* include `mode: .measurement` here. That disables stereo input.
+        try session.setCategory(.playAndRecord)
+        
+        try session.setActive(true)
         
     } catch {
         throw _Error.error(message: "Could not set audio session category. \(String(describing: error))")
@@ -279,19 +250,6 @@ private func showAudioSessionAvailableCategories() {
 }
 
 
-private func showAudioSessionAvailableInputPorts() {
-    
-    let session = AVAudioSession.sharedInstance()
-    
-    if let ports = session.availableInputs {
-        showAudioSessionPorts(ports: ports, title: "Available input ports")
-    } else {
-        console.log("Could not get available input ports.")
-    }
-    
-}
-
-
 // This seems to be necessary since `reason.rawValue` is an integer instead of
 // the string we return here, and `RouteChangeReason` doesn't seem to provide
 // something like this function.
@@ -331,31 +289,63 @@ private func getAudioSessionRouteChangeReasonString(reason: AVAudioSession.Route
 }
 
 
+// For some reason, the information retrieved by `showAudioSessionPorts` for
+// the ports of `AVAudioSession.sharedInstance().availableInputs` does not
+// include stereo polar patterns, while that retrieved for
+// `AVAudioSession.sharedInstance().currentRoute.inputs` does (in particular,
+// for my iPhone SE model A2275 and iOS 15.5). So we rely on the latter
+// rather than the former for information about audio input capabilities.
 private func showAudioSessionCurrentRoute() {
     let session = AVAudioSession.sharedInstance()
     let route = session.currentRoute
-    showAudioSessionPorts(ports: route.inputs, title: "Current audio input ports")
-    showAudioSessionPorts(ports: route.outputs, title: "Current audio output ports")
+    showAudioSessionInputPorts(ports: route.inputs)
+    showAudioSessionOutputPorts(ports: route.outputs)
 }
 
 
-private func showAudioSessionPorts(ports: [AVAudioSessionPortDescription], title: String) {
+private func showAudioSessionInputPorts(ports: [AVAudioSessionPortDescription]) {
     
     console.log("")
-    console.log("\(title):")
+    console.log("Current audio input port(s):")
     
     for port in ports {
         
-        var channelCountText = "could not get channels"
+        var channelCountText = "could not get channel count"
         if let channels = port.channels {
             channelCountText = getChannelCountText(channelCount: channels.count)
         }
         console.log("    \(port.portName) (\(channelCountText))")
         
-        if let sources = port.dataSources {
-            for source in sources {
-                console.log("        \(source.dataSourceName)")
+        if let source = port.selectedDataSource {
+            console.log("        selected data source:")
+            console.log("            \(source.dataSourceName)")
+            if let pattern = source.selectedPolarPattern {
+                console.log("                \(pattern.rawValue)")
+            } else {
+                console.log("                no selected polar pattern")
             }
+        } else {
+            console.log("        no selected data source")
+        }
+        
+        if let sources = port.dataSources {
+            if sources.count == 0 {
+                console.log("        no available data sources")
+            } else {
+                console.log("        available data sources:")
+                for source in sources {
+                    console.log("            \(source.dataSourceName)")
+                    if let patterns = source.supportedPolarPatterns {
+                        for pattern in patterns {
+                            console.log("                \(pattern.rawValue)")
+                        }
+                    } else {
+                        console.log("                source has no supported polar patterns")
+                    }
+                }
+            }
+        } else {
+            console.log("        no available data sources")
         }
         
     }
@@ -378,4 +368,22 @@ private func getChannelCountText(channelCount: Int) -> String {
         
     }
         
+}
+
+
+private func showAudioSessionOutputPorts(ports: [AVAudioSessionPortDescription]) {
+    
+    console.log("")
+    console.log("Current audio output port(s):")
+    
+    for port in ports {
+        
+        var channelCountText = "could not get channel count"
+        if let channels = port.channels {
+            channelCountText = getChannelCountText(channelCount: channels.count)
+        }
+        console.log("    \(port.portName) (\(channelCountText))")
+        
+    }
+
 }

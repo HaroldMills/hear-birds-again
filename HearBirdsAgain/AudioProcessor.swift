@@ -101,6 +101,14 @@ private let stoppedOutputLevel: AUValue = -200
 class AudioProcessor: ObservableObject {
     
     
+    // Note that this class is the source of truth for the audio
+    // processing parameters (i.e. cutoff, pitchShift, etc.) of
+    // this app. The values of these parameters should be changed
+    // only via the published properties of this class, from which
+    // the changes will flow to other parts of the app, e.g. the
+    // pitch shifting audio unit.
+    
+    
     @Published var running = false
     
     @Published var cutoff = defaultProcessorState.cutoff {
@@ -184,9 +192,42 @@ class AudioProcessor: ObservableObject {
     
     
     init() {
-        configureAudioEngine()
-        setSongFinderState()
+        
+        // Make audio unit parameter values agree with ours.
+        songFinderAudioUnit.parameters.setValues(
+            cutoff: AUValue(cutoff),
+            pitchShift: AUValue(pitchShift),
+            windowType: AUValue(windowType.rawValue),
+            windowSize: AUValue(windowSize),
+            gain: AUValue(gain),
+            balance: AUValue(balance))
+        
         // showInputSampleRate()
+        
+    }
+    
+    
+    func start() {
+        
+        if !running {
+            
+            configureAudioEngine()
+            
+            do {
+                try engine.start()
+            } catch {
+                errors.handleNonfatalError(message: "Attempt to start audio engine threw error: \(String(describing: error)).")
+                return
+            }
+            
+            levelUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+                self.outputLevel = self.songFinderAudioUnit.parameters.outputLevel.value
+            }
+            
+            running = true
+            
+        }
+        
     }
     
     
@@ -196,6 +237,9 @@ class AudioProcessor: ObservableObject {
         let output = engine.outputNode
         let format = input.inputFormat(forBus: 0)
         
+        console.log()
+        console.log("AudioProcessor starting with channel count \(format.channelCount)")
+        
         engine.attach(songFinderEffect)
         
         engine.connect(input, to: songFinderEffect, format: format)
@@ -204,18 +248,31 @@ class AudioProcessor: ObservableObject {
     }
     
     
-    private func setSongFinderState() {
+    func stop() {
         
-        songFinderAudioUnit.parameters.setValues(
-            cutoff: AUValue(cutoff),
-            pitchShift: AUValue(pitchShift),
-            windowType: AUValue(windowType.rawValue),
-            windowSize: AUValue(windowSize),
-            gain: AUValue(gain),
-            balance: AUValue(balance))
+        // handleFatalError(message: "Could not stop audio engine.")
         
-        restartIfRunning()
+        if (running) {
+            
+            console.log()
+            console.log("AudioProcessor stopping")
+            
+            engine.stop()
+            deconfigureAudioEngine()
+            
+            levelUpdateTimer?.invalidate()
+            
+            outputLevel = stoppedOutputLevel
+            
+            running = false
+            
+        }
         
+    }
+    
+    
+    private func deconfigureAudioEngine() {
+        engine.detach(songFinderEffect)
     }
     
     
@@ -223,38 +280,6 @@ class AudioProcessor: ObservableObject {
         if (running) {
             stop()
             start()
-        }
-    }
-    
-    
-    func start() {
-        
-        print("AudioProcessor.start")
-        
-        do {
-            try engine.start()
-        } catch {
-            errors.handleNonfatalError(message: "Attempt to start audio engine threw error: \(String(describing: error)).")
-            return
-        }
-        
-        levelUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
-            self.outputLevel = self.songFinderAudioUnit.parameters.outputLevel.value
-        }
-        
-        running = true
-        
-    }
-    
-    
-    func stop() {
-        print("AudioProcessor.stop")
-        // handleFatalError(message: "Could not stop audio engine.")
-        if (running) {
-            engine.stop()
-            levelUpdateTimer?.invalidate()
-            outputLevel = stoppedOutputLevel
-            running = false
         }
     }
     
