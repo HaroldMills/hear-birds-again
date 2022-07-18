@@ -18,7 +18,7 @@ struct HelpView: View {
                 Text("Hear Birds Again")
                     .font(.system(size: 35, weight: .bold, design: .default))
                 
-                Text("v\(getAppVersion())")
+                Text("Version \(getAppVersion())")
                     .font(.subheadline)
                 
             }
