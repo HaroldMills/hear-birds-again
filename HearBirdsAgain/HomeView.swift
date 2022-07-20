@@ -72,7 +72,11 @@ struct HomeView: View {
             HStack {
                 Spacer()
                 VStack {
-                    Stepper("Gain: \(audioProcessor.gain.formatted()) dB", value: $audioProcessor.gain, in: 0...20, step: 1)
+                    if audioProcessor.isInputGainSettable {
+                        Stepper("Gain: \(audioProcessor.inputGain.formatted()) %", value: $audioProcessor.inputGain, in: 0...100, step: 5)
+                    } else {
+                        Stepper("Gain: \(audioProcessor.digitalGain.formatted()) %", value: $audioProcessor.digitalGain, in: 0...100, step: 5)
+                    }
                 }
                 .fixedSize()
                 Spacer()

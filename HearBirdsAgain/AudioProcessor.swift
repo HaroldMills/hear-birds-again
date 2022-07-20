@@ -35,7 +35,8 @@ struct AudioProcessorState: Codable {
     var pitchShift = 2
     var windowType = WindowType.Hann
     var windowSize = 20
-    var gain: AUValue = 0
+    var inputGain: Float = 0
+    var digitalGain: AUValue = 0
     var balance: AUValue = 0
     
     
@@ -95,7 +96,8 @@ private func getSavedProcessorStateUrl() throws -> URL {
 
 
 private let defaultProcessorState = AudioProcessorState()
-private let stoppedOutputLevel: AUValue = -200
+private let stoppedOutputLevel: AUValue = -200      // dB
+private let maxSongFinderGain: AUValue = 20         // dB
 
 
 class AudioProcessor: ObservableObject {
@@ -139,14 +141,40 @@ class AudioProcessor: ObservableObject {
         }
     }
     
-    @Published var gain: AUValue = defaultProcessorState.gain {
+    // This class doesn't use the value of this property, but instead relies
+    // on AVAudioSession.sharedInstance().isInputGainSettable. This property
+    // more or less creates an observable version of that property for use by
+    // a SwiftUI user interface. This property is updated from outside of this
+    // class in response to audio session route changes
+    @Published var isInputGainSettable = false
+    
+    @Published var inputGain: AUValue = defaultProcessorState.inputGain {
         didSet {
-            // Note that unlike for some other SongFinder parameters
-            // we do not need to restart here here since the SongFinder
-            // audio unit can respond to changes in the value of this
-            // parameter while running.
-            songFinderAudioUnit.parameters.gain.value = AUValue(gain)
+            let session = AVAudioSession.sharedInstance()
+            if session.isInputGainSettable {
+                do {
+                    try session.setInputGain(inputGain / 100)
+                } catch {
+                    errors.handleNonfatalError(message: "Could not set input gain. \(error.localizedDescription)")
+                    return
+                }
+                songFinderAudioUnit.parameters.gain.value = 0
+            }
         }
+    }
+    
+    @Published var digitalGain: AUValue = defaultProcessorState.digitalGain {
+        didSet {
+            let session = AVAudioSession.sharedInstance()
+            if !session.isInputGainSettable {
+                // Note that unlike for some other SongFinder parameters
+                // we do not need to restart here here since the SongFinder
+                // audio unit can respond to changes in the value of this
+                // parameter while running.
+                songFinderAudioUnit.parameters.gain.value = songFinderGain
+            }
+        }
+
     }
     
     @Published var balance: AUValue = defaultProcessorState.balance {
@@ -161,14 +189,21 @@ class AudioProcessor: ObservableObject {
     
     @Published var outputLevel: AUValue = stoppedOutputLevel
     
+    var songFinderGain: AUValue {
+        let session = AVAudioSession.sharedInstance()
+        return session.isInputGainSettable ? 0 : (digitalGain / 100) * maxSongFinderGain
+    }
+    
     var levelUpdateTimer: Timer?
     
     var state: AudioProcessorState {
         
         get {
             return AudioProcessorState(
-                cutoff: cutoff, pitchShift: pitchShift, windowType: windowType,
-                windowSize: windowSize, gain: gain, balance: balance)
+                cutoff: cutoff, pitchShift: pitchShift,
+                windowType: windowType, windowSize: windowSize,
+                inputGain: inputGain, digitalGain: digitalGain,
+                balance: balance)
         }
         
         set {
@@ -176,7 +211,8 @@ class AudioProcessor: ObservableObject {
             pitchShift = newValue.pitchShift
             windowType = newValue.windowType
             windowSize = newValue.windowSize
-            gain = newValue.gain
+            inputGain = newValue.inputGain
+            digitalGain = newValue.digitalGain
             balance = newValue.balance
         }
         
@@ -191,26 +227,11 @@ class AudioProcessor: ObservableObject {
     }
     
     
-    init() {
-        
-        // Make audio unit parameter values agree with ours.
-        songFinderAudioUnit.parameters.setValues(
-            cutoff: AUValue(cutoff),
-            pitchShift: AUValue(pitchShift),
-            windowType: AUValue(windowType.rawValue),
-            windowSize: AUValue(windowSize),
-            gain: AUValue(gain),
-            balance: AUValue(balance))
-        
-        // showInputSampleRate()
-        
-    }
-    
-    
     func start() {
         
         if !running {
             
+            configureSongFinderAudioUnit()
             configureAudioEngine()
             
             do {
@@ -227,6 +248,19 @@ class AudioProcessor: ObservableObject {
             running = true
             
         }
+        
+    }
+    
+    
+    private func configureSongFinderAudioUnit() {
+        
+        songFinderAudioUnit.parameters.setValues(
+            cutoff: AUValue(cutoff),
+            pitchShift: AUValue(pitchShift),
+            windowType: AUValue(windowType.rawValue),
+            windowSize: AUValue(windowSize),
+            gain: songFinderGain,
+            balance: balance)
         
     }
     

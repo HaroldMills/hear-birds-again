@@ -126,9 +126,13 @@ class HbaApp: App {
         case .categoryChange:
             // audio session category changed
             
+            updateIsInputGainSettable()
+            
             if (AVAudioSession.sharedInstance().secondaryAudioShouldBeSilencedHint) {
                 console.log("HearBirdsAgainApp.handleRouteChange: Secondary audio should be silenced.")
                 audioProcessor.stop()
+            } else {
+                audioProcessor.restartIfRunning()
             }
             
         case .newDeviceAvailable:
@@ -136,11 +140,14 @@ class HbaApp: App {
             // were connected
             
             // Restart audio processor to use new device.
+            updateIsInputGainSettable()
             audioProcessor.restartIfRunning()
             
         case .oldDeviceUnavailable:
             // route changed because device it was using became unavailable,
             // e.g. because headphones were disconnected
+            
+            updateIsInputGainSettable()
             
             // Always stop processing in this case. Apple's documentation
             // for handling audio session route changes (see link above)
@@ -159,6 +166,12 @@ class HbaApp: App {
     }
 
 
+}
+
+
+private func updateIsInputGainSettable() {
+    let session = AVAudioSession.sharedInstance()
+    audioProcessor.isInputGainSettable = session.isInputGainSettable
 }
 
 
@@ -298,8 +311,26 @@ private func getAudioSessionRouteChangeReasonString(reason: AVAudioSession.Route
 private func showAudioSessionCurrentRoute() {
     let session = AVAudioSession.sharedInstance()
     let route = session.currentRoute
+    showAudioSessionInputGain(session: session)
     showAudioSessionInputPorts(ports: route.inputs)
     showAudioSessionOutputPorts(ports: route.outputs)
+}
+
+
+private func showAudioSessionInputGain(session: AVAudioSession) {
+    
+    console.log("")
+    console.log("Input gain: \(session.inputGain)")
+    console.log("isInputGainSettable: \(session.isInputGainSettable)")
+
+//    if gainSettable && gain != 1 {
+//        do {
+//            try session.setInputGain(1)
+//        } catch {
+//            errors.handleNonfatalError(message: "Could not set input gain. \(error.localizedDescription)")
+//        }
+//    }
+    
 }
 
 
