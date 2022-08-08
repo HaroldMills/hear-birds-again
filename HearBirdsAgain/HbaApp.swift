@@ -1,5 +1,5 @@
 //
-//  HearBirdsAgainApp.swift
+//  HbaApp.swift
 //  HearBirdsAgain
 //
 //  Created by Harold Mills on 3/25/22.
@@ -8,8 +8,6 @@
 import SwiftUI
 import AVFoundation
 
-
-// TODO: Do we need to activate audio session?
 
 // TODO: Handle audio session interruptions.
 
@@ -89,8 +87,6 @@ class HbaApp: App {
         }
 
         setUpNotifications()
-        
-        showAudioSessionCurrentRoute()
         
     }
     
