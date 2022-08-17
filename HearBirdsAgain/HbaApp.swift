@@ -9,6 +9,7 @@ import SwiftUI
 import AVFoundation
 
 
+// TODO: Include `.allowBluetooth` option in `AVAudioSession.setCategory` (seems to be for input, not output)?
 // TODO: Handle audio session interruptions.
 
 
@@ -97,10 +98,28 @@ class HbaApp: App {
         
         notificationCenter.addObserver(
             self, selector: #selector(handleAudioSessionRouteChange), name: AVAudioSession.routeChangeNotification, object: nil)
+        
+        notificationCenter.addObserver(
+            self, selector: #selector(handleDeviceOrientationChange), name: UIDevice.orientationDidChangeNotification, object: nil)
 
     }
 
 
+    @objc private func handleDeviceOrientationChange(notification: Notification) {
+        // console.log("Device orientation changed to \(UIDevice.current.orientation.rawValue).")
+        let session = AVAudioSession.sharedInstance()
+        if let source = session.inputDataSource {
+            if source.dataSourceName == "Back" {
+                if let pattern = source.selectedPolarPattern {
+                    if pattern == .stereo {
+                        setPreferredInputOrientation()
+                    }
+                }
+            }
+        }
+    }
+    
+    
     @objc private func handleAudioSessionRouteChange(notification: Notification) {
         
         //  See https://developer.apple.com/documentation/avfaudio/avaudiosession/responding_to_audio_session_route_changes
@@ -116,6 +135,15 @@ class HbaApp: App {
         let reasonString = getAudioSessionRouteChangeReasonString(reason: reason)
         console.log("HeadBirdsAgainApp.handleRouteChange: \(reasonString)")
         showAudioSessionCurrentRoute()
+        
+        do {
+            try switchToBuiltInStereoInputIfNeeded()
+        } catch _Error.error(let message) {
+            errors.handleNonfatalError(message: "switchToBuildInStereoInputIfNeeded failed. \(message)")
+        } catch {
+            errors.handleNonfatalError(message: "switchToBuildInStereoInputIfNeeded failed. \(error.localizedDescription)")
+        }
+
 
         switch reason {
             
@@ -162,6 +190,135 @@ class HbaApp: App {
     }
 
 
+}
+
+
+private func setPreferredInputOrientation() {
+    if let orientation = getPreferredInputOrientation() {
+        let session = AVAudioSession.sharedInstance()
+        do {
+            try session.setPreferredInputOrientation(orientation)
+            // console.log("Set preferred input orientation to \(orientation.rawValue).")
+        } catch {
+            // console.log("Could not set audio session preferred input orientation.")
+        }
+    }
+}
+
+
+private func getPreferredInputOrientation() -> AVAudioSession.StereoOrientation? {
+    
+    switch UIDevice.current.orientation {
+        
+    case .portrait:
+        return .portrait
+        
+    case .portraitUpsideDown:
+        return .portraitUpsideDown
+        
+    // Note that it's not a mistake that for UIDeviceOrientation.landscapeLeft we
+    // return AVAudioSession.StereoOrientation.landscapeRight. Apple defines the
+    // two in such a way that this is correct. See
+    // https://developer.apple.com/documentation/uikit/uideviceorientation and
+    // https://developer.apple.com/documentation/avfaudio/avaudiosession/stereoorientation
+    case .landscapeLeft:
+        return .landscapeRight
+        
+    // Note that it's not a mistake that for UIDeviceOrientation.landscapeRight we
+    // return AVAudioSession.StereoOrientation.landscapeLeft. Apple defines the
+    // two in such a way that this is correct. See
+    // https://developer.apple.com/documentation/uikit/uideviceorientation and
+    // https://developer.apple.com/documentation/avfaudio/avaudiosession/stereoorientation
+    case .landscapeRight:
+        return .landscapeLeft
+        
+    default:
+        return Optional.none
+        
+    }
+    
+}
+
+
+private func switchToBuiltInStereoInputIfNeeded() throws {
+    
+    // console.log("Device orientation is \(UIDevice.current.orientation).")
+    
+    let session = AVAudioSession.sharedInstance()
+    
+    console.log("Number of output channels is \(session.outputNumberOfChannels).")
+    
+    if session.inputNumberOfChannels == 1 && session.outputNumberOfChannels == 2 {
+        // input is mono but output is stereo
+        
+        if session.maximumInputNumberOfChannels == 2 {
+            // current input supports stereo
+            
+            do {
+                try session.setPreferredInputNumberOfChannels(2)
+            } catch {
+                console.log("Could not set preferred number of input channels. Error message was: \(error.localizedDescription)")
+            }
+
+        } else {
+            // current input does not support stereo
+            
+            // Switch to stereo input from built-in microphone if available.
+            
+            guard let availableInputs = session.availableInputs,
+                  let builtInMicInput = availableInputs.first(where: { $0.portType == .builtInMic }) else {
+                console.log("Could not find built-in mic input.")
+                return
+            }
+            
+            do {
+                try session.setPreferredInput(builtInMicInput)
+            } catch {
+                console.log("Could not set preferred input to built-in mic.")
+                return
+            }
+            
+            guard let dataSources = builtInMicInput.dataSources,
+                  let backDataSource = dataSources.first(where: { $0.dataSourceName == "Back" }) else {
+                console.log("Could not find built-in mic back data source.")
+                return
+            }
+
+            guard let supportedPolarPatterns = backDataSource.supportedPolarPatterns else {
+                console.log("Could not get built-in mic back data source supported polar patterns.")
+                return
+            }
+
+            if supportedPolarPatterns.contains(.stereo) {
+                
+                do {
+                    try backDataSource.setPreferredPolarPattern(.stereo)
+                } catch {
+                    console.log("Could not set built-in mic back data source to stereo polar pattern.")
+                    return
+                }
+                
+                do {
+                    try builtInMicInput.setPreferredDataSource(backDataSource)
+                } catch {
+                    console.log("Could not set built-in mic preferred data source to back.")
+                    return
+                }
+                
+                setPreferredInputOrientation()
+                
+                console.log("Set preferred input to built-in mic back stereo.")
+                
+            } else {
+
+                console.log("Built-in mic back data source does not support stereo polar pattern.")
+                
+            }
+            
+        }
+        
+    }
+    
 }
 
 
@@ -298,17 +455,12 @@ private func getAudioSessionRouteChangeReasonString(reason: AVAudioSession.Route
 }
 
 
-// For some reason, the information retrieved by `showAudioSessionPorts` for
-// the ports of `AVAudioSession.sharedInstance().availableInputs` does not
-// include stereo polar patterns, while that retrieved for
-// `AVAudioSession.sharedInstance().currentRoute.inputs` does (in particular,
-// for my iPhone SE model A2275 and iOS 15.5). So we rely on the latter
-// rather than the former for information about audio input capabilities.
 private func showAudioSessionCurrentRoute() {
     let session = AVAudioSession.sharedInstance()
     let route = session.currentRoute
     showAudioSessionInputGain(session: session)
     showAudioSessionInputPorts(ports: route.inputs)
+    // showAudioSessionInputPorts(ports: session.availableInputs!)
     showAudioSessionOutputPorts(ports: route.outputs)
 }
 
