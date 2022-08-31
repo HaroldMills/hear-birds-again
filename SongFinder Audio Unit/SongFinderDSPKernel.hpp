@@ -14,8 +14,6 @@
 #define SongFinderDSPKernel_hpp
 
 
-// #include <iostream>
-
 #import <cmath>
 #import <string>
 #import "DSPKernel.hpp"
@@ -45,51 +43,23 @@ public:
     SongFinderDSPKernel() {}
 
     
-    void init(int channelCount, double sampleRate) {
+    void allocateRenderResources(int inputChannelCount, int outputChannelCount) {
         
-        _channelCount = channelCount;
-        _sampleRate = float(sampleRate);
+        _inputChannelCount = inputChannelCount;
+        _outputChannelCount = outputChannelCount;
         
-        _gainFactors = new float[_channelCount];
-        _updateGainFactors();
-        
-    }
-
-    
-    void _updateGainFactors() {
-        
-        // Set the gain factors of all channels according to `_gain`.
-        float gainFactor = _dbToFactor(_gain);
-        for (int i = 0; i != _channelCount; ++i)
-            _gainFactors[i] = gainFactor;
-        
-        // If stereo, adjust gain factor of left or right channel if indicated by `_balance`.
-        if (_channelCount == 2) {
-            if (_balance > 0) {
-                _gainFactors[0] *= _dbToFactor(-_balance);
-            } else if (_balance < 0) {
-                _gainFactors[1] *= _dbToFactor(_balance);
-            }
-        }
-        
-    }
-    
-    
-    float _dbToFactor(float x) {
-        return std::pow(10, x / 20);
-    }
-    
-    
-    void reset() { }
-
-    
-    void allocateRenderResources() {
-        
-        _processors = new SongFinderProcessor*[_channelCount];
-        
-        for (int i = 0; i != _channelCount; ++i)
+        _processors = new SongFinderProcessor*[_outputChannelCount];
+        for (int i = 0; i != _outputChannelCount; ++i)
             _processors[i] = _createProcessor();
             
+        _channelMap = _createChannelMap();
+        
+        _gainFactors = new float[_outputChannelCount];
+        
+        _renderResourcesAllocated = true;
+        
+        _updateGainFactors();
+        
     }
     
     
@@ -111,11 +81,62 @@ public:
     }
     
     
+    int *_createChannelMap() {
+        
+        int *channelMap = new int[_outputChannelCount];
+        int maxInputChannelNum = _inputChannelCount - 1;
+        
+        for (int i = 0; i != _outputChannelCount; ++i)
+            channelMap[i] = i < maxInputChannelNum ? i : maxInputChannelNum;
+        
+        return channelMap;
+        
+    }
+    
+    
+    void _updateGainFactors() {
+        
+        if (_renderResourcesAllocated) {
+            
+            // Set the gain factors of all channels according to `_gain`.
+            float gainFactor = _dbToFactor(_gain);
+            for (int i = 0; i != _outputChannelCount; ++i)
+                _gainFactors[i] = gainFactor;
+            
+            // If stereo, adjust gain factor of left or right channel if indicated by `_balance`.
+            if (_outputChannelCount == 2) {
+                if (_balance > 0) {
+                    _gainFactors[0] *= _dbToFactor(-_balance);
+                } else if (_balance < 0) {
+                    _gainFactors[1] *= _dbToFactor(_balance);
+                }
+            }
+            
+        }
+        
+    }
+    
+    
+    float _dbToFactor(float x) {
+        return std::pow(10, x / 20);
+    }
+    
+    
     void deallocateRenderResources() {
-        for (int i = 0; i != _channelCount; ++i)
+        
+        for (int i = 0; i != _inputChannelCount; ++i)
             delete _processors[i];
         delete[] _processors;
         _processors = nullptr;
+        
+        delete[] _channelMap;
+        _channelMap = nullptr;
+        
+        delete[] _gainFactors;
+        _gainFactors = nullptr;
+        
+        _renderResourcesAllocated = false;
+        
     }
     
     
@@ -167,6 +188,7 @@ public:
 
         }
         
+        
     }
 
     
@@ -210,84 +232,86 @@ public:
 
     
     void process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset) override {
+
         
-        if (_bypassed) {
-            // this audio unit bypassed
+        // std::cout << "SongFinderDSPKernel.process " << frameCount << std::endl;
+
+        
+        for (int j = 0; j != _outputChannelCount; ++j) {
+
+            int i = _channelMap[j];
             
-            // Pass samples through.
-            for (int i = 0; i != _channelCount; ++i) {
-                
-                const float *inputs = (float *) _inputBuffers->mBuffers[i].mData + bufferOffset;
-                float *outputs = (float *) _outputBuffers->mBuffers[i].mData + bufferOffset;
-                
+            const float *inputs = (float *) _inputBuffers->mBuffers[i].mData + bufferOffset;
+            float *outputs = (float *) _outputBuffers->mBuffers[j].mData + bufferOffset;
+
+            if (_bypassed) {
+                // this audio unit bypassed
+                    
                 if (outputs == inputs) {
                     // input and output buffers are the same
-                    
+
                     continue;
-                    
+
                 } else {
                     // input and output buffers are not the same
-                    
-                    for (int j = 0; j != frameCount; ++j)
-                        outputs[j] = inputs[j];
-                    
-                }
-                
-            }
 
-        } else {
-            // this audio unit not bypassed
-            
-            // std::cout << "frameCount " << frameCount << std::endl;
-            
-            for (int i = 0; i != _channelCount; ++i) {
-            
-                const float *inputs = (float *) _inputBuffers->mBuffers[i].mData + bufferOffset;
-                float *outputs = (float *) _outputBuffers->mBuffers[i].mData + bufferOffset;
-                
-                _processors[i]->process(inputs, frameCount, outputs);
-                
-                float gainFactor = _gainFactors[i];
-                for (int j = 0; j != frameCount; ++j)
-                    outputs[j] *= gainFactor;
-                
+                    for (int k = 0; k != frameCount; ++k)
+                        outputs[k] = inputs[k];
+
+                }
+
+            } else {
+                // this audio unit not bypassed
+
+                _processors[j]->process(inputs, frameCount, outputs);
+
+                float gainFactor = _gainFactors[j];
+                for (int k = 0; k != frameCount; ++k)
+                    outputs[k] *= gainFactor;
+
             }
             
         }
-        
-        
+
+
         // compute max channel RMS output power in dBFS, where full scale is 1.
         
+        // TODO: Measure separate level for each output channel.
+
         float maxPower = _MIN_POWER;
-        
-        for (int i = 0; i != _channelCount; ++i) {
-            
+
+        for (int i = 0; i != _outputChannelCount; ++i) {
+
             float power = 0;
             float *outputs = (float *) _outputBuffers->mBuffers[0].mData + bufferOffset;
-            
+
             for (int j = 0; j != frameCount; ++j) {
                 const float sample = outputs[j];
                 power += sample * sample;
             }
-            
+
             power /= frameCount;
-            
+
             if (power > maxPower)
                 maxPower = power;
-                
+
         }
-        
+
         _outputLevel = 10 * std::log10(maxPower);
         
-    }
 
+    }
+    
     
 private:
     
     // MARK: Member Variables
 
-    int _channelCount = 2;
-    float _sampleRate = 48000;
+    bool _renderResourcesAllocated = false;
+    
+    int _inputChannelCount;
+    int _outputChannelCount;
+    int *_channelMap = nullptr;
     
     unsigned _maxInputSize = 128;
     AUValue _cutoff = 0;            // Hz

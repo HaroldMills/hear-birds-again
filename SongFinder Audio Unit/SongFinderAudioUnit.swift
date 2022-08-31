@@ -25,6 +25,15 @@ public class SongFinderAudioUnit: AUAudioUnit {
         componentFlags: 0,
         componentFlagsMask: 0
     )
+    
+    public override var channelCapabilities: [NSNumber]? {
+        return [
+            1, 1,     // mono input and output
+            1, 2,     // mono input and stereo output
+            2, 1,     // stereo input and mono output
+            2, 2      // stereo input and output
+        ]
+    }
 
 
     public let parameters: SongFinderParameters
@@ -194,18 +203,8 @@ public class SongFinderAudioUnit: AUAudioUnit {
 
     
     public override func allocateRenderResources() throws {
-        
-        if kernelAdapter.outputBus.format.channelCount != kernelAdapter.inputBus.format.channelCount {
-            throw NSError(
-                domain: NSOSStatusErrorDomain,
-                code: Int(kAudioUnitErr_FailedInitialization),
-                userInfo: nil)
-        }
-        
         try super.allocateRenderResources()
-        
         kernelAdapter.allocateRenderResources()
-        
     }
 
     

@@ -11,6 +11,8 @@ import AVFoundation
 
 // TODO: Include `.allowBluetooth` option in `AVAudioSession.setCategory` (seems to be for input, not output)?
 // TODO: Handle audio session interruptions.
+// TODO: Could we reduce latency via AVAudioSession.setPreferredIOBufferDuration?
+// TODO: Look at AVAudioSession.inputLatency and AVAudioSession.outputLatency for different devices.
 
 
 /*
@@ -137,11 +139,11 @@ class HbaApp: App {
         showAudioSessionCurrentRoute()
         
         do {
-            try switchToBuiltInStereoInputIfNeeded()
+            try adjustNumberOfInputChannelsIfNeeded()
         } catch _Error.error(let message) {
-            errors.handleNonfatalError(message: "switchToBuildInStereoInputIfNeeded failed. \(message)")
+            errors.handleNonfatalError(message: "adjustNumberOfInputChannelsIfNeeded failed. \(message)")
         } catch {
-            errors.handleNonfatalError(message: "switchToBuildInStereoInputIfNeeded failed. \(error.localizedDescription)")
+            errors.handleNonfatalError(message: "adjustNumberOfInputChannelsIfNeeded failed. \(error.localizedDescription)")
         }
 
 
@@ -183,7 +185,17 @@ class HbaApp: App {
             // processing (and hence playback) in all cases.
             audioProcessor.stop()
             
-        default: ()
+        default:
+            // route changed for some other reason
+            
+            // Always update state and restart processing in this case.
+            // We have received .override and .routeConfigurationChange
+            // reasons after plugging in Apple wired earbuds when
+            // processing is running, and the following seems to be
+            // needed in one or both of those cases.
+            
+            updateIsInputGainSettable()
+            audioProcessor.restartIfRunning()
             
         }
         
@@ -240,41 +252,70 @@ private func getPreferredInputOrientation() -> AVAudioSession.StereoOrientation?
 }
 
 
-private func switchToBuiltInStereoInputIfNeeded() throws {
-    
-    // console.log("Device orientation is \(UIDevice.current.orientation).")
+private func adjustNumberOfInputChannelsIfNeeded() throws {
     
     let session = AVAudioSession.sharedInstance()
     
-    console.log("Number of output channels is \(session.outputNumberOfChannels).")
-    
-    if session.inputNumberOfChannels == 1 && session.outputNumberOfChannels == 2 {
-        // input is mono but output is stereo
+    if session.inputNumberOfChannels == 2 && session.outputNumberOfChannels == 1 && isAudioInputBuiltInMic() {
+        // input is stereo from built-in mic but output is mono
         
+        // Switch to mono input from built-in mic.
+        
+        guard let availableInputs = session.availableInputs,
+              let builtInMicInput = availableInputs.first(where: { $0.portType == .builtInMic }) else {
+            console.log("Could not find built-in mic input.")
+            return
+        }
+        
+        guard let dataSources = builtInMicInput.dataSources,
+              let bottomDataSource = dataSources.first(where: { $0.dataSourceName == "Bottom" }) else {
+            console.log("Could not find built-in mic bottom data source.")
+            return
+        }
+
+        do {
+            try bottomDataSource.setPreferredPolarPattern(.omnidirectional)
+        } catch {
+            console.log("Could not set built-in mic bottom data source to omnidirectional polar pattern.")
+            return
+        }
+        
+        do {
+            try builtInMicInput.setPreferredDataSource(bottomDataSource)
+        } catch {
+            console.log("Could not set built-in mic preferred data source to bottom.")
+            return
+        }
+        
+        do {
+            try session.setPreferredInput(builtInMicInput)
+        } catch {
+            console.log("Could not set preferred input to built-in mic.")
+            return
+        }
+        
+    } else if session.inputNumberOfChannels == 1 && session.outputNumberOfChannels == 2 {
+        // input is mono but output is stereo
+
         if session.maximumInputNumberOfChannels == 2 {
             // current input supports stereo
+            
+            // Indicate that we would prefer stereo input.
             
             do {
                 try session.setPreferredInputNumberOfChannels(2)
             } catch {
-                console.log("Could not set preferred number of input channels. Error message was: \(error.localizedDescription)")
+                console.log("Could not set preferred number of input channels to two. Error message was: \(error.localizedDescription)")
             }
 
         } else {
             // current input does not support stereo
             
-            // Switch to stereo input from built-in microphone if available.
+            // Switch to stereo input from built-in mic if available.
             
             guard let availableInputs = session.availableInputs,
                   let builtInMicInput = availableInputs.first(where: { $0.portType == .builtInMic }) else {
                 console.log("Could not find built-in mic input.")
-                return
-            }
-            
-            do {
-                try session.setPreferredInput(builtInMicInput)
-            } catch {
-                console.log("Could not set preferred input to built-in mic.")
                 return
             }
             
@@ -305,6 +346,13 @@ private func switchToBuiltInStereoInputIfNeeded() throws {
                     return
                 }
                 
+                do {
+                    try session.setPreferredInput(builtInMicInput)
+                } catch {
+                    console.log("Could not set preferred input to built-in mic.")
+                    return
+                }
+                
                 setPreferredInputOrientation()
                 
                 console.log("Set preferred input to built-in mic back stereo.")
@@ -319,6 +367,13 @@ private func switchToBuiltInStereoInputIfNeeded() throws {
         
     }
     
+}
+
+
+private func isAudioInputBuiltInMic() -> Bool {
+    let session = AVAudioSession.sharedInstance()
+    let inputs = session.currentRoute.inputs
+    return inputs.first(where: { $0.portType == .builtInMic }) != nil
 }
 
 

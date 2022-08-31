@@ -21,18 +21,23 @@
 - (instancetype)init {
 
     if (self = [super init]) {
-        AVAudioFormat *format = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:48000 channels:2];
         
-        // Create a DSP kernel to handle the signal processing.
-        _kernel.init(format.channelCount, format.sampleRate);
-        // _kernel.setParameter(paramOne, 0);
-
-        // Create the input and output busses.
-        _inputBus.init(format, 8);
-        _outputBus = [[AUAudioUnitBus alloc] initWithFormat:format error:nil];
-        _outputBus.maximumChannelCount = 8;
+        int sampleRate = 48000;
+        int maxChannelCount = 2;
+        
+        AVAudioFormat *defaultFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:sampleRate channels:maxChannelCount];
+        
+        // Configure input bus.
+        _inputBus.init(defaultFormat, maxChannelCount);
+        
+        // Create output bus.
+        _outputBus = [[AUAudioUnitBus alloc] initWithFormat:defaultFormat error:nil];
+        _outputBus.maximumChannelCount = maxChannelCount;
+        
     }
+    
     return self;
+    
 }
 
 - (AUAudioUnitBus *)inputBus {
@@ -65,9 +70,7 @@
 
 - (void)allocateRenderResources {
     _inputBus.allocateRenderResources(self.maximumFramesToRender);
-    _kernel.init(self.outputBus.format.channelCount, self.outputBus.format.sampleRate);
-    _kernel.allocateRenderResources();
-    _kernel.reset();
+    _kernel.allocateRenderResources(self.inputBus.format.channelCount, self.outputBus.format.channelCount);
 }
 
 - (void)deallocateRenderResources {

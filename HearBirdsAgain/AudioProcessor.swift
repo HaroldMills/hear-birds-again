@@ -268,16 +268,18 @@ class AudioProcessor: ObservableObject {
     private func configureAudioEngine() {
         
         let input = engine.inputNode
+        let inputFormat = input.inputFormat(forBus: 0)
+        
         let output = engine.outputNode
-        let format = input.inputFormat(forBus: 0)
+        let outputFormat = output.outputFormat(forBus: 0)
         
         console.log()
-        console.log("AudioProcessor starting with channel count \(format.channelCount)")
+        console.log("AudioProcessor starting with \(inputFormat.channelCount) input channels and \(outputFormat.channelCount) output channels")
         
         engine.attach(songFinderEffect)
         
-        engine.connect(input, to: songFinderEffect, format: format)
-        engine.connect(songFinderEffect, to: output, format: format)
+        engine.connect(input, to: songFinderEffect, format: inputFormat)
+        engine.connect(songFinderEffect, to: output, format: outputFormat)
 
     }
     
