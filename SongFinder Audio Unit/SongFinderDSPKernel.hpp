@@ -24,11 +24,11 @@ using std::string;
 
 
 enum {
-    Cutoff, PitchShift, WindowType, WindowSize, Gain, Balance, OutputLevel
+    Cutoff, PitchShift, WindowType, WindowSize, Gain, Balance, OutputLevel0, OutputLevel1
 };
 
 
-const AUValue _MIN_POWER = 1e-20;
+const AUValue _LOW_OUTPUT_LEVEL = -200;    // dB
 
 
 class SongFinderDSPKernel : public DSPKernel {
@@ -55,6 +55,13 @@ public:
         _channelMap = _createChannelMap();
         
         _gainFactors = new float[_outputChannelCount];
+        
+        _outputLevels = new float[_outputChannelCount];
+        
+        // Not sure this is necessary, but it at least seems like good form for
+        // the output levels to start out at `_LOW_OUTPUT_LEVEL`.
+        for (int i = 0; i != _outputChannelCount; ++i)
+            _outputLevels[i] = _LOW_OUTPUT_LEVEL;
         
         _renderResourcesAllocated = true;
         
@@ -134,6 +141,9 @@ public:
         
         delete[] _gainFactors;
         _gainFactors = nullptr;
+        
+        delete[] _outputLevels;
+        _outputLevels = nullptr;
         
         _renderResourcesAllocated = false;
         
@@ -215,8 +225,11 @@ public:
             case Balance:
                 return _balance;
                 
-            case OutputLevel:
-                return _outputLevel;
+            case OutputLevel0:
+                return _getOutputLevel(0);
+
+            case OutputLevel1:
+                return _getOutputLevel(1);
 
             default: return 0;
                 
@@ -224,6 +237,25 @@ public:
         
     }
 
+    
+    AUValue _getOutputLevel(int channelNum) {
+        
+        // This method always returns something reasonable, even if
+        // `_outputLevels` is not allocated (e.g. if this audio unit is
+        // not running) or the specified channel does not exist (e.g.
+        // channel one when output is mono).
+        
+        if (_outputLevels != nullptr && channelNum < _outputChannelCount)
+            return _outputLevels[channelNum];
+        
+        else
+            // `_outputLevels` is currently unallocated or specified
+            // channel does not exist
+            
+            return _LOW_OUTPUT_LEVEL;
+        
+    }
+    
     
     void setBuffers(AudioBufferList* inputBuffers, AudioBufferList* outputBuffers) {
         _inputBuffers = inputBuffers;
@@ -274,16 +306,12 @@ public:
         }
 
 
-        // compute max channel RMS output power in dBFS, where full scale is 1.
+        // compute channel RMS output powers in dBFS, where full scale is 1.
         
-        // TODO: Measure separate level for each output channel.
-
-        float maxPower = _MIN_POWER;
-
         for (int i = 0; i != _outputChannelCount; ++i) {
 
             float power = 0;
-            float *outputs = (float *) _outputBuffers->mBuffers[0].mData + bufferOffset;
+            float *outputs = (float *) _outputBuffers->mBuffers[i].mData + bufferOffset;
 
             for (int j = 0; j != frameCount; ++j) {
                 const float sample = outputs[j];
@@ -291,13 +319,10 @@ public:
             }
 
             power /= frameCount;
-
-            if (power > maxPower)
-                maxPower = power;
+            
+            _outputLevels[i] = 10 * std::log10(power);
 
         }
-
-        _outputLevel = 10 * std::log10(maxPower);
         
 
     }
@@ -311,16 +336,18 @@ private:
     
     int _inputChannelCount;
     int _outputChannelCount;
+    
+    // `_channelMap[i]` is the index of the input channel assigned to output channel `i`.
     int *_channelMap = nullptr;
     
     unsigned _maxInputSize = 128;
-    AUValue _cutoff = 0;            // Hz
+    AUValue _cutoff = 0;                // Hz
     AUValue _pitchShift = 2;
     AUValue _windowType = 0;
-    AUValue _windowSize = 20;       // ms
-    AUValue _gain = 0;              // dB
-    AUValue _balance = 0;           // dB
-    AUValue _outputLevel = -200;    // dB
+    AUValue _windowSize = 20;           // ms
+    AUValue _gain = 0;                  // dB
+    AUValue _balance = 0;               // dB
+    AUValue *_outputLevels = nullptr;   // dB
     AUValue *_gainFactors = nullptr;
     SongFinderProcessor **_processors = nullptr;
     

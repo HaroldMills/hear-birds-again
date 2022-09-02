@@ -13,7 +13,7 @@ public struct SongFinderParameters {
 
     
     private enum ParameterAddress: AUParameterAddress {
-        case cutoff, pitchShift, windowType, windowSize, gain, balance, outputLevel
+        case cutoff, pitchShift, windowType, windowSize, gain, balance, outputLevel0, outputLevel1
     }
     
     
@@ -165,12 +165,33 @@ public struct SongFinderParameters {
     }()
     
     
-    public let outputLevel: AUParameter = {
+    public let outputLevel0: AUParameter = {
         
         let parameter = AUParameterTree.createParameter(
-            withIdentifier: "outputLevel",
-            name: "Output Level",
-            address: ParameterAddress.outputLevel.rawValue,
+            withIdentifier: "outputLevel0",
+            name: "Output Level 0",
+            address: ParameterAddress.outputLevel0.rawValue,
+            min: minOutputLevel,
+            max: maxOutputLevel,
+            unit: .decibels,
+            unitName: "dB",
+            flags: [.flag_MeterReadOnly],
+            valueStrings: nil,
+            dependentParameters: nil)
+        
+        parameter.value = minOutputLevel
+
+        return parameter
+        
+    }()
+    
+    
+    public let outputLevel1: AUParameter = {
+        
+        let parameter = AUParameterTree.createParameter(
+            withIdentifier: "outputLevel1",
+            name: "Output Level 1",
+            address: ParameterAddress.outputLevel1.rawValue,
             min: minOutputLevel,
             max: maxOutputLevel,
             unit: .decibels,
@@ -193,7 +214,7 @@ public struct SongFinderParameters {
 
         // Create the audio unit's tree of parameters
         parameterTree = AUParameterTree.createTree(
-            withChildren: [cutoff, pitchShift, windowType, windowSize, gain, balance, outputLevel])
+            withChildren: [cutoff, pitchShift, windowType, windowSize, gain, balance, outputLevel0, outputLevel1])
 
         // Closure observing all externally-generated parameter value changes.
         parameterTree.implementorValueObserver = { param, value in
@@ -214,7 +235,8 @@ public struct SongFinderParameters {
                 ParameterAddress.windowSize.rawValue,
                 ParameterAddress.gain.rawValue,
                 ParameterAddress.balance.rawValue,
-                ParameterAddress.outputLevel.rawValue:
+                ParameterAddress.outputLevel0.rawValue,
+                ParameterAddress.outputLevel1.rawValue:
                 return String(format: "%.f", value ?? param.value)
             default:
                 return "?"

@@ -146,13 +146,13 @@ class HbaApp: App {
             errors.handleNonfatalError(message: "adjustNumberOfInputChannelsIfNeeded failed. \(error.localizedDescription)")
         }
 
+        updateIsInputGainSettable()
+        audioProcessor.reinitializeOutputLevelsIfNeeded()
 
         switch reason {
             
         case .categoryChange:
             // audio session category changed
-            
-            updateIsInputGainSettable()
             
             if (AVAudioSession.sharedInstance().secondaryAudioShouldBeSilencedHint) {
                 console.log("HearBirdsAgainApp.handleRouteChange: Secondary audio should be silenced.")
@@ -166,14 +166,11 @@ class HbaApp: App {
             // were connected
             
             // Restart audio processor to use new device.
-            updateIsInputGainSettable()
             audioProcessor.restartIfRunning()
             
         case .oldDeviceUnavailable:
             // route changed because device it was using became unavailable,
             // e.g. because headphones were disconnected
-            
-            updateIsInputGainSettable()
             
             // Always stop processing in this case. Apple's documentation
             // for handling audio session route changes (see link above)
@@ -194,7 +191,6 @@ class HbaApp: App {
             // processing is running, and the following seems to be
             // needed in one or both of those cases.
             
-            updateIsInputGainSettable()
             audioProcessor.restartIfRunning()
             
         }

@@ -33,7 +33,7 @@ struct LevelMeter: View {
         
         HStack(spacing: segmentSpacing) {
             
-            ForEach((0...segmentCount - 1), id: \.self) { i in
+            ForEach(0..<segmentCount, id: \.self) { i in
                 let startLevel = getStartLevel(i)
                 let color = getColor(startLevel)
                 _MeterSegment(
@@ -74,10 +74,10 @@ struct _MeterSegment: View {
     
     var body: some View {
         
-        RoundedRectangle(cornerRadius: 2)
+        Rectangle()
             .fill(getColor())
-            .frame(width: width, height: 20)
-        
+            .frame(width: width, height: 15)
+            
     }
     
     func getColor() -> Color {

@@ -187,7 +187,7 @@ class AudioProcessor: ObservableObject {
         }
     }
     
-    @Published var outputLevel: AUValue = stoppedOutputLevel
+    @Published var outputLevels: [AUValue] = [stoppedOutputLevel]
     
     var songFinderGain: AUValue {
         let session = AVAudioSession.sharedInstance()
@@ -234,6 +234,8 @@ class AudioProcessor: ObservableObject {
             configureSongFinderAudioUnit()
             configureAudioEngine()
             
+            reinitializeOutputLevelsIfNeeded()
+            
             do {
                 try engine.start()
             } catch {
@@ -242,7 +244,11 @@ class AudioProcessor: ObservableObject {
             }
             
             levelUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
-                self.outputLevel = self.songFinderAudioUnit.parameters.outputLevel.value
+                let parameters = self.songFinderAudioUnit.parameters
+                self.outputLevels[0] = parameters.outputLevel0.value
+                if self.outputLevels.count == 2 {
+                    self.outputLevels[1] = parameters.outputLevel1.value
+                }
             }
             
             running = true
@@ -284,6 +290,20 @@ class AudioProcessor: ObservableObject {
     }
     
     
+    func reinitializeOutputLevelsIfNeeded() {
+        
+        let channelCount = engine.outputNode.outputFormat(forBus: 0).channelCount
+        
+        if channelCount != outputLevels.count {
+            // number of output channels has changed
+            
+            outputLevels = Array(repeating: stoppedOutputLevel, count: Int(channelCount))
+            
+        }
+        
+    }
+    
+    
     func stop() {
         
         // handleFatalError(message: "Could not stop audio engine.")
@@ -296,9 +316,11 @@ class AudioProcessor: ObservableObject {
             engine.stop()
             deconfigureAudioEngine()
             
+            // Stop output level updates.
             levelUpdateTimer?.invalidate()
             
-            outputLevel = stoppedOutputLevel
+            // Set output levels to `stoppedOutputLevel`.
+            outputLevels = Array(repeating: stoppedOutputLevel, count: outputLevels.count)
             
             running = false
             

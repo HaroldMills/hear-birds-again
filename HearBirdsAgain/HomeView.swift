@@ -93,9 +93,13 @@ struct HomeView: View {
             }
             .padding()
             
-            LevelMeter(level: $audioProcessor.outputLevel, minLevel: -80, maxLevel: 0, segmentSize: 5)
-                .padding()
-                
+            VStack(spacing: 6) {
+                ForEach(0..<$audioProcessor.outputLevels.count, id: \.self) { i in
+                    LevelMeter(level: $audioProcessor.outputLevels[i], minLevel: -80, maxLevel: 0, segmentSize: 5)
+                }
+            }
+            .padding()
+
             Button(buttonTitle) {
 
                 if (audioProcessor.running) {
