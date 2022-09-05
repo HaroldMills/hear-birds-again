@@ -19,15 +19,13 @@ struct HbaView: View {
 
     enum Tab: String {
         case home
-        case test
+        case controls
         case console
         case help
     }
     
     @SceneStorage("HbaView.selectedTab") private var selectedTab = Tab.home
     
-    private let testTabVisible = false
-
     private var nonfatalErrorMessage: String {
         get {
             return "A nonfatal error occurred. The error message was: \(errors.nonfatalErrorMessage)"
@@ -54,13 +52,12 @@ struct HbaView: View {
             }
             .tag(Tab.home)
 
-            if (testTabVisible) {
-                TestView(audioProcessor: audioProcessor)
-                .tabItem {
-                    Label("Test", systemImage: "slider.horizontal.3")
+            ControlsView(audioProcessor: audioProcessor)
+            .tabItem {
+                Label("Controls", systemImage: "slider.horizontal.3")
+                    
                 }
-                .tag(Tab.test)
-            }
+            .tag(Tab.controls)
             
             ConsoleView(console: console)
             .tabItem {

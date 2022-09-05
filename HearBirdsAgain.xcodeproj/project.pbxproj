@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2104BA0286C9AA100F65AEF /* LevelMeter.swift */; };
 		F24AD4552860C4D500554D3D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4542860C4D500554D3D /* HomeView.swift */; };
-		F24AD4572860CA8300554D3D /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4562860CA8300554D3D /* TestView.swift */; };
 		F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4582860CB7E00554D3D /* ConsoleView.swift */; };
 		F24AD45B2860CC1C00554D3D /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD45A2860CC1C00554D3D /* HelpView.swift */; };
 		F24AD45D2860CE9900554D3D /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD45C2860CE9900554D3D /* ViewExtensions.swift */; };
@@ -24,13 +23,16 @@
 		F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = F2609D2127EE0FAB005DACFA /* DSPKernel.mm */; };
 		F2945ABB283E6A8B0056D1F3 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABA283E6A8B0056D1F3 /* Console.swift */; };
 		F2945ABD283E75BB0056D1F3 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABC283E75BB0056D1F3 /* Errors.swift */; };
+		F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634728C65FA5008C2434 /* ControlsView.swift */; };
+		F2CB634A28C66581008C2434 /* LevelMeters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634928C66581008C2434 /* LevelMeters.swift */; };
+		F2CB634C28C67833008C2434 /* RunButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634B28C67833008C2434 /* RunButton.swift */; };
+		F2CB634E28C67A37008C2434 /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634D28C67A37008C2434 /* Title.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F2104BA0286C9AA100F65AEF /* LevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
 		F245FCFD27FCD5A000C54A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F24AD4542860C4D500554D3D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		F24AD4562860CA8300554D3D /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		F24AD4582860CB7E00554D3D /* ConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleView.swift; sourceTree = "<group>"; };
 		F24AD45A2860CC1C00554D3D /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		F24AD45C2860CE9900554D3D /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -54,6 +56,10 @@
 		F29647A927EE1BA000AB33A6 /* AdvancingBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AdvancingBuffer.hpp; sourceTree = "<group>"; };
 		F29647AA27EE1BD100AB33A6 /* Interpolator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Interpolator.hpp; sourceTree = "<group>"; };
 		F29647AB27EE1C0200AB33A6 /* OverlapAdder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OverlapAdder.hpp; sourceTree = "<group>"; };
+		F2CB634728C65FA5008C2434 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
+		F2CB634928C66581008C2434 /* LevelMeters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeters.swift; sourceTree = "<group>"; };
+		F2CB634B28C67833008C2434 /* RunButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunButton.swift; sourceTree = "<group>"; };
+		F2CB634D28C67A37008C2434 /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
 		F2E7AA50282C1290003E27FF /* FirFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FirFilter.hpp; sourceTree = "<group>"; };
 		F2E7AA51282C1290003E27FF /* HbaFilters.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HbaFilters.hpp; sourceTree = "<group>"; };
 		F2FD2F8B27F6362900BBD070 /* SongFinderProcessor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SongFinderProcessor.hpp; sourceTree = "<group>"; };
@@ -97,8 +103,11 @@
 				F2945ABC283E75BB0056D1F3 /* Errors.swift */,
 				F2609D0627EE0B88005DACFA /* HbaView.swift */,
 				F24AD4542860C4D500554D3D /* HomeView.swift */,
+				F2CB634D28C67A37008C2434 /* Title.swift */,
 				F2104BA0286C9AA100F65AEF /* LevelMeter.swift */,
-				F24AD4562860CA8300554D3D /* TestView.swift */,
+				F2CB634928C66581008C2434 /* LevelMeters.swift */,
+				F2CB634B28C67833008C2434 /* RunButton.swift */,
+				F2CB634728C65FA5008C2434 /* ControlsView.swift */,
 				F24AD4582860CB7E00554D3D /* ConsoleView.swift */,
 				F24AD45A2860CC1C00554D3D /* HelpView.swift */,
 				F24AD45C2860CE9900554D3D /* ViewExtensions.swift */,
@@ -219,17 +228,20 @@
 			files = (
 				F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */,
 				F24AD45B2860CC1C00554D3D /* HelpView.swift in Sources */,
+				F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */,
 				F2609D0727EE0B88005DACFA /* HbaView.swift in Sources */,
-				F24AD4572860CA8300554D3D /* TestView.swift in Sources */,
 				F2609D1627EE0CAB005DACFA /* SongFinderAudioUnit.swift in Sources */,
 				F24AD4552860C4D500554D3D /* HomeView.swift in Sources */,
 				F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */,
+				F2CB634A28C66581008C2434 /* LevelMeters.swift in Sources */,
 				F2609D1827EE0CE6005DACFA /* SongFinderParameters.swift in Sources */,
 				F2609D0527EE0B88005DACFA /* HbaApp.swift in Sources */,
+				F2CB634E28C67A37008C2434 /* Title.swift in Sources */,
 				F24AD45D2860CE9900554D3D /* ViewExtensions.swift in Sources */,
 				F2945ABD283E75BB0056D1F3 /* Errors.swift in Sources */,
 				F2609D1327EE0C2E005DACFA /* AudioProcessor.swift in Sources */,
 				F2609D1B27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm in Sources */,
+				F2CB634C28C67833008C2434 /* RunButton.swift in Sources */,
 				F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */,
 				F2945ABB283E6A8B0056D1F3 /* Console.swift in Sources */,
 			);

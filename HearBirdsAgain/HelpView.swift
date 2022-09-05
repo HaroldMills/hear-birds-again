@@ -13,16 +13,8 @@ struct HelpView: View {
         
         VStack {
             
-            VStack {
-                
-                Text("Hear Birds Again")
-                    .font(.system(size: 35, weight: .bold, design: .default))
-                
-                Text("Version \(getAppVersion())")
-                    .font(.subheadline)
-                
-            }
-            .padding(50)
+            Title(subtitle: "Version \(getAppVersion())")
+                .padding(50)
             
             Spacer()
             
