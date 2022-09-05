@@ -189,6 +189,10 @@ class AudioProcessor: ObservableObject {
     
     @Published var outputLevels: [AUValue] = [stoppedOutputLevel]
     
+    var isOutputMono: Bool {
+        return outputLevels.count == 1
+    }
+    
     var songFinderGain: AUValue {
         let session = AVAudioSession.sharedInstance()
         return session.isInputGainSettable ? 0 : (digitalGain / 100) * maxSongFinderGain
@@ -246,7 +250,7 @@ class AudioProcessor: ObservableObject {
             levelUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
                 let parameters = self.songFinderAudioUnit.parameters
                 self.outputLevels[0] = parameters.outputLevel0.value
-                if self.outputLevels.count == 2 {
+                if !self.isOutputMono {
                     self.outputLevels[1] = parameters.outputLevel1.value
                 }
             }

@@ -89,17 +89,20 @@ struct ControlsView: View {
                 Spacer()
                 VStack {
                     Stepper("Balance: \(audioProcessor.balance.formatted()) dB", value: $audioProcessor.balance, in: -10...10, step: 1)
+                        .foregroundColor(audioProcessor.isOutputMono ? .gray : .primary)
                 }
                 .fixedSize()
+                .disabled(audioProcessor.isOutputMono)
+                
                 Spacer()
             }
             .padding()
             
             LevelMeters(audioProcessor: audioProcessor)
-            .padding()
+                .padding()
             
             RunButton(audioProcessor: audioProcessor)
-            .padding()
+                .padding()
             
             Spacer()
             
