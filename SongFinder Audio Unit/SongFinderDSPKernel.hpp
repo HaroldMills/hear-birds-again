@@ -131,7 +131,7 @@ public:
     
     void deallocateRenderResources() {
         
-        for (int i = 0; i != _inputChannelCount; ++i)
+        for (int i = 0; i != _outputChannelCount; ++i)
             delete _processors[i];
         delete[] _processors;
         _processors = nullptr;
