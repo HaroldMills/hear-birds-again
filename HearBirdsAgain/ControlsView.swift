@@ -33,7 +33,7 @@ struct ControlsView: View {
             
             Spacer()
             
-            Title(subtitle: "Less-frequently Used Controls")
+            Title(subtitle: "Less-Frequently Used Controls")
                 .padding()
             
             if windowControlsVisible {
