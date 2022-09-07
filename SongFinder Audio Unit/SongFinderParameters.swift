@@ -29,7 +29,7 @@ public struct SongFinderParameters {
     private static let minWindowSize: AUValue = 5
     private static let maxWindowSize: AUValue = 50
     
-    private static let minGain: AUValue = -20
+    private static let minGain: AUValue = 0
     private static let maxGain: AUValue = 20
     
     private static let minBalance: AUValue = -10

@@ -36,7 +36,7 @@ struct AudioProcessorState: Codable {
     var windowType = WindowType.Hann
     var windowSize = 20
     var inputGain: Float = 0
-    var digitalGain: AUValue = 0
+    var extraGain: AUValue = 0
     var balance: AUValue = 0
     
     
@@ -97,7 +97,6 @@ private func getSavedProcessorStateUrl() throws -> URL {
 
 private let defaultProcessorState = AudioProcessorState()
 private let stoppedOutputLevel: AUValue = -200      // dB
-private let maxSongFinderGain: AUValue = 20         // dB
 
 
 class AudioProcessor: ObservableObject {
@@ -145,7 +144,7 @@ class AudioProcessor: ObservableObject {
     // on AVAudioSession.sharedInstance().isInputGainSettable. This property
     // more or less creates an observable version of that property for use by
     // a SwiftUI user interface. This property is updated from outside of this
-    // class in response to audio session route changes
+    // class in response to audio session route changes.
     @Published var isInputGainSettable = false
     
     @Published var inputGain: AUValue = defaultProcessorState.inputGain {
@@ -158,21 +157,17 @@ class AudioProcessor: ObservableObject {
                     errors.handleNonfatalError(message: "Could not set input gain. \(error.localizedDescription)")
                     return
                 }
-                songFinderAudioUnit.parameters.gain.value = 0
             }
         }
     }
     
-    @Published var digitalGain: AUValue = defaultProcessorState.digitalGain {
+    @Published var extraGain: AUValue = defaultProcessorState.extraGain {
         didSet {
-            let session = AVAudioSession.sharedInstance()
-            if !session.isInputGainSettable {
-                // Note that unlike for some other SongFinder parameters
-                // we do not need to restart here here since the SongFinder
-                // audio unit can respond to changes in the value of this
-                // parameter while running.
-                songFinderAudioUnit.parameters.gain.value = songFinderGain
-            }
+            // Note that unlike for some other SongFinder parameters
+            // we do not need to restart here here since the SongFinder
+            // audio unit can respond to changes in the value of this
+            // parameter while running.
+            songFinderAudioUnit.parameters.gain.value = extraGain
         }
 
     }
@@ -183,7 +178,7 @@ class AudioProcessor: ObservableObject {
             // we do not need to restart here here since the SongFinder
             // audio unit can respond to changes in the value of this
             // parameter while running.
-            songFinderAudioUnit.parameters.balance.value = AUValue(balance)
+            songFinderAudioUnit.parameters.balance.value = balance
         }
     }
     
@@ -191,11 +186,6 @@ class AudioProcessor: ObservableObject {
     
     var isOutputMono: Bool {
         return outputLevels.count == 1
-    }
-    
-    var songFinderGain: AUValue {
-        let session = AVAudioSession.sharedInstance()
-        return session.isInputGainSettable ? 0 : (digitalGain / 100) * maxSongFinderGain
     }
     
     var levelUpdateTimer: Timer?
@@ -206,7 +196,7 @@ class AudioProcessor: ObservableObject {
             return AudioProcessorState(
                 cutoff: cutoff, pitchShift: pitchShift,
                 windowType: windowType, windowSize: windowSize,
-                inputGain: inputGain, digitalGain: digitalGain,
+                inputGain: inputGain, extraGain: extraGain,
                 balance: balance)
         }
         
@@ -216,7 +206,7 @@ class AudioProcessor: ObservableObject {
             windowType = newValue.windowType
             windowSize = newValue.windowSize
             inputGain = newValue.inputGain
-            digitalGain = newValue.digitalGain
+            extraGain = newValue.extraGain
             balance = newValue.balance
         }
         
@@ -269,7 +259,7 @@ class AudioProcessor: ObservableObject {
             pitchShift: AUValue(pitchShift),
             windowType: AUValue(windowType.rawValue),
             windowSize: AUValue(windowSize),
-            gain: songFinderGain,
+            gain: extraGain,
             balance: balance)
         
     }

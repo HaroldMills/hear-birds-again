@@ -13,6 +13,20 @@ struct ControlsView: View {
 
     @ObservedObject var audioProcessor: AudioProcessor
     
+    var isInputGainControlEnabled: Bool {
+        return audioProcessor.isInputGainSettable
+//        return audioProcessor.isInputGainSettable && audioProcessor.extraGain == 0
+    }
+    
+    var isExtraGainControlEnabled: Bool {
+        return true
+//        return !audioProcessor.isInputGainSettable || audioProcessor.inputGain == 100
+    }
+    
+    var isBalanceControlEnabled: Bool {
+        return !audioProcessor.isOutputMono
+    }
+    
     var body: some View {
         
         VStack {
@@ -62,25 +76,14 @@ struct ControlsView: View {
                 
             }
 
-//            VStack {
-//                HStack {
-//                    Text("Gain:")
-//                    Slider(value: $audioProcessor.gain, in: 0...24)
-//                }
-//                Text(String(format: "%.1f dB", audioProcessor.gain))
-//            }
-//            .padding()
-
             HStack {
                 Spacer()
                 VStack {
-                    if audioProcessor.isInputGainSettable {
-                        Stepper("Gain: \(audioProcessor.inputGain.formatted()) %", value: $audioProcessor.inputGain, in: 0...100, step: 5)
-                    } else {
-                        Stepper("Gain: \(audioProcessor.digitalGain.formatted()) %", value: $audioProcessor.digitalGain, in: 0...100, step: 5)
-                    }
+                    Stepper("Input Gain: \(audioProcessor.inputGain.formatted()) %", value: $audioProcessor.inputGain, in: 0...100, step: 5)
+                        .foregroundColor(isInputGainControlEnabled ? .primary : .gray)
                 }
                 .fixedSize()
+                .disabled(!isInputGainControlEnabled)
                 Spacer()
             }
             .padding()
@@ -88,11 +91,23 @@ struct ControlsView: View {
             HStack {
                 Spacer()
                 VStack {
-                    Stepper("Balance: \(audioProcessor.balance.formatted()) dB", value: $audioProcessor.balance, in: -10...10, step: 1)
-                        .foregroundColor(audioProcessor.isOutputMono ? .gray : .primary)
+                    Stepper("Extra Gain: \(audioProcessor.extraGain.formatted()) dB", value: $audioProcessor.extraGain, in: 0...20)
+                        .foregroundColor(isExtraGainControlEnabled ? .primary : .gray)
                 }
                 .fixedSize()
-                .disabled(audioProcessor.isOutputMono)
+                .disabled(!isExtraGainControlEnabled)
+                Spacer()
+            }
+            .padding()
+            
+            HStack {
+                Spacer()
+                VStack {
+                    Stepper("Balance: \(audioProcessor.balance.formatted()) dB", value: $audioProcessor.balance, in: -10...10, step: 1)
+                        .foregroundColor(isBalanceControlEnabled ? .primary : .gray)
+                }
+                .fixedSize()
+                .disabled(!isBalanceControlEnabled)
                 
                 Spacer()
             }
