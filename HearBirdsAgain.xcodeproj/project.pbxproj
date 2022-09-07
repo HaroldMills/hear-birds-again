@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2104BA0286C9AA100F65AEF /* LevelMeter.swift */; };
+		F23B988D28C8E9560020BA30 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23B988C28C8E9560020BA30 /* VolumeView.swift */; };
 		F24AD4552860C4D500554D3D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4542860C4D500554D3D /* HomeView.swift */; };
 		F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4582860CB7E00554D3D /* ConsoleView.swift */; };
 		F24AD45B2860CC1C00554D3D /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD45A2860CC1C00554D3D /* HelpView.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		F2104BA0286C9AA100F65AEF /* LevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
+		F23B988C28C8E9560020BA30 /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
 		F245FCFD27FCD5A000C54A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F24AD4542860C4D500554D3D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F24AD4582860CB7E00554D3D /* ConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleView.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				F2104BA0286C9AA100F65AEF /* LevelMeter.swift */,
 				F2CB634928C66581008C2434 /* LevelMeters.swift */,
 				F2CB634B28C67833008C2434 /* RunButton.swift */,
+				F23B988C28C8E9560020BA30 /* VolumeView.swift */,
 				F2CB634728C65FA5008C2434 /* ControlsView.swift */,
 				F24AD4582860CB7E00554D3D /* ConsoleView.swift */,
 				F24AD45A2860CC1C00554D3D /* HelpView.swift */,
@@ -226,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F23B988D28C8E9560020BA30 /* VolumeView.swift in Sources */,
 				F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */,
 				F24AD45B2860CC1C00554D3D /* HelpView.swift in Sources */,
 				F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */,
