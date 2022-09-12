@@ -79,17 +79,19 @@ struct ControlsView: View {
             Text("Input: \(audioProcessor.inputName)")
                 .padding()
             
-            HStack {
-                Spacer()
-                VStack {
-                    Stepper("Input Gain: \(audioProcessor.inputGain.formatted()) %", value: $audioProcessor.inputGain, in: 0...100, step: 5)
-                        .foregroundColor(isInputGainControlEnabled ? .primary : .gray)
+            if isInputGainControlEnabled {
+                HStack {
+                    Spacer()
+                    VStack {
+                        Stepper("Input Gain: \(audioProcessor.inputGain.formatted()) %", value: $audioProcessor.inputGain, in: 0...100, step: 5)
+                            .foregroundColor(isInputGainControlEnabled ? .primary : .gray)
+                    }
+                    .fixedSize()
+                    .disabled(!isInputGainControlEnabled)
+                    Spacer()
                 }
-                .fixedSize()
-                .disabled(!isInputGainControlEnabled)
-                Spacer()
+                .padding()
             }
-            .padding()
 
             HStack {
                 Spacer()
@@ -103,18 +105,20 @@ struct ControlsView: View {
             }
             .padding()
             
-            HStack {
-                Spacer()
-                VStack {
-                    Stepper("Balance: \(audioProcessor.balance.formatted()) dB", value: $audioProcessor.balance, in: -10...10, step: 1)
-                        .foregroundColor(isBalanceControlEnabled ? .primary : .gray)
+            if isBalanceControlEnabled {
+                HStack {
+                    Spacer()
+                    VStack {
+                        Stepper("Balance: \(audioProcessor.balance.formatted()) dB", value: $audioProcessor.balance, in: -10...10, step: 1)
+                            .foregroundColor(isBalanceControlEnabled ? .primary : .gray)
+                    }
+                    .fixedSize()
+                    .disabled(!isBalanceControlEnabled)
+                    
+                    Spacer()
                 }
-                .fixedSize()
-                .disabled(!isBalanceControlEnabled)
-                
-                Spacer()
+                .padding()
             }
-            .padding()
             
             LevelMeters(audioProcessor: audioProcessor)
                 .padding()
