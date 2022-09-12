@@ -96,7 +96,7 @@ struct ControlsView: View {
             HStack {
                 Spacer()
                 VStack {
-                    Stepper("Extra Gain: \(audioProcessor.extraGain.formatted()) dB", value: $audioProcessor.extraGain, in: 0...20)
+                    Stepper("App Gain: \(audioProcessor.extraGain.formatted()) dB", value: $audioProcessor.extraGain, in: 0...20)
                         .foregroundColor(isExtraGainControlEnabled ? .primary : .gray)
                 }
                 .fixedSize()
