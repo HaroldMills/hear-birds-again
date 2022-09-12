@@ -13,17 +13,25 @@ struct ControlsView: View {
 
     @ObservedObject var audioProcessor: AudioProcessor
     
-    var isInputGainControlEnabled: Bool {
+    var isInputGainControlVisible: Bool {
         return audioProcessor.isInputGainSettable
-//        return audioProcessor.isInputGainSettable && audioProcessor.extraGain == 0
     }
     
-    var isExtraGainControlEnabled: Bool {
-        return true
-//        return !audioProcessor.isInputGainSettable || audioProcessor.inputGain == 100
+    var isInputGainControlEnabled: Bool {
+        isInputGainControlVisible && audioProcessor.extraGain == 0
     }
     
-    var isBalanceControlEnabled: Bool {
+    private var appGainControlName: String {
+        get {
+            return audioProcessor.isInputGainSettable ? "Extra Gain" : "Gain"
+        }
+    }
+    
+    var isAppGainControlEnabled: Bool {
+        return !isInputGainControlVisible || audioProcessor.inputGain == 100
+    }
+    
+    var isBalanceControlVisible: Bool {
         return !audioProcessor.isOutputMono
     }
     
@@ -79,7 +87,7 @@ struct ControlsView: View {
             Text("Input: \(audioProcessor.inputName)")
                 .padding()
             
-            if isInputGainControlEnabled {
+            if isInputGainControlVisible {
                 HStack {
                     Spacer()
                     VStack {
@@ -96,25 +104,22 @@ struct ControlsView: View {
             HStack {
                 Spacer()
                 VStack {
-                    Stepper("App Gain: \(audioProcessor.extraGain.formatted()) dB", value: $audioProcessor.extraGain, in: 0...20)
-                        .foregroundColor(isExtraGainControlEnabled ? .primary : .gray)
+                    Stepper("\(appGainControlName): \(audioProcessor.extraGain.formatted()) dB", value: $audioProcessor.extraGain, in: 0...20)
+                        .foregroundColor(isAppGainControlEnabled ? .primary : .gray)
                 }
                 .fixedSize()
-                .disabled(!isExtraGainControlEnabled)
+                .disabled(!isAppGainControlEnabled)
                 Spacer()
             }
             .padding()
             
-            if isBalanceControlEnabled {
+            if isBalanceControlVisible {
                 HStack {
                     Spacer()
                     VStack {
                         Stepper("Balance: \(audioProcessor.balance.formatted()) dB", value: $audioProcessor.balance, in: -10...10, step: 1)
-                            .foregroundColor(isBalanceControlEnabled ? .primary : .gray)
                     }
                     .fixedSize()
-                    .disabled(!isBalanceControlEnabled)
-                    
                     Spacer()
                 }
                 .padding()
