@@ -30,7 +30,7 @@ enum WindowType: AUValue, CustomStringConvertible, Codable {
 
 struct Gains: Codable {
     var inputGain: Float? = nil
-    var extraGain: AUValue = 0
+    var appGain: AUValue = 0
 }
 
 
@@ -105,7 +105,7 @@ private func getSavedProcessorStateUrl() throws -> URL {
 
 private let defaultProcessorState = AudioProcessorState()
 private let defaultInputGain: AUValue = 100         // percent
-private let defaultExtraGain: AUValue = 0           // dB
+private let defaultAppGain: AUValue = 0           // dB
 private let stoppedOutputLevel: AUValue = -200      // dB
 
 
@@ -183,7 +183,7 @@ class AudioProcessor: ObservableObject {
             
             // Update `inputPortGains`.
             if let portName = getInputPortName() {
-                inputPortGains[portName] = Gains(inputGain: inputGain, extraGain: extraGain)
+                inputPortGains[portName] = Gains(inputGain: inputGain, appGain: appGain)
             }
             
         }
@@ -199,7 +199,7 @@ class AudioProcessor: ObservableObject {
         }
     }
     
-    @Published var extraGain: AUValue = defaultExtraGain {
+    @Published var appGain: AUValue = defaultAppGain {
         
         didSet {
             
@@ -208,13 +208,13 @@ class AudioProcessor: ObservableObject {
             // we do not need to restart here here since the SongFinder
             // audio unit can respond to changes in the value of this
             // parameter while running.
-            songFinderAudioUnit.parameters.gain.value = extraGain
+            songFinderAudioUnit.parameters.gain.value = appGain
             
             // Update `inputPortGains`.
             if let portName = getInputPortName() {
                 let gainSettable = AVAudioSession.sharedInstance().isInputGainSettable
                 let inputGainOptional = gainSettable ? inputGain : nil
-                inputPortGains[portName] = Gains(inputGain: inputGainOptional, extraGain: extraGain)
+                inputPortGains[portName] = Gains(inputGain: inputGainOptional, appGain: appGain)
             }
             
         }
@@ -309,7 +309,7 @@ class AudioProcessor: ObservableObject {
             pitchShift: AUValue(pitchShift),
             windowType: AUValue(windowType.rawValue),
             windowSize: AUValue(windowSize),
-            gain: extraGain,
+            gain: appGain,
             balance: balance)
         
     }
@@ -349,7 +349,7 @@ class AudioProcessor: ObservableObject {
                 if let gain = gains.inputGain {
                     inputGain = gain
                 }
-                extraGain = gains.extraGain
+                appGain = gains.appGain
             }
         }
     }

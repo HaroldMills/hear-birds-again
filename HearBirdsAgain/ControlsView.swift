@@ -18,7 +18,7 @@ struct ControlsView: View {
     }
     
     var isInputGainControlEnabled: Bool {
-        isInputGainControlVisible && audioProcessor.extraGain == 0
+        isInputGainControlVisible && audioProcessor.appGain == 0
     }
     
     private var appGainControlName: String {
@@ -104,7 +104,7 @@ struct ControlsView: View {
             HStack {
                 Spacer()
                 VStack {
-                    Stepper("\(appGainControlName): \(audioProcessor.extraGain.formatted()) dB", value: $audioProcessor.extraGain, in: 0...20)
+                    Stepper("\(appGainControlName): \(audioProcessor.appGain.formatted()) dB", value: $audioProcessor.appGain, in: 0...20)
                         .foregroundColor(isAppGainControlEnabled ? .primary : .gray)
                 }
                 .fixedSize()
