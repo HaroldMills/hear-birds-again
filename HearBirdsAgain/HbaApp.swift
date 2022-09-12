@@ -147,7 +147,7 @@ class HbaApp: App {
         }
 
         updateIsInputGainSettable()
-        audioProcessor.reinitializeOutputLevelsIfNeeded()
+        audioProcessor.handleAudioSessionRouteChange()
 
         switch reason {
             

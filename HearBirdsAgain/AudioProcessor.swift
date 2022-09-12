@@ -28,6 +28,15 @@ enum WindowType: AUValue, CustomStringConvertible, Codable {
 }
 
 
+struct Gains: Codable {
+    var inputGain: Float? = nil
+    var extraGain: AUValue = 0
+}
+
+
+typealias InputPortGains = Dictionary<String, Gains>
+
+
 struct AudioProcessorState: Codable {
     
     
@@ -35,10 +44,9 @@ struct AudioProcessorState: Codable {
     var pitchShift = 2
     var windowType = WindowType.Hann
     var windowSize = 20
-    var inputGain: Float = 0
-    var extraGain: AUValue = 0
+    var inputPortGains: InputPortGains = [:]
     var balance: AUValue = 0
-    
+
     
     // Modeled after code from the iOS Scrumdinger app tutorial.
     static func load(completion: @escaping (Result<AudioProcessorState, Error>) -> Void) {
@@ -96,6 +104,8 @@ private func getSavedProcessorStateUrl() throws -> URL {
 
 
 private let defaultProcessorState = AudioProcessorState()
+private let defaultInputGain: AUValue = 100         // percent
+private let defaultExtraGain: AUValue = 0           // dB
 private let stoppedOutputLevel: AUValue = -200      // dB
 
 
@@ -140,15 +150,27 @@ class AudioProcessor: ObservableObject {
         }
     }
     
+    // This class doesn't use the value of this property, but instead uses the
+    // `getInputPortName` method whenever it needs to get the input port name.
+    // This property is an observable version of the input port name for use
+    // by a SwiftUI user interface. The property is updated by the audio
+    // processor via its `updateInputInfo` method whenever the its state is
+    // set or the audio session route changes.
+    @Published var inputName = ""
+    
     // This class doesn't use the value of this property, but instead relies
     // on AVAudioSession.sharedInstance().isInputGainSettable. This property
     // more or less creates an observable version of that property for use by
     // a SwiftUI user interface. This property is updated from outside of this
     // class in response to audio session route changes.
+    // TODO: Update this property from within this class.
     @Published var isInputGainSettable = false
     
-    @Published var inputGain: AUValue = defaultProcessorState.inputGain {
+    @Published var inputGain: AUValue = defaultInputGain {
+        
         didSet {
+            
+            // Set gain in audio session.
             let session = AVAudioSession.sharedInstance()
             if session.isInputGainSettable {
                 do {
@@ -158,19 +180,48 @@ class AudioProcessor: ObservableObject {
                     return
                 }
             }
+            
+            // Update `inputPortGains`.
+            if let portName = getInputPortName() {
+                inputPortGains[portName] = Gains(inputGain: inputGain, extraGain: extraGain)
+            }
+            
+        }
+        
+    }
+    
+    private func getInputPortName() -> String? {
+        let inputs = AVAudioSession.sharedInstance().currentRoute.inputs
+        if inputs.count > 0 {
+            return inputs[0].portName
+        } else {
+            return nil
         }
     }
     
-    @Published var extraGain: AUValue = defaultProcessorState.extraGain {
+    @Published var extraGain: AUValue = defaultExtraGain {
+        
         didSet {
+            
+            // Set gain in SongFinder audio unit.
             // Note that unlike for some other SongFinder parameters
             // we do not need to restart here here since the SongFinder
             // audio unit can respond to changes in the value of this
             // parameter while running.
             songFinderAudioUnit.parameters.gain.value = extraGain
+            
+            // Update `inputPortGains`.
+            if let portName = getInputPortName() {
+                let gainSettable = AVAudioSession.sharedInstance().isInputGainSettable
+                let inputGainOptional = gainSettable ? inputGain : nil
+                inputPortGains[portName] = Gains(inputGain: inputGainOptional, extraGain: extraGain)
+            }
+            
         }
 
     }
+    
+    private var inputPortGains: InputPortGains = [:]
     
     @Published var balance: AUValue = defaultProcessorState.balance {
         didSet {
@@ -188,7 +239,7 @@ class AudioProcessor: ObservableObject {
         return outputLevels.count == 1
     }
     
-    var levelUpdateTimer: Timer?
+    private var levelUpdateTimer: Timer?
     
     var state: AudioProcessorState {
         
@@ -196,8 +247,7 @@ class AudioProcessor: ObservableObject {
             return AudioProcessorState(
                 cutoff: cutoff, pitchShift: pitchShift,
                 windowType: windowType, windowSize: windowSize,
-                inputGain: inputGain, extraGain: extraGain,
-                balance: balance)
+                inputPortGains: inputPortGains, balance: balance)
         }
         
         set {
@@ -205,9 +255,9 @@ class AudioProcessor: ObservableObject {
             pitchShift = newValue.pitchShift
             windowType = newValue.windowType
             windowSize = newValue.windowSize
-            inputGain = newValue.inputGain
-            extraGain = newValue.extraGain
+            inputPortGains = newValue.inputPortGains
             balance = newValue.balance
+            updateInputInfo()
         }
         
     }
@@ -284,7 +334,28 @@ class AudioProcessor: ObservableObject {
     }
     
     
-    func reinitializeOutputLevelsIfNeeded() {
+    func handleAudioSessionRouteChange() {
+        console.log()
+        console.log("AudioProcessor.handleAudioSessionRouteChange")
+        updateInputInfo()
+        reinitializeOutputLevelsIfNeeded()
+    }
+    
+    
+    private func updateInputInfo() {
+        if let portName = getInputPortName() {
+            inputName = portName
+            if let gains = inputPortGains[portName] {
+                if let gain = gains.inputGain {
+                    inputGain = gain
+                }
+                extraGain = gains.extraGain
+            }
+        }
+    }
+    
+    
+    private func reinitializeOutputLevelsIfNeeded() {
         
         let channelCount = engine.outputNode.outputFormat(forBus: 0).channelCount
         

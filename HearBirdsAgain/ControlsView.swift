@@ -76,6 +76,9 @@ struct ControlsView: View {
                 
             }
 
+            Text("Input: \(audioProcessor.inputName)")
+                .padding()
+            
             HStack {
                 Spacer()
                 VStack {
