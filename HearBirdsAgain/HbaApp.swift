@@ -402,7 +402,7 @@ private func setAudioSessionCategory() throws {
     do {
         
         // Do *not* include `mode: .measurement` here. That disables stereo input.
-        try session.setCategory(.playAndRecord)
+        try session.setCategory(.playAndRecord, options: [.allowBluetooth, .allowBluetoothA2DP, .allowAirPlay])
         
         try session.setActive(true)
         
