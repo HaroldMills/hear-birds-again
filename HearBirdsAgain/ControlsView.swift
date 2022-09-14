@@ -125,9 +125,12 @@ struct ControlsView: View {
                 .padding()
             }
             
-            LevelMeters(audioProcessor: audioProcessor)
-                .padding()
-            
+            VStack {
+                Text("App Output Level:")
+                LevelMeters(audioProcessor: audioProcessor)
+            }
+            .padding()
+
             RunButton(audioProcessor: audioProcessor)
                 .padding()
             

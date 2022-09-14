@@ -52,16 +52,19 @@ struct HomeView: View {
             }
             .padding()
             
-            HStack {
-                Text("Volume:")
+            VStack {
+                Text("App Output Level:")
+                LevelMeters(audioProcessor: audioProcessor)
+            }
+            .padding()
+
+            VStack {
+                Text("System Volume:")
                 VolumeView()
-                    .frame(width: 200, height: 15)
+                    .frame(width: 250, height: 15)
             }
             .padding()
             
-            LevelMeters(audioProcessor: audioProcessor)
-                .padding()
-
             RunButton(audioProcessor: audioProcessor)
                 .padding()
             
