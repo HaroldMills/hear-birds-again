@@ -9,7 +9,6 @@ import SwiftUI
 import AVFoundation
 
 
-// TODO: Include `.allowBluetooth` option in `AVAudioSession.setCategory` (seems to be for input, not output)?
 // TODO: Handle audio session interruptions.
 // TODO: Could we reduce latency via AVAudioSession.setPreferredIOBufferDuration?
 // TODO: Look at AVAudioSession.inputLatency and AVAudioSession.outputLatency for different devices.
