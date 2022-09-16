@@ -105,7 +105,7 @@ private func getSavedProcessorStateUrl() throws -> URL {
 
 private let defaultProcessorState = AudioProcessorState()
 private let defaultInputGain: AUValue = 100         // percent
-private let defaultAppGain: AUValue = 0           // dB
+private let defaultAppGain: AUValue = 0             // dB
 private let stoppedOutputLevel: AUValue = -200      // dB
 
 
@@ -217,8 +217,8 @@ class AudioProcessor: ObservableObject {
             // Update `inputPortGains`.
             if let portName = getInputPortName() {
                 let gainSettable = AVAudioSession.sharedInstance().isInputGainSettable
-                let inputGainOptional = gainSettable ? inputGain : nil
-                inputPortGains[portName] = Gains(inputGain: inputGainOptional, appGain: appGain)
+                let inputGain = gainSettable ? self.inputGain : nil
+                inputPortGains[portName] = Gains(inputGain: inputGain, appGain: appGain)
             }
             
         }
@@ -353,13 +353,29 @@ class AudioProcessor: ObservableObject {
         
         // Update `inputName`, `inputGain`, and `appGain`.
         if let portName = getInputPortName() {
+            
             inputName = portName
+            
             if let gains = inputPortGains[portName] {
+                // have saved gains for this input port
+                
                 if let gain = gains.inputGain {
                     inputGain = gain
                 }
+                
                 appGain = gains.appGain
+                
+            } else {
+                // no saved gains for this input port
+                
+                if isInputGainSettable {
+                    inputGain = defaultInputGain
+                }
+                
+                appGain = defaultAppGain
+                
             }
+            
         }
         
     }
