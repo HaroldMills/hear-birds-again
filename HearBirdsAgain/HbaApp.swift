@@ -145,7 +145,6 @@ class HbaApp: App {
             errors.handleNonfatalError(message: "adjustNumberOfInputChannelsIfNeeded failed. \(error.localizedDescription)")
         }
 
-        updateIsInputGainSettable()
         audioProcessor.handleAudioSessionRouteChange()
 
         switch reason {
@@ -372,12 +371,6 @@ private func isAudioInputBuiltInMic() -> Bool {
 }
 
 
-private func updateIsInputGainSettable() {
-    let session = AVAudioSession.sharedInstance()
-    audioProcessor.isInputGainSettable = session.isInputGainSettable
-}
-
-
 private func registerSongFinderAudioUnit() {
     AUAudioUnit.registerSubclass(
         SongFinderAudioUnit.self,
@@ -516,19 +509,9 @@ private func showAudioSessionCurrentRoute() {
 
 
 private func showAudioSessionInputGain(session: AVAudioSession) {
-    
     console.log("")
     console.log("Input gain: \(session.inputGain)")
     console.log("isInputGainSettable: \(session.isInputGainSettable)")
-
-//    if gainSettable && gain != 1 {
-//        do {
-//            try session.setInputGain(1)
-//        } catch {
-//            errors.handleNonfatalError(message: "Could not set input gain. \(error.localizedDescription)")
-//        }
-//    }
-    
 }
 
 

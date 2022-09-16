@@ -150,20 +150,24 @@ class AudioProcessor: ObservableObject {
         }
     }
     
-    // This class doesn't use the value of this property, but instead uses the
-    // `getInputPortName` method whenever it needs to get the input port name.
-    // This property is an observable version of the input port name for use
-    // by a SwiftUI user interface. The property is updated by the audio
-    // processor via its `updateInputInfo` method whenever the its state is
-    // set or the audio session route changes.
+    // The name of the current input port.
+    //
+    // This class doesn't read this property, but instead calls the
+    // `getInputPortName` method whenever it needs the input port name.
+    // This property is an observable version of the input port name
+    // for use by a SwiftUI user interface. The property is updated by
+    // the audio processor via its `updateInputInfo` method whenever its
+    // state is set or the audio session route changes.
     @Published var inputName = ""
     
-    // This class doesn't use the value of this property, but instead relies
-    // on AVAudioSession.sharedInstance().isInputGainSettable. This property
-    // more or less creates an observable version of that property for use by
-    // a SwiftUI user interface. This property is updated from outside of this
-    // class in response to audio session route changes.
-    // TODO: Update this property from within this class.
+    // `true` if and only if the gain of the current input is settable.
+    //
+    // This class doesn't read this property, but instead relies on
+    // AVAudioSession.sharedInstance().isInputGainSettable. This property
+    // is an observable version of that property for use by a SwiftUI user
+    // interface. The property is updated by the audio processor via its
+    // `updateInputInfo` method whenever its state is set or the audio
+    // session route changes.
     @Published var isInputGainSettable = false
     
     @Published var inputGain: AUValue = defaultInputGain {
@@ -343,6 +347,11 @@ class AudioProcessor: ObservableObject {
     
     
     private func updateInputInfo() {
+        
+        // Update `isInputGainSettable` property.
+        isInputGainSettable = AVAudioSession.sharedInstance().isInputGainSettable
+        
+        // Update `inputName`, `inputGain`, and `appGain`.
         if let portName = getInputPortName() {
             inputName = portName
             if let gains = inputPortGains[portName] {
@@ -352,6 +361,7 @@ class AudioProcessor: ObservableObject {
                 appGain = gains.appGain
             }
         }
+        
     }
     
     
