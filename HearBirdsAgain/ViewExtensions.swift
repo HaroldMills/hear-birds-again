@@ -14,9 +14,9 @@ private struct HbaScrollbarModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         
-        // We use an HStack here to ensure that the ScrollView
+        // We use an `HStack` here to ensure that the `ScrollView`
         // will span the entire width of the display, even if
-        // the content does not.
+        // `content` does not.
         ScrollView(.vertical) {
             HStack {
                 Spacer()
