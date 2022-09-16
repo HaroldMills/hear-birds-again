@@ -305,6 +305,9 @@ private func adjustNumberOfInputChannelsIfNeeded() throws {
         } else {
             // current input does not support stereo
             
+            // Uncomment the following to test mono input from Apple EarPods on an iPhone.
+            // return
+            
             // Switch to stereo input from built-in mic if available.
             
             guard let availableInputs = session.availableInputs,
