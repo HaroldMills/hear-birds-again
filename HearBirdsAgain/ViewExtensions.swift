@@ -17,6 +17,10 @@ private struct HbaScrollbarModifier: ViewModifier {
         // We use an `HStack` here to ensure that the `ScrollView`
         // will span the entire width of the display, even if
         // `content` does not.
+        //
+        // We pad the top of the `ScrollView` a little to push our
+        // view titles down a little from the top of the display.
+        //
         ScrollView(.vertical) {
             HStack {
                 Spacer()
@@ -24,6 +28,7 @@ private struct HbaScrollbarModifier: ViewModifier {
                 Spacer()
             }
         }
+        .padding(.top, 10)
         
     }
     
