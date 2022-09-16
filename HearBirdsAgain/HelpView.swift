@@ -14,7 +14,7 @@ struct HelpView: View {
         VStack {
             
             Title(subtitle: "Version \(getAppVersion())")
-                .padding(50)
+                .padding()
             
             Spacer()
             
@@ -23,6 +23,7 @@ struct HelpView: View {
             Spacer()
             
         }
+        .hbaScrollbar()
         .hbaBackground()
         
     }

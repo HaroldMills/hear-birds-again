@@ -39,8 +39,6 @@ struct ControlsView: View {
         
         VStack {
             
-            Spacer()
-            
             Title(subtitle: "Less-Frequently Used Controls")
                 .padding()
             
@@ -134,11 +132,10 @@ struct ControlsView: View {
             RunButton(audioProcessor: audioProcessor)
                 .padding()
             
-            Spacer()
-            
         }
+        .hbaScrollbar()
         .hbaBackground()
-        
+            
     }
     
 }

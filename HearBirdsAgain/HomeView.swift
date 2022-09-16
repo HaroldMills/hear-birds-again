@@ -15,8 +15,6 @@ struct HomeView: View {
         
         VStack {
             
-            Spacer()
-            
             Title()
                 .padding()
             
@@ -68,18 +66,17 @@ struct HomeView: View {
             RunButton(audioProcessor: audioProcessor)
                 .padding()
             
-            Spacer()
-            
-//                Text(
-//                    "If you find this app useful, please [donate](https://hearbirdsagain.org/donate/) to support its continued development and maintenance.")
+//            Spacer()
 //
-//                Spacer()
-            
+//            Text(
+//                "If you find this app useful, please [donate](https://hearbirdsagain.org/donate/) to support its continued development and maintenance.")
+                
         }
+        .hbaScrollbar()
         .hbaBackground()
-        
+                
     }
-    
+
 }
 
 struct HomeView_Previews: PreviewProvider {
