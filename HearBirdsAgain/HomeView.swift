@@ -57,7 +57,7 @@ struct HomeView: View {
             .padding()
 
             VStack {
-                Text("System Volume:")
+                Text("iOS Audio Volume:")
                 VolumeView()
                     .frame(width: 250, height: 15)
             }
