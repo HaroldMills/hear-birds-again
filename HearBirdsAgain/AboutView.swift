@@ -1,27 +1,27 @@
 //
-//  HelpView.swift
+//  AboutView.swift
 //  HearBirdsAgain
 //
-//  Created by Harold Mills on 6/20/22.
+//  Created by Harold Mills on 9/21/22.
 //
 
 import SwiftUI
 
-struct HelpView: View {
+struct AboutView: View {
     
     var body: some View {
         
         VStack {
             
-            Title("Help")
+            Title("About")
                 .padding()
-            
+                  
             Spacer()
-            
-            Text("Help is on the way!")
-
+                  
+            Text("Version \(getAppVersion())")
+                 
             Spacer()
-            
+                        
         }
         .hbaScrollbar()
         .hbaBackground()
@@ -34,8 +34,8 @@ struct HelpView: View {
     
 }
 
-struct HelpView_Previews: PreviewProvider {
+struct AboutView_Previews: PreviewProvider {
     static var previews: some View {
-        HelpView()
+        AboutView()
     }
 }

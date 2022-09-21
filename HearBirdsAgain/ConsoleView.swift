@@ -13,28 +13,29 @@ struct ConsoleView: View {
     
     var body: some View {
         
-        ScrollView {
+        VStack {
             
-            VStack {
+            Title("Console")
+                .padding()
+
+            HStack {
                 
-                HStack {
-                    
-                    Text(console.text)
-                        .font(Font.system(size: 16).monospaced())
-                        .multilineTextAlignment(.leading)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding()
-                    
-                    Spacer()
-                    
-                }
+                Text(console.text)
+                    .font(Font.system(size: 16).monospaced())
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding()
                 
                 Spacer()
                 
             }
             
+            Spacer()
+            
         }
-        
+        .hbaScrollbar()
+        .hbaBackground()
+
     }
     
 }

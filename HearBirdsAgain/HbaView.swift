@@ -22,6 +22,8 @@ struct HbaView: View {
         case controls
         case console
         case help
+        case about
+        case donate
     }
     
     @SceneStorage("HbaView.selectedTab") private var selectedTab = Tab.home
@@ -47,17 +49,17 @@ struct HbaView: View {
         TabView(selection: $selectedTab) {
             
             HomeView(audioProcessor: audioProcessor)
-            .tabItem {
-                Label("Home", systemImage: "house")
-            }
-            .tag(Tab.home)
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }
+                .tag(Tab.home)
 
             ControlsView(audioProcessor: audioProcessor)
-            .tabItem {
-                Label("Controls", systemImage: "slider.horizontal.3")
-                    
-                }
-            .tag(Tab.controls)
+                .tabItem {
+                    Label("Controls", systemImage: "slider.horizontal.3")
+                        
+                    }
+                .tag(Tab.controls)
             
             if HbaApp.isConsoleTabEnabled {
                 ConsoleView(console: console)
@@ -68,10 +70,22 @@ struct HbaView: View {
             }
 
             HelpView()
-            .tabItem {
-                Label("Help", systemImage: "questionmark.circle")
-            }
-            .tag(Tab.help)
+                .tabItem {
+                    Label("Help", systemImage: "questionmark.circle")
+                }
+                .tag(Tab.help)
+            
+            AboutView()
+                .tabItem{
+                    Label("About", systemImage: "info.circle")
+                }
+                .tag(Tab.about)
+
+            DonateView()
+                .tabItem{
+                    Label("Donate", systemImage: "gift")
+                }
+                .tag(Tab.donate)
 
         }
         .alert(nonfatalErrorMessage, isPresented: $errors.nonfatalErrorOccurred) {

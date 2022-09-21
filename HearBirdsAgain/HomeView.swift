@@ -15,7 +15,7 @@ struct HomeView: View {
         
         VStack {
             
-            Title()
+            Title("Hear Birds Again")
                 .padding()
             
             HStack {
@@ -68,11 +68,6 @@ struct HomeView: View {
             RunButton(audioProcessor: audioProcessor)
                 .padding()
             
-//            Spacer()
-//
-//            Text(
-//                "If you find this app useful, please [donate](https://hearbirdsagain.org/donate/) to support its continued development and maintenance.")
-                
         }
         .hbaScrollbar()
         .hbaBackground()

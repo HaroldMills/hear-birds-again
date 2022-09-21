@@ -7,35 +7,52 @@
 
 import SwiftUI
 
-struct _AppName: View {
+struct _Title: View {
 
+    var title: String
+    
+    init(_ title: String) {
+        self.title = title
+    }
+    
     var body: some View {
-        Text("Hear Birds Again")
-            .font(.system(size: 35, weight: .bold, design: .default))
+        Text(title)
+            .font(.title)
+            .fontWeight(.bold)
+//            .font(.system(size: 35, weight: .bold, design: .default))
     }
     
 }
 
 struct Title: View {
     
+    var title: String
     var subtitle: String?
 
+    init(_ title: String, subtitle: String? = nil) {
+        self.title = title
+        self.subtitle = subtitle
+    }
+    
     var body: some View {
         
         if let subtitle = self.subtitle {
             
             VStack {
                 
-                _AppName()
+                _Title(title)
                 
                 Text(subtitle)
+//                    .font(.headline)
+//                    // .foregroundColor(.brown)
+//                    .fontWeight(.bold)
                     .font(.subheadline)
                 
             }
             
         } else {
             
-            _AppName()
+            _Title(title)
             
         }
         
@@ -45,6 +62,6 @@ struct Title: View {
 
 struct Title_Previews: PreviewProvider {
     static var previews: some View {
-        Title()
+        Title("Hear Birds Again")
     }
 }

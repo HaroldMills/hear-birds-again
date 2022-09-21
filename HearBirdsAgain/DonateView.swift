@@ -1,25 +1,26 @@
 //
-//  HelpView.swift
+//  DonateView.swift
 //  HearBirdsAgain
 //
-//  Created by Harold Mills on 6/20/22.
+//  Created by Harold Mills on 9/21/22.
 //
 
 import SwiftUI
 
-struct HelpView: View {
+struct DonateView: View {
     
     var body: some View {
         
         VStack {
             
-            Title("Help")
+            Title("Donate")
                 .padding()
             
             Spacer()
-            
-            Text("Help is on the way!")
 
+            Text(
+                "If you find Hear Birds Again useful, please [donate](https://hearbirdsagain.org/donate/) to support its continued development and maintenance.")
+                            
             Spacer()
             
         }
@@ -34,8 +35,8 @@ struct HelpView: View {
     
 }
 
-struct HelpView_Previews: PreviewProvider {
+struct DonateView_Previews: PreviewProvider {
     static var previews: some View {
-        HelpView()
+        DonateView()
     }
 }

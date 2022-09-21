@@ -39,7 +39,7 @@ struct ControlsView: View {
         
         VStack {
             
-            Title(subtitle: "Less-Frequently Used Controls")
+            Title("Hear Birds Again", subtitle: "Less-Frequently Used Controls")
                 .padding()
             
             if windowControlsVisible {
