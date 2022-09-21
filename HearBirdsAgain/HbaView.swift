@@ -59,11 +59,13 @@ struct HbaView: View {
                 }
             .tag(Tab.controls)
             
-            ConsoleView(console: console)
-            .tabItem {
-                Label("Console", systemImage: "terminal")
+            if HbaApp.isConsoleTabEnabled {
+                ConsoleView(console: console)
+                    .tabItem {
+                        Label("Console", systemImage: "terminal")
+                    }
+                    .tag(Tab.console)
             }
-            .tag(Tab.console)
 
             HelpView()
             .tabItem {

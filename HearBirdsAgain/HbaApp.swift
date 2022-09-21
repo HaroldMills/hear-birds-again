@@ -38,6 +38,16 @@ private enum _Error: Error {
 class HbaApp: App {
     
     
+    static var isZeroHzCutoffEnabled: Bool {
+        UserDefaults.standard.bool(forKey: "isZeroHzCutoffEnabled")
+    }
+    
+    
+    static var isConsoleTabEnabled: Bool {
+        UserDefaults.standard.bool(forKey: "isConsoleTabEnabled")
+    }
+    
+    
     var body: some Scene {
         
         WindowGroup {
@@ -102,10 +112,23 @@ class HbaApp: App {
         
         notificationCenter.addObserver(
             self, selector: #selector(handleDeviceOrientationChange), name: UIDevice.orientationDidChangeNotification, object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(handleUserDefaultsDidChange), name: UserDefaults.didChangeNotification, object: nil)
 
     }
 
 
+    @objc private func handleUserDefaultsDidChange(notification: Notification) {
+        
+        // If zero hertz cutoff is disabled, set cutoff to default
+        // instead of zero.
+        if !HbaApp.isZeroHzCutoffEnabled && audioProcessor.cutoff == 0 {
+            audioProcessor.cutoff = AudioProcessor.defaultState.cutoff
+        }
+        
+    }
+    
+    
     @objc private func handleDeviceOrientationChange(notification: Notification) {
         // console.log("Device orientation changed to \(UIDevice.current.orientation.rawValue).")
         let session = AVAudioSession.sharedInstance()

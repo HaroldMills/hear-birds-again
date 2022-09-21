@@ -40,7 +40,7 @@ typealias InputPortGains = Dictionary<String, Gains>
 struct AudioProcessorState: Codable {
     
     
-    var cutoff = 0
+    var cutoff = 2000
     var pitchShift = 2
     var windowType = WindowType.Hann
     var windowSize = 20
@@ -103,7 +103,6 @@ private func getSavedProcessorStateUrl() throws -> URL {
 }
 
 
-private let defaultProcessorState = AudioProcessorState()
 private let defaultInputGain: AUValue = 100         // percent
 private let defaultAppGain: AUValue = 0             // dB
 private let stoppedOutputLevel: AUValue = -200      // dB
@@ -120,30 +119,42 @@ class AudioProcessor: ObservableObject {
     // pitch shifting audio unit.
     
     
+    static let defaultState = AudioProcessorState()
+    
     @Published var running = false
     
-    @Published var cutoff = defaultProcessorState.cutoff {
+    @Published var cutoff = defaultState.cutoff {
+        
         didSet {
+            
+            // If zero hertz cutoff is disabled, set cutoff to default
+            // instead of zero.
+            if !HbaApp.isZeroHzCutoffEnabled && cutoff == 0 {
+                cutoff = AudioProcessor.defaultState.cutoff
+            }
+            
             songFinderAudioUnit.parameters.cutoff.value = AUValue(cutoff)
             restartIfRunning()
+            
         }
+        
     }
     
-    @Published var pitchShift = defaultProcessorState.pitchShift {
+    @Published var pitchShift = defaultState.pitchShift {
         didSet {
             songFinderAudioUnit.parameters.pitchShift.value = AUValue(pitchShift)
             restartIfRunning()
         }
     }
     
-    @Published var windowType = defaultProcessorState.windowType {
+    @Published var windowType = defaultState.windowType {
         didSet {
             songFinderAudioUnit.parameters.windowType.value = AUValue(windowType.rawValue)
             restartIfRunning()
         }
     }
     
-    @Published var windowSize = defaultProcessorState.windowSize {
+    @Published var windowSize = defaultState.windowSize {
         didSet {
             songFinderAudioUnit.parameters.windowSize.value = AUValue(windowSize)
             restartIfRunning()
@@ -227,7 +238,7 @@ class AudioProcessor: ObservableObject {
     
     private var inputPortGains: InputPortGains = [:]
     
-    @Published var balance: AUValue = defaultProcessorState.balance {
+    @Published var balance: AUValue = defaultState.balance {
         didSet {
             // Note that unlike for some other SongFinder parameters
             // we do not need to restart here here since the SongFinder

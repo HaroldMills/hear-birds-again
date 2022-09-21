@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2104BA0286C9AA100F65AEF /* LevelMeter.swift */; };
+		F21AA28D28DB68CA00530DD4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F21AA28C28DB68CA00530DD4 /* Settings.bundle */; };
 		F23B988D28C8E9560020BA30 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23B988C28C8E9560020BA30 /* VolumeView.swift */; };
 		F24AD4552860C4D500554D3D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4542860C4D500554D3D /* HomeView.swift */; };
 		F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4582860CB7E00554D3D /* ConsoleView.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		F2104BA0286C9AA100F65AEF /* LevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
+		F21AA28C28DB68CA00530DD4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F23B988C28C8E9560020BA30 /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
 		F245FCFD27FCD5A000C54A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F24AD4542860C4D500554D3D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				F245FCFD27FCD5A000C54A50 /* Info.plist */,
 				F2609D0827EE0B89005DACFA /* Assets.xcassets */,
 				F2609D0A27EE0B89005DACFA /* Preview Content */,
+				F21AA28C28DB68CA00530DD4 /* Settings.bundle */,
 			);
 			path = HearBirdsAgain;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2609D0C27EE0B89005DACFA /* Preview Assets.xcassets in Resources */,
+				F21AA28D28DB68CA00530DD4 /* Settings.bundle in Resources */,
 				F2609D0927EE0B89005DACFA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

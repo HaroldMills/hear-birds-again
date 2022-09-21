@@ -38,7 +38,9 @@ struct HomeView: View {
                 Text("Start Frequency (kHz):")
             
                 Picker("Start Frequency", selection: $audioProcessor.cutoff) {
-                    Text("0").tag(0)
+                    if HbaApp.isZeroHzCutoffEnabled {
+                        Text("0").tag(0)
+                    }
                     Text("2").tag(2000)
                     Text("2.5").tag(2500)
                     Text("3").tag(3000)
