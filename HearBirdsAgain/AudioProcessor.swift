@@ -28,13 +28,13 @@ enum WindowType: AUValue, CustomStringConvertible, Codable {
 }
 
 
-private let defaultInputGain: AUValue = 100         // percent (for settable input gain)
+private let defaultInputGain: AUValue = 100         // percent, for input devices with settable gain
 private let defaultAppGain: AUValue = 0             // dB
 private let defaultBalance: AUValue = 0             // dB (negative->right channel attenuation, positive->left channel attenuation)
 
 
 struct Gains: Codable {
-    var inputGain: Float? = nil                     // assume non-settable input gain
+    var inputGain: Float? = nil                     // default here assumes input device gain not settable
     var appGain: AUValue = defaultAppGain
     var balance: AUValue = defaultBalance
 }
