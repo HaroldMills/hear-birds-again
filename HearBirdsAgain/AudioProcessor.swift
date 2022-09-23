@@ -28,14 +28,15 @@ enum WindowType: AUValue, CustomStringConvertible, Codable {
 }
 
 
-private let defaultInputGain: AUValue = 100         // percent, for input devices with settable gain
-private let defaultAppGain: AUValue = 0             // dB
-private let defaultBalance: AUValue = 0             // dB (negative->right channel attenuation, positive->left channel attenuation)
+private let defaultInputGain: AUValue = 100          // percent, for input devices with settable gain
+private let defaultAppGainSettable: AUValue = 0      // dB, for input devices with settable gain
+private let defaultAppGainUnsettable: AUValue = 10   // dB, for input devices with unsettable gain
+private let defaultBalance: AUValue = 0              // dB (negative->right channel attenuation, positive->left channel attenuation)
 
 
 struct Gains: Codable {
-    var inputGain: Float? = nil                     // default here assumes input device gain not settable
-    var appGain: AUValue = defaultAppGain
+    var inputGain: Float? = nil
+    var appGain: AUValue = defaultAppGainUnsettable
     var balance: AUValue = defaultBalance
 }
 
@@ -223,7 +224,7 @@ class AudioProcessor: ObservableObject {
         }
     }
     
-    @Published var appGain: AUValue = defaultAppGain {
+    @Published var appGain: AUValue = defaultAppGainUnsettable {
         
         didSet {
             
@@ -393,7 +394,7 @@ class AudioProcessor: ObservableObject {
                     inputGain = defaultInputGain
                 }
                 
-                appGain = defaultAppGain
+                appGain = isInputGainSettable ? defaultAppGainSettable : defaultAppGainUnsettable
                 balance = defaultBalance
                 
             }
