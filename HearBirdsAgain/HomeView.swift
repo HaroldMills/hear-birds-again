@@ -53,7 +53,7 @@ struct HomeView: View {
             .padding()
             
             VStack {
-                Text("App Output Level:")
+                Text("Output Level:")
                 LevelMeters(audioProcessor: audioProcessor)
             }
             .padding()
