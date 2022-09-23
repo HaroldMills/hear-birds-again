@@ -28,9 +28,15 @@ enum WindowType: AUValue, CustomStringConvertible, Codable {
 }
 
 
+private let defaultInputGain: AUValue = 100         // percent (for settable input gain)
+private let defaultAppGain: AUValue = 0             // dB
+private let defaultBalance: AUValue = 0             // dB (negative->right channel attenuation, positive->left channel attenuation)
+
+
 struct Gains: Codable {
-    var inputGain: Float? = nil
-    var appGain: AUValue = 0
+    var inputGain: Float? = nil                     // assume non-settable input gain
+    var appGain: AUValue = defaultAppGain
+    var balance: AUValue = defaultBalance
 }
 
 
@@ -45,7 +51,6 @@ struct AudioProcessorState: Codable {
     var windowType = WindowType.Hann
     var windowSize = 20
     var inputPortGains: InputPortGains = [:]
-    var balance: AUValue = 0
 
     
     // Modeled after code from the iOS Scrumdinger app tutorial.
@@ -103,8 +108,6 @@ private func getSavedProcessorStateUrl() throws -> URL {
 }
 
 
-private let defaultInputGain: AUValue = 100         // percent
-private let defaultAppGain: AUValue = 0             // dB
 private let stoppedOutputLevel: AUValue = -200      // dB
 
 
@@ -196,13 +199,19 @@ class AudioProcessor: ObservableObject {
                 }
             }
             
-            // Update `inputPortGains`.
-            if let portName = getInputPortName() {
-                inputPortGains[portName] = Gains(inputGain: inputGain, appGain: appGain)
-            }
+            updateInputPortGains()
             
         }
         
+    }
+    
+    // Updates the gains for the current input port.
+    private func updateInputPortGains() {
+        if let portName = getInputPortName() {
+            let gainSettable = AVAudioSession.sharedInstance().isInputGainSettable
+            let inputGain = gainSettable ? self.inputGain : nil
+            inputPortGains[portName] = Gains(inputGain: inputGain, appGain: appGain, balance: balance)
+        }
     }
     
     private func getInputPortName() -> String? {
@@ -225,12 +234,7 @@ class AudioProcessor: ObservableObject {
             // parameter while running.
             songFinderAudioUnit.parameters.gain.value = appGain
             
-            // Update `inputPortGains`.
-            if let portName = getInputPortName() {
-                let gainSettable = AVAudioSession.sharedInstance().isInputGainSettable
-                let inputGain = gainSettable ? self.inputGain : nil
-                inputPortGains[portName] = Gains(inputGain: inputGain, appGain: appGain)
-            }
+            updateInputPortGains()
             
         }
 
@@ -238,14 +242,20 @@ class AudioProcessor: ObservableObject {
     
     private var inputPortGains: InputPortGains = [:]
     
-    @Published var balance: AUValue = defaultState.balance {
+    @Published var balance: AUValue = defaultBalance {
+        
         didSet {
+            
             // Note that unlike for some other SongFinder parameters
             // we do not need to restart here here since the SongFinder
             // audio unit can respond to changes in the value of this
             // parameter while running.
             songFinderAudioUnit.parameters.balance.value = balance
+            
+            updateInputPortGains()
+            
         }
+        
     }
     
     @Published var outputLevels: [AUValue] = [stoppedOutputLevel]
@@ -262,7 +272,7 @@ class AudioProcessor: ObservableObject {
             return AudioProcessorState(
                 cutoff: cutoff, pitchShift: pitchShift,
                 windowType: windowType, windowSize: windowSize,
-                inputPortGains: inputPortGains, balance: balance)
+                inputPortGains: inputPortGains)
         }
         
         set {
@@ -271,7 +281,6 @@ class AudioProcessor: ObservableObject {
             windowType = newValue.windowType
             windowSize = newValue.windowSize
             inputPortGains = newValue.inputPortGains
-            balance = newValue.balance
             updateInputInfo()
         }
         
@@ -362,7 +371,7 @@ class AudioProcessor: ObservableObject {
         // Update `isInputGainSettable` property.
         isInputGainSettable = AVAudioSession.sharedInstance().isInputGainSettable
         
-        // Update `inputName`, `inputGain`, and `appGain`.
+        // Update `inputName`, `inputGain`, `appGain`, and `balance`.
         if let portName = getInputPortName() {
             
             inputName = portName
@@ -375,6 +384,7 @@ class AudioProcessor: ObservableObject {
                 }
                 
                 appGain = gains.appGain
+                balance = gains.balance
                 
             } else {
                 // no saved gains for this input port
@@ -384,6 +394,7 @@ class AudioProcessor: ObservableObject {
                 }
                 
                 appGain = defaultAppGain
+                balance = defaultBalance
                 
             }
             
