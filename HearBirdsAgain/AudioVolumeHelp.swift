@@ -20,7 +20,7 @@ struct AudioVolumeHelp: View {
             Spacer()
             
             Text(
-                "Use the iOS Audio Volume slider to adjust the audio output volume of your iOS device. Note that you can also adjust the volume using the physical volume up and down buttons on your device.\n\nThe small AirPlay button to the right of the slider allows you to select an audio output destination. Most users will not need to use this control.")
+                "Use the *iOS Audio Volume* slider to adjust the audio output volume of your iOS device. Note that you can also adjust the volume using the physical volume up and down buttons on your device.\n\nThe small AirPlay button to the right of the slider allows you to select an audio output destination. Most users will not need to use this control.")
             .padding()
             
             Spacer()

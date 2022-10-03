@@ -20,7 +20,7 @@ struct InputHelp: View {
             Spacer()
             
             Text(
-                "The Input field shows the name of the current audio input device. The Hear Birds Again app will process audio from this device.")
+                "The *Input* field shows the name of the current audio input device. The Hear Birds Again app will process audio from this device.")
             .padding()
             
             Spacer()

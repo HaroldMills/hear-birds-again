@@ -27,13 +27,13 @@ struct GainHelp: View {
             if audioProcessor.isInputGainSettable {
                 
                 Text(
-                    "Use the Extra Gain control to boost the output volume if the Input Gain control and the iOS Audio Volume slider together are inadequate.\n\nThe Extra Gain control is only enabled when the Input Gain control value is 100 percent. This ensures that you use input device gain instead of extra gain whenever possible, which maximizes audio quality.")
+                    "Use the *Extra Gain* control to boost the output volume if the *Input Gain* control and the *iOS Audio Volume* slider by themselves provide inadequate gain.\n\nThe *Extra Gain* control is only enabled when the *Input Gain* control value is 100 percent. This ensures that you use input device gain instead of extra gain whenever possible, which maximizes audio quality.")
                 .padding()
                 
             } else {
                 
                 Text(
-                    "Use the Gain control to boost the output volume if the iOS Audio Volume slider alone is inadequate.")
+                    "Use the *Gain* control to boost the output volume if the *iOS Audio Volume* slider by itself provides inadequate gain.")
                 .padding()
                 
             }
