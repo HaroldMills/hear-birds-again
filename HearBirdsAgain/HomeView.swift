@@ -10,7 +10,8 @@ import SwiftUI
 struct HomeView: View {
     
     @ObservedObject var audioProcessor: AudioProcessor
-    @State private var helpButtonsVisible = false
+    @Binding var helpButtonsVisible: Bool
+
     @State private var pitchShiftHelpVisible = false
     @State private var startFrequencyHelpVisible = false
     @State private var outputLevelHelpVisible = false
@@ -169,6 +170,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(audioProcessor: audioProcessor)
+        HomeView(audioProcessor: audioProcessor, helpButtonsVisible: .constant(false))
     }
 }

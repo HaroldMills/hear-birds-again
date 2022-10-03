@@ -15,6 +15,9 @@ struct HbaView: View {
     @ObservedObject var audioProcessor: AudioProcessor
     @ObservedObject var console: Console
     @ObservedObject var errors: Errors
+    
+    @State var helpButtonsVisible = false
+    
     let saveAction: () -> Void
 
     enum Tab: String {
@@ -48,7 +51,7 @@ struct HbaView: View {
         
         TabView(selection: $selectedTab) {
             
-            HomeView(audioProcessor: audioProcessor)
+            HomeView(audioProcessor: audioProcessor, helpButtonsVisible: $helpButtonsVisible)
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
