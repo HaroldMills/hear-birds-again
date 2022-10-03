@@ -20,7 +20,7 @@ struct InputGainHelp: View {
             Spacer()
             
             Text(
-                "Use the Input Gain control to set the gain of the current audio input device. Note that not all input devices have a gain setting, and this control is displayed only for those that do.\n\nThe Input Gain control is only enabled when the Extra Gain control is at zero dB. This ensures that you use input device gain instead of extra gain whenever possible, which maximizes audio quality.")
+                "Use the Input Gain control to set the gain of the current audio input device. Note that not all input devices have a gain setting, and this control is displayed only for those that do.\n\nThe Input Gain control is only enabled when the Extra Gain control value is 0 dB. This ensures that you use input device gain instead of extra gain whenever possible, which maximizes audio quality.")
             .padding()
                             
             Spacer()

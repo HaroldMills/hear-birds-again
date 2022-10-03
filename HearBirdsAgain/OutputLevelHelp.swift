@@ -20,7 +20,7 @@ struct OutputLevelHelp: View {
             Spacer()
             
             Text(
-                "The Output Level meter shows the power level of the audio that the Hear Birds Again app is currently sending to the iOS operating system.\n\nThe level reflects all of the processing that the app performs, including pitch shifting, amplification, and balance processing. The level *does not* reflect amplification that iOS performs according to the iOS Audio Volume control.\n\nThe meter has one bar for monaural output, and two bars for stereo output.")
+                "The Output Level meter shows the power level of the audio that the Hear Birds Again app is currently sending to the iOS operating system.\n\nThe level reflects all of the processing that the app performs, including pitch shifting, amplification, and balance processing. The level *does not* reflect amplification that iOS performs according to the iOS Audio Volume control.\n\nThe meter has one bar when output is monaural, and two bars when it is stereo.")
             .padding()
             
             Spacer()

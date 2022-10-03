@@ -20,7 +20,7 @@ struct PitchShiftHelp: View {
             Spacer()
             
             Text(
-                "Use the Pitch Shift control to select by how much to lower the frequencies of higher-pitched sounds. Select 1/2 to divide them by two, or equivalently to lower them by a musical interval of one octave. Select 1/3 to divide them by three, or lower them by an octave and a fifth. Select 1/4 to divide them by four, or lower them by two octaves.")
+                "Use the Pitch Shift control to select how much the Hear Birds Again app lowers the frequencies of higher-pitched sounds. Select 1/2 to divide them by two, or equivalently to lower them by a musical interval of one octave. Select 1/3 to divide them by three, or lower them by an octave and a fifth. Select 1/4 to divide them by four, or lower them by two octaves.")
             .padding()
             
             Spacer()

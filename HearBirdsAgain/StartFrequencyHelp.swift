@@ -20,7 +20,7 @@ struct StartFrequencyHelp: View {
             Spacer()
             
             Text(
-                "Use the Start Frequency control to select the frequency above which sounds are shifted down in pitch. Note that sounds whose frequencies are below the start frequency are removed, assuming that you will hear them directly.")
+                "Use the Start Frequency control to select the frequency above which the Hear Birds Again app will shift sounds down in pitch. Note that the app removes sounds whose frequencies are below the start frequency, assuming that you will hear them directly.")
             .padding()
             
             Spacer()
