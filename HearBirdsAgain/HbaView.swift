@@ -16,8 +16,6 @@ struct HbaView: View {
     @ObservedObject var console: Console
     @ObservedObject var errors: Errors
     
-    @State var helpButtonsVisible = false
-    
     let saveAction: () -> Void
 
     enum Tab: String {
@@ -30,6 +28,8 @@ struct HbaView: View {
     }
     
     @SceneStorage("HbaView.selectedTab") private var selectedTab = Tab.home
+    
+    @SceneStorage("HbaView.helpButtonsVisible") private var helpButtonsVisible = false
     
     private var nonfatalErrorMessage: String {
         get {
