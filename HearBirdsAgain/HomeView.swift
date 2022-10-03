@@ -137,16 +137,14 @@ struct HomeView: View {
             .padding()
             
             HStack {
-                
+            
                 RunButton(audioProcessor: audioProcessor)
                     .padding()
                 
-                Button(helpButtonTitle) {
-                    helpButtonsVisible = !helpButtonsVisible
-                }
+                ShowHelpButton(helpButtonsVisible: $helpButtonsVisible)
+                    .padding()
                 
             }
-            
             
         }
         .hbaScrollbar()

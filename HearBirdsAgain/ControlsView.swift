@@ -211,9 +211,16 @@ struct ControlsView: View {
             }
             .padding()
 
-            RunButton(audioProcessor: audioProcessor)
-                .padding()
+            HStack {
             
+                RunButton(audioProcessor: audioProcessor)
+                    .padding()
+                
+                ShowHelpButton(helpButtonsVisible: $helpButtonsVisible)
+                    .padding()
+                
+            }
+
         }
         .hbaScrollbar()
         .hbaBackground()
