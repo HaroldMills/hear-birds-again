@@ -10,7 +10,18 @@ import SwiftUI
 struct HomeView: View {
     
     @ObservedObject var audioProcessor: AudioProcessor
+    @State private var helpButtonsVisible = false
+    @State private var pitchShiftHelpVisible = false
+    @State private var startFrequencyHelpVisible = false
+    @State private var outputLevelHelpVisible = false
+    @State private var audioVolumeHelpVisible = false
     
+    private var helpButtonTitle: String {
+        get {
+            return helpButtonsVisible ? "Hide Help" : "Show Help"
+        }
+    }
+
     var body: some View {
         
         VStack {
@@ -30,13 +41,37 @@ struct HomeView: View {
                 .pickerStyle(.segmented)
                 .fixedSize()
                 
+                if helpButtonsVisible {
+                    
+                    Button {
+                        pitchShiftHelpVisible = true
+                    } label: {
+                        Image(systemName: "questionmark.circle")
+                    }
+                    
+                }
+                
             }
             .padding()
 
             VStack {
                 
-                Text("Start Frequency (kHz):")
-            
+                HStack {
+                    
+                    Text("Start Frequency (kHz):")
+                    
+                    if helpButtonsVisible {
+                        
+                        Button {
+                            startFrequencyHelpVisible = true
+                        } label: {
+                            Image(systemName: "questionmark.circle")
+                        }
+                        
+                    }
+                    
+                }
+                
                 Picker("Start Frequency", selection: $audioProcessor.cutoff) {
                     if HbaApp.isZeroHzCutoffEnabled {
                         Text("0").tag(0)
@@ -49,29 +84,85 @@ struct HomeView: View {
                 .pickerStyle(.segmented)
                 .fixedSize()
                 
+                
             }
             .padding()
             
             VStack {
-                Text("Output Level:")
+                
+                HStack {
+                    
+                    Text("Output Level:")
+                    
+                    if helpButtonsVisible {
+                        
+                        Button {
+                            outputLevelHelpVisible = true
+                        } label: {
+                            Image(systemName: "questionmark.circle")
+                        }
+                        
+                    }
+
+                }
+                
                 LevelMeters(audioProcessor: audioProcessor)
+                
             }
             .padding()
 
             VStack {
-                Text("iOS Audio Volume:")
+                
+                HStack {
+                    
+                    Text("iOS Audio Volume:")
+                    
+                    if helpButtonsVisible {
+                        
+                        Button {
+                            audioVolumeHelpVisible = true
+                        } label: {
+                            Image(systemName: "questionmark.circle")
+                        }
+                        
+                    }
+                    
+                }
+                
                 VolumeView()
                     .frame(width: 250, height: 15)
+                
             }
             .padding()
             
-            RunButton(audioProcessor: audioProcessor)
-                .padding()
+            HStack {
+                
+                RunButton(audioProcessor: audioProcessor)
+                    .padding()
+                
+                Button(helpButtonTitle) {
+                    helpButtonsVisible = !helpButtonsVisible
+                }
+                
+            }
+            
             
         }
         .hbaScrollbar()
         .hbaBackground()
-                
+        .sheet(isPresented: $pitchShiftHelpVisible) {
+            PitchShiftHelp(isPresented: $pitchShiftHelpVisible)
+        }
+        .sheet(isPresented: $startFrequencyHelpVisible) {
+            StartFrequencyHelp(isPresented: $startFrequencyHelpVisible)
+        }
+        .sheet(isPresented: $outputLevelHelpVisible) {
+            OutputLevelHelp(isPresented: $outputLevelHelpVisible)
+        }
+        .sheet(isPresented: $audioVolumeHelpVisible) {
+            AudioVolumeHelp(isPresented: $audioVolumeHelpVisible)
+        }
+
     }
 
 }

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+let helpUrl = Bundle.main.url(forResource: "Help", withExtension: "html")
+
 struct HelpView: View {
     
     var body: some View {
@@ -16,11 +18,9 @@ struct HelpView: View {
             Title("Help")
                 .padding()
             
-            Spacer()
-            
-            Text("Help is on the way!")
-
-            Spacer()
+            WebView(url: helpUrl!)
+                .frame(width: 300, height: 450)
+                .background(.clear)
             
         }
         .hbaScrollbar()
