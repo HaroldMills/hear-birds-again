@@ -57,7 +57,7 @@ struct HbaView: View {
                 }
                 .tag(Tab.home)
 
-            ControlsView(audioProcessor: audioProcessor)
+            ControlsView(audioProcessor: audioProcessor, helpButtonsVisible: $helpButtonsVisible)
                 .tabItem {
                     Label("Controls", systemImage: "slider.horizontal.3")
                         

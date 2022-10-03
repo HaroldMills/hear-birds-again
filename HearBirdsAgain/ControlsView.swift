@@ -12,7 +12,14 @@ struct ControlsView: View {
     private let windowControlsVisible = false
 
     @ObservedObject var audioProcessor: AudioProcessor
-    
+    @Binding var helpButtonsVisible: Bool
+
+    @State private var inputHelpVisible = false
+    @State private var inputGainHelpVisible = false
+    @State private var gainHelpVisible = false
+    @State private var balanceHelpVisible = false
+    @State private var outputLevelHelpVisible = false
+
     var isInputGainControlVisible: Bool {
         return audioProcessor.isInputGainSettable
     }
@@ -82,50 +89,125 @@ struct ControlsView: View {
                 
             }
 
-            Text("Input: \(audioProcessor.inputName)")
-                .padding()
+            HStack {
+                
+                Text("Input: \(audioProcessor.inputName)")
+                
+                if helpButtonsVisible {
+                    
+                    Button {
+                        inputHelpVisible = true
+                    } label: {
+                        Image(systemName: "questionmark.circle")
+                    }
+                    
+                }
+
+            }
+            .padding()
             
             if isInputGainControlVisible {
+                
                 HStack {
+                    
                     Spacer()
+                    
                     VStack {
                         Stepper("Input Gain: \(audioProcessor.inputGain.formatted()) %", value: $audioProcessor.inputGain, in: 0...100, step: 5)
                             .foregroundColor(isInputGainControlEnabled ? .primary : .gray)
                     }
                     .fixedSize()
                     .disabled(!isInputGainControlEnabled)
+                    
+                    if helpButtonsVisible {
+                        
+                        Button {
+                            inputGainHelpVisible = true
+                        } label: {
+                            Image(systemName: "questionmark.circle")
+                        }
+                        
+                    }
                     Spacer()
+                    
                 }
                 .padding()
             }
 
             HStack {
+                
                 Spacer()
+                
                 VStack {
                     Stepper("\(appGainControlName): \(audioProcessor.appGain.formatted()) dB", value: $audioProcessor.appGain, in: 0...20)
                         .foregroundColor(isAppGainControlEnabled ? .primary : .gray)
                 }
                 .fixedSize()
                 .disabled(!isAppGainControlEnabled)
+                
+                if helpButtonsVisible {
+                    
+                    Button {
+                        gainHelpVisible = true
+                    } label: {
+                        Image(systemName: "questionmark.circle")
+                    }
+                    
+                }
+                
                 Spacer()
+                
             }
             .padding()
             
             if isBalanceControlVisible {
+                
                 HStack {
+                    
                     Spacer()
+                    
                     VStack {
                         Stepper("Balance: \(audioProcessor.balance.formatted()) dB", value: $audioProcessor.balance, in: -10...10, step: 1)
                     }
                     .fixedSize()
+                    
+                    if helpButtonsVisible {
+                        
+                        Button {
+                            balanceHelpVisible = true
+                        } label: {
+                            Image(systemName: "questionmark.circle")
+                        }
+                        
+                    }
+                    
                     Spacer()
+                    
                 }
                 .padding()
+                
             }
             
             VStack {
-                Text("Output Level:")
+                
+                HStack {
+                    
+                    Text("Output Level:")
+                    
+                    if helpButtonsVisible {
+                        
+                        Button {
+                            outputLevelHelpVisible = true
+                        } label: {
+                            Image(systemName: "questionmark.circle")
+                        }
+                        
+                    }
+
+                }
+
                 LevelMeters(audioProcessor: audioProcessor)
+                
             }
             .padding()
 
@@ -135,13 +217,28 @@ struct ControlsView: View {
         }
         .hbaScrollbar()
         .hbaBackground()
-            
+        .sheet(isPresented: $inputHelpVisible) {
+            InputHelp(isPresented: $inputHelpVisible)
+        }
+        .sheet(isPresented: $inputGainHelpVisible) {
+            InputGainHelp(isPresented: $inputGainHelpVisible)
+        }
+        .sheet(isPresented: $gainHelpVisible) {
+            GainHelp(audioProcessor: audioProcessor, isPresented: $gainHelpVisible)
+        }
+        .sheet(isPresented: $balanceHelpVisible) {
+            BalanceHelp(isPresented: $balanceHelpVisible)
+        }
+        .sheet(isPresented: $outputLevelHelpVisible) {
+            OutputLevelHelp(isPresented: $outputLevelHelpVisible)
+        }
+
     }
     
 }
 
 struct ControlsView_Previews: PreviewProvider {
     static var previews: some View {
-        ControlsView(audioProcessor: audioProcessor)
+        ControlsView(audioProcessor: audioProcessor, helpButtonsVisible: .constant(false))
     }
 }
