@@ -84,6 +84,7 @@
 		F298CC6E28EB4C360042154C /* InputGainHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputGainHelp.swift; sourceTree = "<group>"; };
 		F298CC7028EB4EC60042154C /* BalanceHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceHelp.swift; sourceTree = "<group>"; };
 		F298CC7228EB69680042154C /* ShowHelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowHelpButton.swift; sourceTree = "<group>"; };
+		F2B090D428EDD31F00DBCF35 /* README.md */ = {isa = PBXFileReference; explicitFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F2BCDE5028E2022F00E7A5E4 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		F2BCDE5228E2075500E7A5E4 /* Help.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Help.html; sourceTree = "<group>"; };
 		F2CB634728C65FA5008C2434 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
@@ -186,6 +187,7 @@
 				F29647AA27EE1BD100AB33A6 /* Interpolator.hpp */,
 				F29647AB27EE1C0200AB33A6 /* OverlapAdder.hpp */,
 				F2FD2F8B27F6362900BBD070 /* SongFinderProcessor.hpp */,
+				F2B090D428EDD31F00DBCF35 /* README.md */,
 			);
 			path = "SongFinder Audio Unit";
 			sourceTree = "<group>";
