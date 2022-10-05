@@ -133,7 +133,7 @@ class AudioProcessor: ObservableObject {
             
             // If zero hertz cutoff is disabled, set cutoff to default
             // instead of zero.
-            if !HbaApp.isZeroHzCutoffEnabled && cutoff == 0 {
+            if !HbaApp.zeroHzCutoffVisible && cutoff == 0 {
                 cutoff = AudioProcessor.defaultState.cutoff
             }
             

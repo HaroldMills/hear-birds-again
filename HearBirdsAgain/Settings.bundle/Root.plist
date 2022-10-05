@@ -28,7 +28,7 @@
 			<key>Title</key>
 			<string>0 Hz Start Frequency</string>
 			<key>Key</key>
-			<string>isZeroHzCutoffEnabled</string>
+			<string>zeroHzCutoffVisible</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
@@ -38,7 +38,7 @@
 			<key>Title</key>
 			<string>Console Tab</string>
 			<key>Key</key>
-			<string>isConsoleTabEnabled</string>
+			<string>consoleTabVisible</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>

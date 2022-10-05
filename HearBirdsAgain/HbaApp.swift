@@ -40,15 +40,9 @@ class HbaApp: App {
     
     @AppStorage("helpButtonsVisible") static var helpButtonsVisible = true
     
+    @AppStorage("zeroHzCutoffVisible") static var zeroHzCutoffVisible = false
     
-    static var isZeroHzCutoffEnabled: Bool {
-        UserDefaults.standard.bool(forKey: "isZeroHzCutoffEnabled")
-    }
-    
-    
-    static var isConsoleTabEnabled: Bool {
-        UserDefaults.standard.bool(forKey: "isConsoleTabEnabled")
-    }
+    @AppStorage("consoleTabVisible") static var consoleTabVisible = false
     
     
     var body: some Scene {
@@ -125,7 +119,7 @@ class HbaApp: App {
         
         // If zero hertz cutoff is disabled, set cutoff to default
         // instead of zero.
-        if !HbaApp.isZeroHzCutoffEnabled && audioProcessor.cutoff == 0 {
+        if !HbaApp.zeroHzCutoffVisible && audioProcessor.cutoff == 0 {
             audioProcessor.cutoff = AudioProcessor.defaultState.cutoff
         }
         

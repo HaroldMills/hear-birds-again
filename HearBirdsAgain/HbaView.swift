@@ -62,7 +62,7 @@ struct HbaView: View {
                     }
                 .tag(Tab.controls)
             
-            if HbaApp.isConsoleTabEnabled {
+            if HbaApp.consoleTabVisible {
                 ConsoleView(console: console)
                     .tabItem {
                         Label("Console", systemImage: "terminal")
