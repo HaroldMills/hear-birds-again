@@ -35,6 +35,7 @@
 		F298CC6D28EB43E20042154C /* GainHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298CC6C28EB43E20042154C /* GainHelp.swift */; };
 		F298CC6F28EB4C360042154C /* InputGainHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298CC6E28EB4C360042154C /* InputGainHelp.swift */; };
 		F298CC7128EB4EC60042154C /* BalanceHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298CC7028EB4EC60042154C /* BalanceHelp.swift */; };
+		F2B090D628EDF4FB00DBCF35 /* HelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B090D528EDF4FB00DBCF35 /* HelpButton.swift */; };
 		F2BCDE5128E2022F00E7A5E4 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCDE5028E2022F00E7A5E4 /* WebView.swift */; };
 		F2BCDE5328E2075500E7A5E4 /* Help.html in Resources */ = {isa = PBXBuildFile; fileRef = F2BCDE5228E2075500E7A5E4 /* Help.html */; };
 		F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634728C65FA5008C2434 /* ControlsView.swift */; };
@@ -83,6 +84,7 @@
 		F298CC6E28EB4C360042154C /* InputGainHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputGainHelp.swift; sourceTree = "<group>"; };
 		F298CC7028EB4EC60042154C /* BalanceHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceHelp.swift; sourceTree = "<group>"; };
 		F2B090D428EDD31F00DBCF35 /* README.md */ = {isa = PBXFileReference; explicitFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F2B090D528EDF4FB00DBCF35 /* HelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpButton.swift; sourceTree = "<group>"; };
 		F2BCDE5028E2022F00E7A5E4 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		F2BCDE5228E2075500E7A5E4 /* Help.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Help.html; sourceTree = "<group>"; };
 		F2CB634728C65FA5008C2434 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				F2945ABC283E75BB0056D1F3 /* Errors.swift */,
 				F2609D0627EE0B88005DACFA /* HbaView.swift */,
 				F24AD4542860C4D500554D3D /* HomeView.swift */,
+				F2B090D528EDF4FB00DBCF35 /* HelpButton.swift */,
 				F234AA7328E4A4F3009C2A88 /* PitchShiftHelp.swift */,
 				F298CC6428EB2E130042154C /* StartFrequencyHelp.swift */,
 				F298CC6628EB30470042154C /* OutputLevelHelp.swift */,
@@ -281,6 +284,7 @@
 				F21AA28F28DB7FEF00530DD4 /* AboutView.swift in Sources */,
 				F234AA7428E4A4F3009C2A88 /* PitchShiftHelp.swift in Sources */,
 				F2609D0727EE0B88005DACFA /* HbaView.swift in Sources */,
+				F2B090D628EDF4FB00DBCF35 /* HelpButton.swift in Sources */,
 				F2609D1627EE0CAB005DACFA /* SongFinderAudioUnit.swift in Sources */,
 				F24AD4552860C4D500554D3D /* HomeView.swift in Sources */,
 				F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */,

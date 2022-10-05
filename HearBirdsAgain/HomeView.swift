@@ -36,13 +36,7 @@ struct HomeView: View {
                 .fixedSize()
                 
                 if HbaApp.helpButtonsVisible {
-                    
-                    Button {
-                        pitchShiftHelpVisible = true
-                    } label: {
-                        Image(systemName: "questionmark.circle")
-                    }
-                    
+                    HelpButton { pitchShiftHelpVisible = true }
                 }
                 
             }
@@ -55,13 +49,7 @@ struct HomeView: View {
                     Text("Start Frequency (kHz):")
                     
                     if HbaApp.helpButtonsVisible {
-                        
-                        Button {
-                            startFrequencyHelpVisible = true
-                        } label: {
-                            Image(systemName: "questionmark.circle")
-                        }
-                        
+                        HelpButton { startFrequencyHelpVisible = true }
                     }
                     
                 }
@@ -89,15 +77,9 @@ struct HomeView: View {
                     Text("Output Level:")
                     
                     if HbaApp.helpButtonsVisible {
-                        
-                        Button {
-                            outputLevelHelpVisible = true
-                        } label: {
-                            Image(systemName: "questionmark.circle")
-                        }
-                        
+                        HelpButton { outputLevelHelpVisible = true }
                     }
-
+                    
                 }
                 
                 LevelMeters(audioProcessor: audioProcessor)
@@ -112,13 +94,7 @@ struct HomeView: View {
                     Text("iOS Audio Volume:")
                     
                     if HbaApp.helpButtonsVisible {
-                        
-                        Button {
-                            audioVolumeHelpVisible = true
-                        } label: {
-                            Image(systemName: "questionmark.circle")
-                        }
-                        
+                        HelpButton { audioVolumeHelpVisible = true }
                     }
                     
                 }

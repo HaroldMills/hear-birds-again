@@ -93,13 +93,7 @@ struct ControlsView: View {
                 Text("Input: \(audioProcessor.inputName)")
                 
                 if HbaApp.helpButtonsVisible {
-                    
-                    Button {
-                        inputHelpVisible = true
-                    } label: {
-                        Image(systemName: "questionmark.circle")
-                    }
-                    
+                    HelpButton { inputHelpVisible = true }
                 }
 
             }
@@ -119,13 +113,7 @@ struct ControlsView: View {
                     .disabled(!isInputGainControlEnabled)
                     
                     if HbaApp.helpButtonsVisible {
-                        
-                        Button {
-                            inputGainHelpVisible = true
-                        } label: {
-                            Image(systemName: "questionmark.circle")
-                        }
-                        
+                        HelpButton { inputGainHelpVisible = true }
                     }
                     Spacer()
                     
@@ -145,13 +133,7 @@ struct ControlsView: View {
                 .disabled(!isAppGainControlEnabled)
                 
                 if HbaApp.helpButtonsVisible {
-                    
-                    Button {
-                        gainHelpVisible = true
-                    } label: {
-                        Image(systemName: "questionmark.circle")
-                    }
-                    
+                    HelpButton { gainHelpVisible = true }
                 }
                 
                 Spacer()
@@ -171,13 +153,7 @@ struct ControlsView: View {
                     .fixedSize()
                     
                     if HbaApp.helpButtonsVisible {
-                        
-                        Button {
-                            balanceHelpVisible = true
-                        } label: {
-                            Image(systemName: "questionmark.circle")
-                        }
-                        
+                        HelpButton { balanceHelpVisible = true }
                     }
                     
                     Spacer()
@@ -194,13 +170,7 @@ struct ControlsView: View {
                     Text("Output Level:")
                     
                     if HbaApp.helpButtonsVisible {
-                        
-                        Button {
-                            outputLevelHelpVisible = true
-                        } label: {
-                            Image(systemName: "questionmark.circle")
-                        }
-                        
+                        HelpButton { outputLevelHelpVisible = true }
                     }
 
                 }
