@@ -29,8 +29,6 @@ struct HbaView: View {
     
     @SceneStorage("HbaView.selectedTab") private var selectedTab = Tab.home
     
-    @SceneStorage("HbaView.helpButtonsVisible") private var helpButtonsVisible = false
-    
     private var nonfatalErrorMessage: String {
         get {
             return "A nonfatal error occurred. The error message was: \(errors.nonfatalErrorMessage)"
@@ -51,13 +49,13 @@ struct HbaView: View {
         
         TabView(selection: $selectedTab) {
             
-            HomeView(audioProcessor: audioProcessor, helpButtonsVisible: $helpButtonsVisible)
+            HomeView(audioProcessor: audioProcessor)
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
                 .tag(Tab.home)
 
-            ControlsView(audioProcessor: audioProcessor, helpButtonsVisible: $helpButtonsVisible)
+            ControlsView(audioProcessor: audioProcessor)
                 .tabItem {
                     Label("Controls", systemImage: "slider.horizontal.3")
                         

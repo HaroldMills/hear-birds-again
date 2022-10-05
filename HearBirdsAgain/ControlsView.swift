@@ -12,7 +12,6 @@ struct ControlsView: View {
     private let windowControlsVisible = false
 
     @ObservedObject var audioProcessor: AudioProcessor
-    @Binding var helpButtonsVisible: Bool
 
     @State private var inputHelpVisible = false
     @State private var inputGainHelpVisible = false
@@ -93,7 +92,7 @@ struct ControlsView: View {
                 
                 Text("Input: \(audioProcessor.inputName)")
                 
-                if helpButtonsVisible {
+                if HbaApp.helpButtonsVisible {
                     
                     Button {
                         inputHelpVisible = true
@@ -119,7 +118,7 @@ struct ControlsView: View {
                     .fixedSize()
                     .disabled(!isInputGainControlEnabled)
                     
-                    if helpButtonsVisible {
+                    if HbaApp.helpButtonsVisible {
                         
                         Button {
                             inputGainHelpVisible = true
@@ -145,7 +144,7 @@ struct ControlsView: View {
                 .fixedSize()
                 .disabled(!isAppGainControlEnabled)
                 
-                if helpButtonsVisible {
+                if HbaApp.helpButtonsVisible {
                     
                     Button {
                         gainHelpVisible = true
@@ -171,7 +170,7 @@ struct ControlsView: View {
                     }
                     .fixedSize()
                     
-                    if helpButtonsVisible {
+                    if HbaApp.helpButtonsVisible {
                         
                         Button {
                             balanceHelpVisible = true
@@ -194,7 +193,7 @@ struct ControlsView: View {
                     
                     Text("Output Level:")
                     
-                    if helpButtonsVisible {
+                    if HbaApp.helpButtonsVisible {
                         
                         Button {
                             outputLevelHelpVisible = true
@@ -211,15 +210,8 @@ struct ControlsView: View {
             }
             .padding()
 
-            HStack {
-            
-                RunButton(audioProcessor: audioProcessor)
-                    .padding()
-                
-                ShowHelpButton(helpButtonsVisible: $helpButtonsVisible)
-                    .padding()
-                
-            }
+            RunButton(audioProcessor: audioProcessor)
+                .padding()
 
         }
         .hbaScrollbar()
@@ -246,6 +238,6 @@ struct ControlsView: View {
 
 struct ControlsView_Previews: PreviewProvider {
     static var previews: some View {
-        ControlsView(audioProcessor: audioProcessor, helpButtonsVisible: .constant(false))
+        ControlsView(audioProcessor: audioProcessor)
     }
 }

@@ -38,6 +38,9 @@ private enum _Error: Error {
 class HbaApp: App {
     
     
+    @AppStorage("helpButtonsVisible") static var helpButtonsVisible = true
+    
+    
     static var isZeroHzCutoffEnabled: Bool {
         UserDefaults.standard.bool(forKey: "isZeroHzCutoffEnabled")
     }

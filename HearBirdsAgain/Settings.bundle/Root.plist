@@ -10,7 +10,17 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Enable Diagnostic Features</string>
+			<string>Show User Interface Components</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Help Buttons</string>
+			<key>Key</key>
+			<string>helpButtonsVisible</string>
+			<key>DefaultValue</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>Type</key>

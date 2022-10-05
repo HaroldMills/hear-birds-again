@@ -10,19 +10,12 @@ import SwiftUI
 struct HomeView: View {
     
     @ObservedObject var audioProcessor: AudioProcessor
-    @Binding var helpButtonsVisible: Bool
 
     @State private var pitchShiftHelpVisible = false
     @State private var startFrequencyHelpVisible = false
     @State private var outputLevelHelpVisible = false
     @State private var audioVolumeHelpVisible = false
     
-    private var helpButtonTitle: String {
-        get {
-            return helpButtonsVisible ? "Hide Help" : "Show Help"
-        }
-    }
-
     var body: some View {
         
         VStack {
@@ -42,7 +35,7 @@ struct HomeView: View {
                 .pickerStyle(.segmented)
                 .fixedSize()
                 
-                if helpButtonsVisible {
+                if HbaApp.helpButtonsVisible {
                     
                     Button {
                         pitchShiftHelpVisible = true
@@ -61,7 +54,7 @@ struct HomeView: View {
                     
                     Text("Start Frequency (kHz):")
                     
-                    if helpButtonsVisible {
+                    if HbaApp.helpButtonsVisible {
                         
                         Button {
                             startFrequencyHelpVisible = true
@@ -95,7 +88,7 @@ struct HomeView: View {
                     
                     Text("Output Level:")
                     
-                    if helpButtonsVisible {
+                    if HbaApp.helpButtonsVisible {
                         
                         Button {
                             outputLevelHelpVisible = true
@@ -118,7 +111,7 @@ struct HomeView: View {
                     
                     Text("iOS Audio Volume:")
                     
-                    if helpButtonsVisible {
+                    if HbaApp.helpButtonsVisible {
                         
                         Button {
                             audioVolumeHelpVisible = true
@@ -136,16 +129,9 @@ struct HomeView: View {
             }
             .padding()
             
-            HStack {
-            
-                RunButton(audioProcessor: audioProcessor)
-                    .padding()
+            RunButton(audioProcessor: audioProcessor)
+                .padding()
                 
-                ShowHelpButton(helpButtonsVisible: $helpButtonsVisible)
-                    .padding()
-                
-            }
-            
         }
         .hbaScrollbar()
         .hbaBackground()
@@ -168,6 +154,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(audioProcessor: audioProcessor, helpButtonsVisible: .constant(false))
+        HomeView(audioProcessor: audioProcessor)
     }
 }
