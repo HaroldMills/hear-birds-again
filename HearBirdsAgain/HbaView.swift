@@ -82,11 +82,11 @@ struct HbaView: View {
                 }
                 .tag(Tab.about)
 
-            DonateView()
-                .tabItem{
-                    Label("Donate", systemImage: "gift")
-                }
-                .tag(Tab.donate)
+//            DonateView()
+//                .tabItem{
+//                    Label("Donate", systemImage: "heart")
+//                }
+//                .tag(Tab.donate)
 
         }
         .alert(nonfatalErrorMessage, isPresented: $errors.nonfatalErrorOccurred) {

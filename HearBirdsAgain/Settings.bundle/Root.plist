@@ -26,6 +26,16 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
+			<string>Donate Button</string>
+			<key>Key</key>
+			<string>donateButtonVisible</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
 			<string>0 Hz Start Frequency</string>
 			<key>Key</key>
 			<string>zeroHzCutoffVisible</string>

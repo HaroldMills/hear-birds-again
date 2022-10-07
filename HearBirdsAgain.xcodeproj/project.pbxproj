@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F206341828F0667F0060E5FF /* DonateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206341728F0667F0060E5FF /* DonateButton.swift */; };
 		F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2104BA0286C9AA100F65AEF /* LevelMeter.swift */; };
 		F21AA28D28DB68CA00530DD4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F21AA28C28DB68CA00530DD4 /* Settings.bundle */; };
 		F21AA28F28DB7FEF00530DD4 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21AA28E28DB7FEF00530DD4 /* AboutView.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F206341728F0667F0060E5FF /* DonateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateButton.swift; sourceTree = "<group>"; };
 		F2104BA0286C9AA100F65AEF /* LevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
 		F21AA28C28DB68CA00530DD4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F21AA28E28DB7FEF00530DD4 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				F2609D0627EE0B88005DACFA /* HbaView.swift */,
 				F24AD4542860C4D500554D3D /* HomeView.swift */,
 				F2B090D528EDF4FB00DBCF35 /* HelpButton.swift */,
+				F206341728F0667F0060E5FF /* DonateButton.swift */,
 				F234AA7328E4A4F3009C2A88 /* PitchShiftHelp.swift */,
 				F298CC6428EB2E130042154C /* StartFrequencyHelp.swift */,
 				F298CC6628EB30470042154C /* OutputLevelHelp.swift */,
@@ -279,6 +282,7 @@
 				F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */,
 				F298CC6B28EB427A0042154C /* InputHelp.swift in Sources */,
 				F21AA29128DB81D300530DD4 /* DonateView.swift in Sources */,
+				F206341828F0667F0060E5FF /* DonateButton.swift in Sources */,
 				F24AD45B2860CC1C00554D3D /* HelpView.swift in Sources */,
 				F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */,
 				F21AA28F28DB7FEF00530DD4 /* AboutView.swift in Sources */,
@@ -450,7 +454,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0a8;
+				MARKETING_VERSION = 1.0.0a9;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hearbirdsagain.HearBirdsAgain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -485,7 +489,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0a8;
+				MARKETING_VERSION = 1.0.0a9;
 				PRODUCT_BUNDLE_IDENTIFIER = org.hearbirdsagain.HearBirdsAgain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

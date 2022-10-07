@@ -107,6 +107,10 @@ struct HomeView: View {
             
             RunButton(audioProcessor: audioProcessor)
                 .padding()
+            
+            if HbaApp.donateButtonVisible {
+                DonateButton()
+            }
                 
         }
         .hbaScrollbar()

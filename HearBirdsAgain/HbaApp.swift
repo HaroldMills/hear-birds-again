@@ -40,6 +40,8 @@ class HbaApp: App {
     
     @AppStorage("helpButtonsVisible") static var helpButtonsVisible = true
     
+    @AppStorage("donateButtonVisible") static var donateButtonVisible = true
+    
     @AppStorage("zeroHzCutoffVisible") static var zeroHzCutoffVisible = false
     
     @AppStorage("consoleTabVisible") static var consoleTabVisible = false
