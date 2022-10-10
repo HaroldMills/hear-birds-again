@@ -109,9 +109,18 @@ struct HomeView: View {
                 .padding()
             
             if HbaApp.donateButtonVisible {
-                DonateButton()
-            }
                 
+                VStack {
+                    
+                    DonateButton()
+                    
+                    Text("***Hear Birds Again*** is a free and open-source application, made available as a public service by the nonprofit [Miracle of Nature](https://www.miracleofnature.org). It is funded almost entirely by user donations. Please help support its ongoing development and maintenance.")
+                    
+                }
+                .padding()
+                
+            }
+            
         }
         .hbaScrollbar()
         .hbaBackground()
