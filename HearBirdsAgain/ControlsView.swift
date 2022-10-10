@@ -180,7 +180,7 @@ struct ControlsView: View {
             }
             .padding()
 
-            RunButton(audioProcessor: audioProcessor)
+            StartButton(audioProcessor: audioProcessor)
                 .padding()
 
         }

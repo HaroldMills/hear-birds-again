@@ -1,5 +1,5 @@
 //
-//  RunButton.swift
+//  StartButton.swift
 //  HearBirdsAgain
 //
 //  Created by Harold Mills on 9/5/22.
@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-struct RunButton: View {
+struct StartButton: View {
     
     @ObservedObject var audioProcessor: AudioProcessor
     
     private var buttonTitle: String {
         get {
-            return audioProcessor.running ? "Stop" : "Run"
+            return audioProcessor.running ? "Stop" : "Start"
         }
     }
     
@@ -34,8 +34,8 @@ struct RunButton: View {
     
 }
 
-struct RunButton_Previews: PreviewProvider {
+struct StartButton_Previews: PreviewProvider {
     static var previews: some View {
-        RunButton(audioProcessor: audioProcessor)
+        StartButton(audioProcessor: audioProcessor)
     }
 }

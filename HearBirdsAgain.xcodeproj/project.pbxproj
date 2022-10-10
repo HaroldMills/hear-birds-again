@@ -41,7 +41,7 @@
 		F2BCDE5328E2075500E7A5E4 /* Help.html in Resources */ = {isa = PBXBuildFile; fileRef = F2BCDE5228E2075500E7A5E4 /* Help.html */; };
 		F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634728C65FA5008C2434 /* ControlsView.swift */; };
 		F2CB634A28C66581008C2434 /* LevelMeters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634928C66581008C2434 /* LevelMeters.swift */; };
-		F2CB634C28C67833008C2434 /* RunButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634B28C67833008C2434 /* RunButton.swift */; };
+		F2CB634C28C67833008C2434 /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634B28C67833008C2434 /* StartButton.swift */; };
 		F2CB634E28C67A37008C2434 /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634D28C67A37008C2434 /* Title.swift */; };
 /* End PBXBuildFile section */
 
@@ -91,7 +91,7 @@
 		F2BCDE5228E2075500E7A5E4 /* Help.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Help.html; sourceTree = "<group>"; };
 		F2CB634728C65FA5008C2434 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 		F2CB634928C66581008C2434 /* LevelMeters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeters.swift; sourceTree = "<group>"; };
-		F2CB634B28C67833008C2434 /* RunButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunButton.swift; sourceTree = "<group>"; };
+		F2CB634B28C67833008C2434 /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		F2CB634D28C67A37008C2434 /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
 		F2E7AA50282C1290003E27FF /* FirFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FirFilter.hpp; sourceTree = "<group>"; };
 		F2E7AA51282C1290003E27FF /* HbaFilters.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HbaFilters.hpp; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 				F2CB634D28C67A37008C2434 /* Title.swift */,
 				F2104BA0286C9AA100F65AEF /* LevelMeter.swift */,
 				F2CB634928C66581008C2434 /* LevelMeters.swift */,
-				F2CB634B28C67833008C2434 /* RunButton.swift */,
+				F2CB634B28C67833008C2434 /* StartButton.swift */,
 				F23B988C28C8E9560020BA30 /* VolumeView.swift */,
 				F2CB634728C65FA5008C2434 /* ControlsView.swift */,
 				F298CC6A28EB427A0042154C /* InputHelp.swift */,
@@ -305,7 +305,7 @@
 				F2609D1327EE0C2E005DACFA /* AudioProcessor.swift in Sources */,
 				F2609D1B27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm in Sources */,
 				F298CC6928EB33560042154C /* AudioVolumeHelp.swift in Sources */,
-				F2CB634C28C67833008C2434 /* RunButton.swift in Sources */,
+				F2CB634C28C67833008C2434 /* StartButton.swift in Sources */,
 				F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */,
 				F298CC7128EB4EC60042154C /* BalanceHelp.swift in Sources */,
 				F2945ABB283E6A8B0056D1F3 /* Console.swift in Sources */,

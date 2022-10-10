@@ -105,7 +105,7 @@ struct HomeView: View {
             }
             .padding()
             
-            RunButton(audioProcessor: audioProcessor)
+            StartButton(audioProcessor: audioProcessor)
                 .padding()
             
             if HbaApp.donateButtonVisible {
