@@ -39,6 +39,8 @@
 		F2B090D628EDF4FB00DBCF35 /* HelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B090D528EDF4FB00DBCF35 /* HelpButton.swift */; };
 		F2BCDE5128E2022F00E7A5E4 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCDE5028E2022F00E7A5E4 /* WebView.swift */; };
 		F2BCDE5328E2075500E7A5E4 /* Help.html in Resources */ = {isa = PBXBuildFile; fileRef = F2BCDE5228E2075500E7A5E4 /* Help.html */; };
+		F2CB1FF928F6F64100D47879 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB1FF828F6F64100D47879 /* InfoView.swift */; };
+		F2CB1FFB28F6F7AF00D47879 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB1FFA28F6F7AF00D47879 /* WelcomeView.swift */; };
 		F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634728C65FA5008C2434 /* ControlsView.swift */; };
 		F2CB634A28C66581008C2434 /* LevelMeters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634928C66581008C2434 /* LevelMeters.swift */; };
 		F2CB634C28C67833008C2434 /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634B28C67833008C2434 /* StartButton.swift */; };
@@ -89,6 +91,8 @@
 		F2B090D528EDF4FB00DBCF35 /* HelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpButton.swift; sourceTree = "<group>"; };
 		F2BCDE5028E2022F00E7A5E4 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		F2BCDE5228E2075500E7A5E4 /* Help.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Help.html; sourceTree = "<group>"; };
+		F2CB1FF828F6F64100D47879 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		F2CB1FFA28F6F7AF00D47879 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		F2CB634728C65FA5008C2434 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 		F2CB634928C66581008C2434 /* LevelMeters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeters.swift; sourceTree = "<group>"; };
 		F2CB634B28C67833008C2434 /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 				F298CC6C28EB43E20042154C /* GainHelp.swift */,
 				F298CC7028EB4EC60042154C /* BalanceHelp.swift */,
 				F24AD4582860CB7E00554D3D /* ConsoleView.swift */,
+				F2CB1FF828F6F64100D47879 /* InfoView.swift */,
+				F2CB1FFA28F6F7AF00D47879 /* WelcomeView.swift */,
 				F24AD45A2860CC1C00554D3D /* HelpView.swift */,
 				F2BCDE5228E2075500E7A5E4 /* Help.html */,
 				F2BCDE5028E2022F00E7A5E4 /* WebView.swift */,
@@ -279,9 +285,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F23B988D28C8E9560020BA30 /* VolumeView.swift in Sources */,
+				F2CB1FF928F6F64100D47879 /* InfoView.swift in Sources */,
 				F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */,
 				F298CC6B28EB427A0042154C /* InputHelp.swift in Sources */,
 				F21AA29128DB81D300530DD4 /* DonateView.swift in Sources */,
+				F2CB1FFB28F6F7AF00D47879 /* WelcomeView.swift in Sources */,
 				F206341828F0667F0060E5FF /* DonateButton.swift in Sources */,
 				F24AD45B2860CC1C00554D3D /* HelpView.swift in Sources */,
 				F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */,

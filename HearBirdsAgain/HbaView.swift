@@ -22,6 +22,7 @@ struct HbaView: View {
         case home
         case controls
         case console
+        case info
         case help
         case about
         case donate
@@ -70,17 +71,23 @@ struct HbaView: View {
                     .tag(Tab.console)
             }
 
-            HelpView()
+            InfoView()
                 .tabItem {
-                    Label("Help", systemImage: "questionmark.circle")
+                    Label("Info", systemImage: "info.circle")
                 }
-                .tag(Tab.help)
+                .tag(Tab.info)
             
-            AboutView()
-                .tabItem{
-                    Label("About", systemImage: "info.circle")
-                }
-                .tag(Tab.about)
+//            HelpView()
+//                .tabItem {
+//                    Label("Help", systemImage: "questionmark.circle")
+//                }
+//                .tag(Tab.help)
+            
+//            AboutView()
+//                .tabItem{
+//                    Label("About", systemImage: "info.circle")
+//                }
+//                .tag(Tab.about)
 
 //            DonateView()
 //                .tabItem{
