@@ -20,7 +20,7 @@ struct HomeView: View {
         
         VStack {
             
-            Title("Hear Birds Again")
+            Title("Hear Birds Again", subtitle: "Version \(getAppVersion())")
                 .padding()
             
             HStack {
@@ -140,6 +140,12 @@ struct HomeView: View {
     }
 
 }
+
+
+private func getAppVersion() -> String {
+    return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+}
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
