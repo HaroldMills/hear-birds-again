@@ -28,7 +28,7 @@ struct HbaView: View {
         case donate
     }
     
-    @SceneStorage("HbaView.selectedTab") private var selectedTab = Tab.home
+    @SceneStorage("HbaView.selectedTab") private var selectedTab = Tab.info
     
     private var nonfatalErrorMessage: String {
         get {
