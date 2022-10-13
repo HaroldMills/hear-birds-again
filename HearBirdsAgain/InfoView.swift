@@ -13,9 +13,7 @@ struct InfoView: View {
         
         TabView {
             WelcomeView()
-            Text("Two")
-            Text("Three")
-            Text("Four")
+            HeadsetView()
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))

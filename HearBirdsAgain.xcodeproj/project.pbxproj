@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F206341828F0667F0060E5FF /* DonateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206341728F0667F0060E5FF /* DonateButton.swift */; };
 		F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2104BA0286C9AA100F65AEF /* LevelMeter.swift */; };
+		F218630D28F85F2A000751B2 /* HeadsetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218630C28F85F2A000751B2 /* HeadsetView.swift */; };
 		F21AA28D28DB68CA00530DD4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F21AA28C28DB68CA00530DD4 /* Settings.bundle */; };
 		F21AA28F28DB7FEF00530DD4 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21AA28E28DB7FEF00530DD4 /* AboutView.swift */; };
 		F21AA29128DB81D300530DD4 /* DonateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21AA29028DB81D300530DD4 /* DonateView.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		F206341728F0667F0060E5FF /* DonateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateButton.swift; sourceTree = "<group>"; };
 		F2104BA0286C9AA100F65AEF /* LevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
+		F218630C28F85F2A000751B2 /* HeadsetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadsetView.swift; sourceTree = "<group>"; };
 		F21AA28C28DB68CA00530DD4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F21AA28E28DB7FEF00530DD4 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		F21AA29028DB81D300530DD4 /* DonateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateView.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				F24AD4582860CB7E00554D3D /* ConsoleView.swift */,
 				F2CB1FF828F6F64100D47879 /* InfoView.swift */,
 				F2CB1FFA28F6F7AF00D47879 /* WelcomeView.swift */,
+				F218630C28F85F2A000751B2 /* HeadsetView.swift */,
 				F24AD45A2860CC1C00554D3D /* HelpView.swift */,
 				F2BCDE5228E2075500E7A5E4 /* Help.html */,
 				F2BCDE5028E2022F00E7A5E4 /* WebView.swift */,
@@ -284,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F218630D28F85F2A000751B2 /* HeadsetView.swift in Sources */,
 				F23B988D28C8E9560020BA30 /* VolumeView.swift in Sources */,
 				F2CB1FF928F6F64100D47879 /* InfoView.swift in Sources */,
 				F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */,
