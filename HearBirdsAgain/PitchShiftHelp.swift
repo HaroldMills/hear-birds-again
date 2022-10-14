@@ -13,9 +13,9 @@ struct PitchShiftHelp: View {
     
     var body: some View {
         
-        VStack {
+        VStack(alignment: .leading) {
             
-            Title("Pitch Shift")
+            HelpTitle("Pitch Shift")
             
             Spacer()
             
@@ -25,15 +25,8 @@ struct PitchShiftHelp: View {
             
             Spacer()
             
-            Button("Close") {
-                isPresented = false
-            }
-            
-            Spacer()
-        
         }
-        .hbaScrollbar()
-        .hbaBackground()
+        .hbaHelp(isPresented: $isPresented)
 
     }
     

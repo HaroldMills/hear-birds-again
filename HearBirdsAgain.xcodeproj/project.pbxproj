@@ -17,7 +17,7 @@
 		F23B988D28C8E9560020BA30 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23B988C28C8E9560020BA30 /* VolumeView.swift */; };
 		F24AD4552860C4D500554D3D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4542860C4D500554D3D /* HomeView.swift */; };
 		F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4582860CB7E00554D3D /* ConsoleView.swift */; };
-		F24AD45B2860CC1C00554D3D /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD45A2860CC1C00554D3D /* HelpView.swift */; };
+		F24AD45B2860CC1C00554D3D /* HelpViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD45A2860CC1C00554D3D /* HelpViewOld.swift */; };
 		F24AD45D2860CE9900554D3D /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD45C2860CE9900554D3D /* ViewExtensions.swift */; };
 		F2609D0527EE0B88005DACFA /* HbaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D0427EE0B88005DACFA /* HbaApp.swift */; };
 		F2609D0727EE0B88005DACFA /* HbaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D0627EE0B88005DACFA /* HbaView.swift */; };
@@ -28,6 +28,8 @@
 		F2609D1827EE0CE6005DACFA /* SongFinderParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D1727EE0CE6005DACFA /* SongFinderParameters.swift */; };
 		F2609D1B27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm in Sources */ = {isa = PBXBuildFile; fileRef = F2609D1A27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm */; };
 		F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = F2609D2127EE0FAB005DACFA /* DSPKernel.mm */; };
+		F278D0F128F9C4B30000762B /* HelpDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F278D0F028F9C4B30000762B /* HelpDoneButton.swift */; };
+		F278D0F328F9CE400000762B /* HelpTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F278D0F228F9CE400000762B /* HelpTitle.swift */; };
 		F2945ABB283E6A8B0056D1F3 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABA283E6A8B0056D1F3 /* Console.swift */; };
 		F2945ABD283E75BB0056D1F3 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABC283E75BB0056D1F3 /* Errors.swift */; };
 		F298CC6528EB2E130042154C /* StartFrequencyHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298CC6428EB2E130042154C /* StartFrequencyHelp.swift */; };
@@ -60,7 +62,7 @@
 		F245FCFD27FCD5A000C54A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F24AD4542860C4D500554D3D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F24AD4582860CB7E00554D3D /* ConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleView.swift; sourceTree = "<group>"; };
-		F24AD45A2860CC1C00554D3D /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		F24AD45A2860CC1C00554D3D /* HelpViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewOld.swift; sourceTree = "<group>"; };
 		F24AD45C2860CE9900554D3D /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		F2609D0127EE0B88005DACFA /* HearBirdsAgain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HearBirdsAgain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2609D0427EE0B88005DACFA /* HbaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HbaApp.swift; sourceTree = "<group>"; };
@@ -77,6 +79,8 @@
 		F2609D2127EE0FAB005DACFA /* DSPKernel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DSPKernel.mm; sourceTree = "<group>"; };
 		F2609D2227EE0FAB005DACFA /* DSPKernel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DSPKernel.hpp; sourceTree = "<group>"; };
 		F2609D2427EE0FF1005DACFA /* BufferedAudioBus.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferedAudioBus.hpp; sourceTree = "<group>"; };
+		F278D0F028F9C4B30000762B /* HelpDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDoneButton.swift; sourceTree = "<group>"; };
+		F278D0F228F9CE400000762B /* HelpTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTitle.swift; sourceTree = "<group>"; };
 		F2945ABA283E6A8B0056D1F3 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		F2945ABC283E75BB0056D1F3 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		F29647A927EE1BA000AB33A6 /* AdvancingBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AdvancingBuffer.hpp; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 				F2609D0627EE0B88005DACFA /* HbaView.swift */,
 				F24AD4542860C4D500554D3D /* HomeView.swift */,
 				F2B090D528EDF4FB00DBCF35 /* HelpButton.swift */,
+				F278D0F228F9CE400000762B /* HelpTitle.swift */,
+				F278D0F028F9C4B30000762B /* HelpDoneButton.swift */,
 				F206341728F0667F0060E5FF /* DonateButton.swift */,
 				F234AA7328E4A4F3009C2A88 /* PitchShiftHelp.swift */,
 				F298CC6428EB2E130042154C /* StartFrequencyHelp.swift */,
@@ -162,7 +168,7 @@
 				F2CB1FF828F6F64100D47879 /* InfoView.swift */,
 				F2CB1FFA28F6F7AF00D47879 /* WelcomeView.swift */,
 				F218630C28F85F2A000751B2 /* HeadsetView.swift */,
-				F24AD45A2860CC1C00554D3D /* HelpView.swift */,
+				F24AD45A2860CC1C00554D3D /* HelpViewOld.swift */,
 				F2BCDE5228E2075500E7A5E4 /* Help.html */,
 				F2BCDE5028E2022F00E7A5E4 /* WebView.swift */,
 				F21AA28E28DB7FEF00530DD4 /* AboutView.swift */,
@@ -295,8 +301,9 @@
 				F21AA29128DB81D300530DD4 /* DonateView.swift in Sources */,
 				F2CB1FFB28F6F7AF00D47879 /* WelcomeView.swift in Sources */,
 				F206341828F0667F0060E5FF /* DonateButton.swift in Sources */,
-				F24AD45B2860CC1C00554D3D /* HelpView.swift in Sources */,
+				F24AD45B2860CC1C00554D3D /* HelpViewOld.swift in Sources */,
 				F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */,
+				F278D0F128F9C4B30000762B /* HelpDoneButton.swift in Sources */,
 				F21AA28F28DB7FEF00530DD4 /* AboutView.swift in Sources */,
 				F234AA7428E4A4F3009C2A88 /* PitchShiftHelp.swift in Sources */,
 				F2609D0727EE0B88005DACFA /* HbaView.swift in Sources */,
@@ -319,6 +326,7 @@
 				F298CC6928EB33560042154C /* AudioVolumeHelp.swift in Sources */,
 				F2CB634C28C67833008C2434 /* StartButton.swift in Sources */,
 				F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */,
+				F278D0F328F9CE400000762B /* HelpTitle.swift in Sources */,
 				F298CC7128EB4EC60042154C /* BalanceHelp.swift in Sources */,
 				F2945ABB283E6A8B0056D1F3 /* Console.swift in Sources */,
 				F2BCDE5128E2022F00E7A5E4 /* WebView.swift in Sources */,

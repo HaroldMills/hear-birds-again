@@ -13,9 +13,9 @@ struct StartFrequencyHelp: View {
     
     var body: some View {
         
-        VStack {
+        VStack(alignment: .leading) {
             
-            Title("Start Frequency")
+            HelpTitle("Start Frequency")
             
             Spacer()
             
@@ -25,16 +25,9 @@ struct StartFrequencyHelp: View {
             
             Spacer()
             
-            Button("Close") {
-                isPresented = false
-            }
-            
-            Spacer()
-            
         }
-        .hbaScrollbar()
-        .hbaBackground()
-        
+        .hbaHelp(isPresented: $isPresented)
+
     }
     
 }

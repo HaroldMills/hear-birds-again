@@ -10,6 +10,27 @@ import Foundation
 import SwiftUI
 
 
+private struct HbaHelpModifier: ViewModifier {
+    
+    @Binding var isPresented: Bool
+    
+    func body(content: Content) -> some View {
+        
+        VStack {
+            
+            HelpDoneButton(isPresented: $isPresented)
+            
+            content
+                .hbaScrollbar()
+            
+        }
+        .hbaBackground()
+        
+    }
+    
+}
+
+
 private struct HbaScrollbarModifier: ViewModifier {
     
     func body(content: Content) -> some View {
@@ -17,10 +38,6 @@ private struct HbaScrollbarModifier: ViewModifier {
         // We use an `HStack` here to ensure that the `ScrollView`
         // will span the entire width of the display, even if
         // `content` does not.
-        //
-        // We pad the top of the `ScrollView` a little to push our
-        // view titles down a little from the top of the display.
-        //
         ScrollView(.vertical) {
             HStack {
                 Spacer()
@@ -28,7 +45,6 @@ private struct HbaScrollbarModifier: ViewModifier {
                 Spacer()
             }
         }
-        .padding(.top, 10)
         
     }
     
@@ -53,6 +69,10 @@ private struct HbaBackgroundModifier: ViewModifier {
 
 
 extension View {
+    
+    func hbaHelp(isPresented: Binding<Bool>) -> some View {
+        modifier(HbaHelpModifier(isPresented: isPresented))
+    }
     
     func hbaScrollbar() -> some View {
         modifier(HbaScrollbarModifier())

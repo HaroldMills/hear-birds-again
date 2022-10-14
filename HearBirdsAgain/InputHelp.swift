@@ -13,9 +13,9 @@ struct InputHelp: View {
     
     var body: some View {
         
-        VStack {
+        VStack(alignment: .leading) {
             
-            Title("Input")
+            HelpTitle("Input")
             
             Spacer()
             
@@ -25,15 +25,8 @@ struct InputHelp: View {
             
             Spacer()
             
-            Button("Close") {
-                isPresented = false
-            }
-            
-            Spacer()
-        
         }
-        .hbaScrollbar()
-        .hbaBackground()
+        .hbaHelp(isPresented: $isPresented)
         
     }
     

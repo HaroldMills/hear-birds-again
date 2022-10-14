@@ -13,9 +13,9 @@ struct BalanceHelp: View {
     
     var body: some View {
         
-        VStack {
+        VStack(alignment: .leading) {
             
-            Title("Balance")
+            HelpTitle("Balance")
             
             Spacer()
             
@@ -25,15 +25,8 @@ struct BalanceHelp: View {
             
             Spacer()
             
-            Button("Close") {
-                isPresented = false
-            }
-            
-            Spacer()
-        
         }
-        .hbaScrollbar()
-        .hbaBackground()
+        .hbaHelp(isPresented: $isPresented)
         
     }
     

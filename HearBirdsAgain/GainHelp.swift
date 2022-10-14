@@ -14,12 +14,12 @@ struct GainHelp: View {
 
     var body: some View {
         
-        VStack {
+        VStack(alignment: .leading) {
             
             if audioProcessor.isInputGainSettable {
-                Title("Extra Gain")
+                HelpTitle("Extra Gain")
             } else {
-                Title("Gain")
+                HelpTitle("Gain")
             }
             
             Spacer()
@@ -40,15 +40,8 @@ struct GainHelp: View {
             
             Spacer()
             
-            Button("Close") {
-                isPresented = false
-            }
-            
-            Spacer()
-        
         }
-        .hbaScrollbar()
-        .hbaBackground()
+        .hbaHelp(isPresented: $isPresented)
         
     }
 

@@ -13,9 +13,9 @@ struct OutputLevelHelp: View {
     
     var body: some View {
         
-        VStack {
+        VStack(alignment: .leading) {
             
-            Title("Output Level")
+            HelpTitle("Output Level")
             
             Spacer()
             
@@ -25,16 +25,9 @@ struct OutputLevelHelp: View {
             
             Spacer()
             
-            Button("Close") {
-                isPresented = false
-            }
-            
-            Spacer()
-            
         }
-        .hbaScrollbar()
-        .hbaBackground()
-        
+        .hbaHelp(isPresented: $isPresented)
+
     }
     
 }
