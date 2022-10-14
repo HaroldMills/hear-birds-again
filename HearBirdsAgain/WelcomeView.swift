@@ -13,10 +13,9 @@ struct WelcomeView: View {
         
         VStack {
             
-            VStack {
+            VStack(alignment: .leading) {
                 
-                Title("Welcome!")
-                    .padding()
+                InfoTitle("Welcome!")
                 
                 Text("""
     ***Hear Birds Again*** is a mobile application for bird enthusiasts who can no longer hear high-pitched bird songs, but who still have reasonably good hearing in the lower range. In brief, it works by lowering high-pitched songs into a range where they can be heard.

@@ -13,10 +13,9 @@ struct HeadsetView: View {
         
         VStack {
             
-            VStack {
+            VStack(alignment: .leading) {
                 
-                Title("The Binaural Headset")
-                    .padding()
+                InfoTitle("The Binaural Headset")
                 
                 Text("""
     For optimal results, ***Hear Birds Again*** should be used in conjunction with a special "binaural headset" that will allow users to judge directions and distances of pitch-lowered bird songs in 3D space, and then actually "go find the singers".

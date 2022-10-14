@@ -30,6 +30,7 @@
 		F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = F2609D2127EE0FAB005DACFA /* DSPKernel.mm */; };
 		F278D0F128F9C4B30000762B /* HelpDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F278D0F028F9C4B30000762B /* HelpDoneButton.swift */; };
 		F278D0F328F9CE400000762B /* HelpTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F278D0F228F9CE400000762B /* HelpTitle.swift */; };
+		F278D0F528F9E3450000762B /* InfoTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F278D0F428F9E3450000762B /* InfoTitle.swift */; };
 		F2945ABB283E6A8B0056D1F3 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABA283E6A8B0056D1F3 /* Console.swift */; };
 		F2945ABD283E75BB0056D1F3 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABC283E75BB0056D1F3 /* Errors.swift */; };
 		F298CC6528EB2E130042154C /* StartFrequencyHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298CC6428EB2E130042154C /* StartFrequencyHelp.swift */; };
@@ -81,6 +82,7 @@
 		F2609D2427EE0FF1005DACFA /* BufferedAudioBus.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferedAudioBus.hpp; sourceTree = "<group>"; };
 		F278D0F028F9C4B30000762B /* HelpDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDoneButton.swift; sourceTree = "<group>"; };
 		F278D0F228F9CE400000762B /* HelpTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTitle.swift; sourceTree = "<group>"; };
+		F278D0F428F9E3450000762B /* InfoTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTitle.swift; sourceTree = "<group>"; };
 		F2945ABA283E6A8B0056D1F3 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		F2945ABC283E75BB0056D1F3 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		F29647A927EE1BA000AB33A6 /* AdvancingBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AdvancingBuffer.hpp; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				F24AD4582860CB7E00554D3D /* ConsoleView.swift */,
 				F2CB1FF828F6F64100D47879 /* InfoView.swift */,
 				F2CB1FFA28F6F7AF00D47879 /* WelcomeView.swift */,
+				F278D0F428F9E3450000762B /* InfoTitle.swift */,
 				F218630C28F85F2A000751B2 /* HeadsetView.swift */,
 				F24AD45A2860CC1C00554D3D /* HelpViewOld.swift */,
 				F2BCDE5228E2075500E7A5E4 /* Help.html */,
@@ -317,6 +320,7 @@
 				F2609D1827EE0CE6005DACFA /* SongFinderParameters.swift in Sources */,
 				F2609D0527EE0B88005DACFA /* HbaApp.swift in Sources */,
 				F2CB634E28C67A37008C2434 /* Title.swift in Sources */,
+				F278D0F528F9E3450000762B /* InfoTitle.swift in Sources */,
 				F24AD45D2860CE9900554D3D /* ViewExtensions.swift in Sources */,
 				F2945ABD283E75BB0056D1F3 /* Errors.swift in Sources */,
 				F298CC6728EB30470042154C /* OutputLevelHelp.swift in Sources */,
