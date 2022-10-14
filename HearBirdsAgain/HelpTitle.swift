@@ -17,13 +17,10 @@ struct HelpTitle: View {
     
     var body: some View {
         
-        HStack {
-            Text(title)
-                .font(.title)
-                .fontWeight(.bold)
-            Spacer()
-        }
-        .padding([.leading, .trailing])
+        Text(title)
+            .font(.title)
+            .fontWeight(.bold)
+            .padding(.leading)
         
     }
     
