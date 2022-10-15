@@ -24,7 +24,7 @@ struct WelcomeView: View {
     
     **Will** ***Hear Birds Again*** **Help You?**
     
-    We strongly advise having your hearing tested by an audiologist and obtaining and audiogram, so that you know the frequencies at which your hearing becomes impaired. You may also visit [this web site](https://www.starkey.com/online-hearing-test) to test your hearing online.
+    We strongly advise having your hearing tested by an audiologist and obtaining and audiogram, so that you know the frequencies at which your hearing becomes impaired. You may also visit [this web site](http://www.phys.unsw.edu.au/jw/hearing.html) to test your hearing online.
     
     It will also be informative to check out the [audio examples](https://hearbirdsagain.org/hear-for-yourself/) on our web site where bird songs are played at normal pitch followed by pitch-lowered examples.
     """)
