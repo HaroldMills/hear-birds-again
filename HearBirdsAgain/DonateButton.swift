@@ -27,7 +27,7 @@ struct DonateButton: View {
     var body: some View {
         
         Button {
-            openURL(URL(string: "https://hearbirdsagain.org/donate/")!)
+            openURL(URL(string: "https://hearbirdsagain.org/donate-from-app/")!)
         } label: {
             Label("Donate", systemImage: "heart")
         }
