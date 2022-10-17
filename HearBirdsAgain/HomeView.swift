@@ -114,7 +114,7 @@ struct HomeView: View {
                     
                     DonateButton()
                     
-                    Text("***Hear Birds Again*** is a free and open-source app, made available as a public service by the nonprofit [Miracle of Nature](https://www.miracleofnature.org). Please help support its development and maintenance, which are funded entirely by user donations.")
+                    Text("***Hear Birds Again*** is a free and open-source app, made available as a nonprofit public service. Please help support its continued development, which is funded entirely by user donations.")
                     
                 }
                 .padding()
