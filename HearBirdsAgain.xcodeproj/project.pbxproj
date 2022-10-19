@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F205C428290050A1000E6E20 /* ProjectInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F205C427290050A1000E6E20 /* ProjectInfoPage.swift */; };
 		F205C42A29006651000E6E20 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F205C42929006651000E6E20 /* README.md */; };
+		F205C42C2900674C000E6E20 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F205C42B2900674C000E6E20 /* LICENSE */; };
 		F206341828F0667F0060E5FF /* DonateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206341728F0667F0060E5FF /* DonateButton.swift */; };
 		F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2104BA0286C9AA100F65AEF /* LevelMeter.swift */; };
 		F218630D28F85F2A000751B2 /* HeadsetInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */; };
@@ -58,6 +59,7 @@
 /* Begin PBXFileReference section */
 		F205C427290050A1000E6E20 /* ProjectInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoPage.swift; sourceTree = "<group>"; };
 		F205C42929006651000E6E20 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F205C42B2900674C000E6E20 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F206341728F0667F0060E5FF /* DonateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateButton.swift; sourceTree = "<group>"; };
 		F2104BA0286C9AA100F65AEF /* LevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
 		F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadsetInfoPage.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		F2609CF827EE0B88005DACFA = {
 			isa = PBXGroup;
 			children = (
+				F205C42B2900674C000E6E20 /* LICENSE */,
 				F205C42929006651000E6E20 /* README.md */,
 				F2609D0327EE0B88005DACFA /* HearBirdsAgain */,
 				F2609D1427EE0C6B005DACFA /* SongFinder Audio Unit */,
@@ -294,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F205C42C2900674C000E6E20 /* LICENSE in Resources */,
 				F2609D0C27EE0B89005DACFA /* Preview Assets.xcassets in Resources */,
 				F2BCDE5328E2075500E7A5E4 /* Help.html in Resources */,
 				F205C42A29006651000E6E20 /* README.md in Resources */,
