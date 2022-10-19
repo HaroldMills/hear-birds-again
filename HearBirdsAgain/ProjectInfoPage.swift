@@ -18,7 +18,7 @@ struct ProjectInfoPage: View {
                 InfoPageTitle("The Project")
                 
                 Text("""
-***Hear Birds Again*** is a project of [Miracle of Nature](https://miracleofnature.org), a 501(c)(3) nonprofit. The app is free and open source software, with source code available [here](https://github.com).
+***Hear Birds Again*** is a project of [Miracle of Nature](https://miracleofnature.org), a 501(c)(3) nonprofit. The app is free and open source software, with source code available [here](https://github.com/HaroldMills/hear-birds-again).
 """)
                 .padding()
                 
@@ -50,7 +50,7 @@ In spite of my disability, I have authored numerous audio guides to bird and oth
                     .padding([.leading, .trailing])
                 
                 Text("""
-I’m a computer programmer, audio signal processing engineer, bird enthusiast, and musician who’s been in love with sound all my life. I’ve focused on audio in most of my work, including at the Cornell Lab of Ornithology, where for six years I was the lead developer of the [Raven](https://ravensoundsoftware.com/) sound analysis software, and most recently as the developer of the [Vesper](https://github.com/HaroldMills/Vesper) acoustic bird migration monitoring software and ***Hear Birds Again***.
+I’m a computer programmer, audio signal processing engineer, bird enthusiast, and musician who’s been in love with sound all my life. I’ve focused on audio in most of my work, including at the Cornell Lab of Ornithology, where for six years I was the lead developer of the [Raven](https://ravensoundsoftware.com/) sound analysis software, and most recently as the developer of the open source [Vesper](https://github.com/HaroldMills/Vesper) acoustic bird migration monitoring software and ***Hear Birds Again***.
 """)
                 .padding()
                 
