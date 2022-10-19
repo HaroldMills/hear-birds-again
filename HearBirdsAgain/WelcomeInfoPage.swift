@@ -22,7 +22,7 @@ struct WelcomeInfoPage: View {
 
 Please visit [our website](https://hearbirdsagain.org) for a detailed discussion of the reasoning behind the creation of our app.
                     
-You're currently viewing the app's *Info* tab, which includes several pages of information. You can navigate among the pages by swiping left and right or tapping on the dots near the bottom of the tab. If you're using the app for the first time, please peruse the pages to familiarize yourself with their contents.
+You're currently viewing the app's *Info* tab, which includes several pages of information about the app. You can navigate among the pages by swiping left and right or tapping to the left or right of the dots near the bottom of the tab. If you're using the app for the first time, please peruse the pages to familiarize yourself with their contents.
 """)
                 .padding()
                 

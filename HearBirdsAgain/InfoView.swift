@@ -15,6 +15,7 @@ struct InfoView: View {
             WelcomeInfoPage()
             HeadsetInfoPage()
             UiInfoPage()
+            ProjectInfoPage()
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))
