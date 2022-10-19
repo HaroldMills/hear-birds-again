@@ -13,4 +13,4 @@ frequency domain algorithm.
 Lang Elliott and Harold Mills. It is not yet available on the Apple App Store,
 but we plan to submit it soon.
 
-For more about *Hear Birds Again*, see its [web site](https://hearbirdsagain.org).
+For more about *Hear Birds Again*, please see [hearbirdsagain.org](https://hearbirdsagain.org).
