@@ -49,6 +49,8 @@
 		F2CB634A28C66581008C2434 /* LevelMeters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634928C66581008C2434 /* LevelMeters.swift */; };
 		F2CB634C28C67833008C2434 /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634B28C67833008C2434 /* StartButton.swift */; };
 		F2CB634E28C67A37008C2434 /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634D28C67A37008C2434 /* Title.swift */; };
+		F2ECC99028FDB28000E585DE /* UiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECC98F28FDB28000E585DE /* UiView.swift */; };
+		F2ECC99228FE089800E585DE /* InfoSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECC99128FE089800E585DE /* InfoSectionHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +109,8 @@
 		F2CB634D28C67A37008C2434 /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
 		F2E7AA50282C1290003E27FF /* FirFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FirFilter.hpp; sourceTree = "<group>"; };
 		F2E7AA51282C1290003E27FF /* HbaFilters.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HbaFilters.hpp; sourceTree = "<group>"; };
+		F2ECC98F28FDB28000E585DE /* UiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiView.swift; sourceTree = "<group>"; };
+		F2ECC99128FE089800E585DE /* InfoSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoSectionHeader.swift; sourceTree = "<group>"; };
 		F2FD2F8B27F6362900BBD070 /* SongFinderProcessor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SongFinderProcessor.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,7 +174,9 @@
 				F2CB1FF828F6F64100D47879 /* InfoView.swift */,
 				F2CB1FFA28F6F7AF00D47879 /* WelcomeView.swift */,
 				F278D0F428F9E3450000762B /* InfoTitle.swift */,
+				F2ECC99128FE089800E585DE /* InfoSectionHeader.swift */,
 				F218630C28F85F2A000751B2 /* HeadsetView.swift */,
+				F2ECC98F28FDB28000E585DE /* UiView.swift */,
 				F24AD45A2860CC1C00554D3D /* HelpViewOld.swift */,
 				F2BCDE5228E2075500E7A5E4 /* Help.html */,
 				F2BCDE5028E2022F00E7A5E4 /* WebView.swift */,
@@ -303,6 +309,7 @@
 				F298CC6B28EB427A0042154C /* InputHelp.swift in Sources */,
 				F21AA29128DB81D300530DD4 /* DonateView.swift in Sources */,
 				F2CB1FFB28F6F7AF00D47879 /* WelcomeView.swift in Sources */,
+				F2ECC99028FDB28000E585DE /* UiView.swift in Sources */,
 				F206341828F0667F0060E5FF /* DonateButton.swift in Sources */,
 				F24AD45B2860CC1C00554D3D /* HelpViewOld.swift in Sources */,
 				F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */,
@@ -315,6 +322,7 @@
 				F24AD4552860C4D500554D3D /* HomeView.swift in Sources */,
 				F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */,
 				F2CB634A28C66581008C2434 /* LevelMeters.swift in Sources */,
+				F2ECC99228FE089800E585DE /* InfoSectionHeader.swift in Sources */,
 				F298CC6D28EB43E20042154C /* GainHelp.swift in Sources */,
 				F298CC6528EB2E130042154C /* StartFrequencyHelp.swift in Sources */,
 				F2609D1827EE0CE6005DACFA /* SongFinderParameters.swift in Sources */,

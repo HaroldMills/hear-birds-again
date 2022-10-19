@@ -9,9 +9,12 @@ import SwiftUI
 
 struct InfoTitle: View {
     
-    var title: String
+    // `title` is of type `LocalizedStringKey` to support Markdown.
+    // See https://www.hackingwithswift.com/quick-start/swiftui/how-to-render-markdown-content-in-text
+    // for more on this.
+    var title: LocalizedStringKey
     
-    init(_ title: String) {
+    init(_ title: LocalizedStringKey) {
         self.title = title
     }
     
