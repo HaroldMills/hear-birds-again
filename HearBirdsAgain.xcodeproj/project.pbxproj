@@ -10,6 +10,7 @@
 		F205C428290050A1000E6E20 /* ProjectInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F205C427290050A1000E6E20 /* ProjectInfoPage.swift */; };
 		F205C42A29006651000E6E20 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F205C42929006651000E6E20 /* README.md */; };
 		F205C42C2900674C000E6E20 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F205C42B2900674C000E6E20 /* LICENSE */; };
+		F205C42E29007356000E6E20 /* SupportInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F205C42D29007356000E6E20 /* SupportInfoPage.swift */; };
 		F206341828F0667F0060E5FF /* DonateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206341728F0667F0060E5FF /* DonateButton.swift */; };
 		F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2104BA0286C9AA100F65AEF /* LevelMeter.swift */; };
 		F218630D28F85F2A000751B2 /* HeadsetInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */; };
@@ -60,6 +61,7 @@
 		F205C427290050A1000E6E20 /* ProjectInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoPage.swift; sourceTree = "<group>"; };
 		F205C42929006651000E6E20 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F205C42B2900674C000E6E20 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		F205C42D29007356000E6E20 /* SupportInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportInfoPage.swift; sourceTree = "<group>"; };
 		F206341728F0667F0060E5FF /* DonateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateButton.swift; sourceTree = "<group>"; };
 		F2104BA0286C9AA100F65AEF /* LevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
 		F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadsetInfoPage.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */,
 				F2ECC98F28FDB28000E585DE /* UiInfoPage.swift */,
 				F205C427290050A1000E6E20 /* ProjectInfoPage.swift */,
+				F205C42D29007356000E6E20 /* SupportInfoPage.swift */,
 				F24AD45A2860CC1C00554D3D /* HelpViewOld.swift */,
 				F2BCDE5228E2075500E7A5E4 /* Help.html */,
 				F2BCDE5028E2022F00E7A5E4 /* WebView.swift */,
@@ -353,6 +356,7 @@
 				F278D0F328F9CE400000762B /* HelpTitle.swift in Sources */,
 				F298CC7128EB4EC60042154C /* BalanceHelp.swift in Sources */,
 				F2945ABB283E6A8B0056D1F3 /* Console.swift in Sources */,
+				F205C42E29007356000E6E20 /* SupportInfoPage.swift in Sources */,
 				F2BCDE5128E2022F00E7A5E4 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
