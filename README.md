@@ -1,11 +1,13 @@
 # Hear Birds Again
 
-***Hear Birds Again*** is an open-source, real-time, audio pitch-shifting
-application for iOS. It is intended for use primarily by bird enthusiasts
-who can no longer hear high-pitched bird sounds.
+Hear Birds Again is a real-time audio pitch shifting application for iOS.
+It is intended primarily for field use by bird enthusiasts who can no longer
+hear high-pitched bird sounds.
 
-The initial version of the app uses a simple time-domain overlap-add (OLA)
-pitch-shifting algorithm. A forthcoming version will use a more sophisticated
-frequency-domain algorithm such as the phase vocoder.
+The initial version of the app uses a simple time domain overlap-add (OLA)
+pitch shifting algorithm. A forthcoming version will use a more sophisticated
+frequency domain algorithm.
 
-For more about the app, see [here](https://hearbirdsagain.org)
+Hear Birds Again is not available on the Apple App Store.
+
+For more about Hear Birds Again, see its [web site](https://hearbirdsagain.org).
