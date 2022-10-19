@@ -1,5 +1,5 @@
 //
-//  WelcomeView.swift
+//  WelcomeInfoPage.swift
 //  HearBirdsAgain
 //
 //  Created by Harold Mills on 10/12/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WelcomeView: View {
+struct WelcomeInfoPage: View {
     
     var body: some View {
         
@@ -15,7 +15,7 @@ struct WelcomeView: View {
             
             VStack(alignment: .leading) {
                 
-                InfoTitle("Welcome!")
+                InfoPageTitle("Welcome!")
                 
                 Text("""
 ***Hear Birds Again*** is a mobile application for bird enthusiasts who can no longer hear high-pitched bird songs, but who still have reasonably good hearing in the lower range. In brief, it works by lowering high-pitched songs into a range where they can be heard.
@@ -26,7 +26,7 @@ You're currently viewing the app's *Info* tab, which includes several pages of i
 """)
                 .padding()
                 
-                InfoSectionHeader("Will *Hear Birds Again* Help You?")
+                InfoPageSectionHeader("Will *Hear Birds Again* Help You?")
                 
                 Text("""
 We strongly advise having your hearing tested by an audiologist and obtaining an audiogram, so that you know the frequencies at which your hearing becomes impaired. You may also visit [this web site](http://www.phys.unsw.edu.au/jw/hearing.html) to test your hearing online.
@@ -71,8 +71,8 @@ Please visit [our website](https://hearbirdsagain.org) for more details about ag
     
 }
 
-struct WelcomeView_Previews: PreviewProvider {
+struct WelcomeInfoPage_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeView()
+        WelcomeInfoPage()
     }
 }

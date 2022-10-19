@@ -12,9 +12,9 @@ struct InfoView: View {
     var body: some View {
         
         TabView {
-            WelcomeView()
-            HeadsetView()
-            UiView()
+            WelcomeInfoPage()
+            HeadsetInfoPage()
+            UiInfoPage()
         }
         .tabViewStyle(.page)
         .indexViewStyle(.page(backgroundDisplayMode: .always))

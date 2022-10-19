@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		F206341828F0667F0060E5FF /* DonateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F206341728F0667F0060E5FF /* DonateButton.swift */; };
 		F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2104BA0286C9AA100F65AEF /* LevelMeter.swift */; };
-		F218630D28F85F2A000751B2 /* HeadsetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218630C28F85F2A000751B2 /* HeadsetView.swift */; };
+		F218630D28F85F2A000751B2 /* HeadsetInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */; };
 		F21AA28D28DB68CA00530DD4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F21AA28C28DB68CA00530DD4 /* Settings.bundle */; };
 		F21AA28F28DB7FEF00530DD4 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21AA28E28DB7FEF00530DD4 /* AboutView.swift */; };
 		F21AA29128DB81D300530DD4 /* DonateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21AA29028DB81D300530DD4 /* DonateView.swift */; };
@@ -30,7 +30,7 @@
 		F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = F2609D2127EE0FAB005DACFA /* DSPKernel.mm */; };
 		F278D0F128F9C4B30000762B /* HelpDoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F278D0F028F9C4B30000762B /* HelpDoneButton.swift */; };
 		F278D0F328F9CE400000762B /* HelpTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F278D0F228F9CE400000762B /* HelpTitle.swift */; };
-		F278D0F528F9E3450000762B /* InfoTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F278D0F428F9E3450000762B /* InfoTitle.swift */; };
+		F278D0F528F9E3450000762B /* InfoPageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F278D0F428F9E3450000762B /* InfoPageTitle.swift */; };
 		F2945ABB283E6A8B0056D1F3 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABA283E6A8B0056D1F3 /* Console.swift */; };
 		F2945ABD283E75BB0056D1F3 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABC283E75BB0056D1F3 /* Errors.swift */; };
 		F298CC6528EB2E130042154C /* StartFrequencyHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298CC6428EB2E130042154C /* StartFrequencyHelp.swift */; };
@@ -44,19 +44,19 @@
 		F2BCDE5128E2022F00E7A5E4 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCDE5028E2022F00E7A5E4 /* WebView.swift */; };
 		F2BCDE5328E2075500E7A5E4 /* Help.html in Resources */ = {isa = PBXBuildFile; fileRef = F2BCDE5228E2075500E7A5E4 /* Help.html */; };
 		F2CB1FF928F6F64100D47879 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB1FF828F6F64100D47879 /* InfoView.swift */; };
-		F2CB1FFB28F6F7AF00D47879 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB1FFA28F6F7AF00D47879 /* WelcomeView.swift */; };
+		F2CB1FFB28F6F7AF00D47879 /* WelcomeInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB1FFA28F6F7AF00D47879 /* WelcomeInfoPage.swift */; };
 		F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634728C65FA5008C2434 /* ControlsView.swift */; };
 		F2CB634A28C66581008C2434 /* LevelMeters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634928C66581008C2434 /* LevelMeters.swift */; };
 		F2CB634C28C67833008C2434 /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634B28C67833008C2434 /* StartButton.swift */; };
 		F2CB634E28C67A37008C2434 /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634D28C67A37008C2434 /* Title.swift */; };
-		F2ECC99028FDB28000E585DE /* UiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECC98F28FDB28000E585DE /* UiView.swift */; };
-		F2ECC99228FE089800E585DE /* InfoSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECC99128FE089800E585DE /* InfoSectionHeader.swift */; };
+		F2ECC99028FDB28000E585DE /* UiInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECC98F28FDB28000E585DE /* UiInfoPage.swift */; };
+		F2ECC99228FE089800E585DE /* InfoPageSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECC99128FE089800E585DE /* InfoPageSectionHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F206341728F0667F0060E5FF /* DonateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateButton.swift; sourceTree = "<group>"; };
 		F2104BA0286C9AA100F65AEF /* LevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
-		F218630C28F85F2A000751B2 /* HeadsetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadsetView.swift; sourceTree = "<group>"; };
+		F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadsetInfoPage.swift; sourceTree = "<group>"; };
 		F21AA28C28DB68CA00530DD4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F21AA28E28DB7FEF00530DD4 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		F21AA29028DB81D300530DD4 /* DonateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateView.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 		F2609D2427EE0FF1005DACFA /* BufferedAudioBus.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferedAudioBus.hpp; sourceTree = "<group>"; };
 		F278D0F028F9C4B30000762B /* HelpDoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpDoneButton.swift; sourceTree = "<group>"; };
 		F278D0F228F9CE400000762B /* HelpTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpTitle.swift; sourceTree = "<group>"; };
-		F278D0F428F9E3450000762B /* InfoTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTitle.swift; sourceTree = "<group>"; };
+		F278D0F428F9E3450000762B /* InfoPageTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPageTitle.swift; sourceTree = "<group>"; };
 		F2945ABA283E6A8B0056D1F3 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		F2945ABC283E75BB0056D1F3 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		F29647A927EE1BA000AB33A6 /* AdvancingBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AdvancingBuffer.hpp; sourceTree = "<group>"; };
@@ -102,15 +102,15 @@
 		F2BCDE5028E2022F00E7A5E4 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		F2BCDE5228E2075500E7A5E4 /* Help.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Help.html; sourceTree = "<group>"; };
 		F2CB1FF828F6F64100D47879 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		F2CB1FFA28F6F7AF00D47879 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		F2CB1FFA28F6F7AF00D47879 /* WelcomeInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeInfoPage.swift; sourceTree = "<group>"; };
 		F2CB634728C65FA5008C2434 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 		F2CB634928C66581008C2434 /* LevelMeters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeters.swift; sourceTree = "<group>"; };
 		F2CB634B28C67833008C2434 /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		F2CB634D28C67A37008C2434 /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
 		F2E7AA50282C1290003E27FF /* FirFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FirFilter.hpp; sourceTree = "<group>"; };
 		F2E7AA51282C1290003E27FF /* HbaFilters.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HbaFilters.hpp; sourceTree = "<group>"; };
-		F2ECC98F28FDB28000E585DE /* UiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiView.swift; sourceTree = "<group>"; };
-		F2ECC99128FE089800E585DE /* InfoSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoSectionHeader.swift; sourceTree = "<group>"; };
+		F2ECC98F28FDB28000E585DE /* UiInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiInfoPage.swift; sourceTree = "<group>"; };
+		F2ECC99128FE089800E585DE /* InfoPageSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPageSectionHeader.swift; sourceTree = "<group>"; };
 		F2FD2F8B27F6362900BBD070 /* SongFinderProcessor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SongFinderProcessor.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,11 +172,11 @@
 				F298CC7028EB4EC60042154C /* BalanceHelp.swift */,
 				F24AD4582860CB7E00554D3D /* ConsoleView.swift */,
 				F2CB1FF828F6F64100D47879 /* InfoView.swift */,
-				F2CB1FFA28F6F7AF00D47879 /* WelcomeView.swift */,
-				F278D0F428F9E3450000762B /* InfoTitle.swift */,
-				F2ECC99128FE089800E585DE /* InfoSectionHeader.swift */,
-				F218630C28F85F2A000751B2 /* HeadsetView.swift */,
-				F2ECC98F28FDB28000E585DE /* UiView.swift */,
+				F2CB1FFA28F6F7AF00D47879 /* WelcomeInfoPage.swift */,
+				F278D0F428F9E3450000762B /* InfoPageTitle.swift */,
+				F2ECC99128FE089800E585DE /* InfoPageSectionHeader.swift */,
+				F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */,
+				F2ECC98F28FDB28000E585DE /* UiInfoPage.swift */,
 				F24AD45A2860CC1C00554D3D /* HelpViewOld.swift */,
 				F2BCDE5228E2075500E7A5E4 /* Help.html */,
 				F2BCDE5028E2022F00E7A5E4 /* WebView.swift */,
@@ -302,14 +302,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F218630D28F85F2A000751B2 /* HeadsetView.swift in Sources */,
+				F218630D28F85F2A000751B2 /* HeadsetInfoPage.swift in Sources */,
 				F23B988D28C8E9560020BA30 /* VolumeView.swift in Sources */,
 				F2CB1FF928F6F64100D47879 /* InfoView.swift in Sources */,
 				F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */,
 				F298CC6B28EB427A0042154C /* InputHelp.swift in Sources */,
 				F21AA29128DB81D300530DD4 /* DonateView.swift in Sources */,
-				F2CB1FFB28F6F7AF00D47879 /* WelcomeView.swift in Sources */,
-				F2ECC99028FDB28000E585DE /* UiView.swift in Sources */,
+				F2CB1FFB28F6F7AF00D47879 /* WelcomeInfoPage.swift in Sources */,
+				F2ECC99028FDB28000E585DE /* UiInfoPage.swift in Sources */,
 				F206341828F0667F0060E5FF /* DonateButton.swift in Sources */,
 				F24AD45B2860CC1C00554D3D /* HelpViewOld.swift in Sources */,
 				F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */,
@@ -322,13 +322,13 @@
 				F24AD4552860C4D500554D3D /* HomeView.swift in Sources */,
 				F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */,
 				F2CB634A28C66581008C2434 /* LevelMeters.swift in Sources */,
-				F2ECC99228FE089800E585DE /* InfoSectionHeader.swift in Sources */,
+				F2ECC99228FE089800E585DE /* InfoPageSectionHeader.swift in Sources */,
 				F298CC6D28EB43E20042154C /* GainHelp.swift in Sources */,
 				F298CC6528EB2E130042154C /* StartFrequencyHelp.swift in Sources */,
 				F2609D1827EE0CE6005DACFA /* SongFinderParameters.swift in Sources */,
 				F2609D0527EE0B88005DACFA /* HbaApp.swift in Sources */,
 				F2CB634E28C67A37008C2434 /* Title.swift in Sources */,
-				F278D0F528F9E3450000762B /* InfoTitle.swift in Sources */,
+				F278D0F528F9E3450000762B /* InfoPageTitle.swift in Sources */,
 				F24AD45D2860CE9900554D3D /* ViewExtensions.swift in Sources */,
 				F2945ABD283E75BB0056D1F3 /* Errors.swift in Sources */,
 				F298CC6728EB30470042154C /* OutputLevelHelp.swift in Sources */,

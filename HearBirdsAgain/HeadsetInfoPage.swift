@@ -1,5 +1,5 @@
 //
-//  HeadsetView.swift
+//  HeadsetInfoPage.swift
 //  HearBirdsAgain
 //
 //  Created by Harold Mills on 10/13/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HeadsetView: View {
+struct HeadsetInfoPage: View {
     
     var body: some View {
         
@@ -15,7 +15,7 @@ struct HeadsetView: View {
             
             VStack(alignment: .leading) {
                 
-                InfoTitle("The Binaural Headset")
+                InfoPageTitle("The Binaural Headset")
                 
                 Text("""
 For optimal results, ***Hear Birds Again*** should be used in conjunction with a special "binaural headset" that will allow users to judge directions and distances of pitch-lowered bird songs in 3D space, and then actually "go find the singers".
@@ -44,7 +44,7 @@ Unfortunately, no fully-assembled headsets of this type are currently available 
 """)
                 .padding()
     
-                InfoSectionHeader("Other Input and Output Options")
+                InfoPageSectionHeader("Other Input and Output Options")
                 
                 Text("""
 While our binaural headset is vastly superior to other options, it is possible to test our app using your mobile device's built-in mics along with wired or wireless earbuds and headphones. Be aware, however, that this is not an optimal solution and results will vary greatly depending on a number of factors.
@@ -73,8 +73,8 @@ For testing without the recommended binaural headset, we advise using wired earb
 
 }
 
-struct HeadsetView_Previews: PreviewProvider {
+struct HeadsetInfoPage_Previews: PreviewProvider {
     static var previews: some View {
-        HeadsetView()
+        HeadsetInfoPage()
     }
 }

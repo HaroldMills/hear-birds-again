@@ -1,5 +1,5 @@
 //
-//  UiView.swift
+//  UiInfoPage.swift
 //  HearBirdsAgain
 //
 //  Created by Harold Mills on 10/17/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UiView: View {
+struct UiInfoPage: View {
     
     var body: some View {
         
@@ -15,7 +15,7 @@ struct UiView: View {
             
             VStack(alignment: .leading) {
                 
-                InfoTitle("The User Interface")
+                InfoPageTitle("The User Interface")
     
                 Text("""
 The ***Hear Birds Again*** user interface comprises three tabs, named *Home*, *Controls*, and *Info*. Only one tab is visible at a time, according to the one selected at the bottom of the screen. You are currently viewing the *Info* tab, which includes several pages of information about the app.
@@ -38,8 +38,8 @@ During normal use, you'll probably view the *Home* tab most often, since it incl
     
 }
 
-struct UiView_Previews: PreviewProvider {
+struct UiInfoPage_Previews: PreviewProvider {
     static var previews: some View {
-        UiView()
+        UiInfoPage()
     }
 }

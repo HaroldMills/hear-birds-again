@@ -1,5 +1,5 @@
 //
-//  InfoTitle.swift
+//  InfoPageTitle.swift
 //  HearBirdsAgain
 //
 //  Created by Harold Mills on 10/14/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfoTitle: View {
+struct InfoPageTitle: View {
     
     // `title` is of type `LocalizedStringKey` to support Markdown.
     // See https://www.hackingwithswift.com/quick-start/swiftui/how-to-render-markdown-content-in-text
@@ -29,8 +29,8 @@ struct InfoTitle: View {
     
 }
 
-struct InfoTitle_Previews: PreviewProvider {
+struct InfoPageTitle_Previews: PreviewProvider {
     static var previews: some View {
-        InfoTitle("Info")
+        InfoPageTitle("Info")
     }
 }

@@ -1,5 +1,5 @@
 //
-//  InfoSectionHeader.swift
+//  InfoPageSectionHeader.swift
 //  HearBirdsAgain
 //
 //  Created by Harold Mills on 10/17/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfoSectionHeader: View {
+struct InfoPageSectionHeader: View {
     
     // `header` is of type `LocalizedStringKey` to support Markdown.
     // See https://www.hackingwithswift.com/quick-start/swiftui/how-to-render-markdown-content-in-text
@@ -29,8 +29,8 @@ struct InfoSectionHeader: View {
     
 }
 
-struct InfoSectionHeader_Previews: PreviewProvider {
+struct InfoPageSectionHeader_Previews: PreviewProvider {
     static var previews: some View {
-        InfoSectionHeader("Header")
+        InfoPageSectionHeader("Header")
     }
 }
