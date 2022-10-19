@@ -5,7 +5,7 @@ It is intended primarily for field use by bird enthusiasts who can no longer
 hear high-pitched bird sounds.
 
 The initial version of the app uses a simple time domain overlap-add (OLA)
-pitch shifting algorithm. A forthcoming version will use a more sophisticated
+pitch shifting algorithm. A subsequent version will use a more sophisticated
 frequency domain algorithm.
 
 *Hear Birds Again* is not yet available on the Apple App Store, but we plan
