@@ -96,6 +96,7 @@ struct HbaView: View {
 //                .tag(Tab.donate)
 
         }
+        .clipped()    // prevent scrolling into status bar
         .alert(nonfatalErrorMessage, isPresented: $errors.nonfatalErrorOccurred) {
             Button("OK", role: .cancel) {
                 errors.nonfatalErrorOccurred = false
