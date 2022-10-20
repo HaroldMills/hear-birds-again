@@ -77,24 +77,6 @@ struct HbaView: View {
                 }
                 .tag(Tab.info)
             
-//            HelpView()
-//                .tabItem {
-//                    Label("Help", systemImage: "questionmark.circle")
-//                }
-//                .tag(Tab.help)
-            
-//            AboutView()
-//                .tabItem{
-//                    Label("About", systemImage: "info.circle")
-//                }
-//                .tag(Tab.about)
-
-//            DonateView()
-//                .tabItem{
-//                    Label("Donate", systemImage: "heart")
-//                }
-//                .tag(Tab.donate)
-
         }
         .clipped()    // prevent scrolling into status bar
         .alert(nonfatalErrorMessage, isPresented: $errors.nonfatalErrorOccurred) {
