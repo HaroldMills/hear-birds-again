@@ -50,7 +50,7 @@ In spite of my disability, I have authored numerous audio guides to bird and oth
                     .padding([.leading, .trailing])
                 
                 Text("""
-I’m a computer programmer, audio signal processing engineer, bird enthusiast, and musician who’s been in love with sound all my life. I’ve focused on audio in most of my work, including at the Cornell Lab of Ornithology, where I was the initial lead developer of the [Raven](https://ravensoundsoftware.com/) sound analysis software, and most recently as the developer of the open source [Vesper](https://github.com/HaroldMills/Vesper) acoustic bird migration monitoring software and ***Hear Birds Again***.
+I’m a computer programmer, audio signal processing engineer, bird enthusiast, and musician who’s been in love with sound all my life. I’ve focused on audio in most of my work, including at the Cornell Lab of Ornithology, where I was the initial lead developer of the [Raven](https://ravensoundsoftware.com/) sound analysis software, and more recently as the developer of the open source [Vesper](https://github.com/HaroldMills/Vesper) acoustic bird migration monitoring software and ***Hear Birds Again***.
 """)
                 .padding()
                 
