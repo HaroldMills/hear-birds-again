@@ -19,8 +19,9 @@ struct BalanceHelp: View {
             
             Spacer()
             
-            Text(
-                "Use the *Balance* control to adjust the relative volume of the left and right channels of stereo output. When the balance is positive the right channel is louder than the left one, and when it is negative the left channel is louder than the right one.")
+            Text("""
+Use the *Balance* control to adjust the relative volume of the left and right channels of stereo output. When the balance is positive the right channel is louder than the left one, and when it is negative the left channel is louder than the right one.
+""")
             .padding()
             
             Spacer()

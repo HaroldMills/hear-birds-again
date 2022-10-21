@@ -19,8 +19,11 @@ struct StartFrequencyHelp: View {
             
             Spacer()
             
-            Text(
-                "Use the *Start Frequency* control to select the frequency above which the Hear Birds Again app shifts sounds down in pitch. Note that the app filters out input sounds whose frequencies are below the start frequency, assuming that you will hear them directly through the air.")
+            Text("""
+Use the *Start Frequency* control to select the frequency above which ***Hear Birds Again*** shifts sounds down in pitch. Note that the app filters out input sounds whose frequencies are below the start frequency, assuming that you will hear them directly. This works particularly well with the recommended open air [binaural headset](https://hearbirdsagain.org/binaural-headset/). Note also that the frequency values indicated in the control have units of 1 kilohertz (abbreviated *kHz*), with 1 kilohertz being 1000 Hertz (abbreviated *Hz*).
+
+You can adjust the start frequency according to your individual audiogram. As an example, if your hearing loss becomes substantial at 3000 Hz, you might initially choose the 3 kHz setting. However, as you listen to the pitch-lowered songs of various species singing near the start frequency, be sure to try lower and/or higher start frequency settings to determine which one actually works best for you.
+""")
             .padding()
             
             Spacer()
