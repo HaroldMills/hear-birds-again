@@ -13,6 +13,7 @@ struct InfoView: View {
         
         TabView {
             WelcomeInfoPage()
+            WillHbaHelpInfoPage()
             HeadsetInfoPage()
             UiInfoPage()
             ProjectInfoPage()

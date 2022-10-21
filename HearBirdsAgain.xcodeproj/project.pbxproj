@@ -55,6 +55,7 @@
 		F2CB634E28C67A37008C2434 /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634D28C67A37008C2434 /* Title.swift */; };
 		F2ECC99028FDB28000E585DE /* UiInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECC98F28FDB28000E585DE /* UiInfoPage.swift */; };
 		F2ECC99228FE089800E585DE /* InfoPageSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2ECC99128FE089800E585DE /* InfoPageSectionHeader.swift */; };
+		F2F62B4729030D1E00685DAC /* WillHbaHelpInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F62B4629030D1E00685DAC /* WillHbaHelpInfoPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -119,6 +120,7 @@
 		F2E7AA51282C1290003E27FF /* HbaFilters.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HbaFilters.hpp; sourceTree = "<group>"; };
 		F2ECC98F28FDB28000E585DE /* UiInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiInfoPage.swift; sourceTree = "<group>"; };
 		F2ECC99128FE089800E585DE /* InfoPageSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPageSectionHeader.swift; sourceTree = "<group>"; };
+		F2F62B4629030D1E00685DAC /* WillHbaHelpInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillHbaHelpInfoPage.swift; sourceTree = "<group>"; };
 		F2FD2F8B27F6362900BBD070 /* SongFinderProcessor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SongFinderProcessor.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,6 +187,7 @@
 				F2CB1FFA28F6F7AF00D47879 /* WelcomeInfoPage.swift */,
 				F278D0F428F9E3450000762B /* InfoPageTitle.swift */,
 				F2ECC99128FE089800E585DE /* InfoPageSectionHeader.swift */,
+				F2F62B4629030D1E00685DAC /* WillHbaHelpInfoPage.swift */,
 				F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */,
 				F2ECC98F28FDB28000E585DE /* UiInfoPage.swift */,
 				F205C427290050A1000E6E20 /* ProjectInfoPage.swift */,
@@ -350,6 +353,7 @@
 				F298CC6F28EB4C360042154C /* InputGainHelp.swift in Sources */,
 				F2609D1327EE0C2E005DACFA /* AudioProcessor.swift in Sources */,
 				F2609D1B27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm in Sources */,
+				F2F62B4729030D1E00685DAC /* WillHbaHelpInfoPage.swift in Sources */,
 				F298CC6928EB33560042154C /* AudioVolumeHelp.swift in Sources */,
 				F2CB634C28C67833008C2434 /* StartButton.swift in Sources */,
 				F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */,
