@@ -40,7 +40,7 @@ struct WelcomeInfoPage: View {
                 Text("""
 Both the app and its website [hearbirdsagain.org](https://hearbirdsagain.org) include documentation pertaining to the app. The in-app documentation includes detailed descriptions of the functions of app controls, but defers to the website for many details about other topics, such as [the problem the app solves](https://hearbirdsagain.org/problem-and-solutions/) and the [binaural headset](https://hearbirdsagain.org/binaural-headset/) that we strongly recommend using with the app. *If you want to make effective use of the app, please take the time to read both the in-app documentation and the web site.*
 
-You're currently viewing the app's *Info* tab, which includes several pages of documentation. You can navigate among the pages by swiping left and right or tapping to the left or right of the dots near the bottom of the tab.
+You're currently viewing the app's *Info* tab, which includes several pages of documentation. You can navigate among the pages by swiping left and right or tapping to the left or right of the dots near the bottom of the screen.
 
 We hope you enjoy using ***Hear Birds Again***!
 """)
