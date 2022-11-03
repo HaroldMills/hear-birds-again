@@ -71,7 +71,7 @@ struct HbaView: View {
                     .tag(Tab.console)
             }
 
-            InfoView()
+            InfoView(saveAction: {})
                 .tabItem {
                     Label("Info", systemImage: "info.circle")
                 }
