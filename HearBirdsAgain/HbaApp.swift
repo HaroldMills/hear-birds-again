@@ -10,7 +10,6 @@ import SwiftUI
 import AVFoundation
 
 
-// TODO: Handle audio session interruptions.
 // TODO: Could we reduce latency via AVAudioSession.setPreferredIOBufferDuration?
 // TODO: Look at AVAudioSession.inputLatency and AVAudioSession.outputLatency for different devices.
 
