@@ -5,6 +5,7 @@
 //  Created by Harold Mills on 3/25/22.
 //
 
+
 import SwiftUI
 import AVFoundation
 
@@ -87,14 +88,12 @@ class HbaApp: App {
         
         do {
             
-            try setAudioSessionCategory()
-            
             try configureAudioSession()
             
         } catch _Error.error(let message) {
-            errors.handleFatalError(message: "Audio processor initialization failed. \(message)")
+            errors.handleFatalError(message: "Audio session configuration failed. \(message)")
         } catch {
-            errors.handleFatalError(message: "Audio processor initialization failed. \(error.localizedDescription)")
+            errors.handleFatalError(message: "Audio session configuration failed. \(error.localizedDescription)")
         }
 
         setUpNotifications()
@@ -110,6 +109,9 @@ class HbaApp: App {
             self, selector: #selector(handleAudioSessionRouteChange), name: AVAudioSession.routeChangeNotification, object: nil)
         
         notificationCenter.addObserver(
+            self, selector: #selector(handleAudioSessionInterruption), name: AVAudioSession.interruptionNotification, object: nil)
+        
+        notificationCenter.addObserver(
             self, selector: #selector(handleDeviceOrientationChange), name: UIDevice.orientationDidChangeNotification, object: nil)
         
         notificationCenter.addObserver(self, selector: #selector(handleUserDefaultsDidChange), name: UserDefaults.didChangeNotification, object: nil)
@@ -117,32 +119,6 @@ class HbaApp: App {
     }
 
 
-    @objc private func handleUserDefaultsDidChange(notification: Notification) {
-        
-        // If zero hertz cutoff is disabled, set cutoff to default
-        // instead of zero.
-        if !HbaApp.zeroHzCutoffVisible && audioProcessor.cutoff == 0 {
-            audioProcessor.cutoff = AudioProcessor.defaultState.cutoff
-        }
-        
-    }
-    
-    
-    @objc private func handleDeviceOrientationChange(notification: Notification) {
-        // console.log("Device orientation changed to \(UIDevice.current.orientation.rawValue).")
-        let session = AVAudioSession.sharedInstance()
-        if let source = session.inputDataSource {
-            if source.dataSourceName == "Back" {
-                if let pattern = source.selectedPolarPattern {
-                    if pattern == .stereo {
-                        setPreferredInputOrientation()
-                    }
-                }
-            }
-        }
-    }
-    
-    
     @objc private func handleAudioSessionRouteChange(notification: Notification) {
         
         //  See https://developer.apple.com/documentation/avfaudio/avaudiosession/responding_to_audio_session_route_changes
@@ -156,7 +132,7 @@ class HbaApp: App {
 
         console.log()
         let reasonString = getAudioSessionRouteChangeReasonString(reason: reason)
-        console.log("HeadBirdsAgainApp.handleRouteChange: \(reasonString)")
+        console.log("HbaApp.handleRouteChange: \(reasonString)")
         showAudioSessionCurrentRoute()
         
         do {
@@ -175,7 +151,7 @@ class HbaApp: App {
             // audio session category changed
             
             if (AVAudioSession.sharedInstance().secondaryAudioShouldBeSilencedHint) {
-                console.log("HearBirdsAgainApp.handleRouteChange: Secondary audio should be silenced.")
+                console.log("HbaApp.handleRouteChange: Secondary audio should be silenced.")
                 audioProcessor.stop()
             } else {
                 audioProcessor.restartIfRunning()
@@ -217,7 +193,48 @@ class HbaApp: App {
         
     }
 
-
+    
+    @objc private func handleAudioSessionInterruption(notification: Notification) {
+        
+        console.log()
+        console.log("HbaApp.handleAudioSessionInterruption")
+        
+        // Stop audio processor if it's running. If we don't do this (as of iOS 15.7.1,
+        // at least), the app crashes with the Xcode console error message:
+        //
+        // *** Terminating app due to uncaught exception 'com.apple.coreaudio.avfaudio',
+        //     reason: 'required condition is false: IsFormatSampleRateAndChannelCountValid(format)'
+        audioProcessor.stop()
+        
+    }
+    
+    
+    @objc private func handleDeviceOrientationChange(notification: Notification) {
+        // console.log("Device orientation changed to \(UIDevice.current.orientation.rawValue).")
+        let session = AVAudioSession.sharedInstance()
+        if let source = session.inputDataSource {
+            if source.dataSourceName == "Back" {
+                if let pattern = source.selectedPolarPattern {
+                    if pattern == .stereo {
+                        setPreferredInputOrientation()
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    @objc private func handleUserDefaultsDidChange(notification: Notification) {
+        
+        // If zero hertz cutoff is disabled, set cutoff to default
+        // instead of zero.
+        if !HbaApp.zeroHzCutoffVisible && audioProcessor.cutoff == 0 {
+            audioProcessor.cutoff = AudioProcessor.defaultState.cutoff
+        }
+        
+    }
+    
+    
 }
 
 
@@ -412,24 +429,6 @@ private func songFinderAudioUnitPresent() -> Bool {
 }
 
 
-private func setAudioSessionCategory() throws {
-    
-    let session = AVAudioSession.sharedInstance()
-
-    do {
-        
-        // Do *not* include `mode: .measurement` here. That disables stereo input.
-        try session.setCategory(.playAndRecord, options: [.allowBluetooth, .allowBluetoothA2DP, .allowAirPlay])
-        
-        try session.setActive(true)
-        
-    } catch {
-        throw _Error.error(message: "Could not set audio session category. \(String(describing: error))")
-    }
-
-}
-
-
 private func getCurrentAudioInput() -> AVAudioSessionDataSourceDescription? {
     let session = AVAudioSession.sharedInstance()
     return session.inputDataSource
@@ -453,18 +452,35 @@ private func configureAudioSession() throws {
     
     let session = AVAudioSession.sharedInstance()
     
-    // Configure audio session.
+    // Set session category.
     do {
-        
-        let sampleRate = 48000.0;
-        
-        try session.setPreferredSampleRate(sampleRate)
-
-        let ioBufferDuration = 128.0 / sampleRate
-        try session.setPreferredIOBufferDuration(ioBufferDuration)
-        
+        // Do *not* include `mode: .measurement` here. That disables stereo input.
+        try session.setCategory(.playAndRecord, options: [.allowBluetooth, .allowBluetoothA2DP, .allowAirPlay])
     } catch {
-        throw _Error.error(message: "Could not configure audio session. \(String(describing: error))")
+        throw _Error.error(message: "Could not set audio session category. \(String(describing: error))")
+    }
+    
+    // Activate session.
+    do {
+        try session.setActive(true)
+    } catch {
+        throw _Error.error(message: "Could not activate audio session. \(String(describing: error))")
+    }
+
+    // Set preferred sample rate.
+    let sampleRate = 48000.0;
+    do {
+        try session.setPreferredSampleRate(sampleRate)
+    } catch {
+        throw _Error.error(message: "Could not set audio session preferred sample rate. \(String(describing: error))")
+    }
+    
+    // Set preferred I/O buffer duration.
+    let ioBufferDuration = 128.0 / sampleRate
+    do {
+        try session.setPreferredIOBufferDuration(ioBufferDuration)
+    } catch {
+        throw _Error.error(message: "Could not set audio session preferred I/O buffer duration. \(String(describing: error))")
     }
     
 }
