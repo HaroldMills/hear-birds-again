@@ -19,7 +19,15 @@ struct WillHbaHelpInfoPage: View {
 
                 Text("""
 Generally speaking, if you are unable to hear high-pitched bird songs yet can have conversations without the need of hearing aids, this app will be of use to you. However, we strongly advise having your hearing tested by an audiologist and obtaining an audiogram, so that you know the exact frequencies at which your hearing becomes impaired. You may also visit [this website](http://www.phys.unsw.edu.au/jw/hearing.html) to test your hearing online.
+""")
+                .padding()
+                
+                Image("HearingTest")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                .padding()
 
+                Text("""
 It will also be informative to listen to the [audio examples](https://hearbirdsagain.org/hear-for-yourself/) on our website where bird songs are played at normal pitch followed by pitch-lowered examples.
 
 Below is an audiogram that depicts high frequency hearing loss due to aging (presbycusis). As you can see, the average 60 year-old exhibits substantial hearing loss above 3000 Hz. This is not good news for birders because the majority of songbirds have songs that fall in that range.

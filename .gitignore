@@ -2,3 +2,7 @@
 
 # Xcode user data
 xcuserdata/
+
+# Image files that cannot be included in the HBA Git repo due to
+# intellectual property restrictions.
+HearingTest.jpg
