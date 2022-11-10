@@ -1,0 +1,4 @@
+*.DS_Store
+
+# Xcode user data
+xcuserdata/
