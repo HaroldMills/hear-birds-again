@@ -17,7 +17,7 @@
 		F21AA28D28DB68CA00530DD4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F21AA28C28DB68CA00530DD4 /* Settings.bundle */; };
 		F234AA7428E4A4F3009C2A88 /* PitchShiftHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234AA7328E4A4F3009C2A88 /* PitchShiftHelp.swift */; };
 		F23B988D28C8E9560020BA30 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23B988C28C8E9560020BA30 /* VolumeView.swift */; };
-		F24AD4552860C4D500554D3D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4542860C4D500554D3D /* HomeView.swift */; };
+		F24AD4552860C4D500554D3D /* ListenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4542860C4D500554D3D /* ListenView.swift */; };
 		F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4582860CB7E00554D3D /* ConsoleView.swift */; };
 		F24AD45D2860CE9900554D3D /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD45C2860CE9900554D3D /* ViewExtensions.swift */; };
 		F2609D0527EE0B88005DACFA /* HbaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D0427EE0B88005DACFA /* HbaApp.swift */; };
@@ -66,7 +66,7 @@
 		F234AA7328E4A4F3009C2A88 /* PitchShiftHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchShiftHelp.swift; sourceTree = "<group>"; };
 		F23B988C28C8E9560020BA30 /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
 		F245FCFD27FCD5A000C54A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		F24AD4542860C4D500554D3D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F24AD4542860C4D500554D3D /* ListenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenView.swift; sourceTree = "<group>"; };
 		F24AD4582860CB7E00554D3D /* ConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleView.swift; sourceTree = "<group>"; };
 		F24AD45C2860CE9900554D3D /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		F2609D0127EE0B88005DACFA /* HearBirdsAgain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HearBirdsAgain.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,7 +155,7 @@
 				F2945ABA283E6A8B0056D1F3 /* Console.swift */,
 				F2945ABC283E75BB0056D1F3 /* Errors.swift */,
 				F2609D0627EE0B88005DACFA /* HbaView.swift */,
-				F24AD4542860C4D500554D3D /* HomeView.swift */,
+				F24AD4542860C4D500554D3D /* ListenView.swift */,
 				F2B090D528EDF4FB00DBCF35 /* HelpButton.swift */,
 				F278D0F228F9CE400000762B /* HelpTitle.swift */,
 				F278D0F028F9C4B30000762B /* HelpDoneButton.swift */,
@@ -320,7 +320,7 @@
 				F2609D0727EE0B88005DACFA /* HbaView.swift in Sources */,
 				F2B090D628EDF4FB00DBCF35 /* HelpButton.swift in Sources */,
 				F2609D1627EE0CAB005DACFA /* SongFinderAudioUnit.swift in Sources */,
-				F24AD4552860C4D500554D3D /* HomeView.swift in Sources */,
+				F24AD4552860C4D500554D3D /* ListenView.swift in Sources */,
 				F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */,
 				F2CB634A28C66581008C2434 /* LevelMeters.swift in Sources */,
 				F2ECC99228FE089800E585DE /* InfoPageSectionHeader.swift in Sources */,

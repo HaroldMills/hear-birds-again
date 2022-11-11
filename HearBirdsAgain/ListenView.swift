@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  ListenView.swift
 //  HearBirdsAgain
 //
 //  Created by Harold Mills on 6/20/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct ListenView: View {
     
     @ObservedObject var audioProcessor: AudioProcessor
 
@@ -149,6 +149,6 @@ private func getAppVersion() -> String {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(audioProcessor: audioProcessor)
+        ListenView(audioProcessor: audioProcessor)
     }
 }

@@ -19,7 +19,7 @@ struct HbaView: View {
     let saveAction: () -> Void
 
     enum Tab: String {
-        case home
+        case listen
         case controls
         case console
         case info
@@ -47,11 +47,11 @@ struct HbaView: View {
         
         TabView(selection: $selectedTab) {
             
-            HomeView(audioProcessor: audioProcessor)
+            ListenView(audioProcessor: audioProcessor)
                 .tabItem {
-                    Label("Home", systemImage: "house")
+                    Label("Listen", systemImage: "headphones")
                 }
-                .tag(Tab.home)
+                .tag(Tab.listen)
 
             ControlsView(audioProcessor: audioProcessor)
                 .tabItem {
