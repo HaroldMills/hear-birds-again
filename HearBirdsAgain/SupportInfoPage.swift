@@ -17,6 +17,11 @@ struct SupportInfoPage: View {
                 
                 InfoPageTitle("Support")
                 
+                Image("Support")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding()
+                
                 Text("""
 If you experience technical problems with ***Hear Birds Again*** or have questions about how to use it, please feel free to email us at support@hearbirdsagain.org.
 
