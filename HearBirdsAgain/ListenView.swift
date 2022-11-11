@@ -20,7 +20,7 @@ struct ListenView: View {
         
         VStack {
             
-            Title("Hear Birds Again", subtitle: "Version \(getAppVersion())")
+            Title("Hear Birds Again", subtitle: "Version \(getAppVersion()) Build \(getBuildNumber())")
                 .padding()
             
             HStack {
@@ -144,6 +144,11 @@ struct ListenView: View {
 
 private func getAppVersion() -> String {
     return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+}
+
+
+private func getBuildNumber() -> String {
+    return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
 }
 
 
