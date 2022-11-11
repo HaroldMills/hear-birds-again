@@ -4,6 +4,9 @@
 //
 //  Created by Harold Mills on 9/26/22.
 //
+//  This view is currently unused. I am retaining it in case we want
+//  to switch to HTML info pages in the future.
+//
 
 
 import SwiftUI

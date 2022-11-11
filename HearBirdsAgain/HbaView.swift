@@ -23,9 +23,6 @@ struct HbaView: View {
         case controls
         case console
         case info
-        case help
-        case about
-        case donate
     }
     
     @SceneStorage("HbaView.selectedTab") private var selectedTab = Tab.info

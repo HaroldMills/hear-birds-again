@@ -15,13 +15,10 @@
 		F2104BA1286C9AA100F65AEF /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2104BA0286C9AA100F65AEF /* LevelMeter.swift */; };
 		F218630D28F85F2A000751B2 /* HeadsetInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */; };
 		F21AA28D28DB68CA00530DD4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F21AA28C28DB68CA00530DD4 /* Settings.bundle */; };
-		F21AA28F28DB7FEF00530DD4 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21AA28E28DB7FEF00530DD4 /* AboutView.swift */; };
-		F21AA29128DB81D300530DD4 /* DonateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21AA29028DB81D300530DD4 /* DonateView.swift */; };
 		F234AA7428E4A4F3009C2A88 /* PitchShiftHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234AA7328E4A4F3009C2A88 /* PitchShiftHelp.swift */; };
 		F23B988D28C8E9560020BA30 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23B988C28C8E9560020BA30 /* VolumeView.swift */; };
 		F24AD4552860C4D500554D3D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4542860C4D500554D3D /* HomeView.swift */; };
 		F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4582860CB7E00554D3D /* ConsoleView.swift */; };
-		F24AD45B2860CC1C00554D3D /* HelpViewOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD45A2860CC1C00554D3D /* HelpViewOld.swift */; };
 		F24AD45D2860CE9900554D3D /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD45C2860CE9900554D3D /* ViewExtensions.swift */; };
 		F2609D0527EE0B88005DACFA /* HbaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D0427EE0B88005DACFA /* HbaApp.swift */; };
 		F2609D0727EE0B88005DACFA /* HbaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2609D0627EE0B88005DACFA /* HbaView.swift */; };
@@ -46,7 +43,6 @@
 		F298CC7128EB4EC60042154C /* BalanceHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298CC7028EB4EC60042154C /* BalanceHelp.swift */; };
 		F2B090D628EDF4FB00DBCF35 /* HelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B090D528EDF4FB00DBCF35 /* HelpButton.swift */; };
 		F2BCDE5128E2022F00E7A5E4 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCDE5028E2022F00E7A5E4 /* WebView.swift */; };
-		F2BCDE5328E2075500E7A5E4 /* Help.html in Resources */ = {isa = PBXBuildFile; fileRef = F2BCDE5228E2075500E7A5E4 /* Help.html */; };
 		F2CB1FF928F6F64100D47879 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB1FF828F6F64100D47879 /* InfoView.swift */; };
 		F2CB1FFB28F6F7AF00D47879 /* WelcomeInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB1FFA28F6F7AF00D47879 /* WelcomeInfoPage.swift */; };
 		F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634728C65FA5008C2434 /* ControlsView.swift */; };
@@ -67,14 +63,11 @@
 		F2104BA0286C9AA100F65AEF /* LevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
 		F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadsetInfoPage.swift; sourceTree = "<group>"; };
 		F21AA28C28DB68CA00530DD4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		F21AA28E28DB7FEF00530DD4 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		F21AA29028DB81D300530DD4 /* DonateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateView.swift; sourceTree = "<group>"; };
 		F234AA7328E4A4F3009C2A88 /* PitchShiftHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchShiftHelp.swift; sourceTree = "<group>"; };
 		F23B988C28C8E9560020BA30 /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
 		F245FCFD27FCD5A000C54A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F24AD4542860C4D500554D3D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F24AD4582860CB7E00554D3D /* ConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleView.swift; sourceTree = "<group>"; };
-		F24AD45A2860CC1C00554D3D /* HelpViewOld.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewOld.swift; sourceTree = "<group>"; };
 		F24AD45C2860CE9900554D3D /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		F2609D0127EE0B88005DACFA /* HearBirdsAgain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HearBirdsAgain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2609D0427EE0B88005DACFA /* HbaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HbaApp.swift; sourceTree = "<group>"; };
@@ -109,7 +102,6 @@
 		F2B090D428EDD31F00DBCF35 /* README.md */ = {isa = PBXFileReference; explicitFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F2B090D528EDF4FB00DBCF35 /* HelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpButton.swift; sourceTree = "<group>"; };
 		F2BCDE5028E2022F00E7A5E4 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		F2BCDE5228E2075500E7A5E4 /* Help.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = Help.html; sourceTree = "<group>"; };
 		F2CB1FF828F6F64100D47879 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		F2CB1FFA28F6F7AF00D47879 /* WelcomeInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeInfoPage.swift; sourceTree = "<group>"; };
 		F2CB634728C65FA5008C2434 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
@@ -192,11 +184,7 @@
 				F2ECC98F28FDB28000E585DE /* UiInfoPage.swift */,
 				F205C427290050A1000E6E20 /* ProjectInfoPage.swift */,
 				F205C42D29007356000E6E20 /* SupportInfoPage.swift */,
-				F24AD45A2860CC1C00554D3D /* HelpViewOld.swift */,
-				F2BCDE5228E2075500E7A5E4 /* Help.html */,
 				F2BCDE5028E2022F00E7A5E4 /* WebView.swift */,
-				F21AA28E28DB7FEF00530DD4 /* AboutView.swift */,
-				F21AA29028DB81D300530DD4 /* DonateView.swift */,
 				F24AD45C2860CE9900554D3D /* ViewExtensions.swift */,
 				F245FCFD27FCD5A000C54A50 /* Info.plist */,
 				F2609D0827EE0B89005DACFA /* Assets.xcassets */,
@@ -305,7 +293,6 @@
 			files = (
 				F205C42C2900674C000E6E20 /* LICENSE in Resources */,
 				F2609D0C27EE0B89005DACFA /* Preview Assets.xcassets in Resources */,
-				F2BCDE5328E2075500E7A5E4 /* Help.html in Resources */,
 				F205C42A29006651000E6E20 /* README.md in Resources */,
 				F21AA28D28DB68CA00530DD4 /* Settings.bundle in Resources */,
 				F2609D0927EE0B89005DACFA /* Assets.xcassets in Resources */,
@@ -324,14 +311,11 @@
 				F2CB1FF928F6F64100D47879 /* InfoView.swift in Sources */,
 				F2609D2327EE0FAB005DACFA /* DSPKernel.mm in Sources */,
 				F298CC6B28EB427A0042154C /* InputHelp.swift in Sources */,
-				F21AA29128DB81D300530DD4 /* DonateView.swift in Sources */,
 				F2CB1FFB28F6F7AF00D47879 /* WelcomeInfoPage.swift in Sources */,
 				F2ECC99028FDB28000E585DE /* UiInfoPage.swift in Sources */,
 				F206341828F0667F0060E5FF /* DonateButton.swift in Sources */,
-				F24AD45B2860CC1C00554D3D /* HelpViewOld.swift in Sources */,
 				F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */,
 				F278D0F128F9C4B30000762B /* HelpDoneButton.swift in Sources */,
-				F21AA28F28DB7FEF00530DD4 /* AboutView.swift in Sources */,
 				F234AA7428E4A4F3009C2A88 /* PitchShiftHelp.swift in Sources */,
 				F2609D0727EE0B88005DACFA /* HbaView.swift in Sources */,
 				F2B090D628EDF4FB00DBCF35 /* HelpButton.swift in Sources */,
