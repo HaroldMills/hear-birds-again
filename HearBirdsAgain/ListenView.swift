@@ -114,7 +114,7 @@ struct ListenView: View {
                     
                     DonateButton()
                     
-                    Text("***Hear Birds Again*** is free and open source software, made available as a nonprofit public service. Please help support its continued development, which is funded entirely by user donations.")
+                    Text("***Hear Birds Again*** is free and open source software, made available as a public service by the nonprofit [Miracle of Nature](https://miracleofnature.org). Please help support its continued development, which is funded entirely by user donations.")
                     
                 }
                 .padding()
