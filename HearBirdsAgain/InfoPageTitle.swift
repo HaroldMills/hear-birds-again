@@ -23,7 +23,8 @@ struct InfoPageTitle: View {
         Text(title)
             .font(.title)
             .fontWeight(.bold)
-            .padding([.leading, .top])
+            .padding([.top], 35)
+            .padding([.leading])
         
     }
     

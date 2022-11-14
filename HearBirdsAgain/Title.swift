@@ -19,7 +19,7 @@ struct _Title: View {
         Text(title)
             .font(.title)
             .fontWeight(.bold)
-//            .font(.system(size: 35, weight: .bold, design: .default))
+            .padding([.top], 20)
     }
     
 }
