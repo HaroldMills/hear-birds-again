@@ -25,7 +25,7 @@ struct SupportInfoPage: View {
                 Text("""
 If you experience technical problems with ***Hear Birds Again*** or have questions about how to use it, please feel free to email us at support@hearbirdsagain.org.
 
-There is also a ***Hear Birds Again*** [Google group](https://groups.google.com/g/hear-birds-again) that you can [join](https://hearbirdsagain.org/users-forum/) to communicate with other users and the development team. You can post messages to and receive messages from the group either via email or on the group's [website](https://groups.google.com/g/hear-birds-again). We hope to see you there!
+There is also a [Google group](https://groups.google.com/g/hear-birds-again) named *Hear Birds Again* that you can [join](https://support.google.com/groups/answer/1067205) to communicate with other users and the development team. You can post messages to and receive messages from the group either via email or on the group's [website](https://groups.google.com/g/hear-birds-again). We hope to see you there!
 """)
                 .padding()
                 
