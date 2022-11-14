@@ -18,46 +18,67 @@ struct UiInfoPage: View {
                 InfoPageTitle("The User Interface")
     
                 Text("""
-The ***Hear Birds Again*** user interface comprises three tabs, named *Listen*, *More Controls*, and *Info*. Only one tab is visible at a time, according to the icon selected in the *tab bar* at the bottom of the screen. The tab bar looks like this:
+The ***Hear Birds Again*** user interface comprises three tabs, named *Listen*, *More Controls*, and *Info*. Only one tab is visible at a time, according to the icon selected in the *tab bar* at the bottom of the screen. You are currently viewing the *Info* tab. To see either of the other tabs, just tap its icon in the tab bar.
 """)
                 .padding()
-                
-                Image("TabBar")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding([.leading, .trailing])
 
-                Text("""
-You are currently viewing the *Info* tab. To see either of the other tabs, just tap its icon in the tab bar.
-
-You'll probably use the *Listen* tab most often, since it includes the primary app controls. These include the controls that allow you to adjust the amount of pitch shifting the app performs and the frequency at which shifting starts.
-
-The *More Controls* tab includes less-frequently used controls. These controls allow you to adjust the gain (that is, amplification) and balance (when the output is stereo) for the current input device. For many input devices, these controls will require no adjustment. For others, you may want to adjust them when you first start using a device, but once you have adjusted them appropriately you will probably not need to adjust them again.
-
-Throughout the user interface, most controls are accompanied by a small help button that looks like this:
-""")
-                .padding()
-                
-                HStack {
+                Group {
                     
-                    Spacer()
+                    InfoPageSectionHeader("The *Listen* Tab")
                     
-                    Image("HelpButton")
+                    Text("""
+    You'll probably use the *Listen* tab most often, since it includes the primary app controls. These include the controls that allow you to adjust the amount of pitch shifting the app performs and the frequency at which shifting starts.
+    
+    The *Listen* tab looks like this:
+    """)
+                    .padding()
+                    
+                    Image("ListenTab")
                         .resizable()
-                        .frame(width: 32, height: 30
-                        )
-                        // .aspectRatio(contentMode: .fit)
-                        .padding([.leading, .trailing])
+                        .aspectRatio(contentMode: .fit)
+                        .padding([.leading, .bottom, .trailing])
+
+                    Text("""
+    Throughout the user interface, most controls are accompanied by a small help button that looks like this:
+    """)
+                    .padding()
                     
-                    Spacer()
+                    HStack {
+                        
+                        Spacer()
+                        
+                        Image("HelpButton")
+                            .resizable()
+                            .frame(width: 32, height: 30
+                            )
+                        // .aspectRatio(contentMode: .fit)
+                            .padding([.leading, .trailing])
+                        
+                        Spacer()
+                        
+                    }
+                    
+                    Text("""
+    You can tap a control's help button to see a detailed explanation of the control's function. So, for example, you can tap the help buttons for the *Pitch Shift* and *Start Frequency* controls on the *Listen* tab to learn more about them.
+    """)
+                    .padding()
                     
                 }
                 
+                InfoPageSectionHeader("The *More Controls* Tab")
+                
                 Text("""
-You can tap a control's help button to see a detailed explanation of the control's function.
+The *More Controls* tab includes less-frequently used controls. These controls allow you to adjust the gain (that is, amplification) and balance (when the output is stereo) for the current input device (for example, the R0DE AI-Micro if you're using the recommended binaural headset, or the iPhone Microphone in many other cases). For many input devices, these controls will require no adjustment. For others, you may want to adjust them when you first start using a device, but once you have adjusted them appropriately you will probably not need to adjust them again.
+
+The *More Controls* tab looks like this:
 """)
                 .padding()
                 
+                Image("MoreControlsTab")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding([.leading, .bottom, .trailing])
+
             }
             .hbaScrollbar()
             
