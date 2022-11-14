@@ -53,9 +53,9 @@ struct HbaView: View {
                 }
                 .tag(Tab.listen)
 
-            ControlsView(audioProcessor: audioProcessor)
+            MoreControlsView(audioProcessor: audioProcessor)
                 .tabItem {
-                    Label("Controls", systemImage: "slider.horizontal.3")
+                    Label("More Controls", systemImage: "slider.horizontal.3")
                         
                     }
                 .tag(Tab.controls)

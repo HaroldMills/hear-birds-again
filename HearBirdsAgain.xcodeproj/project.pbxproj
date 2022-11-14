@@ -45,7 +45,7 @@
 		F2BCDE5128E2022F00E7A5E4 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2BCDE5028E2022F00E7A5E4 /* WebView.swift */; };
 		F2CB1FF928F6F64100D47879 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB1FF828F6F64100D47879 /* InfoView.swift */; };
 		F2CB1FFB28F6F7AF00D47879 /* WelcomeInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB1FFA28F6F7AF00D47879 /* WelcomeInfoPage.swift */; };
-		F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634728C65FA5008C2434 /* ControlsView.swift */; };
+		F2CB634828C65FA5008C2434 /* MoreControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634728C65FA5008C2434 /* MoreControlsView.swift */; };
 		F2CB634A28C66581008C2434 /* LevelMeters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634928C66581008C2434 /* LevelMeters.swift */; };
 		F2CB634C28C67833008C2434 /* StartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634B28C67833008C2434 /* StartButton.swift */; };
 		F2CB634E28C67A37008C2434 /* Title.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CB634D28C67A37008C2434 /* Title.swift */; };
@@ -104,7 +104,7 @@
 		F2BCDE5028E2022F00E7A5E4 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		F2CB1FF828F6F64100D47879 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		F2CB1FFA28F6F7AF00D47879 /* WelcomeInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeInfoPage.swift; sourceTree = "<group>"; };
-		F2CB634728C65FA5008C2434 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
+		F2CB634728C65FA5008C2434 /* MoreControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreControlsView.swift; sourceTree = "<group>"; };
 		F2CB634928C66581008C2434 /* LevelMeters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeters.swift; sourceTree = "<group>"; };
 		F2CB634B28C67833008C2434 /* StartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButton.swift; sourceTree = "<group>"; };
 		F2CB634D28C67A37008C2434 /* Title.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Title.swift; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 				F2CB634928C66581008C2434 /* LevelMeters.swift */,
 				F2CB634B28C67833008C2434 /* StartButton.swift */,
 				F23B988C28C8E9560020BA30 /* VolumeView.swift */,
-				F2CB634728C65FA5008C2434 /* ControlsView.swift */,
+				F2CB634728C65FA5008C2434 /* MoreControlsView.swift */,
 				F298CC6A28EB427A0042154C /* InputHelp.swift */,
 				F298CC6E28EB4C360042154C /* InputGainHelp.swift */,
 				F298CC6C28EB43E20042154C /* GainHelp.swift */,
@@ -314,7 +314,7 @@
 				F2CB1FFB28F6F7AF00D47879 /* WelcomeInfoPage.swift in Sources */,
 				F2ECC99028FDB28000E585DE /* UiInfoPage.swift in Sources */,
 				F206341828F0667F0060E5FF /* DonateButton.swift in Sources */,
-				F2CB634828C65FA5008C2434 /* ControlsView.swift in Sources */,
+				F2CB634828C65FA5008C2434 /* MoreControlsView.swift in Sources */,
 				F278D0F128F9C4B30000762B /* HelpDoneButton.swift in Sources */,
 				F234AA7428E4A4F3009C2A88 /* PitchShiftHelp.swift in Sources */,
 				F2609D0727EE0B88005DACFA /* HbaView.swift in Sources */,

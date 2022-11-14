@@ -18,7 +18,7 @@ struct UiInfoPage: View {
                 InfoPageTitle("The User Interface")
     
                 Text("""
-The ***Hear Birds Again*** user interface comprises three tabs, named *Home*, *Controls*, and *Info*. Only one tab is visible at a time, according to the icon selected in the *tab bar* at the bottom of the screen. The tab bar looks like this:
+The ***Hear Birds Again*** user interface comprises three tabs, named *Listen*, *More Controls*, and *Info*. Only one tab is visible at a time, according to the icon selected in the *tab bar* at the bottom of the screen. The tab bar looks like this:
 """)
                 .padding()
                 
@@ -28,11 +28,13 @@ The ***Hear Birds Again*** user interface comprises three tabs, named *Home*, *C
                     .padding([.leading, .trailing])
 
                 Text("""
-You are currently viewing the *Info* tab.
+You are currently viewing the *Info* tab. To see either of the other tabs, just tap its icon in the tab bar.
 
-You'll probably use the *Home* tab most often, since it includes the most frequently-used app controls. The *Controls* tab includes less-frequently used controls.
+You'll probably use the *Listen* tab most often, since it includes the primary app controls. These include the controls that allow you to adjust the amount of pitch shifting the app performs and the frequency at which shifting starts.
 
-On both the *Home* and *Controls* tabs, most controls are accompanied by a small help button that looks like this:
+The *More Controls* tab includes less-frequently used controls. These controls allow you to adjust the gain (that is, amplification) and balance (when the output is stereo) for the current input device. For many input devices, these controls will require no adjustment. For others, you may want to adjust them when you first start using a device, but once you have adjusted them appropriately you will probably not need to adjust them again.
+
+Throughout the user interface, most controls are accompanied by a small help button that looks like this:
 """)
                 .padding()
                 
@@ -52,7 +54,7 @@ On both the *Home* and *Controls* tabs, most controls are accompanied by a small
                 }
                 
                 Text("""
-Tap a control's help button to see a detailed explanation of the control's function.
+You can tap a control's help button to see a detailed explanation of the control's function.
 """)
                 .padding()
                 

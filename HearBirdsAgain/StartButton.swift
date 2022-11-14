@@ -20,7 +20,7 @@ struct StartButton: View {
     
     var body: some View {
         
-        Button(buttonTitle) {
+        Button {
 
             if (audioProcessor.running) {
                 audioProcessor.stop()
@@ -28,7 +28,23 @@ struct StartButton: View {
                 audioProcessor.start()
             }
 
+        } label: {
+            Text(buttonTitle)
         }
+        .padding(10)
+        .background(.blue)
+        .foregroundColor(.white)
+        .clipShape(RoundedRectangle(cornerRadius: 5))
+
+//        Button(buttonTitle) {
+//
+//            if (audioProcessor.running) {
+//                audioProcessor.stop()
+//            } else {
+//                audioProcessor.start()
+//            }
+//
+//        }
         
     }
     

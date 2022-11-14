@@ -1,5 +1,5 @@
 //
-//  ControlsView.swift
+//  MoreControlsView.swift
 //  HearBirdsAgain
 //
 //  Created by Harold Mills on 9/5/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ControlsView: View {
+struct MoreControlsView: View {
     
     private let windowControlsVisible = false
 
@@ -208,6 +208,6 @@ struct ControlsView: View {
 
 struct ControlsView_Previews: PreviewProvider {
     static var previews: some View {
-        ControlsView(audioProcessor: audioProcessor)
+        MoreControlsView(audioProcessor: audioProcessor)
     }
 }
