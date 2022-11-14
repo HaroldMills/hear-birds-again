@@ -70,7 +70,7 @@ The ***Hear Birds Again*** user interface comprises three tabs, named *Listen*, 
                     InfoPageSectionHeader("The *More Controls* Tab")
                     
                     Text("""
-    The *More Controls* tab includes less-frequently used controls. These controls allow you to adjust the gain (that is, amplification) and balance (when the output is stereo) for the current input device (for example, the R0DE AI-Micro if you're using the recommended binaural headset, or the iPhone Microphone in many other cases). For many input devices, these controls will require no adjustment. For others, you may want to adjust them when you first start using a device, but once you have adjusted them appropriately you will probably not need to adjust them again.
+    The *More Controls* tab includes less-frequently used controls. These controls allow you to adjust the gain (that is, amplification) and balance (when the output is stereo) for the current input device (for example, the R0DE AI-Micro if you're using the recommended [binaural headset](https://hearbirdsagain.org/binaural-headset/), or the iPhone Microphone in many other cases). For many input devices, these controls will require no adjustment. For others, you may want to adjust them when you first start using a device, but once you have adjusted them appropriately you will probably not need to adjust them again.
     
     The *More Controls* tab looks like this:
     """)
