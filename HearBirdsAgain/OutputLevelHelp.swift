@@ -24,7 +24,7 @@ The *Output Level* meter shows the power level of the audio that ***Hear Birds A
 
 You can look at the meter to confirm that ***Hear Birds Again*** is receiving audio from the mics, either those mounted on the recommended [binaural headset](https://hearbirdsagain.org/binaural-headset/) or those built into your iOS device or auxiliary earbuds or headphones. If the app is receiving audio, you will see activity in the meter. If the app is not receiving audio, the meter will be still.
 
-If the output level displayed in the meter is consistently low (towards the left end of the green region, say even when you make pishing sounds) or high (jumping into the red region), try raising or lowering the gain on the *Controls* tab to suit.
+If the output level displayed in the meter is consistently low (towards the left end of the green region, say even when you make pishing sounds) or high (jumping into the red region), try raising or lowering the gain on the *More Controls* tab to suit.
 """)
             .padding()
             
