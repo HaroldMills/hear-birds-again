@@ -42,6 +42,7 @@ private struct HbaScrollbarModifier: ViewModifier {
             HStack {
                 Spacer()
                 content
+                    .frame(maxWidth: 500)
                 Spacer()
             }
         }

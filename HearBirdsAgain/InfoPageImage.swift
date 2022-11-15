@@ -11,7 +11,6 @@ struct InfoPageImage: View {
     
     var name: String
     var caption: String?
-    let maxFrameWidth: CGFloat = 500
     
     init(_ name: String, caption: String? = nil) {
         self.name = name
@@ -25,7 +24,6 @@ struct InfoPageImage: View {
             Image(name)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: maxFrameWidth)
             
         } else {
             
@@ -39,7 +37,6 @@ struct InfoPageImage: View {
                     .font(.caption)
                 
             }
-            .frame(maxWidth: maxFrameWidth)
             
         }
                 
