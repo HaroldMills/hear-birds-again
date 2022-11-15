@@ -22,20 +22,8 @@ struct WelcomeInfoPage: View {
 """)
                 .padding()
 
-                VStack {
-                    
-                    Image("HappyUser")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                    
-                    HStack {
-                        Text("\"I'm so happy to hear the high-pitched bird songs again!\"")
-                            .font(.caption)
-                        Spacer()
-                    }
-                    
-                }
-                .padding()
+                InfoPageImage("HappyUser", caption: "\"I'm so happy to hear the high-pitched bird songs again!\"")
+                    .padding()
                 
                 Text("""
 Both the app and its website [hearbirdsagain.org](https://hearbirdsagain.org) include documentation pertaining to the app. The in-app documentation includes detailed descriptions of the functions of app controls, but defers to the website for many details about other topics, such as [the problem the app solves](https://hearbirdsagain.org/problem-and-solutions/) and the [binaural headset](https://hearbirdsagain.org/binaural-headset/) that we strongly recommend using with the app. *If you want to make effective use of the app, please take the time to read both the in-app documentation and the web site.*

@@ -24,9 +24,7 @@ struct ProjectInfoPage: View {
                 
                 InfoPageSectionHeader("Our Team")
                 
-                Image("LangElliott")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                InfoPageImage("LangElliott")
                     .padding([.leading, .top, .trailing])
                 
                 Text("**Lang Elliott**")
@@ -40,9 +38,7 @@ In spite of my disability, I have authored numerous audio guides to bird and oth
 """)
                 .padding()
 
-                Image("HaroldMills")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                InfoPageImage("HaroldMills")
                     .padding([.leading, .top, .trailing])
                 
                 Text("**Harold Mills**")

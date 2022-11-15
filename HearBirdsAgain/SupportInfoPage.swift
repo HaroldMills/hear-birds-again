@@ -17,9 +17,7 @@ struct SupportInfoPage: View {
                 
                 InfoPageTitle("Support")
                 
-                Image("Support")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                InfoPageImage("Support")
                     .padding()
                 
                 Text("""

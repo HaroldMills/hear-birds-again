@@ -34,6 +34,7 @@
 		F278D0F528F9E3450000762B /* InfoPageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F278D0F428F9E3450000762B /* InfoPageTitle.swift */; };
 		F2945ABB283E6A8B0056D1F3 /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABA283E6A8B0056D1F3 /* Console.swift */; };
 		F2945ABD283E75BB0056D1F3 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2945ABC283E75BB0056D1F3 /* Errors.swift */; };
+		F29570982923028600CE8B44 /* InfoPageImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29570972923028600CE8B44 /* InfoPageImage.swift */; };
 		F298CC6528EB2E130042154C /* StartFrequencyHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298CC6428EB2E130042154C /* StartFrequencyHelp.swift */; };
 		F298CC6728EB30470042154C /* OutputLevelHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298CC6628EB30470042154C /* OutputLevelHelp.swift */; };
 		F298CC6928EB33560042154C /* AudioVolumeHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298CC6828EB33560042154C /* AudioVolumeHelp.swift */; };
@@ -89,6 +90,7 @@
 		F278D0F428F9E3450000762B /* InfoPageTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPageTitle.swift; sourceTree = "<group>"; };
 		F2945ABA283E6A8B0056D1F3 /* Console.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		F2945ABC283E75BB0056D1F3 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		F29570972923028600CE8B44 /* InfoPageImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPageImage.swift; sourceTree = "<group>"; };
 		F29647A927EE1BA000AB33A6 /* AdvancingBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AdvancingBuffer.hpp; sourceTree = "<group>"; };
 		F29647AA27EE1BD100AB33A6 /* Interpolator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Interpolator.hpp; sourceTree = "<group>"; };
 		F29647AB27EE1C0200AB33A6 /* OverlapAdder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OverlapAdder.hpp; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				F2CB1FF828F6F64100D47879 /* InfoView.swift */,
 				F2CB1FFA28F6F7AF00D47879 /* WelcomeInfoPage.swift */,
 				F278D0F428F9E3450000762B /* InfoPageTitle.swift */,
+				F29570972923028600CE8B44 /* InfoPageImage.swift */,
 				F2ECC99128FE089800E585DE /* InfoPageSectionHeader.swift */,
 				F2F62B4629030D1E00685DAC /* WillHbaHelpInfoPage.swift */,
 				F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */,
@@ -334,6 +337,7 @@
 				F2945ABD283E75BB0056D1F3 /* Errors.swift in Sources */,
 				F298CC6728EB30470042154C /* OutputLevelHelp.swift in Sources */,
 				F205C428290050A1000E6E20 /* ProjectInfoPage.swift in Sources */,
+				F29570982923028600CE8B44 /* InfoPageImage.swift in Sources */,
 				F298CC6F28EB4C360042154C /* InputGainHelp.swift in Sources */,
 				F2609D1327EE0C2E005DACFA /* AudioProcessor.swift in Sources */,
 				F2609D1B27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm in Sources */,

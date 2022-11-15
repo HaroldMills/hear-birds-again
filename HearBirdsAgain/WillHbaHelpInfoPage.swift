@@ -22,11 +22,9 @@ Generally speaking, if you are unable to hear high-pitched bird songs yet can ha
 """)
                 .padding()
                 
-                Image("HearingTest")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                .padding()
-
+                InfoPageImage("HearingTest")
+                    .padding()
+                
                 Text("""
 It will also be informative to listen to the [audio examples](https://hearbirdsagain.org/hear-for-yourself/) on our website where bird songs are played at normal pitch followed by pitch-lowered examples.
 
@@ -34,21 +32,17 @@ Below is an audiogram that depicts high frequency hearing loss due to aging (pre
 """)
                 .padding()
 
-                Image("AgeRelatedHearingLoss")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                .padding()
-
+                InfoPageImage("AgeRelatedHearingLoss")
+                    .padding()
+                
                 Text("""
 Below is an audiogram of a hypothetical optimal user. Note that hearing in both ears is reasonably good to 2000 Hz, while hearing above 3000 Hz is significantly compromised. Given this curve, it follows that our app should be adjusted to lower bird songs whose pitch falls above around 3000 Hz.
 """)
                 .padding()
 
-                Image("Audiogram")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                .padding()
-
+                InfoPageImage("Audiogram")
+                    .padding()
+                
                 Text("""
 Please visit [our website](https://hearbirdsagain.org) for more details about age-related hearing loss as well as damage due to loud noises.
 """)

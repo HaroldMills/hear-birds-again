@@ -24,9 +24,7 @@ struct HeadsetInfoPage: View {
     """)
                     .padding()
                     
-                    Image("HeadsetSide")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
+                    InfoPageImage("HeadsetSide")
                         .padding()
 
                     Text("""
@@ -34,9 +32,7 @@ Our recommended headset is [described here](https://hearbirdsagain.org/binaural-
 """)
                     .padding()
                     
-                    Image("BinauralHeadset")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
+                    InfoPageImage("BinauralHeadset")
                         .padding()
                     
                     Text("""
@@ -61,9 +57,7 @@ Our recommended headset requires the use of the Rode AI-Micro interface, which w
 """)
                 .padding()
                     
-                Image("RodeCentralConfig")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                InfoPageImage("RodeCentralConfig")
                     .padding()
                     
                 Text("""
