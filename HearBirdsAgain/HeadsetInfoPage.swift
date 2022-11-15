@@ -56,7 +56,7 @@ Our recommended headset requires the use of the Rode AI-Micro interface, which w
                 
 3. TURN OFF the “Direct Monitor” option (the bottommost setting). CAUTION: If left enabled, you will probably experience loud feedback squeal!
                 
-4. Adjust other settings as as shown in the following screenshot of the RodeCentral user interface:
+4. Adjust other settings as shown in the following screenshot of the RodeCentral user interface:
 """)
                 .padding()
                     
