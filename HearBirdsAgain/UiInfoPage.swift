@@ -44,7 +44,7 @@ The ***Hear Birds Again*** user interface comprises three tabs, named *Listen*, 
                     InfoPageSectionHeader("Help Buttons")
                     
                     Text("""
-    On the *Listen* and "More Controls" tabs, most controls are accompanied by a small help button that looks like this:
+    On the *Listen* and *More Controls* tabs, most controls are accompanied by a small help button that looks like this:
     """)
                     .padding()
                     
