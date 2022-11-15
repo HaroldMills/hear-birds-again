@@ -173,7 +173,7 @@ class HbaApp: App {
             // and shows how to test if the previous route's output was to
             // headphones. However, we have found that the suggested test
             // does not always succeed, for example if headphones are
-            // connected via a device like the R0DE AI-Micro. So we stop
+            // connected via a device like the RODE AI-Micro. So we stop
             // processing (and hence playback) in all cases.
             audioProcessor.stop()
             
