@@ -69,6 +69,16 @@ private struct HbaBackgroundModifier: ViewModifier {
 }
 
 
+private struct HbaScreenshotModifier: ViewModifier {
+
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: 390)
+    }
+    
+}
+
+
 extension View {
     
     func hbaHelp(isPresented: Binding<Bool>) -> some View {
@@ -81,6 +91,10 @@ extension View {
     
     func hbaBackground() -> some View {
         modifier(HbaBackgroundModifier())
+    }
+    
+    func hbaScreenshot() -> some View {
+        modifier(HbaScreenshotModifier())
     }
     
 }

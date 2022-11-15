@@ -58,6 +58,7 @@ Our recommended headset requires the use of the Rode AI-Micro interface, which w
                 .padding()
                     
                 InfoPageImage("RodeCentralConfig")
+                    .hbaScreenshot()
                     .padding()
                     
                 Text("""

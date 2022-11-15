@@ -34,22 +34,9 @@ The ***Hear Birds Again*** user interface comprises three tabs, named *Listen*, 
                     .padding()
                     
                     InfoPageImage("ListenTab")
+                        .hbaScreenshot()
                         .padding([.leading, .bottom, .trailing])
-                    
-//                    HStack {
-//
-//                        Spacer()
-//
-//                        Image("ListenTab")
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fit)
-//                            .frame(maxWidth: 390, alignment: .center)
-//                            .padding([.leading, .bottom, .trailing])
-//
-//                        Spacer()
-//
-//                    }
-                        
+                                            
                 }
 
                 Group {
@@ -67,8 +54,7 @@ The ***Hear Birds Again*** user interface comprises three tabs, named *Listen*, 
                         
                         Image("HelpButton")
                             .resizable()
-                            .frame(width: 32, height: 30
-                            )
+                            .frame(width: 32, height: 30)
                             .padding([.leading, .trailing])
                         
                         Spacer()
@@ -94,22 +80,9 @@ The ***Hear Birds Again*** user interface comprises three tabs, named *Listen*, 
                     .padding()
                     
                     InfoPageImage("MoreControlsTab")
+                        .hbaScreenshot()
                         .padding([.leading, .bottom, .trailing])
 
-//                    HStack {
-//
-//                        Spacer()
-//
-//                        Image("MoreControlsTab")
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fit)
-//                            .frame(maxWidth: 390)
-//                            .padding([.leading, .bottom, .trailing])
-//
-//                        Spacer()
-//
-//                    }
-                    
                 }
                 
                 Group {
