@@ -97,17 +97,17 @@ The ***Hear Birds Again*** user interface comprises three tabs, named *Listen*, 
                         .padding([.leading, .bottom, .trailing])
 
 //                    HStack {
-//                        
+//
 //                        Spacer()
-//                        
+//
 //                        Image("MoreControlsTab")
 //                            .resizable()
 //                            .aspectRatio(contentMode: .fit)
 //                            .frame(maxWidth: 390)
 //                            .padding([.leading, .bottom, .trailing])
-//                        
+//
 //                        Spacer()
-//                        
+//
 //                    }
                     
                 }
@@ -126,9 +126,7 @@ The *Info* tab includes several pages of documentation for the app. You can navi
             }
             .hbaScrollbar()
             
-            Rectangle()
-                .frame(height: 45)
-                .foregroundColor(.clear)
+            InfoPageIndexSpacer()
             
         }
         .hbaBackground()

@@ -37,9 +37,7 @@ We hope you enjoy using ***Hear Birds Again***!
             }
             .hbaScrollbar()
             
-            Rectangle()
-                .frame(height: 45)
-                .foregroundColor(.clear)
+            InfoPageIndexSpacer()
             
         }
         .hbaBackground()

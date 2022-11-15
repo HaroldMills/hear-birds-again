@@ -83,9 +83,7 @@ To make matters worse, bluetooth has "latency issues," meaning there is usually 
             }
             .hbaScrollbar()
 
-            Rectangle()
-                .frame(height: 45)
-                .foregroundColor(.clear)
+            InfoPageIndexSpacer()
 
         }
         .hbaBackground()

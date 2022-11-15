@@ -51,9 +51,7 @@ Please visit [our website](https://hearbirdsagain.org) for more details about ag
             }
             .hbaScrollbar()
 
-            Rectangle()
-                .frame(height: 45)
-                .foregroundColor(.clear)
+            InfoPageIndexSpacer()
 
         }
         .hbaBackground()

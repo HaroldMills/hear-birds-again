@@ -31,9 +31,7 @@ There is also a [Google group](https://groups.google.com/g/hear-birds-again) nam
             }
             .hbaScrollbar()
             
-            Rectangle()
-                .frame(height: 45)
-                .foregroundColor(.clear)
+            InfoPageIndexSpacer()
             
         }
         .hbaBackground()

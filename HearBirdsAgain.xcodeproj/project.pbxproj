@@ -16,6 +16,7 @@
 		F218630D28F85F2A000751B2 /* HeadsetInfoPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */; };
 		F21AA28D28DB68CA00530DD4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F21AA28C28DB68CA00530DD4 /* Settings.bundle */; };
 		F234AA7428E4A4F3009C2A88 /* PitchShiftHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F234AA7328E4A4F3009C2A88 /* PitchShiftHelp.swift */; };
+		F23681C02923EE92005DE61B /* InfoPageIndexSpacer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23681BF2923EE92005DE61B /* InfoPageIndexSpacer.swift */; };
 		F23B988D28C8E9560020BA30 /* VolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23B988C28C8E9560020BA30 /* VolumeView.swift */; };
 		F24AD4552860C4D500554D3D /* ListenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4542860C4D500554D3D /* ListenView.swift */; };
 		F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24AD4582860CB7E00554D3D /* ConsoleView.swift */; };
@@ -65,6 +66,7 @@
 		F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadsetInfoPage.swift; sourceTree = "<group>"; };
 		F21AA28C28DB68CA00530DD4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		F234AA7328E4A4F3009C2A88 /* PitchShiftHelp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchShiftHelp.swift; sourceTree = "<group>"; };
+		F23681BF2923EE92005DE61B /* InfoPageIndexSpacer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPageIndexSpacer.swift; sourceTree = "<group>"; };
 		F23B988C28C8E9560020BA30 /* VolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeView.swift; sourceTree = "<group>"; };
 		F245FCFD27FCD5A000C54A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F24AD4542860C4D500554D3D /* ListenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListenView.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				F278D0F428F9E3450000762B /* InfoPageTitle.swift */,
 				F29570972923028600CE8B44 /* InfoPageImage.swift */,
 				F2ECC99128FE089800E585DE /* InfoPageSectionHeader.swift */,
+				F23681BF2923EE92005DE61B /* InfoPageIndexSpacer.swift */,
 				F2F62B4629030D1E00685DAC /* WillHbaHelpInfoPage.swift */,
 				F218630C28F85F2A000751B2 /* HeadsetInfoPage.swift */,
 				F2ECC98F28FDB28000E585DE /* UiInfoPage.swift */,
@@ -342,6 +345,7 @@
 				F2609D1327EE0C2E005DACFA /* AudioProcessor.swift in Sources */,
 				F2609D1B27EE0D47005DACFA /* SongFinderDSPKernelAdapter.mm in Sources */,
 				F2F62B4729030D1E00685DAC /* WillHbaHelpInfoPage.swift in Sources */,
+				F23681C02923EE92005DE61B /* InfoPageIndexSpacer.swift in Sources */,
 				F298CC6928EB33560042154C /* AudioVolumeHelp.swift in Sources */,
 				F2CB634C28C67833008C2434 /* StartButton.swift in Sources */,
 				F24AD4592860CB7E00554D3D /* ConsoleView.swift in Sources */,

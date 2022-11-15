@@ -53,9 +53,7 @@ I’m a computer programmer, audio signal processing engineer, bird enthusiast, 
             }
             .hbaScrollbar()
             
-            Rectangle()
-                .frame(height: 45)
-                .foregroundColor(.clear)
+            InfoPageIndexSpacer()
             
         }
         .hbaBackground()
