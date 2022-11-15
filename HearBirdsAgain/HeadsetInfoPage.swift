@@ -41,22 +41,22 @@ Unfortunately, no fully-assembled headsets of this type are currently available 
                     .padding()
                 }
                     
-                Text("WARNING!: It is important to properly adjust settings for the Rode AI-Micro audio interface in order to prevent loud feedback squeal.")
+                Text("WARNING!: It is important to properly adjust settings for the RODE AI-Micro audio interface in order to prevent loud feedback squeal.")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.red)
                     .padding([.leading, .top, .trailing])
                     
                 Text("""
-Our recommended headset requires the use of the Rode AI-Micro interface, which will route the headset mics inputs into one’s mobile device and the device’s output (the pitch-lowered bird songs) back to the Koss Earphones. In order for this to work properly, it will be necessary for you to download Rode’s RodeCentral application and then adjust the settings. The procedure is as follows:
+Our recommended headset requires the use of the RODE AI-Micro interface, which will route the headset mics inputs into one’s mobile device and the device’s output (the pitch-lowered bird songs) back to the Koss Earphones. In order for this to work properly, it will be necessary for you to download RODE’s RODE Central application and then adjust the settings. The procedure is as follows:
 
-1. Download RodeCentral and then open the app.
+1. Download RODE Central and then open the app.
                 
-2. Connect your Rode AI Micro interface to your mobile device. RodeCentral should then automatically detect the audio interface.
+2. Connect your RODE AI-Micro interface to your mobile device. RODE Central should then automatically detect the audio interface.
                 
 3. TURN OFF the “Direct Monitor” option (the bottommost setting). CAUTION: If left enabled, you will probably experience loud feedback squeal!
                 
-4. Adjust other settings as shown in the following screenshot of the RodeCentral user interface:
+4. Adjust other settings as shown in the following screenshot of the RODE Central user interface:
 """)
                 .padding()
                     
@@ -65,7 +65,7 @@ Our recommended headset requires the use of the Rode AI-Micro interface, which w
                     .padding()
                     
                 Text("""
-Once the direct monitoring setting has been disabled, everything should work fine and you should not have to use the RodeCentral app again, except perhaps to occasionally check for updates to the Rode AI Micro firmware (RodeCentral automatically detects if your current firmware is out of date).
+Once the direct monitoring setting has been disabled, everything should work fine and you should not have to use the RODE Central app again, except perhaps to occasionally check for updates to the RODE AI-Micro firmware (RODE Central automatically detects if your current firmware is out of date).
 """)
                 .padding()
                     
