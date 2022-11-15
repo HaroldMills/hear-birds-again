@@ -41,7 +41,11 @@ Unfortunately, no fully-assembled headsets of this type are currently available 
                     .padding()
                 }
                     
-                InfoPageSectionHeader("WARNING!: It Is Important to Properly Adjust Settings for the Rode AI-Micro Audio interface in Order to Prevent Loud Feedback Squeal.", color: .red)
+                Text("WARNING!: It is important to properly adjust settings for the Rode AI-Micro audio interface in order to prevent loud feedback squeal.")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.red)
+                    .padding([.leading, .top, .trailing])
                     
                 Text("""
 Our recommended headset requires the use of the Rode AI-Micro interface, which will route the headset mics inputs into one’s mobile device and the device’s output (the pitch-lowered bird songs) back to the Koss Earphones. In order for this to work properly, it will be necessary for you to download Rode’s RodeCentral application and then adjust the settings. The procedure is as follows:

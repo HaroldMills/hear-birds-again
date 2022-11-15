@@ -11,7 +11,9 @@ import SwiftUI
 
 struct HbaView: View {
     
-    
+    static let titleColor: Color = .black
+    // static let titleColor: Color = .brown
+
     @ObservedObject var audioProcessor: AudioProcessor
     @ObservedObject var console: Console
     @ObservedObject var errors: Errors
@@ -92,6 +94,15 @@ struct HbaView: View {
 
     }
 
+}
+
+
+private func hexToColor(_ hex: UInt) -> Color {
+    let mask: UInt = 0xff
+    let red = Double((hex >> 16) & mask) / 255
+    let green = Double((hex >> 8) & mask) / 255
+    let blue = Double(hex & mask) / 255
+    return Color(red: red, green: green, blue: blue)
 }
 
 
