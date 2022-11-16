@@ -288,6 +288,11 @@ private func adjustNumberOfInputChannelsIfNeeded() throws {
     
     let session = AVAudioSession.sharedInstance()
     
+    console.log()
+    console.log("HbaApp.adjustNumberOfInputChannelsIfNeeded:")
+    console.log("    inputs: \(session.inputNumberOfChannels) (max \(session.maximumInputNumberOfChannels))")
+    console.log("    outputs \(session.outputNumberOfChannels) (max \(session.maximumOutputNumberOfChannels))")
+    
     if session.inputNumberOfChannels == 2 && session.outputNumberOfChannels == 1 && isAudioInputBuiltInMic() {
         // input is stereo from built-in mic but output is mono
         
