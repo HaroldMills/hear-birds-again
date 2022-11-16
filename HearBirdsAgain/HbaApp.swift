@@ -39,11 +39,8 @@ class HbaApp: App {
     
     
     @AppStorage("helpButtonsVisible") static var helpButtonsVisible = true
-    
     @AppStorage("donateButtonVisible") static var donateButtonVisible = true
-    
     @AppStorage("zeroHzCutoffVisible") static var zeroHzCutoffVisible = false
-    
     @AppStorage("consoleTabVisible") static var consoleTabVisible = false
     
     
@@ -82,8 +79,6 @@ class HbaApp: App {
         registerSongFinderAudioUnit()
         
         assert(songFinderAudioUnitPresent())
-        
-        // showAudioSessionAvailableCategories()
         
         do {
             
@@ -237,186 +232,6 @@ class HbaApp: App {
 }
 
 
-private func setPreferredInputOrientation() {
-    if let orientation = getPreferredInputOrientation() {
-        let session = AVAudioSession.sharedInstance()
-        do {
-            try session.setPreferredInputOrientation(orientation)
-            // console.log("Set preferred input orientation to \(orientation.rawValue).")
-        } catch {
-            // console.log("Could not set audio session preferred input orientation.")
-        }
-    }
-}
-
-
-private func getPreferredInputOrientation() -> AVAudioSession.StereoOrientation? {
-    
-    switch UIDevice.current.orientation {
-        
-    case .portrait:
-        return .portrait
-        
-    case .portraitUpsideDown:
-        return .portraitUpsideDown
-        
-    // Note that it's not a mistake that for UIDeviceOrientation.landscapeLeft we
-    // return AVAudioSession.StereoOrientation.landscapeRight. Apple defines the
-    // two in such a way that this is correct. See
-    // https://developer.apple.com/documentation/uikit/uideviceorientation and
-    // https://developer.apple.com/documentation/avfaudio/avaudiosession/stereoorientation
-    case .landscapeLeft:
-        return .landscapeRight
-        
-    // Note that it's not a mistake that for UIDeviceOrientation.landscapeRight we
-    // return AVAudioSession.StereoOrientation.landscapeLeft. Apple defines the
-    // two in such a way that this is correct. See
-    // https://developer.apple.com/documentation/uikit/uideviceorientation and
-    // https://developer.apple.com/documentation/avfaudio/avaudiosession/stereoorientation
-    case .landscapeRight:
-        return .landscapeLeft
-        
-    default:
-        return Optional.none
-        
-    }
-    
-}
-
-
-private func adjustNumberOfInputChannelsIfNeeded() throws {
-    
-    let session = AVAudioSession.sharedInstance()
-    
-    console.log()
-    console.log("HbaApp.adjustNumberOfInputChannelsIfNeeded:")
-    console.log("    inputs: \(session.inputNumberOfChannels) (max \(session.maximumInputNumberOfChannels))")
-    console.log("    outputs \(session.outputNumberOfChannels) (max \(session.maximumOutputNumberOfChannels))")
-    
-    if session.inputNumberOfChannels == 2 && session.outputNumberOfChannels == 1 && isAudioInputBuiltInMic() {
-        // input is stereo from built-in mic but output is mono
-        
-        // Switch to mono input from built-in mic.
-        
-        guard let availableInputs = session.availableInputs,
-              let builtInMicInput = availableInputs.first(where: { $0.portType == .builtInMic }) else {
-            console.log("Could not find built-in mic input.")
-            return
-        }
-        
-        guard let dataSources = builtInMicInput.dataSources,
-              let bottomDataSource = dataSources.first(where: { $0.dataSourceName == "Bottom" }) else {
-            console.log("Could not find built-in mic bottom data source.")
-            return
-        }
-
-        do {
-            try bottomDataSource.setPreferredPolarPattern(.omnidirectional)
-        } catch {
-            console.log("Could not set built-in mic bottom data source to omnidirectional polar pattern.")
-            return
-        }
-        
-        do {
-            try builtInMicInput.setPreferredDataSource(bottomDataSource)
-        } catch {
-            console.log("Could not set built-in mic preferred data source to bottom.")
-            return
-        }
-        
-        do {
-            try session.setPreferredInput(builtInMicInput)
-        } catch {
-            console.log("Could not set preferred input to built-in mic.")
-            return
-        }
-        
-    } else if session.inputNumberOfChannels == 1 && session.outputNumberOfChannels == 2 {
-        // input is mono but output is stereo
-
-        if session.maximumInputNumberOfChannels == 2 {
-            // current input supports stereo
-            
-            // Indicate that we would prefer stereo input.
-            
-            do {
-                try session.setPreferredInputNumberOfChannels(2)
-            } catch {
-                console.log("Could not set preferred number of input channels to two. Error message was: \(error.localizedDescription)")
-            }
-
-        } else {
-            // current input does not support stereo
-            
-            // Uncomment the following to test mono input from Apple EarPods on an iPhone.
-            // return
-            
-            // Switch to stereo input from built-in mic if available.
-            
-            guard let availableInputs = session.availableInputs,
-                  let builtInMicInput = availableInputs.first(where: { $0.portType == .builtInMic }) else {
-                console.log("Could not find built-in mic input.")
-                return
-            }
-            
-            guard let dataSources = builtInMicInput.dataSources,
-                  let backDataSource = dataSources.first(where: { $0.dataSourceName == "Back" }) else {
-                console.log("Could not find built-in mic back data source.")
-                return
-            }
-
-            guard let supportedPolarPatterns = backDataSource.supportedPolarPatterns else {
-                console.log("Could not get built-in mic back data source supported polar patterns.")
-                return
-            }
-
-            if supportedPolarPatterns.contains(.stereo) {
-                
-                do {
-                    try backDataSource.setPreferredPolarPattern(.stereo)
-                } catch {
-                    console.log("Could not set built-in mic back data source to stereo polar pattern.")
-                    return
-                }
-                
-                do {
-                    try builtInMicInput.setPreferredDataSource(backDataSource)
-                } catch {
-                    console.log("Could not set built-in mic preferred data source to back.")
-                    return
-                }
-                
-                do {
-                    try session.setPreferredInput(builtInMicInput)
-                } catch {
-                    console.log("Could not set preferred input to built-in mic.")
-                    return
-                }
-                
-                setPreferredInputOrientation()
-                
-                console.log("Set preferred input to built-in mic back stereo.")
-                
-            } else {
-
-                console.log("Built-in mic back data source does not support stereo polar pattern.")
-                
-            }
-            
-        }
-        
-    }
-    
-}
-
-
-private func isAudioInputBuiltInMic() -> Bool {
-    let session = AVAudioSession.sharedInstance()
-    let inputs = session.currentRoute.inputs
-    return inputs.first(where: { $0.portType == .builtInMic }) != nil
-}
-
-
 private func registerSongFinderAudioUnit() {
     AUAudioUnit.registerSubclass(
         SongFinderAudioUnit.self,
@@ -433,26 +248,9 @@ private func songFinderAudioUnitPresent() -> Bool {
 }
 
 
-private func getCurrentAudioInput() -> AVAudioSessionDataSourceDescription? {
-    let session = AVAudioSession.sharedInstance()
-    return session.inputDataSource
-}
-
-
-private func getAvailableAudioInputs() throws -> [AVAudioSessionPortDescription] {
-    
-    let session = AVAudioSession.sharedInstance()
-    
-    guard let inputs = session.availableInputs else {
-        throw _Error.error(message: "Could not get available audio session inputs.")
-    }
-    
-    return inputs
-    
-}
-
-
 private func configureAudioSession() throws {
+    
+    // showAudioSessionAvailableCategories()
     
     let session = AVAudioSession.sharedInstance()
     
@@ -644,3 +442,202 @@ private func showAudioSessionOutputPorts(ports: [AVAudioSessionPortDescription])
     }
 
 }
+
+
+private func adjustNumberOfInputChannelsIfNeeded() throws {
+    
+    let session = AVAudioSession.sharedInstance()
+    
+    console.log()
+    console.log("HbaApp.adjustNumberOfInputChannelsIfNeeded:")
+    console.log("    inputs: \(session.inputNumberOfChannels) (max \(session.maximumInputNumberOfChannels))")
+    console.log("    outputs \(session.outputNumberOfChannels) (max \(session.maximumOutputNumberOfChannels))")
+    
+    if session.inputNumberOfChannels == 2 && session.outputNumberOfChannels == 1 && isAudioInputBuiltInMic() {
+        // input is stereo from built-in mic but output is mono
+        
+        // Switch to mono input from built-in mic.
+        
+        guard let availableInputs = session.availableInputs,
+              let builtInMicInput = availableInputs.first(where: { $0.portType == .builtInMic }) else {
+            console.log("Could not find built-in mic input.")
+            return
+        }
+        
+        guard let dataSources = builtInMicInput.dataSources,
+              let bottomDataSource = dataSources.first(where: { $0.dataSourceName == "Bottom" }) else {
+            console.log("Could not find built-in mic bottom data source.")
+            return
+        }
+
+        do {
+            try bottomDataSource.setPreferredPolarPattern(.omnidirectional)
+        } catch {
+            console.log("Could not set built-in mic bottom data source to omnidirectional polar pattern.")
+            return
+        }
+        
+        do {
+            try builtInMicInput.setPreferredDataSource(bottomDataSource)
+        } catch {
+            console.log("Could not set built-in mic preferred data source to bottom.")
+            return
+        }
+        
+        do {
+            try session.setPreferredInput(builtInMicInput)
+        } catch {
+            console.log("Could not set preferred input to built-in mic.")
+            return
+        }
+        
+    } else if session.inputNumberOfChannels == 1 && session.outputNumberOfChannels == 2 {
+        // input is mono but output is stereo
+
+        if session.maximumInputNumberOfChannels == 2 {
+            // current input supports stereo
+            
+            // Indicate that we would prefer stereo input.
+            
+            do {
+                try session.setPreferredInputNumberOfChannels(2)
+            } catch {
+                console.log("Could not set preferred number of input channels to two. Error message was: \(error.localizedDescription)")
+            }
+
+        } else {
+            // current input does not support stereo
+            
+            // Uncomment the following to test mono input from Apple EarPods on an iPhone.
+            // return
+            
+            // Switch to stereo input from built-in mic if available.
+            
+            guard let availableInputs = session.availableInputs,
+                  let builtInMicInput = availableInputs.first(where: { $0.portType == .builtInMic }) else {
+                console.log("Could not find built-in mic input.")
+                return
+            }
+            
+            guard let dataSources = builtInMicInput.dataSources,
+                  let backDataSource = dataSources.first(where: { $0.dataSourceName == "Back" }) else {
+                console.log("Could not find built-in mic back data source.")
+                return
+            }
+
+            guard let supportedPolarPatterns = backDataSource.supportedPolarPatterns else {
+                console.log("Could not get built-in mic back data source supported polar patterns.")
+                return
+            }
+
+            if supportedPolarPatterns.contains(.stereo) {
+                
+                do {
+                    try backDataSource.setPreferredPolarPattern(.stereo)
+                } catch {
+                    console.log("Could not set built-in mic back data source to stereo polar pattern.")
+                    return
+                }
+                
+                do {
+                    try builtInMicInput.setPreferredDataSource(backDataSource)
+                } catch {
+                    console.log("Could not set built-in mic preferred data source to back.")
+                    return
+                }
+                
+                do {
+                    try session.setPreferredInput(builtInMicInput)
+                } catch {
+                    console.log("Could not set preferred input to built-in mic.")
+                    return
+                }
+                
+                setPreferredInputOrientation()
+                
+                console.log("Set preferred input to built-in mic back stereo.")
+                
+            } else {
+
+                console.log("Built-in mic back data source does not support stereo polar pattern.")
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
+
+private func isAudioInputBuiltInMic() -> Bool {
+    let session = AVAudioSession.sharedInstance()
+    let inputs = session.currentRoute.inputs
+    return inputs.first(where: { $0.portType == .builtInMic }) != nil
+}
+
+
+private func setPreferredInputOrientation() {
+    if let orientation = getPreferredInputOrientation() {
+        let session = AVAudioSession.sharedInstance()
+        do {
+            try session.setPreferredInputOrientation(orientation)
+            // console.log("Set preferred input orientation to \(orientation.rawValue).")
+        } catch {
+            // console.log("Could not set audio session preferred input orientation.")
+        }
+    }
+}
+
+
+private func getPreferredInputOrientation() -> AVAudioSession.StereoOrientation? {
+    
+    switch UIDevice.current.orientation {
+        
+    case .portrait:
+        return .portrait
+        
+    case .portraitUpsideDown:
+        return .portraitUpsideDown
+        
+    // Note that it's not a mistake that for UIDeviceOrientation.landscapeLeft we
+    // return AVAudioSession.StereoOrientation.landscapeRight. Apple defines the
+    // two in such a way that this is correct. See
+    // https://developer.apple.com/documentation/uikit/uideviceorientation and
+    // https://developer.apple.com/documentation/avfaudio/avaudiosession/stereoorientation
+    case .landscapeLeft:
+        return .landscapeRight
+        
+    // Note that it's not a mistake that for UIDeviceOrientation.landscapeRight we
+    // return AVAudioSession.StereoOrientation.landscapeLeft. Apple defines the
+    // two in such a way that this is correct. See
+    // https://developer.apple.com/documentation/uikit/uideviceorientation and
+    // https://developer.apple.com/documentation/avfaudio/avaudiosession/stereoorientation
+    case .landscapeRight:
+        return .landscapeLeft
+        
+    default:
+        return Optional.none
+        
+    }
+    
+}
+
+
+//private func getCurrentAudioInput() -> AVAudioSessionDataSourceDescription? {
+//    let session = AVAudioSession.sharedInstance()
+//    return session.inputDataSource
+//}
+//
+//
+//private func getAvailableAudioInputs() throws -> [AVAudioSessionPortDescription] {
+//    
+//    let session = AVAudioSession.sharedInstance()
+//    
+//    guard let inputs = session.availableInputs else {
+//        throw _Error.error(message: "Could not get available audio session inputs.")
+//    }
+//    
+//    return inputs
+//    
+//}
