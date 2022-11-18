@@ -344,10 +344,19 @@ private func getAudioSessionRouteChangeReasonString(reason: AVAudioSession.Route
 private func showAudioSessionCurrentRoute() {
     let session = AVAudioSession.sharedInstance()
     let route = session.currentRoute
+    showAudioSessionSampleRate(session: session)
     showAudioSessionInputGain(session: session)
-    showAudioSessionInputPorts(ports: route.inputs)
-    // showAudioSessionInputPorts(ports: session.availableInputs!)
-    showAudioSessionOutputPorts(ports: route.outputs)
+    showAudioSessionInputPorts(ports: route.inputs, name: "Current audio route")
+    // showAudioSessionInputPorts(ports: session.availableInputs!, name: "Available audio session")
+    showAudioSessionOutputPorts(ports: route.outputs, name: "Current audio session")
+    // showAudioSessionOutputDataSources(sources: session.outputDataSources!, name: "Available audio session")
+
+}
+
+
+private func showAudioSessionSampleRate(session: AVAudioSession) {
+    console.log("")
+    console.log("Sample rate: \(session.sampleRate)")
 }
 
 
@@ -358,17 +367,14 @@ private func showAudioSessionInputGain(session: AVAudioSession) {
 }
 
 
-private func showAudioSessionInputPorts(ports: [AVAudioSessionPortDescription]) {
+private func showAudioSessionInputPorts(ports: [AVAudioSessionPortDescription], name: String) {
     
     console.log("")
-    console.log("Current audio input port(s):")
+    console.log("\(name) input port(s):")
     
     for port in ports {
         
-        var channelCountText = "could not get channel count"
-        if let channels = port.channels {
-            channelCountText = getChannelCountText(channelCount: channels.count)
-        }
+        let channelCountText = getChannelCountText(port: port)
         console.log("    \(port.portName) (\(channelCountText))")
         
         if let source = port.selectedDataSource {
@@ -408,39 +414,52 @@ private func showAudioSessionInputPorts(ports: [AVAudioSessionPortDescription]) 
 }
 
 
-private func getChannelCountText(channelCount: Int) -> String {
+private func getChannelCountText(port: AVAudioSessionPortDescription) -> String {
     
-    switch channelCount {
+    if let channels = port.channels {
         
-    case 1:
-        return "mono"
+        switch channels.count {
+            
+        case 1:
+            return "mono"
+            
+        case 2:
+            return "stereo"
+            
+        default:
+            return "\(channels.count) channels"
+            
+        }
         
-    case 2:
-        return "stereo"
-        
-    default:
-        return "\(channelCount) channels"
-        
+    } else {
+        return "channel count unavailable"
     }
         
 }
 
 
-private func showAudioSessionOutputPorts(ports: [AVAudioSessionPortDescription]) {
+private func showAudioSessionOutputPorts(ports: [AVAudioSessionPortDescription], name: String) {
     
     console.log("")
-    console.log("Current audio output port(s):")
+    console.log("\(name) output port(s):")
     
     for port in ports {
-        
-        var channelCountText = "could not get channel count"
-        if let channels = port.channels {
-            channelCountText = getChannelCountText(channelCount: channels.count)
-        }
+        let channelCountText = getChannelCountText(port: port)
         console.log("    \(port.portName) (\(channelCountText))")
-        
     }
 
+}
+
+
+private func showAudioSessionOutputDataSources(sources: [AVAudioSessionDataSourceDescription], name: String) {
+    
+    console.log("")
+    console.log("\(name) output data source(s):")
+    
+    for source in sources {
+        console.log("    \(source.dataSourceName)")
+    }
+    
 }
 
 
@@ -532,6 +551,8 @@ private func adjustNumberOfInputChannelsIfNeeded() throws {
 
             if supportedPolarPatterns.contains(.stereo) {
                 
+                console.log("Seting preferred input to built-in mic back stereo...")
+                
                 do {
                     try backDataSource.setPreferredPolarPattern(.stereo)
                 } catch {
@@ -554,8 +575,6 @@ private func adjustNumberOfInputChannelsIfNeeded() throws {
                 }
                 
                 setPreferredInputOrientation()
-                
-                console.log("Set preferred input to built-in mic back stereo.")
                 
             } else {
 
