@@ -256,8 +256,22 @@ private func configureAudioSession() throws {
     
     // Set session category.
     do {
-        // Do *not* include `mode: .measurement` here. That disables stereo input.
-        try session.setCategory(.playAndRecord, options: [.allowBluetooth, .allowBluetoothA2DP, .allowAirPlay])
+        
+        // Do *not* include `mode: .measurement` here. That disables built-in stereo iPhone input.
+        
+        // Do *not* include the `.allowBluetooth` option here. As of November, 2022 that makes it
+        // impossible to use built-in stereo iPhone input with Bluetooth output for Apple's AirPods
+        // and AirPods Pro. If we specify `.allowBluetooth`, the audio session offers us to use
+        // only mono AirPod input paired with mono AirPod output or iPhone input paired with iPhone
+        // output, but not built-in stereo iPhone input paired with stereo AirPod output.
+        //
+        // The Apple AirPods (3rd generation) and AirPods Pro (2nd generation) support only 24 kHz
+        // mono input, which for our purposes is not preferable to the 48 kHz built-in stereo iPhone
+        // input. Perhaps a future AirPods model or Bluetooth earbuds from a different manufacturer
+        // will support 48 kHz stereo input.
+        
+        try session.setCategory(.playAndRecord, options: [.allowBluetoothA2DP, .allowAirPlay])
+        
     } catch {
         throw _Error.error(message: "Could not set audio session category. \(String(describing: error))")
     }
