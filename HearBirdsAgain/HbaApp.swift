@@ -100,8 +100,11 @@ class HbaApp: App {
         notificationCenter.addObserver(
             self, selector: #selector(handleAudioSessionRouteChange), name: AVAudioSession.routeChangeNotification, object: nil)
         
-        notificationCenter.addObserver(
-            self, selector: #selector(handleAudioSessionInterruption), name: AVAudioSession.interruptionNotification, object: nil)
+        // Commented this out since the `handleAudioSessionInterruption` method no longer
+        // does anything, but left the observer addition and the method in place since
+        // there's a reasonable chance we'll want to use them again at some point.
+        // notificationCenter.addObserver(
+        //     self, selector: #selector(handleAudioSessionInterruption), name: AVAudioSession.interruptionNotification, object: nil)
         
         notificationCenter.addObserver(
             self, selector: #selector(handleDeviceOrientationChange), name: UIDevice.orientationDidChangeNotification, object: nil)
@@ -186,19 +189,29 @@ class HbaApp: App {
     }
 
     
-    @objc private func handleAudioSessionInterruption(notification: Notification) {
-        
-        console.log()
-        console.log("HbaApp.handleAudioSessionInterruption")
-        
-        // Stop audio processor if it's running. If we don't do this (as of iOS 15.7.1,
-        // at least), the app crashes with the Xcode console error message:
-        //
-        // *** Terminating app due to uncaught exception 'com.apple.coreaudio.avfaudio',
-        //     reason: 'required condition is false: IsFormatSampleRateAndChannelCountValid(format)'
-        audioProcessor.stop()
-        
-    }
+    // See note in `setUpNotifications` method above.
+//    @objc private func handleAudioSessionInterruption(notification: Notification) {
+//
+//        console.log()
+//        console.log("HbaApp.handleAudioSessionInterruption")
+//
+//        // See https://developer.apple.com/documentation/avfaudio/avaudiosession/responding_to_audio_session_interruptions
+//        // for an example of how to respond to audio session interruptions,
+//        // including how to distinguish the beginnings of interruptions
+//        // from the ends.
+//
+//        // We used to stop the audio processor here, as below. However, a while
+//        // after that code was added I found that the crash no longer happened
+//        // without the stop, even under iOS 15.7.1. So I've commented out the stop.
+//        //
+//        // Stop audio processor if it's running. If we don't do this (as of iOS 15.7.1,
+//        // at least), the app crashes with the Xcode console error message:
+//        //
+//        // *** Terminating app due to uncaught exception 'com.apple.coreaudio.avfaudio',
+//        //     reason: 'required condition is false: IsFormatSampleRateAndChannelCountValid(format)'
+//        // audioProcessor.stop()
+//
+//    }
     
     
     @objc private func handleDeviceOrientationChange(notification: Notification) {
