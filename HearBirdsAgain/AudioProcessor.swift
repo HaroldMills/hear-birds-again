@@ -10,9 +10,6 @@ import Foundation
 import AVFoundation
 
 
-// TODO: Check that input sample rate is 48 kHz and quit if not.
-
-
 enum WindowType: AUValue, CustomStringConvertible, Codable {
     
     case Hann = 0.0
@@ -122,6 +119,8 @@ class AudioProcessor: ObservableObject {
     // the changes will flow to other parts of the app, e.g. the
     // pitch shifting audio unit.
     
+    
+    public static let requiredSampleRate: Double = 48000.0
     
     static let defaultState = AudioProcessorState()
     
@@ -300,10 +299,18 @@ class AudioProcessor: ObservableObject {
         
         if !running {
             
+            let session = AVAudioSession.sharedInstance()
+            
             do {
-                try AVAudioSession.sharedInstance().setActive(true)
+                try session.setActive(true)
             } catch {
                 errors.handleNonfatalError(message: "Attempt to activate audio session threw error: \(String(describing: error))")
+                return
+            }
+            
+            // Make sure sample rate is as required.
+            if session.sampleRate != AudioProcessor.requiredSampleRate {
+                errors.handleNonfatalError(message: "Cannot start audio processing. Input sample rate of \(session.sampleRate) Hz differs from required rate of \(AudioProcessor.requiredSampleRate) Hz. Please try a different input device.")
                 return
             }
             

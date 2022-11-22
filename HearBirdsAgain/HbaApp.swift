@@ -316,7 +316,7 @@ private func configureAudioSession() throws {
     }
     
     // Set preferred sample rate.
-    let sampleRate = 48000.0;
+    let sampleRate = AudioProcessor.requiredSampleRate
     do {
         try session.setPreferredSampleRate(sampleRate)
     } catch {
