@@ -300,6 +300,13 @@ class AudioProcessor: ObservableObject {
         
         if !running {
             
+            do {
+                try AVAudioSession.sharedInstance().setActive(true)
+            } catch {
+                errors.handleNonfatalError(message: "Attempt to activate audio session threw error: \(String(describing: error))")
+                return
+            }
+            
             configureSongFinderAudioUnit()
             configureAudioEngine()
             

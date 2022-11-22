@@ -81,9 +81,7 @@ class HbaApp: App {
         assert(songFinderAudioUnitPresent())
         
         do {
-            
             try configureAudioSession()
-            
         } catch _Error.error(let message) {
             errors.handleFatalError(message: "Audio session configuration failed. \(message)")
         } catch {
@@ -276,13 +274,6 @@ private func configureAudioSession() throws {
         throw _Error.error(message: "Could not set audio session category. \(String(describing: error))")
     }
     
-    // Activate session.
-    do {
-        try session.setActive(true)
-    } catch {
-        throw _Error.error(message: "Could not activate audio session. \(String(describing: error))")
-    }
-
     // Set preferred sample rate.
     let sampleRate = 48000.0;
     do {

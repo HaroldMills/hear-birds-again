@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+import AVFoundation
 
 
 struct HbaView: View {
@@ -89,8 +90,37 @@ struct HbaView: View {
             }
         }
         .onChange(of: scenePhase) { phase in
-            if phase == .inactive { saveAction() }
+            
+            if phase == .inactive {
+                
+                saveAction()
+                
+            } else if phase == .background {
+                
+                // For some reason, if HBA is backgrounded while not processing
+                // audio, if it is later foregrounded while another app (e.g.
+                // the Apple Music app) is playing audio, that playback is
+                // interrupted. The following was an attempt to prevent this,
+                // but it didn't solve the problem. Somewhat ironically, if HBA
+                // is backgrounded while processing audio, and that processing
+                // is later interrupted by another app (e.g. by playing audio in
+                // the Apple Music app), if HBA is then foregrounded it does *not*
+                // interrupt the audio of the other app until the user taps the
+                // Start button to initiate processing.
+//                if !audioProcessor.running {
+//                    do {
+//                        try AVAudioSession.sharedInstance().setActive(false)
+//                    } catch {
+//                        console.log()
+//                        console.log("Attempt to deactivate audio session threw error: \(String(describing: error))")
+//                    }
+//                }
+
+            }
+            
         }
+        
+        
 
     }
 
