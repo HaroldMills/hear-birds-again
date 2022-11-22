@@ -100,11 +100,8 @@ class HbaApp: App {
         notificationCenter.addObserver(
             self, selector: #selector(handleAudioSessionRouteChange), name: AVAudioSession.routeChangeNotification, object: nil)
         
-        // Commented this out since the `handleAudioSessionInterruption` method no longer
-        // does anything, but left the observer addition and the method in place since
-        // there's a reasonable chance we'll want to use them again at some point.
-        // notificationCenter.addObserver(
-        //     self, selector: #selector(handleAudioSessionInterruption), name: AVAudioSession.interruptionNotification, object: nil)
+        notificationCenter.addObserver(
+            self, selector: #selector(handleAudioSessionInterruption), name: AVAudioSession.interruptionNotification, object: nil)
         
         notificationCenter.addObserver(
             self, selector: #selector(handleDeviceOrientationChange), name: UIDevice.orientationDidChangeNotification, object: nil)
@@ -190,28 +187,59 @@ class HbaApp: App {
 
     
     // See note in `setUpNotifications` method above.
-//    @objc private func handleAudioSessionInterruption(notification: Notification) {
-//
-//        console.log()
-//        console.log("HbaApp.handleAudioSessionInterruption")
-//
-//        // See https://developer.apple.com/documentation/avfaudio/avaudiosession/responding_to_audio_session_interruptions
-//        // for an example of how to respond to audio session interruptions,
-//        // including how to distinguish the beginnings of interruptions
-//        // from the ends.
-//
-//        // We used to stop the audio processor here, as below. However, a while
-//        // after that code was added I found that the crash no longer happened
-//        // without the stop, even under iOS 15.7.1. So I've commented out the stop.
-//        //
-//        // Stop audio processor if it's running. If we don't do this (as of iOS 15.7.1,
-//        // at least), the app crashes with the Xcode console error message:
-//        //
-//        // *** Terminating app due to uncaught exception 'com.apple.coreaudio.avfaudio',
-//        //     reason: 'required condition is false: IsFormatSampleRateAndChannelCountValid(format)'
-//        // audioProcessor.stop()
-//
-//    }
+    @objc private func handleAudioSessionInterruption(notification: Notification) {
+
+        // See https://developer.apple.com/documentation/avfaudio/avaudiosession/responding_to_audio_session_interruptions
+        // for an example of how to respond to audio session interruptions,
+        // including how to distinguish the beginnings of interruptions
+        // from the ends, and how to read the `.shouldResume` interruption
+        // option.
+
+        // Get interruption type.
+        guard let userInfo = notification.userInfo,
+            let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+            let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+                return
+        }
+        
+        switch type {
+            
+        case .began:
+            
+            // print("HbaApp.handleAudioSessionInterruption began")
+            
+            console.log()
+            console.log("HbaApp.handleAudioSessionInterruption began")
+
+            // Stop audio processor if it's running. If we don't do this, we receive an
+            // audio session route change notification that triggers a processor restart.
+            // The processor start fails since it can't activate the HBA audio session,
+            // and the user sees an ugly nonfatal error alert.
+            //
+            // For some reason, stopping the audio processor causes one or more messages
+            // like the following to appear on the Xcode console:
+            //
+            // 2022-11-22 13:00:20.267854-0500 HearBirdsAgain[26302:2248049] [aurioc]
+            //     AURemoteIO.cpp:1128  failed: 561017449 (enable 3, outf< 1 ch,  48000 Hz, Float32> inf< 1 ch,  48000 Hz, Float32>)
+            audioProcessor.stop()
+            
+        case .ended:
+            
+            // print("HbaApp.handleAudioSessionInterruption ended")
+            
+            console.log()
+            console.log("HbaApp.handleAudioSessionInterruption ended")
+
+        default:
+            
+            // print("HbaApp.handleAudioSessionInterruption other")
+            
+            console.log()
+            console.log("HbaApp.handleAudioSessionInterruption other")
+
+        }
+        
+    }
     
     
     @objc private func handleDeviceOrientationChange(notification: Notification) {
