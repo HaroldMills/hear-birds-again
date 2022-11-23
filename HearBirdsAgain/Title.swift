@@ -19,7 +19,6 @@ struct _Title: View {
         Text(title)
             .font(.title)
             .fontWeight(.bold)
-            .foregroundColor(HbaView.titleColor)
             .padding([.top], 20)
     }
     
@@ -44,7 +43,6 @@ struct Title: View {
                 _Title(title)
                 
                 Text(subtitle)
-                    .foregroundColor(HbaView.titleColor)
                     .font(.subheadline)
                 
             }

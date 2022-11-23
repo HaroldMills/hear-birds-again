@@ -12,9 +12,6 @@ import AVFoundation
 
 struct HbaView: View {
     
-    static let titleColor: Color = .black
-    // static let titleColor: Color = .brown
-
     @ObservedObject var audioProcessor: AudioProcessor
     @ObservedObject var console: Console
     @ObservedObject var errors: Errors

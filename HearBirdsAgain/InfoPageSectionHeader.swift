@@ -23,7 +23,6 @@ struct InfoPageSectionHeader: View {
         Text(header)
             .font(.title2)
             .fontWeight(.bold)
-            .foregroundColor(HbaView.titleColor)
             .padding([.leading, .top, .trailing])
         
     }
