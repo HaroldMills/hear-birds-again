@@ -20,7 +20,7 @@ struct InfoView: View {
         case support
     }
     
-    @SceneStorage("InfoView.selectedTab") private var selectedTab = Tab.headset
+    @SceneStorage("InfoView.selectedTab") private var selectedTab = Tab.welcome
 
     // So we can monitor scene phase changes for saving processor state
     // (see `.onChange` view modifier below).
