@@ -20,8 +20,11 @@ struct ListenView: View {
         
         VStack {
             
-            Title("Hear Birds Again", subtitle: "Version \(getAppVersion()) Build \(getBuildNumber())")
+            Title("Hear Birds Again", subtitle: "Version \(getAppVersion())")
                 .padding()
+
+//            Title("Hear Birds Again", subtitle: "Version \(getAppVersion()) Build \(getBuildNumber())")
+//                .padding()
             
             HStack {
                 
