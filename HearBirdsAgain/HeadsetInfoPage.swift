@@ -51,7 +51,7 @@ If you are a serious birder who desires a high-fidelity headset equipped with su
                 InfoPageSectionHeader("Other Input and Output Options")
                 
                 Text("""
-    While true binaural headset options such as those described above are necessary for a satisfying “3D” experience in the field, it is possible to test our app using your mobile device’s built-in mics along with wired or wireless earbuds and headphones. Be aware, however, that this is not an optimal solution and results will vary greatly depending on a number of factors.
+While true binaural headset options such as those described above are necessary for a satisfying “3D” experience in the field, it is possible to test our app using your mobile device’s built-in mics along with wired or wireless earbuds and headphones. Be aware, however, that this is not an optimal solution and results will vary greatly depending on a number of factors.
 
 The biggest problem is that the built-in mics do not provide accurate spatial audio, so it will be nearly impossible to determine the directions and distances of incoming pitch-lowered songs. The built-in mics also have high internal noise, which can mask faint bird songs.
 
